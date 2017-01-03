@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeHos", "GeHos\GeHos.csproj", "{9BE661C6-7C59-4AB4-B517-EA542436E542}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utiles", "Utiles\Utiles.csproj", "{D01241FC-E450-4FB0-9FF6-D28F35B8D503}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeHosData", "GeHosData\GeHosData.csproj", "{89210751-3797-42CB-9CE4-4D0AA44F88C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeHosContract", "GeHosContract\GeHosContract.csproj", "{63C56EC6-520D-44CE-81A9-9ADBAA6AE49F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeHosWebApi", "GeHosWebApi\GeHosWebApi.csproj", "{173CFE78-16E3-44AC-99E4-F2347350991C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9BE661C6-7C59-4AB4-B517-EA542436E542}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BE661C6-7C59-4AB4-B517-EA542436E542}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BE661C6-7C59-4AB4-B517-EA542436E542}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BE661C6-7C59-4AB4-B517-EA542436E542}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D01241FC-E450-4FB0-9FF6-D28F35B8D503}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D01241FC-E450-4FB0-9FF6-D28F35B8D503}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D01241FC-E450-4FB0-9FF6-D28F35B8D503}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D01241FC-E450-4FB0-9FF6-D28F35B8D503}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89210751-3797-42CB-9CE4-4D0AA44F88C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89210751-3797-42CB-9CE4-4D0AA44F88C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89210751-3797-42CB-9CE4-4D0AA44F88C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89210751-3797-42CB-9CE4-4D0AA44F88C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63C56EC6-520D-44CE-81A9-9ADBAA6AE49F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63C56EC6-520D-44CE-81A9-9ADBAA6AE49F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63C56EC6-520D-44CE-81A9-9ADBAA6AE49F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63C56EC6-520D-44CE-81A9-9ADBAA6AE49F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{173CFE78-16E3-44AC-99E4-F2347350991C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{173CFE78-16E3-44AC-99E4-F2347350991C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{173CFE78-16E3-44AC-99E4-F2347350991C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{173CFE78-16E3-44AC-99E4-F2347350991C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

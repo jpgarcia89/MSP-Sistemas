@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="catAgenda">
+          <Key>
+            <PropertyRef Name="agId" />
+          </Key>
+          <Property Name="agId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="perId" Type="int" />
+          <Property Name="conId" Type="int" />
+          <Property Name="csId" Type="int" Nullable="false" />
+          <Property Name="espId" Type="smallint" Nullable="false" />
+          <Property Name="agDuracion" Type="tinyint" Nullable="false" />
+          <Property Name="agSobreturnos" Type="tinyint" Nullable="false" />
+          <Property Name="agActivo" Type="bit" Nullable="false" />
+          <Property Name="agEstado" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="catAgendaHorario">
+          <Key>
+            <PropertyRef Name="aghId" />
+          </Key>
+          <Property Name="aghId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="aghDiaSemana" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="aghHoraInicio" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="aghMinutoInicio" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="aghHoraFin" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="aghMinutoFin" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="aghVigenciaDesde" Type="date" Nullable="false" />
+          <Property Name="aghVigenciaHasta" Type="date" Nullable="false" />
+          <Property Name="agId" Type="int" Nullable="false" />
+          <Property Name="aghActivo" Type="bit" Nullable="false" />
+          <Property Name="aghCantTurnos" Type="int" />
+          <Property Name="aghSobreturnos" Type="int" />
+          <Property Name="aghTipoAgenda" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="catAlergia">
+          <Key>
+            <PropertyRef Name="alId" />
+          </Key>
+          <Property Name="alId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="alNombre" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="alEsMedicamento" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="catCentroDeSalud">
+          <Key>
+            <PropertyRef Name="csId" />
+          </Key>
+          <Property Name="csId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="csCodigo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="csNombre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="depId" Type="smallint" />
+          <Property Name="csLatitud" Type="varchar" MaxLength="255" />
+          <Property Name="csDirector" Type="nchar" MaxLength="20" />
+          <Property Name="csTipologia" Type="nchar" MaxLength="150" />
+          <Property Name="csTelefono" Type="nchar" MaxLength="20" />
+          <Property Name="csLongitud" Type="varchar" MaxLength="255" />
+          <Property Name="csDomicilio" Type="varchar" MaxLength="300" />
+          <Property Name="csPublico" Type="int" />
+          <Property Name="cszId" Type="int" />
+          <Property Name="CodBioestadistica" Type="varchar" MaxLength="8" />
+          <Property Name="CodRemediar" Type="varchar" MaxLength="5" />
+          <Property Name="CantVivienda" Type="int" />
+          <Property Name="CantVaron" Type="int" />
+          <Property Name="CantMujeres" Type="int" />
+          <Property Name="Total" Type="int" />
+          <Property Name="admId" Type="smallint" />
+          <Property Name="csPassword" Type="varbinary" MaxLength="50" />
+          <Property Name="csRequiereHc" Type="bit" />
+          <Property Name="csCargaDatosTurnosPasado" Type="bit" />
+        </EntityType>
+        <EntityType Name="catEspecialidad">
+          <Key>
+            <PropertyRef Name="espId" />
+          </Key>
+          <Property Name="espId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="espNombre" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="espIdPadre" Type="smallint" />
+          <Property Name="espCodigo" Type="varchar" MaxLength="50" />
+          <Property Name="espDescripcionPlanilla" Type="varchar" MaxLength="50" />
+          <Property Name="espAbreviatura" Type="varchar" MaxLength="50" />
+          <Property Name="espIdMHO" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_catAgenda_catCentroDeSalud">
+          <End Role="catCentroDeSalud" Type="Self.catCentroDeSalud" Multiplicity="1" />
+          <End Role="catAgenda" Type="Self.catAgenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catCentroDeSalud">
+              <PropertyRef Name="csId" />
+            </Principal>
+            <Dependent Role="catAgenda">
+              <PropertyRef Name="csId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_catAgenda_catEspecialidad">
+          <End Role="catEspecialidad" Type="Self.catEspecialidad" Multiplicity="1" />
+          <End Role="catAgenda" Type="Self.catAgenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catEspecialidad">
+              <PropertyRef Name="espId" />
+            </Principal>
+            <Dependent Role="catAgenda">
+              <PropertyRef Name="espId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_catAgendaHorario_catAgenda">
+          <End Role="catAgenda" Type="Self.catAgenda" Multiplicity="1" />
+          <End Role="catAgendaHorario" Type="Self.catAgendaHorario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catAgenda">
+              <PropertyRef Name="agId" />
+            </Principal>
+            <Dependent Role="catAgendaHorario">
+              <PropertyRef Name="agId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="catAgenda" EntityType="Self.catAgenda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="catAgendaHorario" EntityType="Self.catAgendaHorario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="catAlergia" EntityType="Self.catAlergia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="catCentroDeSalud" EntityType="Self.catCentroDeSalud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="catEspecialidad" EntityType="Self.catEspecialidad" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_catAgenda_catCentroDeSalud" Association="Self.FK_catAgenda_catCentroDeSalud">
+            <End Role="catCentroDeSalud" EntitySet="catCentroDeSalud" />
+            <End Role="catAgenda" EntitySet="catAgenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_catAgenda_catEspecialidad" Association="Self.FK_catAgenda_catEspecialidad">
+            <End Role="catEspecialidad" EntitySet="catEspecialidad" />
+            <End Role="catAgenda" EntitySet="catAgenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_catAgendaHorario_catAgenda" Association="Self.FK_catAgendaHorario_catAgenda">
+            <End Role="catAgenda" EntitySet="catAgenda" />
+            <End Role="catAgendaHorario" EntitySet="catAgendaHorario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="catAgenda">
+          <Key>
+            <PropertyRef Name="agId" />
+          </Key>
+          <Property Name="agId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="perId" Type="Int32" />
+          <Property Name="conId" Type="Int32" />
+          <Property Name="csId" Type="Int32" Nullable="false" />
+          <Property Name="espId" Type="Int16" Nullable="false" />
+          <Property Name="agDuracion" Type="Byte" Nullable="false" />
+          <Property Name="agSobreturnos" Type="Byte" Nullable="false" />
+          <Property Name="agActivo" Type="Boolean" Nullable="false" />
+          <Property Name="agEstado" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="catAgendaHorario" Relationship="Self.FK_catAgendaHorario_catAgenda" FromRole="catAgenda" ToRole="catAgendaHorario" />
+          <NavigationProperty Name="catEspecialidad" Relationship="Model.FK_catAgenda_catEspecialidad" FromRole="catAgenda" ToRole="catEspecialidad" />
+          <NavigationProperty Name="catCentroDeSalud" Relationship="Model.FK_catAgenda_catCentroDeSalud" FromRole="catAgenda" ToRole="catCentroDeSalud" />
+        </EntityType>
+        <EntityType Name="catAgendaHorario">
+          <Key>
+            <PropertyRef Name="aghId" />
+          </Key>
+          <Property Name="aghId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="aghDiaSemana" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="aghHoraInicio" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="aghMinutoInicio" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="aghHoraFin" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="aghMinutoFin" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="aghVigenciaDesde" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="aghVigenciaHasta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="agId" Type="Int32" Nullable="false" />
+          <Property Name="aghActivo" Type="Boolean" Nullable="false" />
+          <Property Name="aghCantTurnos" Type="Int32" />
+          <Property Name="aghSobreturnos" Type="Int32" />
+          <Property Name="aghTipoAgenda" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="catAgenda" Relationship="Self.FK_catAgendaHorario_catAgenda" FromRole="catAgendaHorario" ToRole="catAgenda" />
+        </EntityType>
+        <EntityType Name="catAlergia">
+          <Key>
+            <PropertyRef Name="alId" />
+          </Key>
+          <Property Name="alId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="alNombre" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="alEsMedicamento" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_catAgendaHorario_catAgenda">
+          <End Role="catAgenda" Type="Self.catAgenda" Multiplicity="1" />
+          <End Role="catAgendaHorario" Type="Self.catAgendaHorario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catAgenda">
+              <PropertyRef Name="agId" />
+            </Principal>
+            <Dependent Role="catAgendaHorario">
+              <PropertyRef Name="agId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="catAgenda" EntityType="Self.catAgenda" />
+          <EntitySet Name="catAgendaHorario" EntityType="Self.catAgendaHorario" />
+          <EntitySet Name="catAlergia" EntityType="Self.catAlergia" />
+          <AssociationSet Name="FK_catAgendaHorario_catAgenda" Association="Self.FK_catAgendaHorario_catAgenda">
+            <End Role="catAgenda" EntitySet="catAgenda" />
+            <End Role="catAgendaHorario" EntitySet="catAgendaHorario" />
+          </AssociationSet>
+          <EntitySet Name="catCentroDeSalud" EntityType="Model.catCentroDeSalud" />
+          <EntitySet Name="catEspecialidad" EntityType="Model.catEspecialidad" />
+          <AssociationSet Name="FK_catAgenda_catEspecialidad" Association="Model.FK_catAgenda_catEspecialidad">
+            <End Role="catEspecialidad" EntitySet="catEspecialidad" />
+            <End Role="catAgenda" EntitySet="catAgenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_catAgenda_catCentroDeSalud" Association="Model.FK_catAgenda_catCentroDeSalud">
+            <End Role="catCentroDeSalud" EntitySet="catCentroDeSalud" />
+            <End Role="catAgenda" EntitySet="catAgenda" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="catCentroDeSalud">
+          <Key>
+            <PropertyRef Name="csId" />
+          </Key>
+          <Property Name="csId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="csCodigo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="csNombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="depId" Type="Int16" />
+          <Property Name="csLatitud" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="csDirector" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="csTipologia" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="csTelefono" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="csLongitud" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="csDomicilio" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="csPublico" Type="Int32" />
+          <Property Name="cszId" Type="Int32" />
+          <Property Name="CodBioestadistica" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="CodRemediar" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="CantVivienda" Type="Int32" />
+          <Property Name="CantVaron" Type="Int32" />
+          <Property Name="CantMujeres" Type="Int32" />
+          <Property Name="Total" Type="Int32" />
+          <Property Name="admId" Type="Int16" />
+          <Property Name="csPassword" Type="Binary" MaxLength="50" FixedLength="false" />
+          <Property Name="csRequiereHc" Type="Boolean" />
+          <Property Name="csCargaDatosTurnosPasado" Type="Boolean" />
+          <NavigationProperty Name="catAgenda" Relationship="Model.FK_catAgenda_catCentroDeSalud" FromRole="catCentroDeSalud" ToRole="catAgenda" />
+        </EntityType>
+        <EntityType Name="catEspecialidad">
+          <Key>
+            <PropertyRef Name="espId" />
+          </Key>
+          <Property Name="espId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="espNombre" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="espIdPadre" Type="Int16" />
+          <Property Name="espCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="espDescripcionPlanilla" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="espAbreviatura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="espIdMHO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="catAgenda" Relationship="Model.FK_catAgenda_catEspecialidad" FromRole="catEspecialidad" ToRole="catAgenda" />
+        </EntityType>
+        <Association Name="FK_catAgenda_catEspecialidad">
+          <End Type="Model.catEspecialidad" Role="catEspecialidad" Multiplicity="1" />
+          <End Type="Model.catAgenda" Role="catAgenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catEspecialidad">
+              <PropertyRef Name="espId" />
+            </Principal>
+            <Dependent Role="catAgenda">
+              <PropertyRef Name="espId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_catAgenda_catCentroDeSalud">
+          <End Type="Model.catCentroDeSalud" Role="catCentroDeSalud" Multiplicity="1" />
+          <End Type="Model.catAgenda" Role="catAgenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catCentroDeSalud">
+              <PropertyRef Name="csId" />
+            </Principal>
+            <Dependent Role="catAgenda">
+              <PropertyRef Name="csId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="catAgenda">
+            <EntityTypeMapping TypeName="Model.catAgenda">
+              <MappingFragment StoreEntitySet="catAgenda">
+                <ScalarProperty Name="agId" ColumnName="agId" />
+                <ScalarProperty Name="perId" ColumnName="perId" />
+                <ScalarProperty Name="conId" ColumnName="conId" />
+                <ScalarProperty Name="csId" ColumnName="csId" />
+                <ScalarProperty Name="espId" ColumnName="espId" />
+                <ScalarProperty Name="agDuracion" ColumnName="agDuracion" />
+                <ScalarProperty Name="agSobreturnos" ColumnName="agSobreturnos" />
+                <ScalarProperty Name="agActivo" ColumnName="agActivo" />
+                <ScalarProperty Name="agEstado" ColumnName="agEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catAgendaHorario">
+            <EntityTypeMapping TypeName="Model.catAgendaHorario">
+              <MappingFragment StoreEntitySet="catAgendaHorario">
+                <ScalarProperty Name="aghId" ColumnName="aghId" />
+                <ScalarProperty Name="aghDiaSemana" ColumnName="aghDiaSemana" />
+                <ScalarProperty Name="aghHoraInicio" ColumnName="aghHoraInicio" />
+                <ScalarProperty Name="aghMinutoInicio" ColumnName="aghMinutoInicio" />
+                <ScalarProperty Name="aghHoraFin" ColumnName="aghHoraFin" />
+                <ScalarProperty Name="aghMinutoFin" ColumnName="aghMinutoFin" />
+                <ScalarProperty Name="aghVigenciaDesde" ColumnName="aghVigenciaDesde" />
+                <ScalarProperty Name="aghVigenciaHasta" ColumnName="aghVigenciaHasta" />
+                <ScalarProperty Name="agId" ColumnName="agId" />
+                <ScalarProperty Name="aghActivo" ColumnName="aghActivo" />
+                <ScalarProperty Name="aghCantTurnos" ColumnName="aghCantTurnos" />
+                <ScalarProperty Name="aghSobreturnos" ColumnName="aghSobreturnos" />
+                <ScalarProperty Name="aghTipoAgenda" ColumnName="aghTipoAgenda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catAlergia">
+            <EntityTypeMapping TypeName="Model.catAlergia">
+              <MappingFragment StoreEntitySet="catAlergia">
+                <ScalarProperty Name="alId" ColumnName="alId" />
+                <ScalarProperty Name="alNombre" ColumnName="alNombre" />
+                <ScalarProperty Name="alEsMedicamento" ColumnName="alEsMedicamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catCentroDeSalud">
+            <EntityTypeMapping TypeName="Model.catCentroDeSalud">
+              <MappingFragment StoreEntitySet="catCentroDeSalud">
+                <ScalarProperty Name="csCargaDatosTurnosPasado" ColumnName="csCargaDatosTurnosPasado" />
+                <ScalarProperty Name="csRequiereHc" ColumnName="csRequiereHc" />
+                <ScalarProperty Name="csPassword" ColumnName="csPassword" />
+                <ScalarProperty Name="admId" ColumnName="admId" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="CantMujeres" ColumnName="CantMujeres" />
+                <ScalarProperty Name="CantVaron" ColumnName="CantVaron" />
+                <ScalarProperty Name="CantVivienda" ColumnName="CantVivienda" />
+                <ScalarProperty Name="CodRemediar" ColumnName="CodRemediar" />
+                <ScalarProperty Name="CodBioestadistica" ColumnName="CodBioestadistica" />
+                <ScalarProperty Name="cszId" ColumnName="cszId" />
+                <ScalarProperty Name="csPublico" ColumnName="csPublico" />
+                <ScalarProperty Name="csDomicilio" ColumnName="csDomicilio" />
+                <ScalarProperty Name="csLongitud" ColumnName="csLongitud" />
+                <ScalarProperty Name="csTelefono" ColumnName="csTelefono" />
+                <ScalarProperty Name="csTipologia" ColumnName="csTipologia" />
+                <ScalarProperty Name="csDirector" ColumnName="csDirector" />
+                <ScalarProperty Name="csLatitud" ColumnName="csLatitud" />
+                <ScalarProperty Name="depId" ColumnName="depId" />
+                <ScalarProperty Name="csNombre" ColumnName="csNombre" />
+                <ScalarProperty Name="csCodigo" ColumnName="csCodigo" />
+                <ScalarProperty Name="csId" ColumnName="csId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catEspecialidad">
+            <EntityTypeMapping TypeName="Model.catEspecialidad">
+              <MappingFragment StoreEntitySet="catEspecialidad">
+                <ScalarProperty Name="espIdMHO" ColumnName="espIdMHO" />
+                <ScalarProperty Name="espAbreviatura" ColumnName="espAbreviatura" />
+                <ScalarProperty Name="espDescripcionPlanilla" ColumnName="espDescripcionPlanilla" />
+                <ScalarProperty Name="espCodigo" ColumnName="espCodigo" />
+                <ScalarProperty Name="espIdPadre" ColumnName="espIdPadre" />
+                <ScalarProperty Name="espNombre" ColumnName="espNombre" />
+                <ScalarProperty Name="espId" ColumnName="espId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
