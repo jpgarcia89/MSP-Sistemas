@@ -1,5 +1,13 @@
 ﻿@{
-    var menus = Session["Menu"] as List<GeHos.Controllers.HomeController.mnuEntitie>;
+    List<GeHosContract.Contrato.MenuVM> menus;
+    if (Session["Menu"] == null)
+    {
+        var menuClien = new GeHos.Model.MenuClient();
+        Session["Menu"] = menuClien.buscarTodos();
+    }
+
+    menus = Session["Menu"] as List<GeHosContract.Contrato.MenuVM>;
+
     //var menusPadres = menus == null ? null : menus.Where(r => r.mnuIdPadre == null).ToList();
 
 }
