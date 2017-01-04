@@ -56,5 +56,7 @@ namespace GeHosWebApi.Models
         public virtual DbSet<Turno> Turno { get; set; }
         public virtual DbSet<TurnoEstado> TurnoEstado { get; set; }
         public virtual DbSet<TurnoEstadoAdmision> TurnoEstadoAdmision { get; set; }
+        public virtual DbSet<EstadoCivil> EstadoCivil { get; set; }
+        public virtual DbSet<TipoDNI> TipoDNI { get; set; }
     }
 }

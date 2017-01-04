@@ -12,24 +12,19 @@ namespace GeHosWebApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Departamento
+    public partial class TipoDNI
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Departamento()
+        public TipoDNI()
         {
-            this.Localidad = new HashSet<Localidad>();
-            this.CentroDeSalud = new HashSet<CentroDeSalud>();
+            this.Persona = new HashSet<Persona>();
         }
     
         public int ID { get; set; }
         public string Nombre { get; set; }
-        public int ProvinciaID { get; set; }
         public bool Activa { get; set; }
     
-        public virtual Provincia Provincia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Localidad> Localidad { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CentroDeSalud> CentroDeSalud { get; set; }
+        public virtual ICollection<Persona> Persona { get; set; }
     }
 }

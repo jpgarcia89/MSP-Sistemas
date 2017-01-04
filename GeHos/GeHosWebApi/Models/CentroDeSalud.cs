@@ -25,7 +25,7 @@ namespace GeHosWebApi.Models
         public int ID { get; set; }
         public string Codigo { get; set; }
         public string Nombre { get; set; }
-        public Nullable<short> DepartamentoID { get; set; }
+        public Nullable<int> DepartamentoID { get; set; }
         public string Latitud { get; set; }
         public string Director { get; set; }
         public string Tipologia { get; set; }
@@ -52,5 +52,6 @@ namespace GeHosWebApi.Models
         public virtual ICollection<EmpleadoEspecialidadCentroDeSalud> EmpleadoEspecialidadCentroDeSalud { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Paciente> Paciente { get; set; }
+        public virtual Departamento Departamento { get; set; }
     }
 }
