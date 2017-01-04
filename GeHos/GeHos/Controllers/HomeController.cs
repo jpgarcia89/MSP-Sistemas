@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GeHos.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -32,7 +33,14 @@ namespace GeHos.Controllers
             return View();
         }
 
-
+        [HttpGet]
+        public ActionResult SeleccionarCentroDeSalud()
+        {
+            CentroDeSaludClient csC = new CentroDeSaludClient();
+            var lol = new SelectList(csC.buscarTodos().ToList(), "ID", "Nombre");
+            ViewBag.ListaCSDeUsuario = lol;
+            return PartialView();
+        }
 
         #region Datos Estaticos Menu        
         private List<mnuEntitie> GetMenu(string name)

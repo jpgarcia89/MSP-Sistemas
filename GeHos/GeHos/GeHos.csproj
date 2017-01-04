@@ -1104,6 +1104,7 @@
     <Content Include="Scripts\plugins\input-mask\phone-codes\phone-codes.json" />
     <Content Include="Views\Agenda\Agregar.cshtml" />
     <Content Include="Views\Agenda\Modificar.cshtml" />
+    <Content Include="Views\Home\SeleccionarCentroDeSalud.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
