@@ -16,53 +16,29 @@
     </p>
     <table class="table">
         <tr>
-            @*<th>
-    @Html.DisplayNameFor(obj => itemH.perApellidoNombre)
-            </th>*@
             <th>
                 @Html.DisplayNameFor(obj => itemH.CentroDeSaludNombre)
             </th>
             <th>
                 @Html.DisplayNameFor(obj => itemH.EspecialidadNombre)
             </th>
-            @*<th>
-        @Html.DisplayNameFor(obj => itemH.agDuracion)
-    </th>
-    <th>
-        @Html.DisplayNameFor(obj => itemH.agSobreturnos)
-    </th>*@
             <th>
                 @Html.DisplayNameFor(obj => itemH.Activa)
             </th>
-            @*<th>
-                @Html.DisplayNameFor(obj => itemH.agEstado)
-            </th>*@
             <th></th>
         </tr>
     
     @foreach (var item in Model.ListaItems) {
         <tr>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.perApellidoNombre)
-            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.CentroDeSaludNombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EspecialidadNombre)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.agDuracion)
-            </td>*@
-            @*<td>
-                @Html.DisplayFor(modelItem => item.agSobreturnos)
-            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Activa)
             </td>
-            @*<td>
-        @Html.DisplayFor(modelItem => item.agEstado)
-    </td>*@
             <td>
                 <a href="@Url.Action("Modificar","Agenda", new { id = item.ID })">Modificar</a> |
                 @*@Html.ActionLink("Details", "Details", new { id=item.agId }) |*@

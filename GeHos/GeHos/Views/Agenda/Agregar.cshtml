@@ -1,4 +1,4 @@
-﻿@model GeHosContract.Contrato.catAgendaVM
+﻿@model GeHosContract.Contrato.AgendaVM
 
 <!-- CSS Includes -->
 @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.js"></script>
@@ -28,38 +28,22 @@
             <h4>catAgendaVM</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.perApellidoNombre, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @*@Html.EditorFor(model => model.perApellidoNombre, new { htmlAttributes = new { @class = "form-control" } })*@
-                    @Html.DropDownListFor(model => model.perId, (SelectList)(ViewBag.Persona), new { @class = "select2", @style = "width: 100%" })
-                    @Html.ValidationMessageFor(model => model.perApellidoNombre, "", new { @class = "text-danger" })
-                </div>
-            </div>
     
             <div class="form-group">
-                @Html.LabelFor(model => model.csNombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.CentroDeSaludNombre, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @*@Html.EditorFor(model => model.csNombre, new { htmlAttributes = new { @class = "form-control" } })*@
-                    @Html.DropDownListFor(model=>model.csId, (SelectList)(ViewBag.ListaCentroSalud), new { @class = "select2", @style="width: 100%" })
-                    @Html.ValidationMessageFor(model => model.csNombre, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model=>model.CentroDeSaludID, (SelectList)(ViewBag.ListaCentroSalud), new { @class = "select2", @style="width: 100%" })
+                    @Html.ValidationMessageFor(model => model.CentroDeSaludNombre, "", new { @class = "text-danger" })
                 </div>
             </div>
     
             <div class="form-group">
-                @Html.LabelFor(model => model.espNombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.EspecialidadNombre, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @*@Html.EditorFor(model => model.espNombre, new { htmlAttributes = new { @class = "form-control" } })*@
-                    @Html.DropDownListFor(model => model.espId, (SelectList)(ViewBag.Especialidad), new { @class = "select2", @style = "width: 100%" })
-                    @Html.ValidationMessageFor(model => model.espNombre, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.agDuracion, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.agDuracion, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.agDuracion, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => model.EspecialidadID, (SelectList)(ViewBag.Especialidad), new { @class = "select2", @style = "width: 100%" })
+                    @Html.ValidationMessageFor(model => model.EspecialidadNombre, "", new { @class = "text-danger" })
                 </div>
             </div>
     
@@ -70,9 +54,8 @@
             </div>
         </div>
 
-        @Html.HiddenFor(model => model.espId, "espId");
-        @Html.HiddenFor(model => model.csId, "csId");
-        @Html.HiddenFor(model => model.perId, "perId");
+        @Html.HiddenFor(model => model.EspecialidadID, "EspecialidadID");
+        @Html.HiddenFor(model => model.CentroDeSaludID, "CentroDeSaludID");
     }
     
     <div>
@@ -83,8 +66,7 @@
 
 <script>
     $(document).ready(function () {
-        $('#csNombre').select2();
-        $('#espNombre').select2();
-        $('#perApellidoNombre').select2();
+        $('#CentroDeSaludNombre').select2();
+        $('#EspecialidadNombre').select2();
     })
 </script>
