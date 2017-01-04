@@ -90,6 +90,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contratos\AccountViewModels.cs" />
+    <Compile Include="Contratos\Menu\MenuVM.cs" />
+    <Compile Include="Contratos\Menu\CMenuVM.cs" />
     <Compile Include="Contratos\AgendaHorario\AgendaHorarioVM.cs" />
     <Compile Include="Contratos\AgendaHorario\CAgendaHorarioVM.cs" />
     <Compile Include="Contratos\Agenda\AgendaVM.cs" />
