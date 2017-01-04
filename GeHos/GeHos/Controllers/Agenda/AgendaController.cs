@@ -33,9 +33,8 @@ namespace GeHos.Controllers
             PersonaClient peC = new PersonaClient();
             AgendaVM nuevaAgenda = new AgendaVM();
             //ViewData["ListaCentroSalud"] = new SelectList(csC.buscarTodos().ToList(), "csId", "csNombre");
-            ViewBag.ListaCentroSalud = new SelectList(csC.buscarTodos().ToList(), "csId", "csNombre");
-            ViewBag.Especialidad = new SelectList(esC.buscarTodas().ToList(), "espId", "espNombre");
-            ViewBag.Persona = new SelectList(peC.buscarTodas().ToList(), "perId", "perApellidoyNombre");
+            ViewBag.ListaCentroSalud = new SelectList(csC.buscarTodos().ToList(), "ID", "Nombre");
+            ViewBag.Especialidad = new SelectList(esC.buscarTodas().ToList(), "ID", "Nombre");
             return View("Agregar", nuevaAgenda);
         }
 
@@ -55,9 +54,8 @@ namespace GeHos.Controllers
             EspecialidadClient esC = new EspecialidadClient();
             PersonaClient peC = new PersonaClient();
             AgendaVM objModificar = new AgendaVM();
-            ViewBag.ListaCentroSalud = new SelectList(csC.buscarTodos().ToList(), "csId", "csNombre");
-            ViewBag.Especialidad = new SelectList(esC.buscarTodas().ToList(), "espId", "espNombre");
-            ViewBag.Persona = new SelectList(peC.buscarTodas().ToList(), "perId", "perApellidoyNombre");
+            ViewBag.ListaCentroSalud = new SelectList(csC.buscarTodos().ToList(), "ID", "Nombre");
+            ViewBag.Especialidad = new SelectList(esC.buscarTodas().ToList(), "ID", "Nombre");
             objModificar = ac.buscarAgenda(id.Value);
             return View("Modificar", objModificar);
         }
