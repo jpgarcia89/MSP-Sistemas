@@ -1,12 +1,12 @@
-﻿@model CcatAgendaVM
+﻿@model CAgendaVM
 @using GeHosContract.Contrato
 @using System.Collections.ObjectModel
 
 @{
     //Layout = null;
-    CcatAgendaVM modelo = Model;
-    ObservableCollection<catAgendaVM> aux = Model.ListaItems;
-    catAgendaVM itemH = new catAgendaVM();
+    CAgendaVM modelo = Model;
+    ObservableCollection<AgendaVM> aux = Model.ListaItems;
+    AgendaVM itemH = new AgendaVM();
     ViewBag.Title = "Agenda";
 }
 
@@ -16,57 +16,57 @@
     </p>
     <table class="table">
         <tr>
+            @*<th>
+    @Html.DisplayNameFor(obj => itemH.perApellidoNombre)
+            </th>*@
             <th>
-                @Html.DisplayNameFor(obj => itemH.perApellidoNombre)
+                @Html.DisplayNameFor(obj => itemH.CentroDeSaludNombre)
             </th>
             <th>
-                @Html.DisplayNameFor(obj => itemH.csNombre)
+                @Html.DisplayNameFor(obj => itemH.EspecialidadNombre)
             </th>
+            @*<th>
+        @Html.DisplayNameFor(obj => itemH.agDuracion)
+    </th>
+    <th>
+        @Html.DisplayNameFor(obj => itemH.agSobreturnos)
+    </th>*@
             <th>
-                @Html.DisplayNameFor(obj => itemH.espNombre)
+                @Html.DisplayNameFor(obj => itemH.Activa)
             </th>
-            <th>
-                @Html.DisplayNameFor(obj => itemH.agDuracion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(obj => itemH.agSobreturnos)
-            </th>
-            <th>
-                @Html.DisplayNameFor(obj => itemH.agActivo)
-            </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(obj => itemH.agEstado)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     
     @foreach (var item in Model.ListaItems) {
         <tr>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.perApellidoNombre)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.CentroDeSaludNombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.csNombre)
+                @Html.DisplayFor(modelItem => item.EspecialidadNombre)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.espNombre)
-            </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.agDuracion)
-            </td>
-            <td>
+            </td>*@
+            @*<td>
                 @Html.DisplayFor(modelItem => item.agSobreturnos)
-            </td>
+            </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.agActivo)
+                @Html.DisplayFor(modelItem => item.Activa)
             </td>
+            @*<td>
+        @Html.DisplayFor(modelItem => item.agEstado)
+    </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.agEstado)
-            </td>
-            <td>
-                <a href="@Url.Action("Modificar","Agenda", new { id = item.agId })">Modificar</a> |
+                <a href="@Url.Action("Modificar","Agenda", new { id = item.ID })">Modificar</a> |
                 @*@Html.ActionLink("Details", "Details", new { id=item.agId }) |*@
-                <a onclick="return confirm('Esta seguro?')" href="@Url.Action("Borrar","Agenda", new { id = item.agId })">Borrar</a>
+                <a onclick="return confirm('Esta seguro?')" href="@Url.Action("Borrar","Agenda", new { id = item.ID })">Borrar</a>
             </td>
         </tr>
     }
