@@ -65,6 +65,11 @@
 .skin-blue .user-panel > .info > a {
   color: #fff;
 }
+
+.skin-blue .sidebar-menu {
+    white-space: normal;
+}
+
 .skin-blue .sidebar-menu > li.header {
   color: #4b646f;
   background: #1a2226;
