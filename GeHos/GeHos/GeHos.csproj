@@ -1014,6 +1014,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\GlobalVariables.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
     <Compile Include="Model\MenuClient.cs" />
     <Compile Include="Model\AgendaClient.cs" />

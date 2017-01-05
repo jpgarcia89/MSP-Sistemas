@@ -27,7 +27,7 @@ namespace GeHos.Helpers
 
                         if (menusAll.Where(r => r.PadreID == item.ID).Any())
                         {
-                            string a = string.Format(@"<li><a href=""#""><i class=""fa fa-circle-o""></i> {0} <span class=""pull-right-container""><i class=""fa fa-angle-left pull-right""></i></span></a><ul class=""treeview-menu"">", item.Nombre);
+                            string a = string.Format(@"<li><a href=""#""><i class=""{1}""></i> {0} <span class=""pull-right-container""><i class=""fa fa-angle-left pull-right""></i></span></a><ul class=""treeview-menu"">", item.Nombre,item.Icono);
                             output += a;
 
                             output = createMenu(menusAll.Where(r => r.PadreID == item.ID).ToList(), menusAll, output);
@@ -50,7 +50,7 @@ namespace GeHos.Helpers
 
                     foreach (var item in menusPadres)
                     {
-                        string x = string.Format(@"<li class=""treeview""><a href = ""#"" ><i class=""fa fa-circle-o""></i><span> {0} </span><span class=""pull-right-container""><i class=""fa fa-angle-left pull-right""></i></span></a>", item.Nombre);
+                        string x = string.Format(@"<li class=""treeview""><a href = ""#"" ><i class=""{1}""></i><span> {0} </span><span class=""pull-right-container""><i class=""fa fa-angle-left pull-right""></i></span></a>", item.Nombre,item.Icono);
                         output += x;
 
                         if (menusAll.Where(r => r.PadreID == item.ID).Any())
