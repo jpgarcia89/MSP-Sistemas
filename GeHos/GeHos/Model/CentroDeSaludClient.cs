@@ -32,5 +32,27 @@ namespace GeHos.Model
                 return null;
             }
         }
+
+        public IEnumerable<CentroDeSaludVM> buscarTodosPorUsuario(int id)
+        {
+            try
+            {
+
+                HttpClient cliente = new HttpClient();
+                cliente.BaseAddress = new Uri(BASE_URL);
+                cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage respuesta = cliente.GetAsync("CentroDeSalud/GetCentroDeSaludPorUsuario/" + id).Result;
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    return respuesta.Content.ReadAsAsync<IEnumerable<CentroDeSaludVM>>().Result;
+                }
+                return null;
+            }
+            catch (Exception es)
+            {
+
+                return null;
+            }
+        }
     }
 }

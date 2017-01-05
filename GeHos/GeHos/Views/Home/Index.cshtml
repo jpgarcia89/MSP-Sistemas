@@ -132,8 +132,26 @@
 
     $('#cmdSeleccionar').on('click', function (event) {
         var sele = $('#ListaCSDeUsuario').val();
-        alert(sele);
-        //event.preventDefault(); // To prevent following the link (optional)
+        //alert(sele);
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("setCentroDeSalud", "Home")',
+            dataType: 'json',
+            data: {
+                csSeleccionado: sele
+            },
+            success: function (data) {
+                if (data.msg == "ok") {
+                    $('#modal').modal('hide');
+                    @*if (@Session["CSSeleccionado"]!=null)
+                        alert(@Session["CSSeleccionado"].ToString());*@
+                }
+            },
+            error: function () {
+                alert('Ha ocurrido un error!', "Atencion");
+            }
+        });
     });
 
 </script>

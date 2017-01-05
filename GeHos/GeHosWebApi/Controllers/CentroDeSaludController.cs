@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using GeHosWebApi.Models;
 using GeHosContract.Contrato;
+using Microsoft.AspNet.Identity;
 
 namespace GeHosWebApi.Controllers
 {
@@ -119,6 +120,28 @@ namespace GeHosWebApi.Controllers
         private bool catCentroDeSaludExists(int id)
         {
             return db.CentroDeSalud.Count(e => e.ID == id) > 0;
+        }
+
+
+        // GET: api/CentroDeSalud/GetCentroDeSaludPorUsuario/1
+        public IQueryable<CentroDeSaludVM> GetCentroDeSaludPorUsuario(int id)
+        {
+            int lol = db.Empleado.Where(z => z.AspNetUsersID == id).Select(y => y.ID).FirstOrDefault();
+            var x = from a in db.CentroDeSalud
+                    join b in db.EmpleadoEspecialidadCentroDeSalud on a.ID equals b.CentroDeSaludID
+                    where b.EmpleadoID == lol
+                    group a by new
+                    {
+                        a.ID,
+                        a.Nombre
+                    } into gCS
+                    select new CentroDeSaludVM()
+                    {
+                        ID = gCS.Key.ID,
+                        Nombre = gCS.Key.Nombre
+                    };
+
+            return x;
         }
     }
 }

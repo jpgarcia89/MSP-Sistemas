@@ -27,6 +27,12 @@ namespace GeHosWebApi
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            config.Routes.MapHttpRoute(
+                name: "RouteApi2",
+                routeTemplate: "api/{controller}/{action}/{id}",
+                defaults: new { action = "Get", id = RouteParameter.Optional }
+            );
+
             config.Formatters.Remove(config.Formatters.XmlFormatter);
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
         }
