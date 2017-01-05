@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Administrador">
           <Key>
             <PropertyRef Name="ID" />
@@ -147,14 +147,14 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="ProvinciaID" Type="int" Nullable="false" />
+          <Property Name="ProvinciaID" Type="tinyint" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Empleado">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PersonaID" Type="int" Nullable="false" />
           <Property Name="AspNetUsersID" Type="int" Nullable="false" />
         </EntityType>
@@ -199,7 +199,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
         </EntityType>
@@ -216,7 +216,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="tinyint" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Factor" Type="tinyint" />
         </EntityType>
@@ -276,7 +276,7 @@
           <Property Name="ObraSocialID" Type="int" />
           <Property Name="EsDonanteDeOrganos" Type="bit" />
           <Property Name="Hospitalizado" Type="bit" />
-          <Property Name="GrupoSanguineoID" Type="int" />
+          <Property Name="GrupoSanguineoID" Type="tinyint" />
           <Property Name="CentroDeSaludID" Type="int" />
           <Property Name="NumeroHistoriaClinica" Type="nvarchar" MaxLength="25" />
         </EntityType>
@@ -292,17 +292,17 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Apellido" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="TipodniID" Type="int" Nullable="false" />
-          <Property Name="EstadoCivilID" Type="int" Nullable="false" />
+          <Property Name="TipodniID" Type="tinyint" Nullable="false" />
+          <Property Name="EstadoCivilID" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="tinyint" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PaisID" Type="int" />
           <Property Name="Activa" Type="bit" Nullable="false" />
@@ -321,7 +321,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
         </EntityType>
@@ -333,8 +333,8 @@
           <Property Name="PacienteID" Type="int" />
           <Property Name="AgendaHorarioID" Type="int" Nullable="false" />
           <Property Name="FechaTurno" Type="datetime" Nullable="false" />
-          <Property Name="TurnoEstadoID" Type="int" Nullable="false" />
-          <Property Name="TurnoEstadoAdmisionID" Type="int" Nullable="false" />
+          <Property Name="TurnoEstadoID" Type="tinyint" Nullable="false" />
+          <Property Name="TurnoEstadoAdmisionID" Type="tinyint" Nullable="false" />
           <Property Name="EsSobreturno" Type="bit" />
           <Property Name="FechaAdmision" Type="datetime" />
           <Property Name="FechaInicioAtencion" Type="datetime" />
@@ -347,7 +347,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
         </EntityType>
@@ -355,7 +355,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
         </EntityType>
@@ -404,18 +404,6 @@
             </Principal>
             <Dependent Role="AgendaHorario">
               <PropertyRef Name="AgendaTipoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CentroDeSalud_Administrador">
-          <End Role="Administrador" Type="Self.Administrador" Multiplicity="0..1" />
-          <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Administrador">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CentroDeSalud">
-              <PropertyRef Name="AdministradorID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -520,18 +508,6 @@
             </Principal>
             <Dependent Role="AspNetUserRoles">
               <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Departamento_Provincia">
-          <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provincia">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Departamento">
-              <PropertyRef Name="ProvinciaID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -838,10 +814,6 @@
             <End Role="AgendaTipo" EntitySet="AgendaTipo" />
             <End Role="AgendaHorario" EntitySet="AgendaHorario" />
           </AssociationSet>
-          <AssociationSet Name="FK_CentroDeSalud_Administrador" Association="Self.FK_CentroDeSalud_Administrador">
-            <End Role="Administrador" EntitySet="Administrador" />
-            <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
-          </AssociationSet>
           <AssociationSet Name="FK_CentroDeSalud_Departamento" Association="Self.FK_CentroDeSalud_Departamento">
             <End Role="Departamento" EntitySet="Departamento" />
             <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
@@ -873,10 +845,6 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Departamento_Provincia" Association="Self.FK_Departamento_Provincia">
-            <End Role="Provincia" EntitySet="Provincia" />
-            <End Role="Departamento" EntitySet="Departamento" />
           </AssociationSet>
           <AssociationSet Name="FK_Empleado_AspNetUsers" Association="Self.FK_Empleado_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -963,7 +931,8 @@
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -976,7 +945,6 @@
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CuentaEscrituralID" Type="Int16" />
           <NavigationProperty Name="CuentaEscritural" Relationship="Self.FK_Administrador_CuentaEscritural" FromRole="Administrador" ToRole="CuentaEscritural" />
-          <NavigationProperty Name="CentroDeSalud" Relationship="Self.FK_CentroDeSalud_Administrador" FromRole="Administrador" ToRole="CentroDeSalud" />
         </EntityType>
         <EntityType Name="Agenda">
           <Key>
@@ -1090,11 +1058,10 @@
           <Property Name="Password" Type="Binary" MaxLength="50" FixedLength="false" />
           <Property Name="RequiereHc" Type="Boolean" />
           <Property Name="CargaDatosTurnosPasado" Type="Boolean" />
-          <NavigationProperty Name="Administrador" Relationship="Self.FK_CentroDeSalud_Administrador" FromRole="CentroDeSalud" ToRole="Administrador" />
+          <NavigationProperty Name="Departamento" Relationship="Self.FK_CentroDeSalud_Departamento" FromRole="CentroDeSalud" ToRole="Departamento" />
           <NavigationProperty Name="CentroDeSaludConsultorio" Relationship="Self.FK_CentroDeSaludConsultorio_CentroDeSalud" FromRole="CentroDeSalud" ToRole="CentroDeSaludConsultorio" />
           <NavigationProperty Name="EmpleadoEspecialidadCentroDeSalud" Relationship="Self.FK_EmpleadoEspecialidadCentroDeSalud_CentroDeSalud" FromRole="CentroDeSalud" ToRole="EmpleadoEspecialidadCentroDeSalud" />
           <NavigationProperty Name="Paciente" Relationship="Self.FK_Paciente_CentroDeSalud" FromRole="CentroDeSalud" ToRole="Paciente" />
-          <NavigationProperty Name="Departamento" Relationship="Model.FK_CentroDeSalud_Departamento" FromRole="CentroDeSalud" ToRole="Departamento" />
         </EntityType>
         <EntityType Name="CentroDeSaludConsultorio">
           <Key>
@@ -1125,17 +1092,16 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ProvinciaID" Type="Int32" Nullable="false" />
+          <Property Name="ProvinciaID" Type="Byte" Nullable="false" />
           <Property Name="Activa" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Provincia" Relationship="Self.FK_Departamento_Provincia" FromRole="Departamento" ToRole="Provincia" />
+          <NavigationProperty Name="CentroDeSalud" Relationship="Self.FK_CentroDeSalud_Departamento" FromRole="Departamento" ToRole="CentroDeSalud" />
           <NavigationProperty Name="Localidad" Relationship="Self.FK_Localidad_Localidad" FromRole="Departamento" ToRole="Localidad" />
-          <NavigationProperty Name="CentroDeSalud" Relationship="Model.FK_CentroDeSalud_Departamento" FromRole="Departamento" ToRole="CentroDeSalud" />
         </EntityType>
         <EntityType Name="Empleado">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PersonaID" Type="Int32" Nullable="false" />
           <Property Name="AspNetUsersID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Empleado_AspNetUsers" FromRole="Empleado" ToRole="AspNetUsers" />
@@ -1188,6 +1154,15 @@
           <Property Name="IdMHO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="EmpleadoEspecialidadCentroDeSalud" Relationship="Self.FK_EmpleadoEspecialidadCentroDeSalud_Especialidad" FromRole="Especialidad" ToRole="EmpleadoEspecialidadCentroDeSalud" />
         </EntityType>
+        <EntityType Name="EstadoCivil">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_Persona_EstadoCivil" FromRole="EstadoCivil" ToRole="Persona" />
+        </EntityType>
         <EntityType Name="Fuente">
           <Key>
             <PropertyRef Name="ID" />
@@ -1203,7 +1178,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Byte" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Factor" Type="Byte" />
           <NavigationProperty Name="Paciente" Relationship="Self.FK_Paciente_GrupoSanguineo" FromRole="GrupoSanguineo" ToRole="Paciente" />
@@ -1270,7 +1245,7 @@
           <Property Name="ObraSocialID" Type="Int32" />
           <Property Name="EsDonanteDeOrganos" Type="Boolean" />
           <Property Name="Hospitalizado" Type="Boolean" />
-          <Property Name="GrupoSanguineoID" Type="Int32" />
+          <Property Name="GrupoSanguineoID" Type="Byte" />
           <Property Name="CentroDeSaludID" Type="Int32" />
           <Property Name="NumeroHistoriaClinica" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CentroDeSalud" Relationship="Self.FK_Paciente_CentroDeSalud" FromRole="Paciente" ToRole="CentroDeSalud" />
@@ -1292,25 +1267,24 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TipodniID" Type="Byte" Nullable="false" />
+          <Property Name="EstadoCivilID" Type="Byte" Nullable="false" />
           <NavigationProperty Name="Empleado" Relationship="Self.FK_Empleado_Persona" FromRole="Persona" ToRole="Empleado" />
+          <NavigationProperty Name="EstadoCivil" Relationship="Self.FK_Persona_EstadoCivil" FromRole="Persona" ToRole="EstadoCivil" />
           <NavigationProperty Name="Paciente" Relationship="Self.FK_Paciente_Persona" FromRole="Persona" ToRole="Paciente" />
-          <Property Name="Apellido" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TipodniID" Type="Int32" Nullable="false" />
-          <Property Name="EstadoCivilID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="EstadoCivil" Relationship="Model.FK_Persona_EstadoCivil" FromRole="Persona" ToRole="EstadoCivil" />
-          <NavigationProperty Name="TipoDNI" Relationship="Model.FK_Persona_TipoDNI" FromRole="Persona" ToRole="TipoDNI" />
+          <NavigationProperty Name="TipoDNI" Relationship="Self.FK_Persona_TipoDNI" FromRole="Persona" ToRole="TipoDNI" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Byte" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PaisID" Type="Int32" />
           <Property Name="Activa" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Departamento" Relationship="Self.FK_Departamento_Provincia" FromRole="Provincia" ToRole="Departamento" />
           <NavigationProperty Name="Pais" Relationship="Self.FK_Provincia_Pais" FromRole="Provincia" ToRole="Pais" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -1323,6 +1297,15 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <EntityType Name="TipoDNI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_Persona_TipoDNI" FromRole="TipoDNI" ToRole="Persona" />
+        </EntityType>
         <EntityType Name="Turno">
           <Key>
             <PropertyRef Name="ID" />
@@ -1331,8 +1314,8 @@
           <Property Name="PacienteID" Type="Int32" />
           <Property Name="AgendaHorarioID" Type="Int32" Nullable="false" />
           <Property Name="FechaTurno" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="TurnoEstadoID" Type="Int32" Nullable="false" />
-          <Property Name="TurnoEstadoAdmisionID" Type="Int32" Nullable="false" />
+          <Property Name="TurnoEstadoID" Type="Byte" Nullable="false" />
+          <Property Name="TurnoEstadoAdmisionID" Type="Byte" Nullable="false" />
           <Property Name="EsSobreturno" Type="Boolean" />
           <Property Name="FechaAdmision" Type="DateTime" Precision="3" />
           <Property Name="FechaInicioAtencion" Type="DateTime" Precision="3" />
@@ -1349,7 +1332,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Activa" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Turno" Relationship="Self.FK_Turno_TurnoEstado" FromRole="TurnoEstado" ToRole="Turno" />
@@ -1358,7 +1341,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Activa" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Turno" Relationship="Self.FK_Turno_TurnoEstadoAdmision" FromRole="TurnoEstadoAdmision" ToRole="Turno" />
@@ -1372,18 +1355,6 @@
             </Principal>
             <Dependent Role="Administrador">
               <PropertyRef Name="CuentaEscrituralID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CentroDeSalud_Administrador">
-          <End Role="Administrador" Type="Self.Administrador" Multiplicity="0..1" />
-          <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Administrador">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CentroDeSalud">
-              <PropertyRef Name="AdministradorID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1475,6 +1446,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CentroDeSalud_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CentroDeSalud">
+              <PropertyRef Name="DepartamentoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CentroDeSaludConsultorio_CentroDeSalud">
           <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="1" />
           <End Role="CentroDeSaludConsultorio" Type="Self.CentroDeSaludConsultorio" Multiplicity="*" />
@@ -1532,18 +1515,6 @@
             </Principal>
             <Dependent Role="CuentaEscritural">
               <PropertyRef Name="InstitucionContableID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Departamento_Provincia">
-          <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provincia">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Departamento">
-              <PropertyRef Name="ProvinciaID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1616,6 +1587,18 @@
             </Principal>
             <Dependent Role="EmpleadoEspecialidadCentroDeSalud">
               <PropertyRef Name="EspecialidadID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_EstadoCivil">
+          <End Role="EstadoCivil" Type="Self.EstadoCivil" Multiplicity="1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCivil">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="EstadoCivilID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1703,6 +1686,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Persona_TipoDNI">
+          <End Role="TipoDNI" Type="Self.TipoDNI" Multiplicity="1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDNI">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="TipodniID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Turno_TurnoEstado">
           <End Role="TurnoEstado" Type="Self.TurnoEstado" Multiplicity="1" />
           <End Role="Turno" Type="Self.Turno" Multiplicity="*" />
@@ -1749,6 +1744,7 @@
           <EntitySet Name="EmpleadoEspecialidadCentroDeSalud" EntityType="Self.EmpleadoEspecialidadCentroDeSalud" />
           <EntitySet Name="EmpleadoPlantaPermanente" EntityType="Self.EmpleadoPlantaPermanente" />
           <EntitySet Name="Especialidad" EntityType="Self.Especialidad" />
+          <EntitySet Name="EstadoCivil" EntityType="Self.EstadoCivil" />
           <EntitySet Name="Fuente" EntityType="Self.Fuente" />
           <EntitySet Name="GrupoSanguineo" EntityType="Self.GrupoSanguineo" />
           <EntitySet Name="InstitucionContable" EntityType="Self.InstitucionContable" />
@@ -1760,16 +1756,13 @@
           <EntitySet Name="Persona" EntityType="Self.Persona" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TipoDNI" EntityType="Self.TipoDNI" />
           <EntitySet Name="Turno" EntityType="Self.Turno" />
           <EntitySet Name="TurnoEstado" EntityType="Self.TurnoEstado" />
           <EntitySet Name="TurnoEstadoAdmision" EntityType="Self.TurnoEstadoAdmision" />
           <AssociationSet Name="FK_Administrador_CuentaEscritural" Association="Self.FK_Administrador_CuentaEscritural">
             <End Role="CuentaEscritural" EntitySet="CuentaEscritural" />
             <End Role="Administrador" EntitySet="Administrador" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CentroDeSalud_Administrador" Association="Self.FK_CentroDeSalud_Administrador">
-            <End Role="Administrador" EntitySet="Administrador" />
-            <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
           </AssociationSet>
           <AssociationSet Name="FK_Agenda_EmpleadoEspecialidadCentroDeSalud" Association="Self.FK_Agenda_EmpleadoEspecialidadCentroDeSalud">
             <End Role="EmpleadoEspecialidadCentroDeSalud" EntitySet="EmpleadoEspecialidadCentroDeSalud" />
@@ -1799,6 +1792,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Empleado" EntitySet="Empleado" />
           </AssociationSet>
+          <AssociationSet Name="FK_CentroDeSalud_Departamento" Association="Self.FK_CentroDeSalud_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
+          </AssociationSet>
           <AssociationSet Name="FK_CentroDeSaludConsultorio_CentroDeSalud" Association="Self.FK_CentroDeSaludConsultorio_CentroDeSalud">
             <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
             <End Role="CentroDeSaludConsultorio" EntitySet="CentroDeSaludConsultorio" />
@@ -1818,10 +1815,6 @@
           <AssociationSet Name="FK_CuentaEscritural_InstitucionContable" Association="Self.FK_CuentaEscritural_InstitucionContable">
             <End Role="InstitucionContable" EntitySet="InstitucionContable" />
             <End Role="CuentaEscritural" EntitySet="CuentaEscritural" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Departamento_Provincia" Association="Self.FK_Departamento_Provincia">
-            <End Role="Provincia" EntitySet="Provincia" />
-            <End Role="Departamento" EntitySet="Departamento" />
           </AssociationSet>
           <AssociationSet Name="FK_Localidad_Localidad" Association="Self.FK_Localidad_Localidad">
             <End Role="Departamento" EntitySet="Departamento" />
@@ -1846,6 +1839,10 @@
           <AssociationSet Name="FK_EmpleadoEspecialidadCentroDeSalud_Especialidad" Association="Self.FK_EmpleadoEspecialidadCentroDeSalud_Especialidad">
             <End Role="Especialidad" EntitySet="Especialidad" />
             <End Role="EmpleadoEspecialidadCentroDeSalud" EntitySet="EmpleadoEspecialidadCentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_EstadoCivil" Association="Self.FK_Persona_EstadoCivil">
+            <End Role="EstadoCivil" EntitySet="EstadoCivil" />
+            <End Role="Persona" EntitySet="Persona" />
           </AssociationSet>
           <AssociationSet Name="FK_Fuente_InstitucionContable" Association="Self.FK_Fuente_InstitucionContable">
             <End Role="InstitucionContable" EntitySet="InstitucionContable" />
@@ -1875,6 +1872,10 @@
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Provincia" EntitySet="Provincia" />
           </AssociationSet>
+          <AssociationSet Name="FK_Persona_TipoDNI" Association="Self.FK_Persona_TipoDNI">
+            <End Role="TipoDNI" EntitySet="TipoDNI" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
           <AssociationSet Name="FK_Turno_TurnoEstado" Association="Self.FK_Turno_TurnoEstado">
             <End Role="TurnoEstado" EntitySet="TurnoEstado" />
             <End Role="Turno" EntitySet="Turno" />
@@ -1887,75 +1888,7 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <EntitySet Name="EstadoCivil" EntityType="Model.EstadoCivil" />
-          <EntitySet Name="TipoDNI" EntityType="Model.TipoDNI" />
-          <AssociationSet Name="FK_CentroDeSalud_Departamento" Association="Model.FK_CentroDeSalud_Departamento">
-            <End Role="Departamento" EntitySet="Departamento" />
-            <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Persona_EstadoCivil" Association="Model.FK_Persona_EstadoCivil">
-            <End Role="EstadoCivil" EntitySet="EstadoCivil" />
-            <End Role="Persona" EntitySet="Persona" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Persona_TipoDNI" Association="Model.FK_Persona_TipoDNI">
-            <End Role="TipoDNI" EntitySet="TipoDNI" />
-            <End Role="Persona" EntitySet="Persona" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="EstadoCivil">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Activa" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Persona" Relationship="Model.FK_Persona_EstadoCivil" FromRole="EstadoCivil" ToRole="Persona" />
-        </EntityType>
-        <EntityType Name="TipoDNI">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Activa" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Persona" Relationship="Model.FK_Persona_TipoDNI" FromRole="TipoDNI" ToRole="Persona" />
-        </EntityType>
-        <Association Name="FK_CentroDeSalud_Departamento">
-          <End Type="Model.Departamento" Role="Departamento" Multiplicity="0..1" />
-          <End Type="Model.CentroDeSalud" Role="CentroDeSalud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Departamento">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CentroDeSalud">
-              <PropertyRef Name="DepartamentoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Persona_EstadoCivil">
-          <End Type="Model.EstadoCivil" Role="EstadoCivil" Multiplicity="1" />
-          <End Type="Model.Persona" Role="Persona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EstadoCivil">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Persona">
-              <PropertyRef Name="EstadoCivilID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Persona_TipoDNI">
-          <End Type="Model.TipoDNI" Role="TipoDNI" Multiplicity="1" />
-          <End Type="Model.Persona" Role="Persona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoDNI">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Persona">
-              <PropertyRef Name="TipodniID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2159,6 +2092,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EstadoCivil">
+            <EntityTypeMapping TypeName="Model.EstadoCivil">
+              <MappingFragment StoreEntitySet="EstadoCivil">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Fuente">
             <EntityTypeMapping TypeName="Model.Fuente">
               <MappingFragment StoreEntitySet="Fuente">
@@ -2255,11 +2197,11 @@
           <EntitySetMapping Name="Persona">
             <EntityTypeMapping TypeName="Model.Persona">
               <MappingFragment StoreEntitySet="Persona">
-                <ScalarProperty Name="EstadoCivilID" ColumnName="EstadoCivilID" />
-                <ScalarProperty Name="TipodniID" ColumnName="TipodniID" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="TipodniID" ColumnName="TipodniID" />
+                <ScalarProperty Name="EstadoCivilID" ColumnName="EstadoCivilID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2281,6 +2223,15 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDNI">
+            <EntityTypeMapping TypeName="Model.TipoDNI">
+              <MappingFragment StoreEntitySet="TipoDNI">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2329,24 +2280,6 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="EstadoCivil">
-            <EntityTypeMapping TypeName="Model.EstadoCivil">
-              <MappingFragment StoreEntitySet="EstadoCivil">
-                <ScalarProperty Name="Activa" ColumnName="Activa" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TipoDNI">
-            <EntityTypeMapping TypeName="Model.TipoDNI">
-              <MappingFragment StoreEntitySet="TipoDNI">
-                <ScalarProperty Name="Activa" ColumnName="Activa" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

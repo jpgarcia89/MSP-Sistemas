@@ -45,13 +45,12 @@ namespace GeHosWebApi.Models
         public Nullable<bool> RequiereHc { get; set; }
         public Nullable<bool> CargaDatosTurnosPasado { get; set; }
     
-        public virtual Administrador Administrador { get; set; }
+        public virtual Departamento Departamento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CentroDeSaludConsultorio> CentroDeSaludConsultorio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmpleadoEspecialidadCentroDeSalud> EmpleadoEspecialidadCentroDeSalud { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Paciente> Paciente { get; set; }
-        public virtual Departamento Departamento { get; set; }
     }
 }

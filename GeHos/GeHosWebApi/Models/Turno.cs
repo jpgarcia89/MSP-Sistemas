@@ -18,8 +18,8 @@ namespace GeHosWebApi.Models
         public Nullable<int> PacienteID { get; set; }
         public int AgendaHorarioID { get; set; }
         public System.DateTime FechaTurno { get; set; }
-        public int TurnoEstadoID { get; set; }
-        public int TurnoEstadoAdmisionID { get; set; }
+        public byte TurnoEstadoID { get; set; }
+        public byte TurnoEstadoAdmisionID { get; set; }
         public Nullable<bool> EsSobreturno { get; set; }
         public Nullable<System.DateTime> FechaAdmision { get; set; }
         public Nullable<System.DateTime> FechaInicioAtencion { get; set; }

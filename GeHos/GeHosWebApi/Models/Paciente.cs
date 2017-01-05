@@ -25,7 +25,7 @@ namespace GeHosWebApi.Models
         public Nullable<int> ObraSocialID { get; set; }
         public Nullable<bool> EsDonanteDeOrganos { get; set; }
         public Nullable<bool> Hospitalizado { get; set; }
-        public Nullable<int> GrupoSanguineoID { get; set; }
+        public Nullable<byte> GrupoSanguineoID { get; set; }
         public Nullable<int> CentroDeSaludID { get; set; }
         public string NumeroHistoriaClinica { get; set; }
     

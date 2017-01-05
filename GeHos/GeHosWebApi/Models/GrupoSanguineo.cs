@@ -20,7 +20,7 @@ namespace GeHosWebApi.Models
             this.Paciente = new HashSet<Paciente>();
         }
     
-        public int ID { get; set; }
+        public byte ID { get; set; }
         public string Descripcion { get; set; }
         public Nullable<byte> Factor { get; set; }
     

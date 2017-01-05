@@ -24,14 +24,14 @@ namespace GeHosWebApi.Models
         public int ID { get; set; }
         public string Apellido { get; set; }
         public string Nombre { get; set; }
-        public int TipodniID { get; set; }
-        public int EstadoCivilID { get; set; }
+        public byte TipodniID { get; set; }
+        public byte EstadoCivilID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Empleado> Empleado { get; set; }
+        public virtual EstadoCivil EstadoCivil { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Paciente> Paciente { get; set; }
-        public virtual EstadoCivil EstadoCivil { get; set; }
         public virtual TipoDNI TipoDNI { get; set; }
     }
 }

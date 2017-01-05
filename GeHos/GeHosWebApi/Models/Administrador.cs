@@ -14,19 +14,11 @@ namespace GeHosWebApi.Models
     
     public partial class Administrador
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Administrador()
-        {
-            this.CentroDeSalud = new HashSet<CentroDeSalud>();
-        }
-    
         public short ID { get; set; }
         public string Codigo { get; set; }
         public string Descripcion { get; set; }
         public Nullable<short> CuentaEscrituralID { get; set; }
     
         public virtual CuentaEscritural CuentaEscritural { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CentroDeSalud> CentroDeSalud { get; set; }
     }
 }

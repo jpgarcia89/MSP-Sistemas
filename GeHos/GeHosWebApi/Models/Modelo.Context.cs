@@ -42,6 +42,7 @@ namespace GeHosWebApi.Models
         public virtual DbSet<EmpleadoEspecialidadCentroDeSalud> EmpleadoEspecialidadCentroDeSalud { get; set; }
         public virtual DbSet<EmpleadoPlantaPermanente> EmpleadoPlantaPermanente { get; set; }
         public virtual DbSet<Especialidad> Especialidad { get; set; }
+        public virtual DbSet<EstadoCivil> EstadoCivil { get; set; }
         public virtual DbSet<Fuente> Fuente { get; set; }
         public virtual DbSet<GrupoSanguineo> GrupoSanguineo { get; set; }
         public virtual DbSet<InstitucionContable> InstitucionContable { get; set; }
@@ -53,10 +54,9 @@ namespace GeHosWebApi.Models
         public virtual DbSet<Persona> Persona { get; set; }
         public virtual DbSet<Provincia> Provincia { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<TipoDNI> TipoDNI { get; set; }
         public virtual DbSet<Turno> Turno { get; set; }
         public virtual DbSet<TurnoEstado> TurnoEstado { get; set; }
         public virtual DbSet<TurnoEstadoAdmision> TurnoEstadoAdmision { get; set; }
-        public virtual DbSet<EstadoCivil> EstadoCivil { get; set; }
-        public virtual DbSet<TipoDNI> TipoDNI { get; set; }
     }
 }
