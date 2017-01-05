@@ -7,19 +7,20 @@ using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using GeHosContract.Contrato;
+using GeHos.Helpers;
 
 namespace GeHos.Model
 {
     public class AgendaClient
     {
-        private string BASE_URL = "http://localhost:1338/api/";
+        //private string BASE_URL = "http://localhost:1338/api/";
 
         public IEnumerable<AgendaVM> buscarTodas()
         {
             try
             {
                 HttpClient cliente = new HttpClient();
-                cliente.BaseAddress = new Uri(BASE_URL);
+                cliente.BaseAddress = new Uri(GlobalVariables.BASE_URL);
                 cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage respuesta = cliente.GetAsync("Agenda").Result;
                 if (respuesta.IsSuccessStatusCode)
@@ -40,7 +41,7 @@ namespace GeHos.Model
             try
             {
                 HttpClient cliente = new HttpClient();
-                cliente.BaseAddress = new Uri(BASE_URL);
+                cliente.BaseAddress = new Uri(GlobalVariables.BASE_URL);
                 cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage respuesta = cliente.GetAsync("Agenda/" + id).Result;
                 if (respuesta.IsSuccessStatusCode)
@@ -61,7 +62,7 @@ namespace GeHos.Model
             try
             {
                 HttpClient cliente = new HttpClient();
-                cliente.BaseAddress = new Uri(BASE_URL);
+                cliente.BaseAddress = new Uri(GlobalVariables.BASE_URL);
                 cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage respuesta = cliente.PostAsJsonAsync("Agenda", objAgenda).Result;
                 return respuesta.IsSuccessStatusCode;
@@ -78,7 +79,7 @@ namespace GeHos.Model
             try
             {
                 HttpClient cliente = new HttpClient();
-                cliente.BaseAddress = new Uri(BASE_URL);
+                cliente.BaseAddress = new Uri(GlobalVariables.BASE_URL);
                 cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage respuesta = cliente.PutAsJsonAsync("Agenda/" + objAgenda.ID, objAgenda).Result;
                 return respuesta.IsSuccessStatusCode;
@@ -95,7 +96,7 @@ namespace GeHos.Model
             try
             {
                 HttpClient cliente = new HttpClient();
-                cliente.BaseAddress = new Uri(BASE_URL);
+                cliente.BaseAddress = new Uri(GlobalVariables.BASE_URL);
                 cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage respuesta = cliente.DeleteAsync("Agenda/" + id).Result;
                 return respuesta.IsSuccessStatusCode;
