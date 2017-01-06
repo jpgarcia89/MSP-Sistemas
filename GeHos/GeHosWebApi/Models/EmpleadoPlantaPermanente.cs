@@ -16,7 +16,24 @@ namespace GeHosWebApi.Models
     {
         public int ID { get; set; }
         public int EmpleadoID { get; set; }
+        public System.DateTime FechaAlta { get; set; }
+        public short SectorID { get; set; }
+        public string Observaciones { get; set; }
+        public string Foto { get; set; }
+        public Nullable<int> ProfesionID { get; set; }
+        public Nullable<bool> LeeEscribe { get; set; }
+        public Nullable<System.DateTime> FechaCasamiento { get; set; }
+        public Nullable<bool> AutorizaNotificarSMS { get; set; }
+        public Nullable<int> CronosID { get; set; }
+        public Nullable<short> OficinaID { get; set; }
+        public Nullable<int> GradosDesignacionID { get; set; }
+        public string Funcion { get; set; }
+        public Nullable<bool> PertenecePlantaAdministrativa { get; set; }
     
         public virtual Empleado Empleado { get; set; }
+        public virtual GradosDesignacion GradosDesignacion { get; set; }
+        public virtual Oficina Oficina { get; set; }
+        public virtual Profesion Profesion { get; set; }
+        public virtual Sector Sector { get; set; }
     }
 }

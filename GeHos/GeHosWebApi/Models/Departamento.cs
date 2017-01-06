@@ -19,6 +19,7 @@ namespace GeHosWebApi.Models
         {
             this.CentroDeSalud = new HashSet<CentroDeSalud>();
             this.Localidad = new HashSet<Localidad>();
+            this.Barrio = new HashSet<Barrio>();
         }
     
         public int ID { get; set; }
@@ -30,5 +31,7 @@ namespace GeHosWebApi.Models
         public virtual ICollection<CentroDeSalud> CentroDeSalud { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Localidad> Localidad { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Barrio> Barrio { get; set; }
     }
 }

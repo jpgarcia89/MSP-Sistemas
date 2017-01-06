@@ -23,7 +23,7 @@ namespace GeHosWebApi.Models
         public short ID { get; set; }
         public string Codigo { get; set; }
         public string Descripcion { get; set; }
-        public Nullable<int> InstitucionContableID { get; set; }
+        public Nullable<byte> InstitucionContableID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CuentaEscritural> CuentaEscritural { get; set; }

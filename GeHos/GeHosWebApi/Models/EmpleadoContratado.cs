@@ -16,7 +16,18 @@ namespace GeHosWebApi.Models
     {
         public int ID { get; set; }
         public int EmpleadoID { get; set; }
+        public System.DateTime FechaAlta { get; set; }
+        public string Observaciones { get; set; }
+        public int ProfesionID { get; set; }
+        public byte CargaHorariaSemanal { get; set; }
+        public byte Cuotas { get; set; }
+        public decimal MontoMensual { get; set; }
+        public byte ReparticionID { get; set; }
+        public Nullable<System.DateTime> FechaBaja { get; set; }
+        public string MotivoBaja { get; set; }
     
         public virtual Empleado Empleado { get; set; }
+        public virtual Profesion Profesion { get; set; }
+        public virtual Reparticion Reparticion { get; set; }
     }
 }

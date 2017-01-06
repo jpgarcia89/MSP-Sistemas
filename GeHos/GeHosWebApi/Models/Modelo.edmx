@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Administrador">
           <Key>
             <PropertyRef Name="ID" />
@@ -43,6 +43,14 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AgrupamientoGradosDeEscalafon">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -95,6 +103,15 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="Barrio">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DepartamentoID" Type="int" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="CentroDeSalud">
           <Key>
             <PropertyRef Name="ID" />
@@ -131,6 +148,16 @@
           <Property Name="CentroDeSaludID" Type="int" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="CuentaContable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="nvarchar" MaxLength="13" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="InstitucionContableID" Type="tinyint" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="CuentaEscritural">
           <Key>
             <PropertyRef Name="ID" />
@@ -139,7 +166,19 @@
           <Property Name="Codigo" Type="varchar" MaxLength="7" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="FuenteID" Type="smallint" Nullable="false" />
-          <Property Name="InstitucionContableID" Type="int" />
+          <Property Name="InstitucionContableID" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Decreto">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numero" Type="smallint" />
+          <Property Name="FechaAlta" Type="datetime" />
+          <Property Name="Considerando" Type="nvarchar(max)" />
+          <Property Name="Resuelve" Type="nvarchar(max)" />
+          <Property Name="EnlaceArchivo" Type="nvarchar" MaxLength="250" />
+          <Property Name="EsAcuerdo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Departamento">
           <Key>
@@ -164,6 +203,15 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmpleadoID" Type="int" Nullable="false" />
+          <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+          <Property Name="Observaciones" Type="nvarchar" MaxLength="250" />
+          <Property Name="ProfesionID" Type="int" Nullable="false" />
+          <Property Name="CargaHorariaSemanal" Type="tinyint" Nullable="false" />
+          <Property Name="Cuotas" Type="tinyint" Nullable="false" />
+          <Property Name="MontoMensual" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ReparticionID" Type="tinyint" Nullable="false" />
+          <Property Name="FechaBaja" Type="datetime" />
+          <Property Name="MotivoBaja" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="EmpleadoEspecialidadCentroDeSalud">
           <Key>
@@ -182,6 +230,19 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmpleadoID" Type="int" Nullable="false" />
+          <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+          <Property Name="SectorID" Type="smallint" Nullable="false" />
+          <Property Name="Observaciones" Type="nvarchar" MaxLength="250" />
+          <Property Name="Foto" Type="nvarchar" MaxLength="250" />
+          <Property Name="ProfesionID" Type="int" />
+          <Property Name="LeeEscribe" Type="bit" />
+          <Property Name="FechaCasamiento" Type="datetime" />
+          <Property Name="AutorizaNotificarSMS" Type="bit" />
+          <Property Name="CronosID" Type="int" />
+          <Property Name="OficinaID" Type="smallint" />
+          <Property Name="GradosDesignacionID" Type="int" />
+          <Property Name="Funcion" Type="nvarchar" MaxLength="250" />
+          <Property Name="PertenecePlantaAdministrativa" Type="bit" />
         </EntityType>
         <EntityType Name="Especialidad">
           <Key>
@@ -210,21 +271,59 @@
           <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Codigo" Type="varchar" MaxLength="13" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="80" Nullable="false" />
-          <Property Name="InstitucionContableID" Type="int" />
+          <Property Name="InstitucionContableID" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Grados">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="AgrupamientoGradosDeEscalafonID" Type="smallint" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GradosCategoria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="GradosID" Type="smallint" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GradosDesignacion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Horas" Type="smalldatetime" Nullable="false" />
+          <Property Name="ConAdicional" Type="bit" Nullable="false" />
+          <Property Name="HorasAdicional" Type="smallint" Nullable="false" />
+          <Property Name="Observaciones" Type="nvarchar" MaxLength="250" />
+          <Property Name="Servicio" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaDesde" Type="datetime" />
+          <Property Name="FechaHasta" Type="datetime" />
+          <Property Name="Funcion" Type="nvarchar" MaxLength="250" />
+          <Property Name="NumeroRegistro" Type="nvarchar" MaxLength="20" />
+          <Property Name="GradosCategoriaID" Type="smallint" Nullable="false" />
+          <Property Name="TipoGradosDesignacionID" Type="tinyint" Nullable="false" />
+          <Property Name="ResolucionID" Type="bigint" />
+          <Property Name="DecretoID" Type="bigint" />
         </EntityType>
         <EntityType Name="GrupoSanguineo">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="tinyint" Nullable="false" />
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Factor" Type="tinyint" />
+          <Property Name="Factor" Type="char" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="InstitucionContable">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <EntityType Name="Localidad">
@@ -267,6 +366,15 @@
           <Property Name="Web" Type="nvarchar" MaxLength="255" />
           <Property Name="EsPrepaga" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Oficina">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="smallint" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ReparticionID" Type="tinyint" />
+        </EntityType>
         <EntityType Name="Paciente">
           <Key>
             <PropertyRef Name="ID" />
@@ -296,7 +404,51 @@
           <Property Name="Apellido" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="TipodniID" Type="tinyint" Nullable="false" />
+          <Property Name="NroDocumento" Type="int" />
+          <Property Name="DocumentoPropio" Type="bit" />
           <Property Name="EstadoCivilID" Type="tinyint" Nullable="false" />
+          <Property Name="SexoID" Type="tinyint" />
+          <Property Name="FechaNacimiento" Type="datetime" />
+          <Property Name="PuebloIndigena" Type="bit" />
+          <Property Name="LocalidadID" Type="int" />
+          <Property Name="CodigoPostal" Type="nvarchar" MaxLength="10" />
+          <Property Name="DomicilioCalle" Type="nvarchar" MaxLength="100" />
+          <Property Name="DomicilioNumero" Type="nvarchar" MaxLength="20" />
+          <Property Name="DomicilioManzana" Type="nvarchar" MaxLength="20" />
+          <Property Name="DomicilioPiso" Type="nvarchar" MaxLength="20" />
+          <Property Name="DomicilioDepto" Type="nvarchar" MaxLength="20" />
+          <Property Name="CalleReferencia1" Type="nvarchar" MaxLength="100" />
+          <Property Name="CalleReferencia2" Type="nvarchar" MaxLength="100" />
+          <Property Name="BarrioID" Type="int" />
+          <Property Name="TelefonoFijo" Type="nvarchar" MaxLength="50" />
+          <Property Name="TelefonoCelular" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="70" />
+          <Property Name="LenguaID" Type="tinyint" />
+          <Property Name="TribuID" Type="tinyint" />
+          <Property Name="Etnia" Type="tinyint" />
+          <Property Name="LocalidadNacimientoID" Type="int" />
+          <Property Name="NacionalidadID" Type="int" />
+          <Property Name="Indocumentado" Type="bit" />
+          <Property Name="CUIL" Type="nvarchar" MaxLength="13" />
+          <Property Name="GrupoSanguineoID" Type="tinyint" />
+          <Property Name="TipoCoberturaSocialID" Type="tinyint" />
+          <Property Name="CoberturaSocialID" Type="int" />
+          <Property Name="CoberturaSocialDesde" Type="datetime" />
+          <Property Name="ScoreDeRiesgo" Type="nvarchar" MaxLength="50" />
+          <Property Name="NroHC" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZonaDeSaludID" Type="tinyint" />
+          <Property Name="Alfabeta" Type="nvarchar" MaxLength="50" />
+          <Property Name="EstudiosID" Type="tinyint" />
+          <Property Name="AñoMayorNivelDeEstudio" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Profesion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+          <Property Name="ProfesionSISAID" Type="int" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -305,6 +457,57 @@
           <Property Name="ID" Type="tinyint" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PaisID" Type="int" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PuebloIndigena">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reparticion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Resolucion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numero" Type="smallint" />
+          <Property Name="FechaAlta" Type="datetime" />
+          <Property Name="Considerando" Type="nvarchar(max)" />
+          <Property Name="Resuelve" Type="nvarchar(max)" />
+          <Property Name="EnlaceArchivo" Type="nvarchar" MaxLength="250" />
+          <Property Name="EsImportante" Type="bit" Nullable="false" />
+          <Property Name="NotificacionVencimiento" Type="datetime" />
+          <Property Name="NotificacionDiaInicio" Type="smallint" />
+          <Property Name="TipoNormaLegalID" Type="int" />
+        </EntityType>
+        <EntityType Name="Sector">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="smallint" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UbicacionGeografica" Type="nvarchar" MaxLength="250" />
+          <Property Name="EnlaceMapa" Type="nvarchar" MaxLength="250" />
+          <Property Name="ReparticionID" Type="tinyint" Nullable="false" />
+          <Property Name="CuentaContableID" Type="smallint" />
+        </EntityType>
+        <EntityType Name="Sexo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -322,6 +525,22 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoGradosDesignacion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoNormaLegal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
         </EntityType>
@@ -407,6 +626,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Barrio_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Barrio" Type="Self.Barrio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Barrio">
+              <PropertyRef Name="DepartamentoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CentroDeSalud_Departamento">
           <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
           <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="*" />
@@ -428,6 +659,18 @@
             </Principal>
             <Dependent Role="CentroDeSaludConsultorio">
               <PropertyRef Name="CentroDeSaludID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CuentaContable_InstitucionContable">
+          <End Role="InstitucionContable" Type="Self.InstitucionContable" Multiplicity="0..1" />
+          <End Role="CuentaContable" Type="Self.CuentaContable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InstitucionContable">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CuentaContable">
+              <PropertyRef Name="InstitucionContableID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -547,6 +790,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_EmpleadoContratado_Profesion">
+          <End Role="Profesion" Type="Self.Profesion" Multiplicity="1" />
+          <End Role="EmpleadoContratado" Type="Self.EmpleadoContratado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmpleadoContratado">
+              <PropertyRef Name="ProfesionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoContratado_Reparticion">
+          <End Role="Reparticion" Type="Self.Reparticion" Multiplicity="1" />
+          <End Role="EmpleadoContratado" Type="Self.EmpleadoContratado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reparticion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmpleadoContratado">
+              <PropertyRef Name="ReparticionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_EmpleadoEspecialidadCentroDeSalud_CentroDeSalud">
           <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="1" />
           <End Role="EmpleadoEspecialidadCentroDeSalud" Type="Self.EmpleadoEspecialidadCentroDeSalud" Multiplicity="*" />
@@ -595,6 +862,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_EmpleadoPlantaPermanente_GradosDesignacion">
+          <End Role="GradosDesignacion" Type="Self.GradosDesignacion" Multiplicity="0..1" />
+          <End Role="EmpleadoPlantaPermanente" Type="Self.EmpleadoPlantaPermanente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GradosDesignacion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmpleadoPlantaPermanente">
+              <PropertyRef Name="GradosDesignacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoPlantaPermanente_Oficina">
+          <End Role="Oficina" Type="Self.Oficina" Multiplicity="0..1" />
+          <End Role="EmpleadoPlantaPermanente" Type="Self.EmpleadoPlantaPermanente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oficina">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmpleadoPlantaPermanente">
+              <PropertyRef Name="OficinaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoPlantaPermanente_Profesion">
+          <End Role="Profesion" Type="Self.Profesion" Multiplicity="0..1" />
+          <End Role="EmpleadoPlantaPermanente" Type="Self.EmpleadoPlantaPermanente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmpleadoPlantaPermanente">
+              <PropertyRef Name="ProfesionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoPlantaPermanente_Sector">
+          <End Role="Sector" Type="Self.Sector" Multiplicity="1" />
+          <End Role="EmpleadoPlantaPermanente" Type="Self.EmpleadoPlantaPermanente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sector">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmpleadoPlantaPermanente">
+              <PropertyRef Name="SectorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Fuente_InstitucionContable">
           <End Role="InstitucionContable" Type="Self.InstitucionContable" Multiplicity="0..1" />
           <End Role="Fuente" Type="Self.Fuente" Multiplicity="*" />
@@ -604,6 +919,78 @@
             </Principal>
             <Dependent Role="Fuente">
               <PropertyRef Name="InstitucionContableID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grados_AgrupamientoGradosDeEscalafon">
+          <End Role="AgrupamientoGradosDeEscalafon" Type="Self.AgrupamientoGradosDeEscalafon" Multiplicity="1" />
+          <End Role="Grados" Type="Self.Grados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgrupamientoGradosDeEscalafon">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Grados">
+              <PropertyRef Name="AgrupamientoGradosDeEscalafonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradosCategoria_Grados">
+          <End Role="Grados" Type="Self.Grados" Multiplicity="1" />
+          <End Role="GradosCategoria" Type="Self.GradosCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grados">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GradosCategoria">
+              <PropertyRef Name="GradosID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradosDesignacion_Decreto">
+          <End Role="Decreto" Type="Self.Decreto" Multiplicity="0..1" />
+          <End Role="GradosDesignacion" Type="Self.GradosDesignacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Decreto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GradosDesignacion">
+              <PropertyRef Name="DecretoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradosDesignacion_GradosCategoria">
+          <End Role="GradosCategoria" Type="Self.GradosCategoria" Multiplicity="1" />
+          <End Role="GradosDesignacion" Type="Self.GradosDesignacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GradosCategoria">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GradosDesignacion">
+              <PropertyRef Name="GradosCategoriaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradosDesignacion_Resolucion">
+          <End Role="Resolucion" Type="Self.Resolucion" Multiplicity="0..1" />
+          <End Role="GradosDesignacion" Type="Self.GradosDesignacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resolucion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GradosDesignacion">
+              <PropertyRef Name="ResolucionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradosDesignacion_TipoGradosDesignacion">
+          <End Role="TipoGradosDesignacion" Type="Self.TipoGradosDesignacion" Multiplicity="1" />
+          <End Role="GradosDesignacion" Type="Self.GradosDesignacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoGradosDesignacion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GradosDesignacion">
+              <PropertyRef Name="TipoGradosDesignacionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -628,6 +1015,18 @@
             </Principal>
             <Dependent Role="Menu1">
               <PropertyRef Name="PadreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Oficina_Reparticion">
+          <End Role="Reparticion" Type="Self.Reparticion" Multiplicity="0..1" />
+          <End Role="Oficina" Type="Self.Oficina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reparticion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Oficina">
+              <PropertyRef Name="ReparticionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -679,6 +1078,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Persona_Barrio">
+          <End Role="Barrio" Type="Self.Barrio" Multiplicity="0..1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Barrio">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="BarrioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Persona_EstadoCivil">
           <End Role="EstadoCivil" Type="Self.EstadoCivil" Multiplicity="1" />
           <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
@@ -688,6 +1099,54 @@
             </Principal>
             <Dependent Role="Persona">
               <PropertyRef Name="EstadoCivilID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_GrupoSanguineo">
+          <End Role="GrupoSanguineo" Type="Self.GrupoSanguineo" Multiplicity="0..1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoSanguineo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="GrupoSanguineoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_Localidad">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="LocalidadID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_LocalidadNacimiento">
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="LocalidadNacimientoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_Sexo">
+          <End Role="Sexo" Type="Self.Sexo" Multiplicity="0..1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sexo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="SexoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -712,6 +1171,42 @@
             </Principal>
             <Dependent Role="Provincia">
               <PropertyRef Name="PaisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Resolucion_TipoNormaLegal">
+          <End Role="TipoNormaLegal" Type="Self.TipoNormaLegal" Multiplicity="0..1" />
+          <End Role="Resolucion" Type="Self.Resolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoNormaLegal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Resolucion">
+              <PropertyRef Name="TipoNormaLegalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sector_CuentaContable">
+          <End Role="CuentaContable" Type="Self.CuentaContable" Multiplicity="0..1" />
+          <End Role="Sector" Type="Self.Sector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CuentaContable">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sector">
+              <PropertyRef Name="CuentaContableID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sector_Reparticion">
+          <End Role="Reparticion" Type="Self.Reparticion" Multiplicity="1" />
+          <End Role="Sector" Type="Self.Sector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reparticion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sector">
+              <PropertyRef Name="ReparticionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -768,14 +1263,18 @@
           <EntitySet Name="Agenda" EntityType="Self.Agenda" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AgendaHorario" EntityType="Self.AgendaHorario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AgendaTipo" EntityType="Self.AgendaTipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgrupamientoGradosDeEscalafon" EntityType="Self.AgrupamientoGradosDeEscalafon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Barrio" EntityType="Self.Barrio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CentroDeSalud" EntityType="Self.CentroDeSalud" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CentroDeSaludConsultorio" EntityType="Self.CentroDeSaludConsultorio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CuentaContable" EntityType="Self.CuentaContable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CuentaEscritural" EntityType="Self.CuentaEscritural" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Decreto" EntityType="Self.Decreto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpleadoContratado" EntityType="Self.EmpleadoContratado" Schema="dbo" store:Type="Tables" />
@@ -784,17 +1283,29 @@
           <EntitySet Name="Especialidad" EntityType="Self.Especialidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadoCivil" EntityType="Self.EstadoCivil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fuente" EntityType="Self.Fuente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grados" EntityType="Self.Grados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GradosCategoria" EntityType="Self.GradosCategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GradosDesignacion" EntityType="Self.GradosDesignacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GrupoSanguineo" EntityType="Self.GrupoSanguineo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InstitucionContable" EntityType="Self.InstitucionContable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ObraSocial" EntityType="Self.ObraSocial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Oficina" EntityType="Self.Oficina" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Paciente" EntityType="Self.Paciente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profesion" EntityType="Self.Profesion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PuebloIndigena" EntityType="Self.PuebloIndigena" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reparticion" EntityType="Self.Reparticion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resolucion" EntityType="Self.Resolucion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sector" EntityType="Self.Sector" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sexo" EntityType="Self.Sexo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoDNI" EntityType="Self.TipoDNI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoGradosDesignacion" EntityType="Self.TipoGradosDesignacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoNormaLegal" EntityType="Self.TipoNormaLegal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Turno" EntityType="Self.Turno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TurnoEstado" EntityType="Self.TurnoEstado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TurnoEstadoAdmision" EntityType="Self.TurnoEstadoAdmision" Schema="dbo" store:Type="Tables" />
@@ -814,6 +1325,10 @@
             <End Role="AgendaTipo" EntitySet="AgendaTipo" />
             <End Role="AgendaHorario" EntitySet="AgendaHorario" />
           </AssociationSet>
+          <AssociationSet Name="FK_Barrio_Departamento" Association="Self.FK_Barrio_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Barrio" EntitySet="Barrio" />
+          </AssociationSet>
           <AssociationSet Name="FK_CentroDeSalud_Departamento" Association="Self.FK_CentroDeSalud_Departamento">
             <End Role="Departamento" EntitySet="Departamento" />
             <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
@@ -821,6 +1336,10 @@
           <AssociationSet Name="FK_CentroDeSaludConsultorio_CentroDeSalud" Association="Self.FK_CentroDeSaludConsultorio_CentroDeSalud">
             <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
             <End Role="CentroDeSaludConsultorio" EntitySet="CentroDeSaludConsultorio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CuentaContable_InstitucionContable" Association="Self.FK_CuentaContable_InstitucionContable">
+            <End Role="InstitucionContable" EntitySet="InstitucionContable" />
+            <End Role="CuentaContable" EntitySet="CuentaContable" />
           </AssociationSet>
           <AssociationSet Name="FK_CuentaEscritural_Fuente" Association="Self.FK_CuentaEscritural_Fuente">
             <End Role="Fuente" EntitySet="Fuente" />
@@ -858,6 +1377,14 @@
             <End Role="Empleado" EntitySet="Empleado" />
             <End Role="EmpleadoContratado" EntitySet="EmpleadoContratado" />
           </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoContratado_Profesion" Association="Self.FK_EmpleadoContratado_Profesion">
+            <End Role="Profesion" EntitySet="Profesion" />
+            <End Role="EmpleadoContratado" EntitySet="EmpleadoContratado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoContratado_Reparticion" Association="Self.FK_EmpleadoContratado_Reparticion">
+            <End Role="Reparticion" EntitySet="Reparticion" />
+            <End Role="EmpleadoContratado" EntitySet="EmpleadoContratado" />
+          </AssociationSet>
           <AssociationSet Name="FK_EmpleadoEspecialidadCentroDeSalud_CentroDeSalud" Association="Self.FK_EmpleadoEspecialidadCentroDeSalud_CentroDeSalud">
             <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
             <End Role="EmpleadoEspecialidadCentroDeSalud" EntitySet="EmpleadoEspecialidadCentroDeSalud" />
@@ -874,9 +1401,49 @@
             <End Role="Empleado" EntitySet="Empleado" />
             <End Role="EmpleadoPlantaPermanente" EntitySet="EmpleadoPlantaPermanente" />
           </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoPlantaPermanente_GradosDesignacion" Association="Self.FK_EmpleadoPlantaPermanente_GradosDesignacion">
+            <End Role="GradosDesignacion" EntitySet="GradosDesignacion" />
+            <End Role="EmpleadoPlantaPermanente" EntitySet="EmpleadoPlantaPermanente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoPlantaPermanente_Oficina" Association="Self.FK_EmpleadoPlantaPermanente_Oficina">
+            <End Role="Oficina" EntitySet="Oficina" />
+            <End Role="EmpleadoPlantaPermanente" EntitySet="EmpleadoPlantaPermanente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoPlantaPermanente_Profesion" Association="Self.FK_EmpleadoPlantaPermanente_Profesion">
+            <End Role="Profesion" EntitySet="Profesion" />
+            <End Role="EmpleadoPlantaPermanente" EntitySet="EmpleadoPlantaPermanente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoPlantaPermanente_Sector" Association="Self.FK_EmpleadoPlantaPermanente_Sector">
+            <End Role="Sector" EntitySet="Sector" />
+            <End Role="EmpleadoPlantaPermanente" EntitySet="EmpleadoPlantaPermanente" />
+          </AssociationSet>
           <AssociationSet Name="FK_Fuente_InstitucionContable" Association="Self.FK_Fuente_InstitucionContable">
             <End Role="InstitucionContable" EntitySet="InstitucionContable" />
             <End Role="Fuente" EntitySet="Fuente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grados_AgrupamientoGradosDeEscalafon" Association="Self.FK_Grados_AgrupamientoGradosDeEscalafon">
+            <End Role="AgrupamientoGradosDeEscalafon" EntitySet="AgrupamientoGradosDeEscalafon" />
+            <End Role="Grados" EntitySet="Grados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradosCategoria_Grados" Association="Self.FK_GradosCategoria_Grados">
+            <End Role="Grados" EntitySet="Grados" />
+            <End Role="GradosCategoria" EntitySet="GradosCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradosDesignacion_Decreto" Association="Self.FK_GradosDesignacion_Decreto">
+            <End Role="Decreto" EntitySet="Decreto" />
+            <End Role="GradosDesignacion" EntitySet="GradosDesignacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradosDesignacion_GradosCategoria" Association="Self.FK_GradosDesignacion_GradosCategoria">
+            <End Role="GradosCategoria" EntitySet="GradosCategoria" />
+            <End Role="GradosDesignacion" EntitySet="GradosDesignacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradosDesignacion_Resolucion" Association="Self.FK_GradosDesignacion_Resolucion">
+            <End Role="Resolucion" EntitySet="Resolucion" />
+            <End Role="GradosDesignacion" EntitySet="GradosDesignacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradosDesignacion_TipoGradosDesignacion" Association="Self.FK_GradosDesignacion_TipoGradosDesignacion">
+            <End Role="TipoGradosDesignacion" EntitySet="TipoGradosDesignacion" />
+            <End Role="GradosDesignacion" EntitySet="GradosDesignacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Localidad_Localidad" Association="Self.FK_Localidad_Localidad">
             <End Role="Departamento" EntitySet="Departamento" />
@@ -885,6 +1452,10 @@
           <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
             <End Role="Menu" EntitySet="Menu" />
             <End Role="Menu1" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Oficina_Reparticion" Association="Self.FK_Oficina_Reparticion">
+            <End Role="Reparticion" EntitySet="Reparticion" />
+            <End Role="Oficina" EntitySet="Oficina" />
           </AssociationSet>
           <AssociationSet Name="FK_Paciente_CentroDeSalud" Association="Self.FK_Paciente_CentroDeSalud">
             <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
@@ -902,8 +1473,28 @@
             <End Role="Persona" EntitySet="Persona" />
             <End Role="Paciente" EntitySet="Paciente" />
           </AssociationSet>
+          <AssociationSet Name="FK_Persona_Barrio" Association="Self.FK_Persona_Barrio">
+            <End Role="Barrio" EntitySet="Barrio" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
           <AssociationSet Name="FK_Persona_EstadoCivil" Association="Self.FK_Persona_EstadoCivil">
             <End Role="EstadoCivil" EntitySet="EstadoCivil" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_GrupoSanguineo" Association="Self.FK_Persona_GrupoSanguineo">
+            <End Role="GrupoSanguineo" EntitySet="GrupoSanguineo" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_Localidad" Association="Self.FK_Persona_Localidad">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_LocalidadNacimiento" Association="Self.FK_Persona_LocalidadNacimiento">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_Sexo" Association="Self.FK_Persona_Sexo">
+            <End Role="Sexo" EntitySet="Sexo" />
             <End Role="Persona" EntitySet="Persona" />
           </AssociationSet>
           <AssociationSet Name="FK_Persona_TipoDNI" Association="Self.FK_Persona_TipoDNI">
@@ -913,6 +1504,18 @@
           <AssociationSet Name="FK_Provincia_Pais" Association="Self.FK_Provincia_Pais">
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Provincia" EntitySet="Provincia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Resolucion_TipoNormaLegal" Association="Self.FK_Resolucion_TipoNormaLegal">
+            <End Role="TipoNormaLegal" EntitySet="TipoNormaLegal" />
+            <End Role="Resolucion" EntitySet="Resolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sector_CuentaContable" Association="Self.FK_Sector_CuentaContable">
+            <End Role="CuentaContable" EntitySet="CuentaContable" />
+            <End Role="Sector" EntitySet="Sector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sector_Reparticion" Association="Self.FK_Sector_Reparticion">
+            <End Role="Reparticion" EntitySet="Reparticion" />
+            <End Role="Sector" EntitySet="Sector" />
           </AssociationSet>
           <AssociationSet Name="FK_Turno_AgendaHorario" Association="Self.FK_Turno_AgendaHorario">
             <End Role="AgendaHorario" EntitySet="AgendaHorario" />
@@ -931,8 +1534,7 @@
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1081,7 +1683,7 @@
           <Property Name="Codigo" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FuenteID" Type="Int16" Nullable="false" />
-          <Property Name="InstitucionContableID" Type="Int32" />
+          <Property Name="InstitucionContableID" Type="Byte" />
           <NavigationProperty Name="Administrador" Relationship="Self.FK_Administrador_CuentaEscritural" FromRole="CuentaEscritural" ToRole="Administrador" />
           <NavigationProperty Name="Fuente" Relationship="Self.FK_CuentaEscritural_Fuente" FromRole="CuentaEscritural" ToRole="Fuente" />
           <NavigationProperty Name="InstitucionContable" Relationship="Self.FK_CuentaEscritural_InstitucionContable" FromRole="CuentaEscritural" ToRole="InstitucionContable" />
@@ -1096,6 +1698,7 @@
           <Property Name="Activa" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="CentroDeSalud" Relationship="Self.FK_CentroDeSalud_Departamento" FromRole="Departamento" ToRole="CentroDeSalud" />
           <NavigationProperty Name="Localidad" Relationship="Self.FK_Localidad_Localidad" FromRole="Departamento" ToRole="Localidad" />
+          <NavigationProperty Name="Barrio" Relationship="Model.FK_Barrio_Departamento" FromRole="Departamento" ToRole="Barrio" />
         </EntityType>
         <EntityType Name="Empleado">
           <Key>
@@ -1117,6 +1720,17 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmpleadoID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Empleado" Relationship="Self.FK_EmpleadoContratado_Empleado" FromRole="EmpleadoContratado" ToRole="Empleado" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ProfesionID" Type="Int32" Nullable="false" />
+          <Property Name="CargaHorariaSemanal" Type="Byte" Nullable="false" />
+          <Property Name="Cuotas" Type="Byte" Nullable="false" />
+          <Property Name="MontoMensual" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ReparticionID" Type="Byte" Nullable="false" />
+          <Property Name="FechaBaja" Type="DateTime" Precision="3" />
+          <Property Name="MotivoBaja" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Profesion" Relationship="Model.FK_EmpleadoContratado_Profesion" FromRole="EmpleadoContratado" ToRole="Profesion" />
+          <NavigationProperty Name="Reparticion" Relationship="Model.FK_EmpleadoContratado_Reparticion" FromRole="EmpleadoContratado" ToRole="Reparticion" />
         </EntityType>
         <EntityType Name="EmpleadoEspecialidadCentroDeSalud">
           <Key>
@@ -1140,6 +1754,23 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmpleadoID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Empleado" Relationship="Self.FK_EmpleadoPlantaPermanente_Empleado" FromRole="EmpleadoPlantaPermanente" ToRole="Empleado" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SectorID" Type="Int16" Nullable="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Foto" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ProfesionID" Type="Int32" />
+          <Property Name="LeeEscribe" Type="Boolean" />
+          <Property Name="FechaCasamiento" Type="DateTime" Precision="3" />
+          <Property Name="AutorizaNotificarSMS" Type="Boolean" />
+          <Property Name="CronosID" Type="Int32" />
+          <Property Name="OficinaID" Type="Int16" />
+          <Property Name="GradosDesignacionID" Type="Int32" />
+          <Property Name="Funcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PertenecePlantaAdministrativa" Type="Boolean" />
+          <NavigationProperty Name="GradosDesignacion" Relationship="Model.FK_EmpleadoPlantaPermanente_GradosDesignacion" FromRole="EmpleadoPlantaPermanente" ToRole="GradosDesignacion" />
+          <NavigationProperty Name="Oficina" Relationship="Model.FK_EmpleadoPlantaPermanente_Oficina" FromRole="EmpleadoPlantaPermanente" ToRole="Oficina" />
+          <NavigationProperty Name="Profesion" Relationship="Model.FK_EmpleadoPlantaPermanente_Profesion" FromRole="EmpleadoPlantaPermanente" ToRole="Profesion" />
+          <NavigationProperty Name="Sector" Relationship="Model.FK_EmpleadoPlantaPermanente_Sector" FromRole="EmpleadoPlantaPermanente" ToRole="Sector" />
         </EntityType>
         <EntityType Name="Especialidad">
           <Key>
@@ -1170,7 +1801,7 @@
           <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Codigo" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="InstitucionContableID" Type="Int32" />
+          <Property Name="InstitucionContableID" Type="Byte" />
           <NavigationProperty Name="CuentaEscritural" Relationship="Self.FK_CuentaEscritural_Fuente" FromRole="Fuente" ToRole="CuentaEscritural" />
           <NavigationProperty Name="InstitucionContable" Relationship="Self.FK_Fuente_InstitucionContable" FromRole="Fuente" ToRole="InstitucionContable" />
         </EntityType>
@@ -1180,17 +1811,19 @@
           </Key>
           <Property Name="ID" Type="Byte" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Factor" Type="Byte" />
+          <Property Name="Factor" Type="String" Nullable="false" MaxLength="10" />
           <NavigationProperty Name="Paciente" Relationship="Self.FK_Paciente_GrupoSanguineo" FromRole="GrupoSanguineo" ToRole="Paciente" />
+          <NavigationProperty Name="Persona" Relationship="Model.FK_Persona_GrupoSanguineo" FromRole="GrupoSanguineo" ToRole="Persona" />
         </EntityType>
         <EntityType Name="InstitucionContable">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="CuentaEscritural" Relationship="Self.FK_CuentaEscritural_InstitucionContable" FromRole="InstitucionContable" ToRole="CuentaEscritural" />
           <NavigationProperty Name="Fuente" Relationship="Self.FK_Fuente_InstitucionContable" FromRole="InstitucionContable" ToRole="Fuente" />
+          <NavigationProperty Name="CuentaContable" Relationship="Model.FK_CuentaContable_InstitucionContable" FromRole="InstitucionContable" ToRole="CuentaContable" />
         </EntityType>
         <EntityType Name="Localidad">
           <Key>
@@ -1201,6 +1834,8 @@
           <Property Name="DepartamentoID" Type="Int32" Nullable="false" />
           <Property Name="Activa" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Departamento" Relationship="Self.FK_Localidad_Localidad" FromRole="Localidad" ToRole="Departamento" />
+          <NavigationProperty Name="Persona" Relationship="Model.FK_Persona_Localidad" FromRole="Localidad" ToRole="Persona" />
+          <NavigationProperty Name="Persona1" Relationship="Model.FK_Persona_LocalidadNacimiento" FromRole="Localidad" ToRole="Persona" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -1276,6 +1911,46 @@
           <NavigationProperty Name="EstadoCivil" Relationship="Self.FK_Persona_EstadoCivil" FromRole="Persona" ToRole="EstadoCivil" />
           <NavigationProperty Name="Paciente" Relationship="Self.FK_Paciente_Persona" FromRole="Persona" ToRole="Paciente" />
           <NavigationProperty Name="TipoDNI" Relationship="Self.FK_Persona_TipoDNI" FromRole="Persona" ToRole="TipoDNI" />
+          <Property Name="NroDocumento" Type="Int32" />
+          <Property Name="DocumentoPropio" Type="Boolean" />
+          <Property Name="SexoID" Type="Byte" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
+          <Property Name="PuebloIndigena" Type="Boolean" />
+          <Property Name="LocalidadID" Type="Int32" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DomicilioCalle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DomicilioNumero" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DomicilioManzana" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DomicilioPiso" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DomicilioDepto" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CalleReferencia1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CalleReferencia2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BarrioID" Type="Int32" />
+          <Property Name="TelefonoFijo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TelefonoCelular" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="LenguaID" Type="Byte" />
+          <Property Name="TribuID" Type="Byte" />
+          <Property Name="Etnia" Type="Byte" />
+          <Property Name="LocalidadNacimientoID" Type="Int32" />
+          <Property Name="NacionalidadID" Type="Int32" />
+          <Property Name="Indocumentado" Type="Boolean" />
+          <Property Name="CUIL" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="GrupoSanguineoID" Type="Byte" />
+          <Property Name="TipoCoberturaSocialID" Type="Byte" />
+          <Property Name="CoberturaSocialID" Type="Int32" />
+          <Property Name="CoberturaSocialDesde" Type="DateTime" Precision="3" />
+          <Property Name="ScoreDeRiesgo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NroHC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ZonaDeSaludID" Type="Byte" />
+          <Property Name="Alfabeta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EstudiosID" Type="Byte" />
+          <Property Name="AñoMayorNivelDeEstudio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Barrio" Relationship="Model.FK_Persona_Barrio" FromRole="Persona" ToRole="Barrio" />
+          <NavigationProperty Name="GrupoSanguineo" Relationship="Model.FK_Persona_GrupoSanguineo" FromRole="Persona" ToRole="GrupoSanguineo" />
+          <NavigationProperty Name="Localidad" Relationship="Model.FK_Persona_Localidad" FromRole="Persona" ToRole="Localidad" />
+          <NavigationProperty Name="Localidad1" Relationship="Model.FK_Persona_LocalidadNacimiento" FromRole="Persona" ToRole="Localidad" />
+          <NavigationProperty Name="Sexo" Relationship="Model.FK_Persona_Sexo" FromRole="Persona" ToRole="Sexo" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -1888,7 +2563,583 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="AgrupamientoGradosDeEscalafon" EntityType="Model.AgrupamientoGradosDeEscalafon" />
+          <EntitySet Name="Barrio" EntityType="Model.Barrio" />
+          <EntitySet Name="CuentaContable" EntityType="Model.CuentaContable" />
+          <EntitySet Name="Decreto" EntityType="Model.Decreto" />
+          <EntitySet Name="Grados" EntityType="Model.Grados" />
+          <EntitySet Name="GradosCategoria" EntityType="Model.GradosCategoria" />
+          <EntitySet Name="GradosDesignacion" EntityType="Model.GradosDesignacion" />
+          <EntitySet Name="Oficina" EntityType="Model.Oficina" />
+          <EntitySet Name="Profesion" EntityType="Model.Profesion" />
+          <EntitySet Name="PuebloIndigena" EntityType="Model.PuebloIndigena" />
+          <EntitySet Name="Reparticion" EntityType="Model.Reparticion" />
+          <EntitySet Name="Resolucion" EntityType="Model.Resolucion" />
+          <EntitySet Name="Sector" EntityType="Model.Sector" />
+          <EntitySet Name="Sexo" EntityType="Model.Sexo" />
+          <EntitySet Name="TipoGradosDesignacion" EntityType="Model.TipoGradosDesignacion" />
+          <EntitySet Name="TipoNormaLegal" EntityType="Model.TipoNormaLegal" />
+          <AssociationSet Name="FK_Grados_AgrupamientoGradosDeEscalafon" Association="Model.FK_Grados_AgrupamientoGradosDeEscalafon">
+            <End Role="AgrupamientoGradosDeEscalafon" EntitySet="AgrupamientoGradosDeEscalafon" />
+            <End Role="Grados" EntitySet="Grados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Barrio_Departamento" Association="Model.FK_Barrio_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Barrio" EntitySet="Barrio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_Barrio" Association="Model.FK_Persona_Barrio">
+            <End Role="Barrio" EntitySet="Barrio" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CuentaContable_InstitucionContable" Association="Model.FK_CuentaContable_InstitucionContable">
+            <End Role="InstitucionContable" EntitySet="InstitucionContable" />
+            <End Role="CuentaContable" EntitySet="CuentaContable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sector_CuentaContable" Association="Model.FK_Sector_CuentaContable">
+            <End Role="CuentaContable" EntitySet="CuentaContable" />
+            <End Role="Sector" EntitySet="Sector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradosDesignacion_Decreto" Association="Model.FK_GradosDesignacion_Decreto">
+            <End Role="Decreto" EntitySet="Decreto" />
+            <End Role="GradosDesignacion" EntitySet="GradosDesignacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoContratado_Profesion" Association="Model.FK_EmpleadoContratado_Profesion">
+            <End Role="Profesion" EntitySet="Profesion" />
+            <End Role="EmpleadoContratado" EntitySet="EmpleadoContratado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoContratado_Reparticion" Association="Model.FK_EmpleadoContratado_Reparticion">
+            <End Role="Reparticion" EntitySet="Reparticion" />
+            <End Role="EmpleadoContratado" EntitySet="EmpleadoContratado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoPlantaPermanente_GradosDesignacion" Association="Model.FK_EmpleadoPlantaPermanente_GradosDesignacion">
+            <End Role="GradosDesignacion" EntitySet="GradosDesignacion" />
+            <End Role="EmpleadoPlantaPermanente" EntitySet="EmpleadoPlantaPermanente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoPlantaPermanente_Oficina" Association="Model.FK_EmpleadoPlantaPermanente_Oficina">
+            <End Role="Oficina" EntitySet="Oficina" />
+            <End Role="EmpleadoPlantaPermanente" EntitySet="EmpleadoPlantaPermanente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoPlantaPermanente_Profesion" Association="Model.FK_EmpleadoPlantaPermanente_Profesion">
+            <End Role="Profesion" EntitySet="Profesion" />
+            <End Role="EmpleadoPlantaPermanente" EntitySet="EmpleadoPlantaPermanente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoPlantaPermanente_Sector" Association="Model.FK_EmpleadoPlantaPermanente_Sector">
+            <End Role="Sector" EntitySet="Sector" />
+            <End Role="EmpleadoPlantaPermanente" EntitySet="EmpleadoPlantaPermanente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradosCategoria_Grados" Association="Model.FK_GradosCategoria_Grados">
+            <End Role="Grados" EntitySet="Grados" />
+            <End Role="GradosCategoria" EntitySet="GradosCategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradosDesignacion_GradosCategoria" Association="Model.FK_GradosDesignacion_GradosCategoria">
+            <End Role="GradosCategoria" EntitySet="GradosCategoria" />
+            <End Role="GradosDesignacion" EntitySet="GradosDesignacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradosDesignacion_Resolucion" Association="Model.FK_GradosDesignacion_Resolucion">
+            <End Role="Resolucion" EntitySet="Resolucion" />
+            <End Role="GradosDesignacion" EntitySet="GradosDesignacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradosDesignacion_TipoGradosDesignacion" Association="Model.FK_GradosDesignacion_TipoGradosDesignacion">
+            <End Role="TipoGradosDesignacion" EntitySet="TipoGradosDesignacion" />
+            <End Role="GradosDesignacion" EntitySet="GradosDesignacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_GrupoSanguineo" Association="Model.FK_Persona_GrupoSanguineo">
+            <End Role="GrupoSanguineo" EntitySet="GrupoSanguineo" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_Localidad" Association="Model.FK_Persona_Localidad">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_LocalidadNacimiento" Association="Model.FK_Persona_LocalidadNacimiento">
+            <End Role="Localidad" EntitySet="Localidad" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Oficina_Reparticion" Association="Model.FK_Oficina_Reparticion">
+            <End Role="Reparticion" EntitySet="Reparticion" />
+            <End Role="Oficina" EntitySet="Oficina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_Sexo" Association="Model.FK_Persona_Sexo">
+            <End Role="Sexo" EntitySet="Sexo" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sector_Reparticion" Association="Model.FK_Sector_Reparticion">
+            <End Role="Reparticion" EntitySet="Reparticion" />
+            <End Role="Sector" EntitySet="Sector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Resolucion_TipoNormaLegal" Association="Model.FK_Resolucion_TipoNormaLegal">
+            <End Role="TipoNormaLegal" EntitySet="TipoNormaLegal" />
+            <End Role="Resolucion" EntitySet="Resolucion" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="AgrupamientoGradosDeEscalafon">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Grados" Relationship="Model.FK_Grados_AgrupamientoGradosDeEscalafon" FromRole="AgrupamientoGradosDeEscalafon" ToRole="Grados" />
+        </EntityType>
+        <EntityType Name="Barrio">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DepartamentoID" Type="Int32" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Departamento" Relationship="Model.FK_Barrio_Departamento" FromRole="Barrio" ToRole="Departamento" />
+          <NavigationProperty Name="Persona" Relationship="Model.FK_Persona_Barrio" FromRole="Barrio" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="CuentaContable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="InstitucionContableID" Type="Byte" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="InstitucionContable" Relationship="Model.FK_CuentaContable_InstitucionContable" FromRole="CuentaContable" ToRole="InstitucionContable" />
+          <NavigationProperty Name="Sector" Relationship="Model.FK_Sector_CuentaContable" FromRole="CuentaContable" ToRole="Sector" />
+        </EntityType>
+        <EntityType Name="Decreto">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numero" Type="Int16" />
+          <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+          <Property Name="Considerando" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Resuelve" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EnlaceArchivo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="EsAcuerdo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="GradosDesignacion" Relationship="Model.FK_GradosDesignacion_Decreto" FromRole="Decreto" ToRole="GradosDesignacion" />
+        </EntityType>
+        <EntityType Name="Grados">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="AgrupamientoGradosDeEscalafonID" Type="Int16" Nullable="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AgrupamientoGradosDeEscalafon" Relationship="Model.FK_Grados_AgrupamientoGradosDeEscalafon" FromRole="Grados" ToRole="AgrupamientoGradosDeEscalafon" />
+          <NavigationProperty Name="GradosCategoria" Relationship="Model.FK_GradosCategoria_Grados" FromRole="Grados" ToRole="GradosCategoria" />
+        </EntityType>
+        <EntityType Name="GradosCategoria">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="GradosID" Type="Int16" Nullable="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Grados" Relationship="Model.FK_GradosCategoria_Grados" FromRole="GradosCategoria" ToRole="Grados" />
+          <NavigationProperty Name="GradosDesignacion" Relationship="Model.FK_GradosDesignacion_GradosCategoria" FromRole="GradosCategoria" ToRole="GradosDesignacion" />
+        </EntityType>
+        <EntityType Name="GradosDesignacion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Horas" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ConAdicional" Type="Boolean" Nullable="false" />
+          <Property Name="HorasAdicional" Type="Int16" Nullable="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Servicio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaDesde" Type="DateTime" Precision="3" />
+          <Property Name="FechaHasta" Type="DateTime" Precision="3" />
+          <Property Name="Funcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="NumeroRegistro" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="GradosCategoriaID" Type="Int16" Nullable="false" />
+          <Property Name="TipoGradosDesignacionID" Type="Byte" Nullable="false" />
+          <Property Name="ResolucionID" Type="Int64" />
+          <Property Name="DecretoID" Type="Int64" />
+          <NavigationProperty Name="Decreto" Relationship="Model.FK_GradosDesignacion_Decreto" FromRole="GradosDesignacion" ToRole="Decreto" />
+          <NavigationProperty Name="EmpleadoPlantaPermanente" Relationship="Model.FK_EmpleadoPlantaPermanente_GradosDesignacion" FromRole="GradosDesignacion" ToRole="EmpleadoPlantaPermanente" />
+          <NavigationProperty Name="GradosCategoria" Relationship="Model.FK_GradosDesignacion_GradosCategoria" FromRole="GradosDesignacion" ToRole="GradosCategoria" />
+          <NavigationProperty Name="Resolucion" Relationship="Model.FK_GradosDesignacion_Resolucion" FromRole="GradosDesignacion" ToRole="Resolucion" />
+          <NavigationProperty Name="TipoGradosDesignacion" Relationship="Model.FK_GradosDesignacion_TipoGradosDesignacion" FromRole="GradosDesignacion" ToRole="TipoGradosDesignacion" />
+        </EntityType>
+        <EntityType Name="Oficina">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="Int16" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReparticionID" Type="Byte" />
+          <NavigationProperty Name="EmpleadoPlantaPermanente" Relationship="Model.FK_EmpleadoPlantaPermanente_Oficina" FromRole="Oficina" ToRole="EmpleadoPlantaPermanente" />
+          <NavigationProperty Name="Reparticion" Relationship="Model.FK_Oficina_Reparticion" FromRole="Oficina" ToRole="Reparticion" />
+        </EntityType>
+        <EntityType Name="Profesion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <Property Name="ProfesionSISAID" Type="Int32" />
+          <NavigationProperty Name="EmpleadoContratado" Relationship="Model.FK_EmpleadoContratado_Profesion" FromRole="Profesion" ToRole="EmpleadoContratado" />
+          <NavigationProperty Name="EmpleadoPlantaPermanente" Relationship="Model.FK_EmpleadoPlantaPermanente_Profesion" FromRole="Profesion" ToRole="EmpleadoPlantaPermanente" />
+        </EntityType>
+        <EntityType Name="PuebloIndigena">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reparticion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EmpleadoContratado" Relationship="Model.FK_EmpleadoContratado_Reparticion" FromRole="Reparticion" ToRole="EmpleadoContratado" />
+          <NavigationProperty Name="Oficina" Relationship="Model.FK_Oficina_Reparticion" FromRole="Reparticion" ToRole="Oficina" />
+          <NavigationProperty Name="Sector" Relationship="Model.FK_Sector_Reparticion" FromRole="Reparticion" ToRole="Sector" />
+        </EntityType>
+        <EntityType Name="Resolucion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numero" Type="Int16" />
+          <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+          <Property Name="Considerando" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Resuelve" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EnlaceArchivo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="EsImportante" Type="Boolean" Nullable="false" />
+          <Property Name="NotificacionVencimiento" Type="DateTime" Precision="3" />
+          <Property Name="NotificacionDiaInicio" Type="Int16" />
+          <Property Name="TipoNormaLegalID" Type="Int32" />
+          <NavigationProperty Name="GradosDesignacion" Relationship="Model.FK_GradosDesignacion_Resolucion" FromRole="Resolucion" ToRole="GradosDesignacion" />
+          <NavigationProperty Name="TipoNormaLegal" Relationship="Model.FK_Resolucion_TipoNormaLegal" FromRole="Resolucion" ToRole="TipoNormaLegal" />
+        </EntityType>
+        <EntityType Name="Sector">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="Int16" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UbicacionGeografica" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="EnlaceMapa" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ReparticionID" Type="Byte" Nullable="false" />
+          <Property Name="CuentaContableID" Type="Int16" />
+          <NavigationProperty Name="CuentaContable" Relationship="Model.FK_Sector_CuentaContable" FromRole="Sector" ToRole="CuentaContable" />
+          <NavigationProperty Name="EmpleadoPlantaPermanente" Relationship="Model.FK_EmpleadoPlantaPermanente_Sector" FromRole="Sector" ToRole="EmpleadoPlantaPermanente" />
+          <NavigationProperty Name="Reparticion" Relationship="Model.FK_Sector_Reparticion" FromRole="Sector" ToRole="Reparticion" />
+        </EntityType>
+        <EntityType Name="Sexo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Persona" Relationship="Model.FK_Persona_Sexo" FromRole="Sexo" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="TipoGradosDesignacion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="GradosDesignacion" Relationship="Model.FK_GradosDesignacion_TipoGradosDesignacion" FromRole="TipoGradosDesignacion" ToRole="GradosDesignacion" />
+        </EntityType>
+        <EntityType Name="TipoNormaLegal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Resolucion" Relationship="Model.FK_Resolucion_TipoNormaLegal" FromRole="TipoNormaLegal" ToRole="Resolucion" />
+        </EntityType>
+        <Association Name="FK_Grados_AgrupamientoGradosDeEscalafon">
+          <End Type="Model.AgrupamientoGradosDeEscalafon" Role="AgrupamientoGradosDeEscalafon" Multiplicity="1" />
+          <End Type="Model.Grados" Role="Grados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgrupamientoGradosDeEscalafon">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Grados">
+              <PropertyRef Name="AgrupamientoGradosDeEscalafonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Barrio_Departamento">
+          <End Type="Model.Departamento" Role="Departamento" Multiplicity="0..1" />
+          <End Type="Model.Barrio" Role="Barrio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Barrio">
+              <PropertyRef Name="DepartamentoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_Barrio">
+          <End Type="Model.Barrio" Role="Barrio" Multiplicity="0..1" />
+          <End Type="Model.Persona" Role="Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Barrio">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="BarrioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CuentaContable_InstitucionContable">
+          <End Type="Model.InstitucionContable" Role="InstitucionContable" Multiplicity="0..1" />
+          <End Type="Model.CuentaContable" Role="CuentaContable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InstitucionContable">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CuentaContable">
+              <PropertyRef Name="InstitucionContableID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sector_CuentaContable">
+          <End Type="Model.CuentaContable" Role="CuentaContable" Multiplicity="0..1" />
+          <End Type="Model.Sector" Role="Sector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CuentaContable">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sector">
+              <PropertyRef Name="CuentaContableID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradosDesignacion_Decreto">
+          <End Type="Model.Decreto" Role="Decreto" Multiplicity="0..1" />
+          <End Type="Model.GradosDesignacion" Role="GradosDesignacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Decreto">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GradosDesignacion">
+              <PropertyRef Name="DecretoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoContratado_Profesion">
+          <End Type="Model.Profesion" Role="Profesion" Multiplicity="1" />
+          <End Type="Model.EmpleadoContratado" Role="EmpleadoContratado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmpleadoContratado">
+              <PropertyRef Name="ProfesionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoContratado_Reparticion">
+          <End Type="Model.Reparticion" Role="Reparticion" Multiplicity="1" />
+          <End Type="Model.EmpleadoContratado" Role="EmpleadoContratado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reparticion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmpleadoContratado">
+              <PropertyRef Name="ReparticionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoPlantaPermanente_GradosDesignacion">
+          <End Type="Model.GradosDesignacion" Role="GradosDesignacion" Multiplicity="0..1" />
+          <End Type="Model.EmpleadoPlantaPermanente" Role="EmpleadoPlantaPermanente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GradosDesignacion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmpleadoPlantaPermanente">
+              <PropertyRef Name="GradosDesignacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoPlantaPermanente_Oficina">
+          <End Type="Model.Oficina" Role="Oficina" Multiplicity="0..1" />
+          <End Type="Model.EmpleadoPlantaPermanente" Role="EmpleadoPlantaPermanente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oficina">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmpleadoPlantaPermanente">
+              <PropertyRef Name="OficinaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoPlantaPermanente_Profesion">
+          <End Type="Model.Profesion" Role="Profesion" Multiplicity="0..1" />
+          <End Type="Model.EmpleadoPlantaPermanente" Role="EmpleadoPlantaPermanente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmpleadoPlantaPermanente">
+              <PropertyRef Name="ProfesionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoPlantaPermanente_Sector">
+          <End Type="Model.Sector" Role="Sector" Multiplicity="1" />
+          <End Type="Model.EmpleadoPlantaPermanente" Role="EmpleadoPlantaPermanente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sector">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmpleadoPlantaPermanente">
+              <PropertyRef Name="SectorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradosCategoria_Grados">
+          <End Type="Model.Grados" Role="Grados" Multiplicity="1" />
+          <End Type="Model.GradosCategoria" Role="GradosCategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grados">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GradosCategoria">
+              <PropertyRef Name="GradosID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradosDesignacion_GradosCategoria">
+          <End Type="Model.GradosCategoria" Role="GradosCategoria" Multiplicity="1" />
+          <End Type="Model.GradosDesignacion" Role="GradosDesignacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GradosCategoria">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GradosDesignacion">
+              <PropertyRef Name="GradosCategoriaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradosDesignacion_Resolucion">
+          <End Type="Model.Resolucion" Role="Resolucion" Multiplicity="0..1" />
+          <End Type="Model.GradosDesignacion" Role="GradosDesignacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resolucion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GradosDesignacion">
+              <PropertyRef Name="ResolucionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradosDesignacion_TipoGradosDesignacion">
+          <End Type="Model.TipoGradosDesignacion" Role="TipoGradosDesignacion" Multiplicity="1" />
+          <End Type="Model.GradosDesignacion" Role="GradosDesignacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoGradosDesignacion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GradosDesignacion">
+              <PropertyRef Name="TipoGradosDesignacionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_GrupoSanguineo">
+          <End Type="Model.GrupoSanguineo" Role="GrupoSanguineo" Multiplicity="0..1" />
+          <End Type="Model.Persona" Role="Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoSanguineo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="GrupoSanguineoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_Localidad">
+          <End Type="Model.Localidad" Role="Localidad" Multiplicity="0..1" />
+          <End Type="Model.Persona" Role="Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="LocalidadID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_LocalidadNacimiento">
+          <End Type="Model.Localidad" Role="Localidad" Multiplicity="0..1" />
+          <End Type="Model.Persona" Role="Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidad">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="LocalidadNacimientoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Oficina_Reparticion">
+          <End Type="Model.Reparticion" Role="Reparticion" Multiplicity="0..1" />
+          <End Type="Model.Oficina" Role="Oficina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reparticion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Oficina">
+              <PropertyRef Name="ReparticionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_Sexo">
+          <End Type="Model.Sexo" Role="Sexo" Multiplicity="0..1" />
+          <End Type="Model.Persona" Role="Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sexo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="SexoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sector_Reparticion">
+          <End Type="Model.Reparticion" Role="Reparticion" Multiplicity="1" />
+          <End Type="Model.Sector" Role="Sector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reparticion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sector">
+              <PropertyRef Name="ReparticionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Resolucion_TipoNormaLegal">
+          <End Type="Model.TipoNormaLegal" Role="TipoNormaLegal" Multiplicity="0..1" />
+          <End Type="Model.Resolucion" Role="Resolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoNormaLegal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Resolucion">
+              <PropertyRef Name="TipoNormaLegalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2054,6 +3305,15 @@
           <EntitySetMapping Name="EmpleadoContratado">
             <EntityTypeMapping TypeName="Model.EmpleadoContratado">
               <MappingFragment StoreEntitySet="EmpleadoContratado">
+                <ScalarProperty Name="MotivoBaja" ColumnName="MotivoBaja" />
+                <ScalarProperty Name="FechaBaja" ColumnName="FechaBaja" />
+                <ScalarProperty Name="ReparticionID" ColumnName="ReparticionID" />
+                <ScalarProperty Name="MontoMensual" ColumnName="MontoMensual" />
+                <ScalarProperty Name="Cuotas" ColumnName="Cuotas" />
+                <ScalarProperty Name="CargaHorariaSemanal" ColumnName="CargaHorariaSemanal" />
+                <ScalarProperty Name="ProfesionID" ColumnName="ProfesionID" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
               </MappingFragment>
@@ -2074,6 +3334,19 @@
           <EntitySetMapping Name="EmpleadoPlantaPermanente">
             <EntityTypeMapping TypeName="Model.EmpleadoPlantaPermanente">
               <MappingFragment StoreEntitySet="EmpleadoPlantaPermanente">
+                <ScalarProperty Name="PertenecePlantaAdministrativa" ColumnName="PertenecePlantaAdministrativa" />
+                <ScalarProperty Name="Funcion" ColumnName="Funcion" />
+                <ScalarProperty Name="GradosDesignacionID" ColumnName="GradosDesignacionID" />
+                <ScalarProperty Name="OficinaID" ColumnName="OficinaID" />
+                <ScalarProperty Name="CronosID" ColumnName="CronosID" />
+                <ScalarProperty Name="AutorizaNotificarSMS" ColumnName="AutorizaNotificarSMS" />
+                <ScalarProperty Name="FechaCasamiento" ColumnName="FechaCasamiento" />
+                <ScalarProperty Name="LeeEscribe" ColumnName="LeeEscribe" />
+                <ScalarProperty Name="ProfesionID" ColumnName="ProfesionID" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="SectorID" ColumnName="SectorID" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
               </MappingFragment>
@@ -2197,6 +3470,41 @@
           <EntitySetMapping Name="Persona">
             <EntityTypeMapping TypeName="Model.Persona">
               <MappingFragment StoreEntitySet="Persona">
+                <ScalarProperty Name="AñoMayorNivelDeEstudio" ColumnName="AñoMayorNivelDeEstudio" />
+                <ScalarProperty Name="EstudiosID" ColumnName="EstudiosID" />
+                <ScalarProperty Name="Alfabeta" ColumnName="Alfabeta" />
+                <ScalarProperty Name="ZonaDeSaludID" ColumnName="ZonaDeSaludID" />
+                <ScalarProperty Name="NroHC" ColumnName="NroHC" />
+                <ScalarProperty Name="ScoreDeRiesgo" ColumnName="ScoreDeRiesgo" />
+                <ScalarProperty Name="CoberturaSocialDesde" ColumnName="CoberturaSocialDesde" />
+                <ScalarProperty Name="CoberturaSocialID" ColumnName="CoberturaSocialID" />
+                <ScalarProperty Name="TipoCoberturaSocialID" ColumnName="TipoCoberturaSocialID" />
+                <ScalarProperty Name="GrupoSanguineoID" ColumnName="GrupoSanguineoID" />
+                <ScalarProperty Name="CUIL" ColumnName="CUIL" />
+                <ScalarProperty Name="Indocumentado" ColumnName="Indocumentado" />
+                <ScalarProperty Name="NacionalidadID" ColumnName="NacionalidadID" />
+                <ScalarProperty Name="LocalidadNacimientoID" ColumnName="LocalidadNacimientoID" />
+                <ScalarProperty Name="Etnia" ColumnName="Etnia" />
+                <ScalarProperty Name="TribuID" ColumnName="TribuID" />
+                <ScalarProperty Name="LenguaID" ColumnName="LenguaID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="TelefonoCelular" ColumnName="TelefonoCelular" />
+                <ScalarProperty Name="TelefonoFijo" ColumnName="TelefonoFijo" />
+                <ScalarProperty Name="BarrioID" ColumnName="BarrioID" />
+                <ScalarProperty Name="CalleReferencia2" ColumnName="CalleReferencia2" />
+                <ScalarProperty Name="CalleReferencia1" ColumnName="CalleReferencia1" />
+                <ScalarProperty Name="DomicilioDepto" ColumnName="DomicilioDepto" />
+                <ScalarProperty Name="DomicilioPiso" ColumnName="DomicilioPiso" />
+                <ScalarProperty Name="DomicilioManzana" ColumnName="DomicilioManzana" />
+                <ScalarProperty Name="DomicilioNumero" ColumnName="DomicilioNumero" />
+                <ScalarProperty Name="DomicilioCalle" ColumnName="DomicilioCalle" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="LocalidadID" ColumnName="LocalidadID" />
+                <ScalarProperty Name="PuebloIndigena" ColumnName="PuebloIndigena" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="SexoID" ColumnName="SexoID" />
+                <ScalarProperty Name="DocumentoPropio" ColumnName="DocumentoPropio" />
+                <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Apellido" ColumnName="Apellido" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -2280,6 +3588,184 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="AgrupamientoGradosDeEscalafon">
+            <EntityTypeMapping TypeName="Model.AgrupamientoGradosDeEscalafon">
+              <MappingFragment StoreEntitySet="AgrupamientoGradosDeEscalafon">
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Barrio">
+            <EntityTypeMapping TypeName="Model.Barrio">
+              <MappingFragment StoreEntitySet="Barrio">
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="DepartamentoID" ColumnName="DepartamentoID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CuentaContable">
+            <EntityTypeMapping TypeName="Model.CuentaContable">
+              <MappingFragment StoreEntitySet="CuentaContable">
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="InstitucionContableID" ColumnName="InstitucionContableID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Decreto">
+            <EntityTypeMapping TypeName="Model.Decreto">
+              <MappingFragment StoreEntitySet="Decreto">
+                <ScalarProperty Name="EsAcuerdo" ColumnName="EsAcuerdo" />
+                <ScalarProperty Name="EnlaceArchivo" ColumnName="EnlaceArchivo" />
+                <ScalarProperty Name="Resuelve" ColumnName="Resuelve" />
+                <ScalarProperty Name="Considerando" ColumnName="Considerando" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grados">
+            <EntityTypeMapping TypeName="Model.Grados">
+              <MappingFragment StoreEntitySet="Grados">
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="AgrupamientoGradosDeEscalafonID" ColumnName="AgrupamientoGradosDeEscalafonID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GradosCategoria">
+            <EntityTypeMapping TypeName="Model.GradosCategoria">
+              <MappingFragment StoreEntitySet="GradosCategoria">
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="GradosID" ColumnName="GradosID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GradosDesignacion">
+            <EntityTypeMapping TypeName="Model.GradosDesignacion">
+              <MappingFragment StoreEntitySet="GradosDesignacion">
+                <ScalarProperty Name="DecretoID" ColumnName="DecretoID" />
+                <ScalarProperty Name="ResolucionID" ColumnName="ResolucionID" />
+                <ScalarProperty Name="TipoGradosDesignacionID" ColumnName="TipoGradosDesignacionID" />
+                <ScalarProperty Name="GradosCategoriaID" ColumnName="GradosCategoriaID" />
+                <ScalarProperty Name="NumeroRegistro" ColumnName="NumeroRegistro" />
+                <ScalarProperty Name="Funcion" ColumnName="Funcion" />
+                <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
+                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+                <ScalarProperty Name="Servicio" ColumnName="Servicio" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="HorasAdicional" ColumnName="HorasAdicional" />
+                <ScalarProperty Name="ConAdicional" ColumnName="ConAdicional" />
+                <ScalarProperty Name="Horas" ColumnName="Horas" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Oficina">
+            <EntityTypeMapping TypeName="Model.Oficina">
+              <MappingFragment StoreEntitySet="Oficina">
+                <ScalarProperty Name="ReparticionID" ColumnName="ReparticionID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profesion">
+            <EntityTypeMapping TypeName="Model.Profesion">
+              <MappingFragment StoreEntitySet="Profesion">
+                <ScalarProperty Name="ProfesionSISAID" ColumnName="ProfesionSISAID" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PuebloIndigena">
+            <EntityTypeMapping TypeName="Model.PuebloIndigena">
+              <MappingFragment StoreEntitySet="PuebloIndigena">
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reparticion">
+            <EntityTypeMapping TypeName="Model.Reparticion">
+              <MappingFragment StoreEntitySet="Reparticion">
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resolucion">
+            <EntityTypeMapping TypeName="Model.Resolucion">
+              <MappingFragment StoreEntitySet="Resolucion">
+                <ScalarProperty Name="TipoNormaLegalID" ColumnName="TipoNormaLegalID" />
+                <ScalarProperty Name="NotificacionDiaInicio" ColumnName="NotificacionDiaInicio" />
+                <ScalarProperty Name="NotificacionVencimiento" ColumnName="NotificacionVencimiento" />
+                <ScalarProperty Name="EsImportante" ColumnName="EsImportante" />
+                <ScalarProperty Name="EnlaceArchivo" ColumnName="EnlaceArchivo" />
+                <ScalarProperty Name="Resuelve" ColumnName="Resuelve" />
+                <ScalarProperty Name="Considerando" ColumnName="Considerando" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sector">
+            <EntityTypeMapping TypeName="Model.Sector">
+              <MappingFragment StoreEntitySet="Sector">
+                <ScalarProperty Name="CuentaContableID" ColumnName="CuentaContableID" />
+                <ScalarProperty Name="ReparticionID" ColumnName="ReparticionID" />
+                <ScalarProperty Name="EnlaceMapa" ColumnName="EnlaceMapa" />
+                <ScalarProperty Name="UbicacionGeografica" ColumnName="UbicacionGeografica" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sexo">
+            <EntityTypeMapping TypeName="Model.Sexo">
+              <MappingFragment StoreEntitySet="Sexo">
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoGradosDesignacion">
+            <EntityTypeMapping TypeName="Model.TipoGradosDesignacion">
+              <MappingFragment StoreEntitySet="TipoGradosDesignacion">
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoNormaLegal">
+            <EntityTypeMapping TypeName="Model.TipoNormaLegal">
+              <MappingFragment StoreEntitySet="TipoNormaLegal">
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

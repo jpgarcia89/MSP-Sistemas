@@ -19,14 +19,17 @@ namespace GeHosWebApi.Models
         {
             this.CuentaEscritural = new HashSet<CuentaEscritural>();
             this.Fuente = new HashSet<Fuente>();
+            this.CuentaContable = new HashSet<CuentaContable>();
         }
     
-        public int ID { get; set; }
+        public byte ID { get; set; }
         public string Descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CuentaEscritural> CuentaEscritural { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Fuente> Fuente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CuentaContable> CuentaContable { get; set; }
     }
 }

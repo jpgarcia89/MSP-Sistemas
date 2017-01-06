@@ -58,5 +58,21 @@ namespace GeHosWebApi.Models
         public virtual DbSet<Turno> Turno { get; set; }
         public virtual DbSet<TurnoEstado> TurnoEstado { get; set; }
         public virtual DbSet<TurnoEstadoAdmision> TurnoEstadoAdmision { get; set; }
+        public virtual DbSet<AgrupamientoGradosDeEscalafon> AgrupamientoGradosDeEscalafon { get; set; }
+        public virtual DbSet<Barrio> Barrio { get; set; }
+        public virtual DbSet<CuentaContable> CuentaContable { get; set; }
+        public virtual DbSet<Decreto> Decreto { get; set; }
+        public virtual DbSet<Grados> Grados { get; set; }
+        public virtual DbSet<GradosCategoria> GradosCategoria { get; set; }
+        public virtual DbSet<GradosDesignacion> GradosDesignacion { get; set; }
+        public virtual DbSet<Oficina> Oficina { get; set; }
+        public virtual DbSet<Profesion> Profesion { get; set; }
+        public virtual DbSet<PuebloIndigena> PuebloIndigena { get; set; }
+        public virtual DbSet<Reparticion> Reparticion { get; set; }
+        public virtual DbSet<Resolucion> Resolucion { get; set; }
+        public virtual DbSet<Sector> Sector { get; set; }
+        public virtual DbSet<Sexo> Sexo { get; set; }
+        public virtual DbSet<TipoGradosDesignacion> TipoGradosDesignacion { get; set; }
+        public virtual DbSet<TipoNormaLegal> TipoNormaLegal { get; set; }
     }
 }

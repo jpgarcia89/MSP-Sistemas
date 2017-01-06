@@ -12,22 +12,21 @@ namespace GeHosWebApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class GrupoSanguineo
+    public partial class GradosCategoria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public GrupoSanguineo()
+        public GradosCategoria()
         {
-            this.Paciente = new HashSet<Paciente>();
-            this.Persona = new HashSet<Persona>();
+            this.GradosDesignacion = new HashSet<GradosDesignacion>();
         }
     
-        public byte ID { get; set; }
-        public string Descripcion { get; set; }
-        public string Factor { get; set; }
+        public short ID { get; set; }
+        public string Nombre { get; set; }
+        public short GradosID { get; set; }
+        public bool Activa { get; set; }
     
+        public virtual Grados Grados { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Paciente> Paciente { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Persona> Persona { get; set; }
+        public virtual ICollection<GradosDesignacion> GradosDesignacion { get; set; }
     }
 }
