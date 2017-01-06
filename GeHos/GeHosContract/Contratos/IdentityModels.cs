@@ -22,7 +22,6 @@ namespace GeHosContract.Contrato
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, CustomRole, int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
         public ApplicationDbContext()
-        //: base("DefaultConnection", throwIfV1Schema: false)MSPGeDoc
         : base("MSP_GeDoc")
         {
             
@@ -61,23 +60,6 @@ namespace GeHosContract.Contrato
         public CustomRoleStore(ApplicationDbContext context)
             : base(context)
         {
-        }
-    }
-
-
-    public class CustomPasswordHasher : IPasswordHasher
-    {
-        public string HashPassword(string password)
-        {
-            //Implementar Funcion HASH
-            return password;
-        }
-
-        public PasswordVerificationResult VerifyHashedPassword(string hashedPassword, string providedPassword)
-        {
-            if (hashedPassword.Equals(providedPassword))
-                return PasswordVerificationResult.Success;
-            else return PasswordVerificationResult.Failed;
         }
     }
     #endregion ID "int"

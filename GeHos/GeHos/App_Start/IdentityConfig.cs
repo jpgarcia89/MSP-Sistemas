@@ -44,7 +44,6 @@ namespace GeHos
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {
             var manager = new ApplicationUserManager(new CustomUserStore(context.Get<ApplicationDbContext>()));
-            manager.PasswordHasher = new CustomPasswordHasher();
 
 
             // Configure validation logic for usernames
