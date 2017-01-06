@@ -119,11 +119,9 @@
 <script>
 
     $(document).ready(function () {
-        debugger;
         var url = $('#modal').data('url');
 
         $.get(url, function (data) {
-            debugger;
             $('#modalBody').html(data);
 
             $('#modal').modal('show');
