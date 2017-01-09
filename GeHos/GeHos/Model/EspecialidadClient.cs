@@ -32,5 +32,30 @@ namespace GeHos.Model
                 return null;
             }
         }
+
+
+        //Trae todas las Especialidades correspondientes a un Centro de Salud
+        public IEnumerable<EspecialidadVM> buscarTodasPorCS(int id)
+        {
+            try
+            {
+                HttpClient cliente = new HttpClient();
+                cliente.BaseAddress = new Uri(BASE_URL);
+                cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage respuesta = cliente.GetAsync("Especialidad/GetEspecialidadPorCentroSalud/" + id).Result;
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    return respuesta.Content.ReadAsAsync<IEnumerable<EspecialidadVM>>().Result;
+                }
+                return null;
+            }
+            catch (Exception es)
+            {
+
+                return null;
+            }
+        }
+
+
     }
 }

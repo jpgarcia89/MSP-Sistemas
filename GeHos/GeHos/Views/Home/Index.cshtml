@@ -98,7 +98,7 @@
 </div>
 <!-- /.intro-header -->
 
-<div id="modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" data-url='@Url.Action("SeleccionarCentroDeSalud","Home")'>
+<div id="modal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" data-url='@Url.Action("SeleccionarCentroDeSalud", "Home")'>
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -119,13 +119,18 @@
 <script>
 
     $(document).ready(function () {
-        var url = $('#modal').data('url');
+        debugger
+       
+        if (@Session["CSSeleccionado"]==0){
 
-        $.get(url, function (data) {
-            $('#modalBody').html(data);
+            var url = $('#modal').data('url');
 
-            $('#modal').modal('show');
-        });
+            $.get(url, function (data) {
+                $('#modalBody').html(data);
+
+                $('#modal').modal('show');
+            });
+        }        
     });
 
     $('#cmdSeleccionar').on('click', function (event) {

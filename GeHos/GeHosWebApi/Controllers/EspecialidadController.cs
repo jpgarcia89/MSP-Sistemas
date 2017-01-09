@@ -106,6 +106,21 @@ namespace GeHosWebApi.Controllers
             return Ok(catEspecialidad);
         }
 
+
+        // GET: api/Especialidad/GetEspecialidadPorCentroSalud/5
+        //[Route("api/Especialidad/GetEspecialidadPorCentroSalud/{id}")]
+        public IQueryable<EspecialidadVM> GetEspecialidadPorCentroSalud(int id)
+        {
+            return db.Especialidad.Select(x => new EspecialidadVM()
+            {
+                ID = x.ID,
+                Nombre = x.Nombre
+            });
+        }
+
+
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

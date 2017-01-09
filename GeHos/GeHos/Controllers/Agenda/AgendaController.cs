@@ -34,7 +34,7 @@ namespace GeHos.Controllers
             AgendaVM nuevaAgenda = new AgendaVM();
             //ViewData["ListaCentroSalud"] = new SelectList(csC.buscarTodos().ToList(), "csId", "csNombre");
             ViewBag.ListaCentroSalud = new SelectList(csC.buscarTodos().ToList(), "ID", "Nombre");
-            ViewBag.Especialidad = new SelectList(esC.buscarTodas().ToList(), "ID", "Nombre");
+            ViewBag.Especialidad = new SelectList(esC.buscarTodasPorCS((int)Session["CSSeleccionado"]).ToList(), "ID", "Nombre");
             return View("Agregar", nuevaAgenda);
         }
 
