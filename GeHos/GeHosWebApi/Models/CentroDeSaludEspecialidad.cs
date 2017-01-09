@@ -12,23 +12,22 @@ namespace GeHosWebApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class EmpleadoEspecialidadCentroDeSalud
+    public partial class CentroDeSaludEspecialidad
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EmpleadoEspecialidadCentroDeSalud()
+        public CentroDeSaludEspecialidad()
         {
-            this.Agenda = new HashSet<Agenda>();
+            this.EmpleadoEspecialidadCentroDeSalud = new HashSet<EmpleadoEspecialidadCentroDeSalud>();
         }
     
         public int ID { get; set; }
-        public int EmpleadoID { get; set; }
-        public int CentroDeSaludEspecialidadID { get; set; }
-        public System.DateTime FechaAlta { get; set; }
+        public int CentroDeSaludID { get; set; }
+        public int EspecialidadID { get; set; }
         public bool Activa { get; set; }
     
+        public virtual CentroDeSalud CentroDeSalud { get; set; }
+        public virtual Especialidad Especialidad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Agenda> Agenda { get; set; }
-        public virtual CentroDeSaludEspecialidad CentroDeSaludEspecialidad { get; set; }
-        public virtual Empleado Empleado { get; set; }
+        public virtual ICollection<EmpleadoEspecialidadCentroDeSalud> EmpleadoEspecialidadCentroDeSalud { get; set; }
     }
 }

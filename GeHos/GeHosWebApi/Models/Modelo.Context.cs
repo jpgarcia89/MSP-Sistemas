@@ -12,6 +12,8 @@ namespace GeHosWebApi.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Entities : DbContext
     {
@@ -29,50 +31,66 @@ namespace GeHosWebApi.Models
         public virtual DbSet<Agenda> Agenda { get; set; }
         public virtual DbSet<AgendaHorario> AgendaHorario { get; set; }
         public virtual DbSet<AgendaTipo> AgendaTipo { get; set; }
+        public virtual DbSet<AgrupamientoGradosDeEscalafon> AgrupamientoGradosDeEscalafon { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<Barrio> Barrio { get; set; }
         public virtual DbSet<CentroDeSalud> CentroDeSalud { get; set; }
         public virtual DbSet<CentroDeSaludConsultorio> CentroDeSaludConsultorio { get; set; }
+        public virtual DbSet<CentroDeSaludEspecialidad> CentroDeSaludEspecialidad { get; set; }
+        public virtual DbSet<CuentaContable> CuentaContable { get; set; }
         public virtual DbSet<CuentaEscritural> CuentaEscritural { get; set; }
+        public virtual DbSet<Decreto> Decreto { get; set; }
         public virtual DbSet<Departamento> Departamento { get; set; }
+        public virtual DbSet<Diagnostico> Diagnostico { get; set; }
+        public virtual DbSet<DiagnosticoAgrupamiento> DiagnosticoAgrupamiento { get; set; }
         public virtual DbSet<Empleado> Empleado { get; set; }
         public virtual DbSet<EmpleadoContratado> EmpleadoContratado { get; set; }
         public virtual DbSet<EmpleadoEspecialidadCentroDeSalud> EmpleadoEspecialidadCentroDeSalud { get; set; }
         public virtual DbSet<EmpleadoPlantaPermanente> EmpleadoPlantaPermanente { get; set; }
         public virtual DbSet<Especialidad> Especialidad { get; set; }
         public virtual DbSet<EstadoCivil> EstadoCivil { get; set; }
+        public virtual DbSet<Evolucion> Evolucion { get; set; }
         public virtual DbSet<Fuente> Fuente { get; set; }
+        public virtual DbSet<Grados> Grados { get; set; }
+        public virtual DbSet<GradosCategoria> GradosCategoria { get; set; }
+        public virtual DbSet<GradosDesignacion> GradosDesignacion { get; set; }
         public virtual DbSet<GrupoSanguineo> GrupoSanguineo { get; set; }
         public virtual DbSet<InstitucionContable> InstitucionContable { get; set; }
         public virtual DbSet<Localidad> Localidad { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
+        public virtual DbSet<Nomenclador> Nomenclador { get; set; }
         public virtual DbSet<ObraSocial> ObraSocial { get; set; }
+        public virtual DbSet<Oficina> Oficina { get; set; }
         public virtual DbSet<Paciente> Paciente { get; set; }
         public virtual DbSet<Pais> Pais { get; set; }
         public virtual DbSet<Persona> Persona { get; set; }
-        public virtual DbSet<Provincia> Provincia { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<TipoDNI> TipoDNI { get; set; }
-        public virtual DbSet<Turno> Turno { get; set; }
-        public virtual DbSet<TurnoEstado> TurnoEstado { get; set; }
-        public virtual DbSet<TurnoEstadoAdmision> TurnoEstadoAdmision { get; set; }
-        public virtual DbSet<AgrupamientoGradosDeEscalafon> AgrupamientoGradosDeEscalafon { get; set; }
-        public virtual DbSet<Barrio> Barrio { get; set; }
-        public virtual DbSet<CuentaContable> CuentaContable { get; set; }
-        public virtual DbSet<Decreto> Decreto { get; set; }
-        public virtual DbSet<Grados> Grados { get; set; }
-        public virtual DbSet<GradosCategoria> GradosCategoria { get; set; }
-        public virtual DbSet<GradosDesignacion> GradosDesignacion { get; set; }
-        public virtual DbSet<Oficina> Oficina { get; set; }
+        public virtual DbSet<Practica> Practica { get; set; }
         public virtual DbSet<Profesion> Profesion { get; set; }
+        public virtual DbSet<Provincia> Provincia { get; set; }
         public virtual DbSet<PuebloIndigena> PuebloIndigena { get; set; }
         public virtual DbSet<Reparticion> Reparticion { get; set; }
         public virtual DbSet<Resolucion> Resolucion { get; set; }
         public virtual DbSet<Sector> Sector { get; set; }
         public virtual DbSet<Sexo> Sexo { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<TipoDNI> TipoDNI { get; set; }
+        public virtual DbSet<TipoEstadoEmpleadoPlantaPermanente> TipoEstadoEmpleadoPlantaPermanente { get; set; }
         public virtual DbSet<TipoGradosDesignacion> TipoGradosDesignacion { get; set; }
         public virtual DbSet<TipoNormaLegal> TipoNormaLegal { get; set; }
+        public virtual DbSet<Turno> Turno { get; set; }
+        public virtual DbSet<TurnoEstado> TurnoEstado { get; set; }
+        public virtual DbSet<TurnoEstadoAdmision> TurnoEstadoAdmision { get; set; }
+    
+        public virtual ObjectResult<byte[]> sp_encryptPassword(string pass)
+        {
+            var passParameter = pass != null ?
+                new ObjectParameter("Pass", pass) :
+                new ObjectParameter("Pass", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<byte[]>("sp_encryptPassword", passParameter);
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace GeHosWebApi.Models
         public CentroDeSalud()
         {
             this.CentroDeSaludConsultorio = new HashSet<CentroDeSaludConsultorio>();
-            this.EmpleadoEspecialidadCentroDeSalud = new HashSet<EmpleadoEspecialidadCentroDeSalud>();
+            this.CentroDeSaludEspecialidad = new HashSet<CentroDeSaludEspecialidad>();
             this.Paciente = new HashSet<Paciente>();
         }
     
@@ -49,7 +49,7 @@ namespace GeHosWebApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CentroDeSaludConsultorio> CentroDeSaludConsultorio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmpleadoEspecialidadCentroDeSalud> EmpleadoEspecialidadCentroDeSalud { get; set; }
+        public virtual ICollection<CentroDeSaludEspecialidad> CentroDeSaludEspecialidad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Paciente> Paciente { get; set; }
     }

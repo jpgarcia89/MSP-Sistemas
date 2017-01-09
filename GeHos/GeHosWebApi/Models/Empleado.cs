@@ -23,7 +23,7 @@ namespace GeHosWebApi.Models
     
         public int ID { get; set; }
         public int PersonaID { get; set; }
-        public int AspNetUsersID { get; set; }
+        public Nullable<int> AspNetUsersID { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Persona Persona { get; set; }

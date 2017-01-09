@@ -25,9 +25,9 @@ namespace GeHosWebApi.Models
         public string Apellido { get; set; }
         public string Nombre { get; set; }
         public byte TipodniID { get; set; }
-        public byte EstadoCivilID { get; set; }
         public Nullable<int> NroDocumento { get; set; }
         public Nullable<bool> DocumentoPropio { get; set; }
+        public Nullable<byte> EstadoCivilID { get; set; }
         public Nullable<byte> SexoID { get; set; }
         public Nullable<System.DateTime> FechaNacimiento { get; set; }
         public Nullable<bool> PuebloIndigena { get; set; }
@@ -62,16 +62,16 @@ namespace GeHosWebApi.Models
         public Nullable<byte> EstudiosID { get; set; }
         public string AñoMayorNivelDeEstudio { get; set; }
     
+        public virtual Barrio Barrio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Empleado> Empleado { get; set; }
         public virtual EstadoCivil EstadoCivil { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Paciente> Paciente { get; set; }
-        public virtual TipoDNI TipoDNI { get; set; }
-        public virtual Barrio Barrio { get; set; }
         public virtual GrupoSanguineo GrupoSanguineo { get; set; }
         public virtual Localidad Localidad { get; set; }
         public virtual Localidad Localidad1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Paciente> Paciente { get; set; }
         public virtual Sexo Sexo { get; set; }
+        public virtual TipoDNI TipoDNI { get; set; }
     }
 }
