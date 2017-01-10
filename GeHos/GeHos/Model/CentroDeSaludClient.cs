@@ -12,6 +12,26 @@ namespace GeHos.Model
     {
         private string BASE_URL = "http://localhost:1338/api/";
 
+        public CentroDeSaludVM buscarUno(int id)
+        {
+            try
+            {
+                HttpClient cliente = new HttpClient();
+                cliente.BaseAddress = new Uri(BASE_URL);
+                cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage respuesta = cliente.GetAsync("CentroDeSalud/GetcatCentroDeSalud/" + id).Result;
+                if (respuesta.IsSuccessStatusCode)
+                {
+                    return respuesta.Content.ReadAsAsync<CentroDeSaludVM>().Result;
+                }
+                return null;
+            }
+            catch (Exception es)
+            {
+
+                return null;
+            }
+        }
         public IEnumerable<CentroDeSaludVM> buscarTodos()
         {
             try

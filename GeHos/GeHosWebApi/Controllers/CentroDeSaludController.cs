@@ -30,10 +30,13 @@ namespace GeHosWebApi.Controllers
         }
 
         // GET: api/CentroDeSalud/5
-        [ResponseType(typeof(CentroDeSalud))]
+        [ResponseType(typeof(CentroDeSaludVM))]
         public IHttpActionResult GetcatCentroDeSalud(int id)
         {
-            CentroDeSalud catCentroDeSalud = db.CentroDeSalud.Find(id);
+            CentroDeSaludVM catCentroDeSalud = db.CentroDeSalud.Where(r => r.ID == id).Select(r => new CentroDeSaludVM() {
+                ID=r.ID,
+                Nombre =r.Nombre                
+            }).FirstOrDefault();
             if (catCentroDeSalud == null)
             {
                 return NotFound();

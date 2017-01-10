@@ -23,7 +23,7 @@ namespace GeHos
 
         protected void Session_Start(Object sender, EventArgs e)
         {
-            Session["CSSeleccionado"] = 0;
+           // Session["CSSeleccionado"] = 0;
         }
     }
 }

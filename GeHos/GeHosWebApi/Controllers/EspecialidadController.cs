@@ -108,14 +108,29 @@ namespace GeHosWebApi.Controllers
 
 
         // GET: api/Especialidad/GetEspecialidadPorCentroSalud/5
-        //[Route("api/Especialidad/GetEspecialidadPorCentroSalud/{id}")]
         public IQueryable<EspecialidadVM> GetEspecialidadPorCentroSalud(int id)
         {
-            return db.Especialidad.Select(x => new EspecialidadVM()
-            {
-                ID = x.ID,
-                Nombre = x.Nombre
-            });
+            var x = from a in db.Especialidad
+                    join b in db.CentroDeSaludEspecialidad on a.ID equals b.CentroDeSaludID
+                    where b.ID == id
+                    select new EspecialidadVM()
+                    {
+                        ID = a.ID,
+                        Nombre = a.Nombre
+                    };
+
+
+
+
+            //return db.Especialidad.Select(x => new EspecialidadVM()
+            //{
+            //    ID = x.ID,
+            //    Nombre = x.Nombre
+            //});
+
+            
+
+            return x;
         }
 
 

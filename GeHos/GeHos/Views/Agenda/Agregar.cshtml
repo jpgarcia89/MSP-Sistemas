@@ -25,7 +25,7 @@
         @Html.AntiForgeryToken()
         
         <div class="form-horizontal">
-            <h4>catAgendaVM</h4>
+            <h4>Nueva Agranda</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     
@@ -46,6 +46,85 @@
                     @Html.ValidationMessageFor(model => model.EspecialidadNombre, "", new { @class = "text-danger" })
                 </div>
             </div>
+
+
+
+            @* Nuevos campos de carga para agenda *@
+            <div class="form-group">
+                @Html.Label("Fecha Desde", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.espNombre, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.EspecialidadID, (SelectList)(ViewBag.Especialidad), new { @class = "select2", @style = "width: 100%" })
+                    @Html.ValidationMessageFor(model => model.EspecialidadNombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Fecha Hasta", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.espNombre, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.EspecialidadID, (SelectList)(ViewBag.Especialidad), new { @class = "select2", @style = "width: 100%" })
+                    @Html.ValidationMessageFor(model => model.EspecialidadNombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Dias", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.espNombre, new { htmlAttributes = new { @class = "form-control" } })*@
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBox("Lunes", new { @value = "Lunes" }) Lunes
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBox("Martes", new { @value = "Martes" }) Martes
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBox("Miercoles", new { @value = "Miercoles" }) Miercoles
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBox("Jueves", new { @value = "Jueves" }) Jueves
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBox("Viernes", new { @value = "Viernes" }) Viernes
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBox("Sabado", new { @value = "Sabado" }) Sabado
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBox("Domingo", new { @value = "Domingo" }) Domingo
+                        </label>
+                    </div>
+                    @*Html.ValidationMessage(model => model.EspecialidadNombre, "", new { @class = "text-danger" })*@
+                </div>
+                </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.EspecialidadNombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.espNombre, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.EspecialidadID, (SelectList)(ViewBag.Especialidad), new { @class = "select2", @style = "width: 100%" })
+                    @Html.ValidationMessageFor(model => model.EspecialidadNombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
     
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">

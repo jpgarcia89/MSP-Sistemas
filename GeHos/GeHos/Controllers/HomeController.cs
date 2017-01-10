@@ -44,8 +44,10 @@ namespace GeHos.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult setCentroDeSalud(int csSeleccionado)
         {
-            Session["CSSeleccionado"] = csSeleccionado;
-            return Json(new { msg = "ok" });
+            CentroDeSaludClient csC = new CentroDeSaludClient();
+            //api / CentroDeSalud / 5
+            Session["CSSeleccionado"] = csC.buscarUno(csSeleccionado);
+            return Json(new { msg = "ok",descCs= (Session["CSSeleccionado"] as CentroDeSaludVM).Nombre });
         }
     }
 }

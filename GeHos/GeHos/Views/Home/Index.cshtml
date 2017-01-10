@@ -1,70 +1,70 @@
-﻿@{
+﻿@using GeHosContract.Contrato;
+
+@{
     ViewBag.Title = "Home Page";
 }
 
 @*<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+        <h1>ASP.NET</h1>
+        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+        <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>*@
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Getting started</h2>
+            <p>
+                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                enables a clean separation of concerns and gives you full control over markup
+                for enjoyable, agile development.
+            </p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Get more libraries</h2>
+            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Web Hosting</h2>
+            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        </div>
+    </div>*@
 
 
 <style>
-    
-.intro-header {
-    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
-    padding-bottom: 50px;
-    text-align: center;
-    color: #f8f8f8;
-    background: url(/Content/img/globe.png) no-repeat center center;
-    background-size: cover;
-}
+    .intro-header {
+        padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+        padding-bottom: 50px;
+        text-align: center;
+        color: #f8f8f8;
+        background: url(/Content/img/globe.png) no-repeat center center;
+        background-size: cover;
+    }
 
-.intro-message {
-    position: relative;
-    padding-top: 10%;/*20%*/
-    padding-bottom: 10%;/*20%*/
-}
+    .intro-message {
+        position: relative;
+        padding-top: 10%; /*20%*/
+        padding-bottom: 10%; /*20%*/
+    }
 
-.intro-message > h1 {
-    margin: 0;
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
-    font-size: 5em;
-}
+        .intro-message > h1 {
+            margin: 0;
+            text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+            font-size: 5em;
+        }
 
-.intro-divider {
-    width: 400px;
-    border-top: 1px solid #f8f8f8;
-    border-bottom: 1px solid rgba(0,0,0,0.2);
-}
+    .intro-divider {
+        width: 400px;
+        border-top: 1px solid #f8f8f8;
+        border-bottom: 1px solid rgba(0,0,0,0.2);
+    }
 
-.intro-message > h3 {
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
-}
-
-</style>     
+    .intro-message > h3 {
+        text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    }
+</style>
 
 
 
@@ -116,45 +116,61 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<script>
+@section Scripts {
+    <script>
 
-    $(document).ready(function () {
-        debugger
-       
-        if (@Session["CSSeleccionado"]==0){
+        $(document).ready(function () {
+            debugger
 
-            var url = $('#modal').data('url');
-
-            $.get(url, function (data) {
-                $('#modalBody').html(data);
-
-                $('#modal').modal('show');
-            });
-        }        
-    });
-
-    $('#cmdSeleccionar').on('click', function (event) {
-        var sele = $('#ListaCSDeUsuario').val();
-        //alert(sele);
-
-        $.ajax({
-            type: 'POST',
-            url: '@Url.Action("setCentroDeSalud", "Home")',
-            dataType: 'json',
-            data: {
-                csSeleccionado: sele
-            },
-            success: function (data) {
-                if (data.msg == "ok") {
-                    $('#modal').modal('hide');
-                    @*if (@Session["CSSeleccionado"]!=null)
-                        alert(@Session["CSSeleccionado"].ToString());*@
+            @{
+                int csId;
+                if (Session["CSSeleccionado"] == null)
+                {
+                    csId = 0;
                 }
-            },
-            error: function () {
-                alert('Ha ocurrido un error!', "Atencion");
+                else
+                {
+                    csId=(Session["CSSeleccionado"] as CentroDeSaludVM).ID;
+                }
+            }
+
+            var CSSeleccionado = @csId;
+
+            //if (((Session["CSSeleccionado"] as CentroDeSaludVM).ID)==0){
+            if(CSSeleccionado == 0){
+
+                var url = $('#modal').data('url');
+
+                $.get(url, function (data) {
+                    $('#modalBody').html(data);
+                    $('#modal').modal('show');
+                });
             }
         });
-    });
 
-</script>
+        $('#cmdSeleccionar').on('click', function (event) {
+            var sele = $('#ListaCSDeUsuario').val();
+            //alert(sele);
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("setCentroDeSalud", "Home")',
+                dataType: 'json',
+                data: {
+                    csSeleccionado: sele
+                },
+                success: function (data) {
+                    if (data.msg == "ok") {
+                        $('#modal').modal('hide');
+
+                        $('#descCs').text(data.descCs)
+                    }
+                },
+                error: function () {
+                    alert('Ha ocurrido un error!', "Atencion");
+                }
+            });
+        });
+
+    </script>
+}

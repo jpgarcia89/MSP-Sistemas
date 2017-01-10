@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using GeHosContract.Contrato;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -30,44 +31,55 @@
                 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                     <span class="sr-only">Toggle navigation</span>
                 </a>
-                <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav pull-right">
+                   
+                    <li >
+                        <a id="descCs">@(Session["CSSeleccionado"] == null ? "" : (Session["CSSeleccionado"] as CentroDeSaludVM).Nombre)</a>
+                    </li>
 
-                        <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="~/Content/Fotos/Hombre.jpg" class="user-image" alt="User Image">
-                                <span class="hidden-xs">@User.Identity.Name</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- User image -->
-                                <li class="user-header">
-                                    <img src="~/Content/Fotos/Hombre.jpg" class="img-circle" alt="User Image">
-                                    <p>
-                                        @User.Identity.Name
-                                        @*<small>Member since Nov. 2012</small>*@
-                                    </p>
-                                </li>
+                    <li>
+                        <div class="navbar-custom-menu">
+                            <ul class="nav navbar-nav">
 
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        @Html.ActionLink("Cambiar Contraseña", "ChangePassword", "Manage", null, new { @class = "btn btn-default btn-flat" })                                        
-                                    </div>
-                                    <div class="pull-right">
-                                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) 
-                                        {
-                                            @Html.AntiForgeryToken()
-                                            <a class="btn btn-default btn-flat" href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesion</a>
-                                        }
-                                    </div>
+                                <!-- User Account: style can be found in dropdown.less -->
+                                <li class="dropdown user user-menu">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <img src="~/Content/Fotos/Hombre.jpg" class="user-image" alt="User Image">
+                                        <span class="hidden-xs">@User.Identity.Name</span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <!-- User image -->
+                                        <li class="user-header">
+                                            <img src="~/Content/Fotos/Hombre.jpg" class="img-circle" alt="User Image">
+                                            <p>
+                                                @User.Identity.Name
+                                                @*<small>Member since Nov. 2012</small>*@
+                                            </p>
+                                        </li>
+
+                                        <!-- Menu Footer-->
+                                        <li class="user-footer">
+                                            <div class="pull-left">
+                                                @Html.ActionLink("Cambiar Contraseña", "ChangePassword", "Manage", null, new { @class = "btn btn-default btn-flat" })
+                                            </div>
+                                            <div class="pull-right">
+                                                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    <a class="btn btn-default btn-flat" href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesion</a>
+                                                }
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </li>
+                                <!-- Control Sidebar Toggle Button -->
+
                             </ul>
-                        </li>
-                        <!-- Control Sidebar Toggle Button -->
-
-                    </ul>
-                </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+                
             </nav>
         </header>
 

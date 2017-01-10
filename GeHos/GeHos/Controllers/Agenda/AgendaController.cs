@@ -28,13 +28,14 @@ namespace GeHos.Controllers
         [HttpGet]
         public ActionResult Agregar()
         {
+            int csId = ((CentroDeSaludVM)Session["CSSeleccionado"]).ID;
             CentroDeSaludClient csC = new CentroDeSaludClient();
             EspecialidadClient esC = new EspecialidadClient();
             PersonaClient peC = new PersonaClient();
             AgendaVM nuevaAgenda = new AgendaVM();
             //ViewData["ListaCentroSalud"] = new SelectList(csC.buscarTodos().ToList(), "csId", "csNombre");
             ViewBag.ListaCentroSalud = new SelectList(csC.buscarTodos().ToList(), "ID", "Nombre");
-            ViewBag.Especialidad = new SelectList(esC.buscarTodasPorCS((int)Session["CSSeleccionado"]).ToList(), "ID", "Nombre");
+            ViewBag.Especialidad = new SelectList(esC.buscarTodasPorCS(csId).ToList(), "ID", "Nombre");
             return View("Agregar", nuevaAgenda);
         }
 
