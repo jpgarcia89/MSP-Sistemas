@@ -302,3 +302,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 GeHos/GeHosWebApi/Web.config
+GeHos/GeHosWebApi/Content/bootstrap-datetimepicker.css

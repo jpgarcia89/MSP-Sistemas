@@ -8,8 +8,8 @@ namespace GeHos
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles//*jquery*/").Include(
-                        "~/Scripts/jquery-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                        "~/Scripts/jquery-3.1.1.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -40,7 +40,7 @@ namespace GeHos
             //appScripts
             bundles.Add(new ScriptBundle("~/bundles/appScripts").Include(
                       "~/Scripts/jquery.validate*",                     //jQuery Validations
-                      "~/Scripts/plugins/jQueryUI/jquery-ui.min.js",    //jQuery UI
+                      "~/Scripts/Scripts/plugins/jQueryUI/jquery-ui.min.js",    //jQuery UI
                       "~/Scripts/bootstrap.min.js",                     //Bootstrap
                       "~/Scripts/plugins/select2/select2.min.js",                     //Bootstrap
                       "~/Scripts/app.min.js"));

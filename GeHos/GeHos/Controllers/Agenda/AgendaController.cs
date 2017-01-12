@@ -10,6 +10,7 @@ using GeHosWebApi;
 
 namespace GeHos.Controllers
 {
+    [Authorize]
     public class AgendaController : Controller
     {
         public AgendaController()

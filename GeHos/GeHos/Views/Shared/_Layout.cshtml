@@ -10,8 +10,9 @@
 
     <!-- Estilos de la aplicacion -->
     @Styles.Render("~/bundles/appStyles")
-
-    @Scripts.Render("~/bundles//*jquery*/")
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("Styles", false)
+    
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
