@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GeHosWebApi;
+using System.ComponentModel.DataAnnotations;
+using GeHosContract.Contratos.Agenda;
 
 namespace GeHos.Controllers
 {
@@ -41,10 +43,13 @@ namespace GeHos.Controllers
         }
 
         [HttpPost]
-        public ActionResult Agregar(AgendaVM agendaVM)
+        
+        public ActionResult Agregar(NewAgendaVM nuevaAgenda)
         {
+            //var x = nuevaAgenda;
+            //var y = Request.Form["EspecialidadID"];
             AgendaClient ac = new AgendaClient();
-            ac.AgregarAgenda(agendaVM);
+            ac.AgregarAgenda(nuevaAgenda);
             return RedirectToAction("Index");
         }
 
@@ -61,5 +66,8 @@ namespace GeHos.Controllers
             objModificar = ac.buscarAgenda(id.Value);
             return View("Modificar", objModificar);
         }
+
+
+        
     }
 }

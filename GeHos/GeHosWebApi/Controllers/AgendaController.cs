@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using GeHosWebApi.Models;
 using GeHosContract.Contrato;
+using GeHosContract.Contratos.Agenda;
 
 namespace GeHosWebApi.Controllers
 {
@@ -81,17 +82,41 @@ namespace GeHosWebApi.Controllers
 
         // POST: api/Agenda
         [ResponseType(typeof(Agenda))]
-        public IHttpActionResult PostcatAgenda(Agenda catAgenda)
+        public IHttpActionResult PostcatAgenda(NewAgendaVM NuevaAgenda)
         {
+            //Por cada rango horario
+            foreach (var rangoHorario in NuevaAgenda.RangosHorarios)
+            {
+                List<DateTime> allDates = new List<DateTime>();
+
+                int Desde = NuevaAgenda.fechaDesde.Day;
+                int Hasta = NuevaAgenda.fechaHasta.Day;               
+
+                for (int i = Desde; i <= Hasta; i++)
+                {
+                    var diaValido = new DateTime(NuevaAgenda.fechaDesde.Year, NuevaAgenda.fechaHasta.Month, i);
+
+                    if (rangoHorario.dias.Any(r => r == (int)diaValido.DayOfWeek))
+                    {
+                        allDates.Add(diaValido);
+                    }                     
+                }
+            }
+
+
+
+
+
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Agenda.Add(catAgenda);
-            db.SaveChanges();
+            //db.Agenda.Add(NuevaAgenda);
+            //db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = catAgenda.ID }, catAgenda);
+            return CreatedAtRoute("DefaultApi", new { id = true }, NuevaAgenda);
         }
 
         // DELETE: api/Agenda/5

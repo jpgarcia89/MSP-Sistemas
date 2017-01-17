@@ -8,6 +8,7 @@ using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using GeHosContract.Contrato;
 using GeHos.Helpers;
+using GeHosContract.Contratos.Agenda;
 
 namespace GeHos.Model
 {
@@ -57,14 +58,14 @@ namespace GeHos.Model
             }
         }
 
-        public bool AgregarAgenda(AgendaVM objAgenda)
+        public bool AgregarAgenda(NewAgendaVM objAgenda)
         {
             try
             {
                 HttpClient cliente = new HttpClient();
                 cliente.BaseAddress = new Uri(GlobalVariables.BASE_URL);
                 cliente.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage respuesta = cliente.PostAsJsonAsync("Agenda", objAgenda).Result;
+                HttpResponseMessage respuesta = cliente.PostAsJsonAsync("Agenda/PostcatAgenda", objAgenda).Result;
                 return respuesta.IsSuccessStatusCode;
             }
             catch (Exception es)
