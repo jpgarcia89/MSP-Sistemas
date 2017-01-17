@@ -82,19 +82,31 @@ namespace GeHosWebApi.Controllers
 
         // POST: api/Agenda
         [ResponseType(typeof(Agenda))]
-        public IHttpActionResult PostcatAgenda(NewAgendaVM NuevaAgenda)
+        public IHttpActionResult PostcatAgenda(NewAgendaVM NuevaAgendaVM)
         {
-            //Por cada rango horario
-            foreach (var rangoHorario in NuevaAgenda.RangosHorarios)
+            //Validaciones
+            //FuncionDeValidacion();
+
+
+            //Nueva Agenda
+            Agenda NuevaAgenda = new Agenda();
+
+            NuevaAgenda.Activa = true;
+            NuevaAgenda.FechaDesde = NuevaAgendaVM.fechaDesde;
+            NuevaAgenda.FechaHasta = NuevaAgendaVM.fechaHasta;
+
+
+            //Por cada rango horario creo un nuevo congunto de agendas horario
+            foreach (var rangoHorario in NuevaAgendaVM.RangosHorarios)
             {
                 List<DateTime> allDates = new List<DateTime>();
 
-                int Desde = NuevaAgenda.fechaDesde.Day;
-                int Hasta = NuevaAgenda.fechaHasta.Day;               
+                int Desde = NuevaAgendaVM.fechaDesde.Day;
+                int Hasta = NuevaAgendaVM.fechaHasta.Day;               
 
                 for (int i = Desde; i <= Hasta; i++)
                 {
-                    var diaValido = new DateTime(NuevaAgenda.fechaDesde.Year, NuevaAgenda.fechaHasta.Month, i);
+                    var diaValido = new DateTime(NuevaAgendaVM.fechaDesde.Year, NuevaAgendaVM.fechaHasta.Month, i);
 
                     if (rangoHorario.dias.Any(r => r == (int)diaValido.DayOfWeek))
                     {
@@ -116,7 +128,7 @@ namespace GeHosWebApi.Controllers
             //db.Agenda.Add(NuevaAgenda);
             //db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = true }, NuevaAgenda);
+            return CreatedAtRoute("DefaultApi", new { id = true }, NuevaAgendaVM);
         }
 
         // DELETE: api/Agenda/5
