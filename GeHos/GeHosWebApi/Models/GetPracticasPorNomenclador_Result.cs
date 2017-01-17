@@ -10,16 +10,14 @@
 namespace GeHosWebApi.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class CentroDeSaludEspecialidad
+    public partial class GetPracticasPorNomenclador_Result
     {
-        public int ID { get; set; }
-        public int CentroDeSaludID { get; set; }
-        public int EspecialidadID { get; set; }
+        public long ID { get; set; }
+        public string Codigo { get; set; }
+        public string Descripcion { get; set; }
+        public decimal Costo { get; set; }
+        public decimal Uop { get; set; }
         public bool Activa { get; set; }
-    
-        public virtual CentroDeSalud CentroDeSalud { get; set; }
-        public virtual Especialidad Especialidad { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace GeHosWebApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Reparticion()
         {
+            this.CentroDeSalud = new HashSet<CentroDeSalud>();
             this.EmpleadoContratado = new HashSet<EmpleadoContratado>();
             this.Oficina = new HashSet<Oficina>();
             this.Sector = new HashSet<Sector>();
@@ -26,6 +27,8 @@ namespace GeHosWebApi.Models
         public string Nombre { get; set; }
         public bool Activa { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CentroDeSalud> CentroDeSalud { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmpleadoContratado> EmpleadoContratado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

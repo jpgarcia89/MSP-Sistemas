@@ -35,6 +35,7 @@ namespace GeHosWebApi.Models
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Barrio> Barrio { get; set; }
         public virtual DbSet<CentroDeSalud> CentroDeSalud { get; set; }
@@ -47,11 +48,13 @@ namespace GeHosWebApi.Models
         public virtual DbSet<Diagnostico> Diagnostico { get; set; }
         public virtual DbSet<DiagnosticoAgrupamiento> DiagnosticoAgrupamiento { get; set; }
         public virtual DbSet<Empleado> Empleado { get; set; }
+        public virtual DbSet<EmpleadoCentroDeSalud> EmpleadoCentroDeSalud { get; set; }
         public virtual DbSet<EmpleadoContratado> EmpleadoContratado { get; set; }
-        public virtual DbSet<EmpleadoEspecialidadCentroDeSalud> EmpleadoEspecialidadCentroDeSalud { get; set; }
+        public virtual DbSet<EmpleadoEspecialidad> EmpleadoEspecialidad { get; set; }
         public virtual DbSet<EmpleadoPlantaPermanente> EmpleadoPlantaPermanente { get; set; }
         public virtual DbSet<Especialidad> Especialidad { get; set; }
         public virtual DbSet<EstadoCivil> EstadoCivil { get; set; }
+        public virtual DbSet<Etnia> Etnia { get; set; }
         public virtual DbSet<Evolucion> Evolucion { get; set; }
         public virtual DbSet<Fuente> Fuente { get; set; }
         public virtual DbSet<Grados> Grados { get; set; }
@@ -76,21 +79,201 @@ namespace GeHosWebApi.Models
         public virtual DbSet<Sector> Sector { get; set; }
         public virtual DbSet<Sexo> Sexo { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<TipoAgendaDeProfesionales> TipoAgendaDeProfesionales { get; set; }
         public virtual DbSet<TipoDNI> TipoDNI { get; set; }
         public virtual DbSet<TipoEstadoEmpleadoPlantaPermanente> TipoEstadoEmpleadoPlantaPermanente { get; set; }
         public virtual DbSet<TipoGradosDesignacion> TipoGradosDesignacion { get; set; }
+        public virtual DbSet<TipoLlamadoProximoTurno> TipoLlamadoProximoTurno { get; set; }
         public virtual DbSet<TipoNormaLegal> TipoNormaLegal { get; set; }
+        public virtual DbSet<TipoParentesco> TipoParentesco { get; set; }
         public virtual DbSet<Turno> Turno { get; set; }
         public virtual DbSet<TurnoEstado> TurnoEstado { get; set; }
         public virtual DbSet<TurnoEstadoAdmision> TurnoEstadoAdmision { get; set; }
+        public virtual DbSet<Zona> Zona { get; set; }
     
-        public virtual ObjectResult<byte[]> sp_encryptPassword(string pass)
+        public virtual int GetAgendaHorariosPorEspecialista(Nullable<int> empleadoID)
         {
-            var passParameter = pass != null ?
-                new ObjectParameter("Pass", pass) :
-                new ObjectParameter("Pass", typeof(string));
+            var empleadoIDParameter = empleadoID.HasValue ?
+                new ObjectParameter("EmpleadoID", empleadoID) :
+                new ObjectParameter("EmpleadoID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<byte[]>("sp_encryptPassword", passParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetAgendaHorariosPorEspecialista", empleadoIDParameter);
+        }
+    
+        public virtual int GetAgendaPorEspecialista(Nullable<int> empleadoID)
+        {
+            var empleadoIDParameter = empleadoID.HasValue ?
+                new ObjectParameter("EmpleadoID", empleadoID) :
+                new ObjectParameter("EmpleadoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetAgendaPorEspecialista", empleadoIDParameter);
+        }
+    
+        public virtual int GetCentrosDeSaludPorEmpleado(Nullable<int> empleadoID)
+        {
+            var empleadoIDParameter = empleadoID.HasValue ?
+                new ObjectParameter("EmpleadoID", empleadoID) :
+                new ObjectParameter("EmpleadoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetCentrosDeSaludPorEmpleado", empleadoIDParameter);
+        }
+    
+        public virtual ObjectResult<GetDepartamentosPorProvincia_Result> GetDepartamentosPorProvincia(Nullable<int> provinciaID)
+        {
+            var provinciaIDParameter = provinciaID.HasValue ?
+                new ObjectParameter("ProvinciaID", provinciaID) :
+                new ObjectParameter("ProvinciaID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDepartamentosPorProvincia_Result>("GetDepartamentosPorProvincia", provinciaIDParameter);
+        }
+    
+        public virtual ObjectResult<GetDiagnosticosPorAgrupamiento_Result> GetDiagnosticosPorAgrupamiento(Nullable<byte> diagnosticoAgrupamientoID)
+        {
+            var diagnosticoAgrupamientoIDParameter = diagnosticoAgrupamientoID.HasValue ?
+                new ObjectParameter("DiagnosticoAgrupamientoID", diagnosticoAgrupamientoID) :
+                new ObjectParameter("DiagnosticoAgrupamientoID", typeof(byte));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetDiagnosticosPorAgrupamiento_Result>("GetDiagnosticosPorAgrupamiento", diagnosticoAgrupamientoIDParameter);
+        }
+    
+        public virtual ObjectResult<GetEspecialidadesPorCentroDeSalud_Result> GetEspecialidadesPorCentroDeSalud(Nullable<int> centroDeSaludID)
+        {
+            var centroDeSaludIDParameter = centroDeSaludID.HasValue ?
+                new ObjectParameter("CentroDeSaludID", centroDeSaludID) :
+                new ObjectParameter("CentroDeSaludID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEspecialidadesPorCentroDeSalud_Result>("GetEspecialidadesPorCentroDeSalud", centroDeSaludIDParameter);
+        }
+    
+        public virtual int GetEspecialistasPorCentroDeSalud(Nullable<int> centroDeSaludID)
+        {
+            var centroDeSaludIDParameter = centroDeSaludID.HasValue ?
+                new ObjectParameter("CentroDeSaludID", centroDeSaludID) :
+                new ObjectParameter("CentroDeSaludID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetEspecialistasPorCentroDeSalud", centroDeSaludIDParameter);
+        }
+    
+        public virtual ObjectResult<GetEvolucionPorPaciente_Result> GetEvolucionPorPaciente(Nullable<int> pacienteID)
+        {
+            var pacienteIDParameter = pacienteID.HasValue ?
+                new ObjectParameter("PacienteID", pacienteID) :
+                new ObjectParameter("PacienteID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEvolucionPorPaciente_Result>("GetEvolucionPorPaciente", pacienteIDParameter);
+        }
+    
+        public virtual ObjectResult<GetEvolucionPorTurno_Result> GetEvolucionPorTurno(Nullable<long> turnoID)
+        {
+            var turnoIDParameter = turnoID.HasValue ?
+                new ObjectParameter("TurnoID", turnoID) :
+                new ObjectParameter("TurnoID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEvolucionPorTurno_Result>("GetEvolucionPorTurno", turnoIDParameter);
+        }
+    
+        public virtual ObjectResult<GetListaDiagnosticoAgrupamiento_Result> GetListaDiagnosticoAgrupamiento()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListaDiagnosticoAgrupamiento_Result>("GetListaDiagnosticoAgrupamiento");
+        }
+    
+        public virtual ObjectResult<GetListaSexo_Result> GetListaSexo()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListaSexo_Result>("GetListaSexo");
+        }
+    
+        public virtual ObjectResult<GetListaTipoAgendaDeProfesionales_Result> GetListaTipoAgendaDeProfesionales()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListaTipoAgendaDeProfesionales_Result>("GetListaTipoAgendaDeProfesionales");
+        }
+    
+        public virtual ObjectResult<GetListaTipoDNI_Result> GetListaTipoDNI()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListaTipoDNI_Result>("GetListaTipoDNI");
+        }
+    
+        public virtual ObjectResult<GetListaTipoEstadoCivil_Result> GetListaTipoEstadoCivil()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListaTipoEstadoCivil_Result>("GetListaTipoEstadoCivil");
+        }
+    
+        public virtual ObjectResult<GetListaTipoEstadoEmpleadoPlantaPermanente_Result> GetListaTipoEstadoEmpleadoPlantaPermanente()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListaTipoEstadoEmpleadoPlantaPermanente_Result>("GetListaTipoEstadoEmpleadoPlantaPermanente");
+        }
+    
+        public virtual ObjectResult<GetListaTipoLlamadoProximoTurno_Result> GetListaTipoLlamadoProximoTurno()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListaTipoLlamadoProximoTurno_Result>("GetListaTipoLlamadoProximoTurno");
+        }
+    
+        public virtual ObjectResult<GetListaTipoNormaLegal_Result> GetListaTipoNormaLegal()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListaTipoNormaLegal_Result>("GetListaTipoNormaLegal");
+        }
+    
+        public virtual ObjectResult<GetListaTipoParentesco_Result> GetListaTipoParentesco()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListaTipoParentesco_Result>("GetListaTipoParentesco");
+        }
+    
+        public virtual ObjectResult<GetListaTurnoEstado_Result> GetListaTurnoEstado()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListaTurnoEstado_Result>("GetListaTurnoEstado");
+        }
+    
+        public virtual ObjectResult<GetListaTurnoEstadoAdmision_Result> GetListaTurnoEstadoAdmision()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetListaTurnoEstadoAdmision_Result>("GetListaTurnoEstadoAdmision");
+        }
+    
+        public virtual ObjectResult<GetLocalidadesPorDepartamento_Result> GetLocalidadesPorDepartamento(Nullable<int> departamentoID)
+        {
+            var departamentoIDParameter = departamentoID.HasValue ?
+                new ObjectParameter("DepartamentoID", departamentoID) :
+                new ObjectParameter("DepartamentoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetLocalidadesPorDepartamento_Result>("GetLocalidadesPorDepartamento", departamentoIDParameter);
+        }
+    
+        public virtual ObjectResult<GetPaises_Result> GetPaises()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPaises_Result>("GetPaises");
+        }
+    
+        public virtual ObjectResult<GetPracticasPorNomenclador_Result> GetPracticasPorNomenclador(Nullable<int> nomencladorID)
+        {
+            var nomencladorIDParameter = nomencladorID.HasValue ?
+                new ObjectParameter("NomencladorID", nomencladorID) :
+                new ObjectParameter("NomencladorID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPracticasPorNomenclador_Result>("GetPracticasPorNomenclador", nomencladorIDParameter);
+        }
+    
+        public virtual ObjectResult<GetProvinciasPorPais_Result> GetProvinciasPorPais(Nullable<int> paisID)
+        {
+            var paisIDParameter = paisID.HasValue ?
+                new ObjectParameter("PaisID", paisID) :
+                new ObjectParameter("PaisID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetProvinciasPorPais_Result>("GetProvinciasPorPais", paisIDParameter);
+        }
+    
+        public virtual int GetTurnosPorPaciente(Nullable<int> pacienteID, Nullable<System.DateTime> fechaDesde, Nullable<System.DateTime> fechaHasta)
+        {
+            var pacienteIDParameter = pacienteID.HasValue ?
+                new ObjectParameter("PacienteID", pacienteID) :
+                new ObjectParameter("PacienteID", typeof(int));
+    
+            var fechaDesdeParameter = fechaDesde.HasValue ?
+                new ObjectParameter("FechaDesde", fechaDesde) :
+                new ObjectParameter("FechaDesde", typeof(System.DateTime));
+    
+            var fechaHastaParameter = fechaHasta.HasValue ?
+                new ObjectParameter("FechaHasta", fechaHasta) :
+                new ObjectParameter("FechaHasta", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetTurnosPorPaciente", pacienteIDParameter, fechaDesdeParameter, fechaHastaParameter);
         }
     }
 }

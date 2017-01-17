@@ -46,7 +46,7 @@ namespace GeHosWebApi.Models
         public string Email { get; set; }
         public Nullable<byte> LenguaID { get; set; }
         public Nullable<byte> TribuID { get; set; }
-        public Nullable<byte> Etnia { get; set; }
+        public Nullable<byte> EtniaID { get; set; }
         public Nullable<int> LocalidadNacimientoID { get; set; }
         public Nullable<int> NacionalidadID { get; set; }
         public Nullable<bool> Indocumentado { get; set; }
@@ -66,6 +66,7 @@ namespace GeHosWebApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Empleado> Empleado { get; set; }
         public virtual EstadoCivil EstadoCivil { get; set; }
+        public virtual Etnia Etnia { get; set; }
         public virtual GrupoSanguineo GrupoSanguineo { get; set; }
         public virtual Localidad Localidad { get; set; }
         public virtual Localidad Localidad1 { get; set; }

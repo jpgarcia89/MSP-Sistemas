@@ -25,8 +25,8 @@ namespace GeHosWebApi.Controllers
             {
                 Activa = x.Activa,
                 ID = x.ID,
-                CentroDeSaludID = x.EmpleadoEspecialidadCentroDeSalud.CentroDeSaludEspecialidad.CentroDeSaludID,
-                EspecialidadID = x.EmpleadoEspecialidadCentroDeSalud.CentroDeSaludEspecialidad.EspecialidadID,
+                CentroDeSaludID = x.CentroDeSalud.ID,
+                EspecialidadID = x.Especialidad.ID,
                 FechaDesde = x.FechaDesde,
                 FechaHasta = x.FechaHasta
             });

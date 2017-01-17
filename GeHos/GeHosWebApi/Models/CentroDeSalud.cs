@@ -17,8 +17,10 @@ namespace GeHosWebApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CentroDeSalud()
         {
+            this.Agenda = new HashSet<Agenda>();
             this.CentroDeSaludConsultorio = new HashSet<CentroDeSaludConsultorio>();
             this.CentroDeSaludEspecialidad = new HashSet<CentroDeSaludEspecialidad>();
+            this.EmpleadoCentroDeSalud = new HashSet<EmpleadoCentroDeSalud>();
             this.Paciente = new HashSet<Paciente>();
         }
     
@@ -33,7 +35,7 @@ namespace GeHosWebApi.Models
         public string Longitud { get; set; }
         public string Domicilio { get; set; }
         public Nullable<int> Publico { get; set; }
-        public Nullable<int> ZonaID { get; set; }
+        public Nullable<byte> ReparticionID { get; set; }
         public string CodBioestadistica { get; set; }
         public string CodRemediar { get; set; }
         public Nullable<int> CantVivienda { get; set; }
@@ -45,11 +47,17 @@ namespace GeHosWebApi.Models
         public Nullable<bool> RequiereHc { get; set; }
         public Nullable<bool> CargaDatosTurnosPasado { get; set; }
     
+        public virtual Administrador Administrador { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Agenda> Agenda { get; set; }
         public virtual Departamento Departamento { get; set; }
+        public virtual Reparticion Reparticion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CentroDeSaludConsultorio> CentroDeSaludConsultorio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CentroDeSaludEspecialidad> CentroDeSaludEspecialidad { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmpleadoCentroDeSalud> EmpleadoCentroDeSalud { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Paciente> Paciente { get; set; }
     }

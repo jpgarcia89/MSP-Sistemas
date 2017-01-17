@@ -14,11 +14,19 @@ namespace GeHosWebApi.Models
     
     public partial class Provincia
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Provincia()
+        {
+            this.Departamento = new HashSet<Departamento>();
+        }
+    
         public byte ID { get; set; }
         public string Nombre { get; set; }
         public Nullable<int> PaisID { get; set; }
         public bool Activa { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Departamento> Departamento { get; set; }
         public virtual Pais Pais { get; set; }
     }
 }

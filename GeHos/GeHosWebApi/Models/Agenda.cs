@@ -21,12 +21,16 @@ namespace GeHosWebApi.Models
         }
     
         public int ID { get; set; }
-        public int EmpleadoEspecialidadCentroDeSaludID { get; set; }
+        public int EmpleadoID { get; set; }
+        public int CentroDeSaludID { get; set; }
+        public int EspecialidadID { get; set; }
         public System.DateTime FechaDesde { get; set; }
         public System.DateTime FechaHasta { get; set; }
         public bool Activa { get; set; }
     
-        public virtual EmpleadoEspecialidadCentroDeSalud EmpleadoEspecialidadCentroDeSalud { get; set; }
+        public virtual CentroDeSalud CentroDeSalud { get; set; }
+        public virtual Empleado Empleado { get; set; }
+        public virtual Especialidad Especialidad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AgendaHorario> AgendaHorario { get; set; }
     }

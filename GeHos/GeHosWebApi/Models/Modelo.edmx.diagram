@@ -4,98 +4,111 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3e2f15a278ed4674835e8f3e07eaf20e" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.Administrador" Width="1.5" PointX="12.75" PointY="44.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Agenda" Width="1.5" PointX="15" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.AgendaHorario" Width="1.5" PointX="17.25" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.AgendaTipo" Width="1.5" PointX="15" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.AgrupamientoGradosDeEscalafon" Width="1.5" PointX="3.75" PointY="29.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.AspNetRoles" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.AspNetUserClaims" Width="1.5" PointX="10.5" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.AspNetUserLogins" Width="1.5" PointX="10.5" PointY="19" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Barrio" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.CentroDeSalud" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.CentroDeSaludConsultorio" Width="1.5" PointX="5.25" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.CentroDeSaludEspecialidad" Width="1.5" PointX="5.25" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.CuentaContable" Width="1.5" PointX="8.25" PointY="40.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.CuentaEscritural" Width="1.5" PointX="10.5" PointY="43.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Decreto" Width="1.5" PointX="8.25" PointY="26.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Departamento" Width="1.5" PointX="0.75" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Diagnostico" Width="1.5" PointX="18" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.DiagnosticoAgrupamiento" Width="1.5" PointX="15.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Empleado" Width="1.5" PointX="10.5" PointY="15.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.EmpleadoContratado" Width="1.5" PointX="15.75" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.EmpleadoEspecialidadCentroDeSalud" Width="1.5" PointX="12.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.EmpleadoPlantaPermanente" Width="1.5" PointX="12.75" PointY="19.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Especialidad" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.EstadoCivil" Width="1.5" PointX="6" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Evolucion" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Fuente" Width="1.5" PointX="8.25" PointY="43.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Grados" Width="1.5" PointX="6" PointY="29.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.GradosCategoria" Width="1.5" PointX="8.25" PointY="29.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.GradosDesignacion" Width="1.5" PointX="10.5" PointY="29.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.GrupoSanguineo" Width="1.5" PointX="6" PointY="18.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.InstitucionContable" Width="1.5" PointX="6" PointY="40.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Localidad" Width="1.5" PointX="3" PointY="20.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Menu" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Nomenclador" Width="1.5" PointX="10.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ObraSocial" Width="1.5" PointX="11.25" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Oficina" Width="1.5" PointX="10.5" PointY="25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Paciente" Width="1.5" PointX="13.5" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Pais" Width="1.5" PointX="2.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Persona" Width="1.5" PointX="8.25" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Practica" Width="1.5" PointX="13" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Profesion" Width="1.5" PointX="13.5" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Provincia" Width="1.5" PointX="5" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.PuebloIndigena" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Reparticion" Width="1.5" PointX="13.5" PointY="24.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Resolucion" Width="1.5" PointX="8.25" PointY="32.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Sector" Width="1.5" PointX="10.5" PointY="39.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Sexo" Width="1.5" PointX="6" PointY="21" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="15.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.TipoDNI" Width="1.5" PointX="6" PointY="23.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.TipoEstadoEmpleadoPlantaPermanente" Width="1.5" PointX="17.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.TipoGradosDesignacion" Width="1.5" PointX="8.25" PointY="36.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.TipoNormaLegal" Width="1.5" PointX="6" PointY="33.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Turno" Width="1.5" PointX="19.5" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.TurnoEstado" Width="1.5" PointX="17.25" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.TurnoEstadoAdmision" Width="1.5" PointX="17.25" PointY="19.75" IsExpanded="true" />
+      <Diagram DiagramId="2deb11d7e00a4c829e3b16eae86cf472" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Administrador" Width="1.5" PointX="1.5" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Agenda" Width="1.5" PointX="10.5" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AgendaHorario" Width="1.5" PointX="15.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AgendaTipo" Width="1.5" PointX="13.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AgrupamientoGradosDeEscalafon" Width="1.5" PointX="1.5" PointY="56.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetRoles" Width="1.5" PointX="15.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUserClaims" Width="1.5" PointX="2.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUserLogins" Width="1.5" PointX="15.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUserRoles" Width="1.5" PointX="18" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.5" PointX="10.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Barrio" Width="1.5" PointX="3.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CentroDeSalud" Width="1.5" PointX="0.75" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CentroDeSaludConsultorio" Width="1.5" PointX="3" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CentroDeSaludEspecialidad" Width="1.5" PointX="10.5" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CuentaContable" Width="1.5" PointX="6" PointY="34" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CuentaEscritural" Width="1.5" PointX="1.5" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Decreto" Width="1.5" PointX="6" PointY="53" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Departamento" Width="1.5" PointX="1.5" PointY="35.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Diagnostico" Width="1.5" PointX="16" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DiagnosticoAgrupamiento" Width="1.5" PointX="13.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Empleado" Width="1.5" PointX="8.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EmpleadoCentroDeSalud" Width="1.5" PointX="13.5" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EmpleadoContratado" Width="1.5" PointX="13.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EmpleadoEspecialidad" Width="1.5" PointX="13.5" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EmpleadoPlantaPermanente" Width="1.5" PointX="10.5" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Especialidad" Width="1.5" PointX="8.25" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EstadoCivil" Width="1.5" PointX="3.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Etnia" Width="1.5" PointX="3.75" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Evolucion" Width="1.5" PointX="15.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Fuente" Width="1.5" PointX="1.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Grados" Width="1.5" PointX="3.75" PointY="56.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GradosCategoria" Width="1.5" PointX="6" PointY="56.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GradosDesignacion" Width="1.5" PointX="8.25" PointY="56.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GrupoSanguineo" Width="1.5" PointX="0.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.InstitucionContable" Width="1.5" PointX="1.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Localidad" Width="1.5" PointX="3.75" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Menu" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Nomenclador" Width="1.5" PointX="8.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ObraSocial" Width="1.5" PointX="0.75" PointY="48.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Oficina" Width="1.5" PointX="8.25" PointY="27.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Paciente" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Pais" Width="1.5" PointX="1.5" PointY="42.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Persona" Width="1.5" PointX="6" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Practica" Width="1.5" PointX="11" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Profesion" Width="1.5" PointX="8.25" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Provincia" Width="1.5" PointX="1.5" PointY="39.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PuebloIndigena" Width="1.5" PointX="15.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Reparticion" Width="1.5" PointX="1.5" PointY="45.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Resolucion" Width="1.5" PointX="6" PointY="59.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Sector" Width="1.5" PointX="8.25" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Sexo" Width="1.5" PointX="3.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="17.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TipoAgendaDeProfesionales" Width="1.5" PointX="17.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TipoDNI" Width="1.5" PointX="3.75" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TipoEstadoEmpleadoPlantaPermanente" Width="1.5" PointX="17.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TipoGradosDesignacion" Width="1.5" PointX="6" PointY="63.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TipoLlamadoProximoTurno" Width="1.5" PointX="17.75" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TipoNormaLegal" Width="1.5" PointX="3.75" PointY="60" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TipoParentesco" Width="1.5" PointX="18.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Turno" Width="1.5" PointX="8.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TurnoEstado" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TurnoEstadoAdmision" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Zona" Width="1.5" PointX="17.75" PointY="19" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_Administrador_CuentaEscritural" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Agenda_EmpleadoEspecialidadCentroDeSalud" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_CentroDeSalud_Administrador" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Agenda_CentroDeSalud" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Agenda_Empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Agenda_Especialidad" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_AgendaHorario_Agenda" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_AgendaHorario_AgendaTipo" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Turno_AgendaHorario" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Grados_AgrupamientoGradosDeEscalafon" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Empleado_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Barrio_Departamento" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Persona_Barrio" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_CentroDeSalud_Departamento" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_CentroDeSalud_Reparticion" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_CentroDeSaludConsultorio_CentroDeSalud" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_CentroDeSaludEspecialidad_CentroDeSalud" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_EmpleadoCentroDeSalud_CentroDeSalud" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Paciente_CentroDeSalud" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_CentroDeSaludEspecialidad_Especialidad" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_EmpleadoEspecialidadCentroDeSalud_CentroDeSaludEspecialidad" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_CuentaContable_InstitucionContable" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Sector_CuentaContable" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_CuentaEscritural_Fuente" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_CuentaEscritural_InstitucionContable" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_GradosDesignacion_Decreto" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Departamento_Provincia" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Localidad_Localidad" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Diagnostico_DiagnosticoAgrupamiento" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Empleado_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_EmpleadoCentroDeSalud_Empleado" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_EmpleadoContratado_Empleado" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_EmpleadoEspecialidadCentroDeSalud_Empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_EmpleadoEspecialidad_Empleado" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_EmpleadoPlantaPermanente_Empleado" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_EmpleadoContratado_Profesion" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_EmpleadoContratado_Reparticion" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_EmpleadoEspecialidad_Especialidad" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_EmpleadoPlantaPermanente_GradosDesignacion" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_EmpleadoPlantaPermanente_Oficina" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_EmpleadoPlantaPermanente_Profesion" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_EmpleadoPlantaPermanente_Sector" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Persona_EstadoCivil" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Persona_Etnia" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Fuente_InstitucionContable" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_GradosCategoria_Grados" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_GradosDesignacion_GradosCategoria" ManuallyRouted="false" />
@@ -118,7 +131,6 @@
         <AssociationConnector Association="Model.FK_Resolucion_TipoNormaLegal" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Turno_TurnoEstado" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Turno_TurnoEstadoAdmision" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.AspNetUserRoles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

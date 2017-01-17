@@ -19,7 +19,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EmpleadoEspecialidadCentroDeSaludID" Type="int" Nullable="false" />
+          <Property Name="EmpleadoID" Type="int" Nullable="false" />
+          <Property Name="CentroDeSaludID" Type="int" Nullable="false" />
+          <Property Name="EspecialidadID" Type="int" Nullable="false" />
           <Property Name="FechaDesde" Type="datetime" Nullable="false" />
           <Property Name="FechaHasta" Type="datetime" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
@@ -127,7 +129,7 @@
           <Property Name="Longitud" Type="varchar" MaxLength="255" />
           <Property Name="Domicilio" Type="varchar" MaxLength="300" />
           <Property Name="Publico" Type="int" />
-          <Property Name="ZonaID" Type="int" />
+          <Property Name="ReparticionID" Type="tinyint" />
           <Property Name="CodBioestadistica" Type="varchar" MaxLength="8" />
           <Property Name="CodRemediar" Type="varchar" MaxLength="5" />
           <Property Name="CantVivienda" Type="int" />
@@ -222,6 +224,15 @@
           <Property Name="PersonaID" Type="int" Nullable="false" />
           <Property Name="AspNetUsersID" Type="int" />
         </EntityType>
+        <EntityType Name="EmpleadoCentroDeSalud">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpleadoID" Type="int" Nullable="false" />
+          <Property Name="CentroDeSaludID" Type="int" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="EmpleadoContratado">
           <Key>
             <PropertyRef Name="ID" />
@@ -238,13 +249,13 @@
           <Property Name="FechaBaja" Type="datetime" />
           <Property Name="MotivoBaja" Type="nvarchar" MaxLength="250" />
         </EntityType>
-        <EntityType Name="EmpleadoEspecialidadCentroDeSalud">
+        <EntityType Name="EmpleadoEspecialidad">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmpleadoID" Type="int" Nullable="false" />
-          <Property Name="CentroDeSaludEspecialidadID" Type="int" Nullable="false" />
+          <Property Name="EspecialidadID" Type="int" Nullable="false" />
           <Property Name="FechaAlta" Type="datetime" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
         </EntityType>
@@ -287,6 +298,14 @@
           <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Etnia">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreComunidad" Type="nvarchar" MaxLength="150" />
+          <Property Name="Pueblo" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Evolucion">
           <Key>
@@ -467,7 +486,7 @@
           <Property Name="Email" Type="nvarchar" MaxLength="70" />
           <Property Name="LenguaID" Type="tinyint" />
           <Property Name="TribuID" Type="tinyint" />
-          <Property Name="Etnia" Type="tinyint" />
+          <Property Name="EtniaID" Type="tinyint" />
           <Property Name="LocalidadNacimientoID" Type="int" />
           <Property Name="NacionalidadID" Type="int" />
           <Property Name="Indocumentado" Type="bit" />
@@ -574,6 +593,14 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="TipoAgendaDeProfesionales">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="TipoDNI">
           <Key>
             <PropertyRef Name="ID" />
@@ -599,11 +626,27 @@
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="TipoLlamadoProximoTurno">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="TipoNormaLegal">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoParentesco">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
         </EntityType>
@@ -641,6 +684,14 @@
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Zona">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="zonCodigo" Type="int" Nullable="false" />
+          <Property Name="zonNombre" Type="nvarchar" MaxLength="80" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Administrador_CuentaEscritural">
           <End Role="CuentaEscritural" Type="Self.CuentaEscritural" Multiplicity="0..1" />
           <End Role="Administrador" Type="Self.Administrador" Multiplicity="*" />
@@ -653,15 +704,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Agenda_EmpleadoEspecialidadCentroDeSalud">
-          <End Role="EmpleadoEspecialidadCentroDeSalud" Type="Self.EmpleadoEspecialidadCentroDeSalud" Multiplicity="1" />
+        <Association Name="FK_Agenda_CentroDeSalud">
+          <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="EmpleadoEspecialidadCentroDeSalud">
+            <Principal Role="CentroDeSalud">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Agenda">
-              <PropertyRef Name="EmpleadoEspecialidadCentroDeSaludID" />
+              <PropertyRef Name="CentroDeSaludID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agenda_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agenda">
+              <PropertyRef Name="EmpleadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agenda_Especialidad">
+          <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
+          <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialidad">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agenda">
+              <PropertyRef Name="EspecialidadID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -701,6 +776,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CentroDeSalud_Administrador">
+          <End Role="Administrador" Type="Self.Administrador" Multiplicity="0..1" />
+          <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administrador">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CentroDeSalud">
+              <PropertyRef Name="AdministradorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CentroDeSalud_Departamento">
           <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
           <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="*" />
@@ -710,6 +797,18 @@
             </Principal>
             <Dependent Role="CentroDeSalud">
               <PropertyRef Name="DepartamentoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CentroDeSalud_Reparticion">
+          <End Role="Reparticion" Type="Self.Reparticion" Multiplicity="0..1" />
+          <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reparticion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CentroDeSalud">
+              <PropertyRef Name="ReparticionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -785,34 +884,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserClaims">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -827,17 +898,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+        <Association Name="FK_Departamento_Provincia">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
+            <Principal Role="Provincia">
+              <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="UserId" />
+            <Dependent Role="Departamento">
+              <PropertyRef Name="ProvinciaID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -853,18 +922,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Empleado_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Empleado">
-              <PropertyRef Name="AspNetUsersID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Empleado_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
           <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
@@ -874,6 +931,30 @@
             </Principal>
             <Dependent Role="Empleado">
               <PropertyRef Name="PersonaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoCentroDeSalud_CentroDeSalud">
+          <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="1" />
+          <End Role="EmpleadoCentroDeSalud" Type="Self.EmpleadoCentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroDeSalud">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmpleadoCentroDeSalud">
+              <PropertyRef Name="CentroDeSaludID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoCentroDeSalud_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="EmpleadoCentroDeSalud" Type="Self.EmpleadoCentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmpleadoCentroDeSalud">
+              <PropertyRef Name="EmpleadoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -913,27 +994,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EmpleadoEspecialidadCentroDeSalud_CentroDeSaludEspecialidad">
-          <End Role="CentroDeSaludEspecialidad" Type="Self.CentroDeSaludEspecialidad" Multiplicity="1" />
-          <End Role="EmpleadoEspecialidadCentroDeSalud" Type="Self.EmpleadoEspecialidadCentroDeSalud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CentroDeSaludEspecialidad">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="EmpleadoEspecialidadCentroDeSalud">
-              <PropertyRef Name="CentroDeSaludEspecialidadID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmpleadoEspecialidadCentroDeSalud_Empleado">
+        <Association Name="FK_EmpleadoEspecialidad_Empleado">
           <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
-          <End Role="EmpleadoEspecialidadCentroDeSalud" Type="Self.EmpleadoEspecialidadCentroDeSalud" Multiplicity="*" />
+          <End Role="EmpleadoEspecialidad" Type="Self.EmpleadoEspecialidad" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empleado">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="EmpleadoEspecialidadCentroDeSalud">
+            <Dependent Role="EmpleadoEspecialidad">
               <PropertyRef Name="EmpleadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoEspecialidad_Especialidad">
+          <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
+          <End Role="EmpleadoEspecialidad" Type="Self.EmpleadoEspecialidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialidad">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmpleadoEspecialidad">
+              <PropertyRef Name="EspecialidadID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1189,6 +1270,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Persona_Etnia">
+          <End Role="Etnia" Type="Self.Etnia" Multiplicity="0..1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etnia">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="EtniaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Persona_GrupoSanguineo">
           <End Role="GrupoSanguineo" Type="Self.GrupoSanguineo" Multiplicity="0..1" />
           <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
@@ -1357,8 +1450,58 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="sp_encryptPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Pass" Type="varchar" Mode="In" />
+        <Function Name="GetAgendaHorariosPorEspecialista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpleadoID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAgendaPorEspecialista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpleadoID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetCentrosDeSaludPorEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpleadoID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetDepartamentosPorProvincia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProvinciaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetDiagnosticosPorAgrupamiento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DiagnosticoAgrupamientoID" Type="tinyint" Mode="In" />
+        </Function>
+        <Function Name="GetEspecialidadesPorCentroDeSalud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CentroDeSaludID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetEspecialistasPorCentroDeSalud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CentroDeSaludID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetEvolucionPorPaciente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PacienteID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetEvolucionPorTurno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TurnoID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetListaDiagnosticoAgrupamiento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetListaSexo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetListaTipoAgendaDeProfesionales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetListaTipoDNI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetListaTipoEstadoCivil" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetListaTipoEstadoEmpleadoPlantaPermanente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetListaTipoLlamadoProximoTurno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetListaTipoNormaLegal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetListaTipoParentesco" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetListaTurnoEstado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetListaTurnoEstadoAdmision" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetLocalidadesPorDepartamento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DepartamentoID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetPaises" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetPracticasPorNomenclador" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NomencladorID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetProvinciasPorPais" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PaisID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetTurnosPorPaciente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PacienteID" Type="int" Mode="In" />
+          <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
+          <Parameter Name="FechaHasta" Type="datetime" Mode="In" />
         </Function>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
@@ -1382,11 +1525,13 @@
           <EntitySet Name="Diagnostico" EntityType="Self.Diagnostico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiagnosticoAgrupamiento" EntityType="Self.DiagnosticoAgrupamiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpleadoCentroDeSalud" EntityType="Self.EmpleadoCentroDeSalud" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpleadoContratado" EntityType="Self.EmpleadoContratado" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EmpleadoEspecialidadCentroDeSalud" EntityType="Self.EmpleadoEspecialidadCentroDeSalud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpleadoEspecialidad" EntityType="Self.EmpleadoEspecialidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpleadoPlantaPermanente" EntityType="Self.EmpleadoPlantaPermanente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Especialidad" EntityType="Self.Especialidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadoCivil" EntityType="Self.EstadoCivil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Etnia" EntityType="Self.Etnia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Evolucion" EntityType="Self.Evolucion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fuente" EntityType="Self.Fuente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grados" EntityType="Self.Grados" Schema="dbo" store:Type="Tables" />
@@ -1411,19 +1556,31 @@
           <EntitySet Name="Sector" EntityType="Self.Sector" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sexo" EntityType="Self.Sexo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoAgendaDeProfesionales" EntityType="Self.TipoAgendaDeProfesionales" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoDNI" EntityType="Self.TipoDNI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoEstadoEmpleadoPlantaPermanente" EntityType="Self.TipoEstadoEmpleadoPlantaPermanente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoGradosDesignacion" EntityType="Self.TipoGradosDesignacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoLlamadoProximoTurno" EntityType="Self.TipoLlamadoProximoTurno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoNormaLegal" EntityType="Self.TipoNormaLegal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoParentesco" EntityType="Self.TipoParentesco" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Turno" EntityType="Self.Turno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TurnoEstado" EntityType="Self.TurnoEstado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TurnoEstadoAdmision" EntityType="Self.TurnoEstadoAdmision" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zona" EntityType="Self.Zona" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Administrador_CuentaEscritural" Association="Self.FK_Administrador_CuentaEscritural">
             <End Role="CuentaEscritural" EntitySet="CuentaEscritural" />
             <End Role="Administrador" EntitySet="Administrador" />
           </AssociationSet>
-          <AssociationSet Name="FK_Agenda_EmpleadoEspecialidadCentroDeSalud" Association="Self.FK_Agenda_EmpleadoEspecialidadCentroDeSalud">
-            <End Role="EmpleadoEspecialidadCentroDeSalud" EntitySet="EmpleadoEspecialidadCentroDeSalud" />
+          <AssociationSet Name="FK_Agenda_CentroDeSalud" Association="Self.FK_Agenda_CentroDeSalud">
+            <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
+            <End Role="Agenda" EntitySet="Agenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agenda_Empleado" Association="Self.FK_Agenda_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Agenda" EntitySet="Agenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agenda_Especialidad" Association="Self.FK_Agenda_Especialidad">
+            <End Role="Especialidad" EntitySet="Especialidad" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
           <AssociationSet Name="FK_AgendaHorario_Agenda" Association="Self.FK_AgendaHorario_Agenda">
@@ -1438,8 +1595,16 @@
             <End Role="Departamento" EntitySet="Departamento" />
             <End Role="Barrio" EntitySet="Barrio" />
           </AssociationSet>
+          <AssociationSet Name="FK_CentroDeSalud_Administrador" Association="Self.FK_CentroDeSalud_Administrador">
+            <End Role="Administrador" EntitySet="Administrador" />
+            <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
+          </AssociationSet>
           <AssociationSet Name="FK_CentroDeSalud_Departamento" Association="Self.FK_CentroDeSalud_Departamento">
             <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CentroDeSalud_Reparticion" Association="Self.FK_CentroDeSalud_Reparticion">
+            <End Role="Reparticion" EntitySet="Reparticion" />
             <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
           </AssociationSet>
           <AssociationSet Name="FK_CentroDeSaludConsultorio_CentroDeSalud" Association="Self.FK_CentroDeSaludConsultorio_CentroDeSalud">
@@ -1466,33 +1631,29 @@
             <End Role="InstitucionContable" EntitySet="InstitucionContable" />
             <End Role="CuentaEscritural" EntitySet="CuentaEscritural" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          <AssociationSet Name="FK_Departamento_Provincia" Association="Self.FK_Departamento_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Departamento" EntitySet="Departamento" />
           </AssociationSet>
           <AssociationSet Name="FK_Diagnostico_DiagnosticoAgrupamiento" Association="Self.FK_Diagnostico_DiagnosticoAgrupamiento">
             <End Role="DiagnosticoAgrupamiento" EntitySet="DiagnosticoAgrupamiento" />
             <End Role="Diagnostico" EntitySet="Diagnostico" />
           </AssociationSet>
-          <AssociationSet Name="FK_Empleado_AspNetUsers" Association="Self.FK_Empleado_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Empleado" EntitySet="Empleado" />
-          </AssociationSet>
           <AssociationSet Name="FK_Empleado_Persona" Association="Self.FK_Empleado_Persona">
             <End Role="Persona" EntitySet="Persona" />
             <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoCentroDeSalud_CentroDeSalud" Association="Self.FK_EmpleadoCentroDeSalud_CentroDeSalud">
+            <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
+            <End Role="EmpleadoCentroDeSalud" EntitySet="EmpleadoCentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoCentroDeSalud_Empleado" Association="Self.FK_EmpleadoCentroDeSalud_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="EmpleadoCentroDeSalud" EntitySet="EmpleadoCentroDeSalud" />
           </AssociationSet>
           <AssociationSet Name="FK_EmpleadoContratado_Empleado" Association="Self.FK_EmpleadoContratado_Empleado">
             <End Role="Empleado" EntitySet="Empleado" />
@@ -1506,13 +1667,13 @@
             <End Role="Reparticion" EntitySet="Reparticion" />
             <End Role="EmpleadoContratado" EntitySet="EmpleadoContratado" />
           </AssociationSet>
-          <AssociationSet Name="FK_EmpleadoEspecialidadCentroDeSalud_CentroDeSaludEspecialidad" Association="Self.FK_EmpleadoEspecialidadCentroDeSalud_CentroDeSaludEspecialidad">
-            <End Role="CentroDeSaludEspecialidad" EntitySet="CentroDeSaludEspecialidad" />
-            <End Role="EmpleadoEspecialidadCentroDeSalud" EntitySet="EmpleadoEspecialidadCentroDeSalud" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmpleadoEspecialidadCentroDeSalud_Empleado" Association="Self.FK_EmpleadoEspecialidadCentroDeSalud_Empleado">
+          <AssociationSet Name="FK_EmpleadoEspecialidad_Empleado" Association="Self.FK_EmpleadoEspecialidad_Empleado">
             <End Role="Empleado" EntitySet="Empleado" />
-            <End Role="EmpleadoEspecialidadCentroDeSalud" EntitySet="EmpleadoEspecialidadCentroDeSalud" />
+            <End Role="EmpleadoEspecialidad" EntitySet="EmpleadoEspecialidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoEspecialidad_Especialidad" Association="Self.FK_EmpleadoEspecialidad_Especialidad">
+            <End Role="Especialidad" EntitySet="Especialidad" />
+            <End Role="EmpleadoEspecialidad" EntitySet="EmpleadoEspecialidad" />
           </AssociationSet>
           <AssociationSet Name="FK_EmpleadoPlantaPermanente_Empleado" Association="Self.FK_EmpleadoPlantaPermanente_Empleado">
             <End Role="Empleado" EntitySet="Empleado" />
@@ -1598,6 +1759,10 @@
             <End Role="EstadoCivil" EntitySet="EstadoCivil" />
             <End Role="Persona" EntitySet="Persona" />
           </AssociationSet>
+          <AssociationSet Name="FK_Persona_Etnia" Association="Self.FK_Persona_Etnia">
+            <End Role="Etnia" EntitySet="Etnia" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
           <AssociationSet Name="FK_Persona_GrupoSanguineo" Association="Self.FK_Persona_GrupoSanguineo">
             <End Role="GrupoSanguineo" EntitySet="GrupoSanguineo" />
             <End Role="Persona" EntitySet="Persona" />
@@ -1669,17 +1834,22 @@
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CuentaEscrituralID" Type="Int16" />
           <NavigationProperty Name="CuentaEscritural" Relationship="Self.FK_Administrador_CuentaEscritural" FromRole="Administrador" ToRole="CuentaEscritural" />
+          <NavigationProperty Name="CentroDeSalud" Relationship="Self.FK_CentroDeSalud_Administrador" FromRole="Administrador" ToRole="CentroDeSalud" />
         </EntityType>
         <EntityType Name="Agenda">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmpleadoEspecialidadCentroDeSaludID" Type="Int32" Nullable="false" />
+          <Property Name="EmpleadoID" Type="Int32" Nullable="false" />
+          <Property Name="CentroDeSaludID" Type="Int32" Nullable="false" />
+          <Property Name="EspecialidadID" Type="Int32" Nullable="false" />
           <Property Name="FechaDesde" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FechaHasta" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Activa" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="EmpleadoEspecialidadCentroDeSalud" Relationship="Self.FK_Agenda_EmpleadoEspecialidadCentroDeSalud" FromRole="Agenda" ToRole="EmpleadoEspecialidadCentroDeSalud" />
+          <NavigationProperty Name="CentroDeSalud" Relationship="Self.FK_Agenda_CentroDeSalud" FromRole="Agenda" ToRole="CentroDeSalud" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_Agenda_Empleado" FromRole="Agenda" ToRole="Empleado" />
+          <NavigationProperty Name="Especialidad" Relationship="Self.FK_Agenda_Especialidad" FromRole="Agenda" ToRole="Especialidad" />
           <NavigationProperty Name="AgendaHorario" Relationship="Self.FK_AgendaHorario_Agenda" FromRole="Agenda" ToRole="AgendaHorario" />
         </EntityType>
         <EntityType Name="AgendaHorario">
@@ -1721,7 +1891,7 @@
           </Key>
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetRoles" ToRole="AspNetUserRoles" />
         </EntityType>
         <EntityType Name="AspNetUserClaims">
           <Key>
@@ -1731,7 +1901,6 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUserLogins">
           <Key>
@@ -1742,7 +1911,15 @@
           <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetUserRoles" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
@@ -1760,10 +1937,6 @@
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="Empleado" Relationship="Self.FK_Empleado_AspNetUsers" FromRole="AspNetUsers" ToRole="Empleado" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="Barrio">
           <Key>
@@ -1791,7 +1964,7 @@
           <Property Name="Longitud" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Domicilio" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="Publico" Type="Int32" />
-          <Property Name="ZonaID" Type="Int32" />
+          <Property Name="ReparticionID" Type="Byte" />
           <Property Name="CodBioestadistica" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="CodRemediar" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="CantVivienda" Type="Int32" />
@@ -1802,9 +1975,13 @@
           <Property Name="Password" Type="Binary" MaxLength="50" FixedLength="false" />
           <Property Name="RequiereHc" Type="Boolean" />
           <Property Name="CargaDatosTurnosPasado" Type="Boolean" />
+          <NavigationProperty Name="Administrador" Relationship="Self.FK_CentroDeSalud_Administrador" FromRole="CentroDeSalud" ToRole="Administrador" />
+          <NavigationProperty Name="Agenda" Relationship="Self.FK_Agenda_CentroDeSalud" FromRole="CentroDeSalud" ToRole="Agenda" />
           <NavigationProperty Name="Departamento" Relationship="Self.FK_CentroDeSalud_Departamento" FromRole="CentroDeSalud" ToRole="Departamento" />
+          <NavigationProperty Name="Reparticion" Relationship="Self.FK_CentroDeSalud_Reparticion" FromRole="CentroDeSalud" ToRole="Reparticion" />
           <NavigationProperty Name="CentroDeSaludConsultorio" Relationship="Self.FK_CentroDeSaludConsultorio_CentroDeSalud" FromRole="CentroDeSalud" ToRole="CentroDeSaludConsultorio" />
           <NavigationProperty Name="CentroDeSaludEspecialidad" Relationship="Self.FK_CentroDeSaludEspecialidad_CentroDeSalud" FromRole="CentroDeSalud" ToRole="CentroDeSaludEspecialidad" />
+          <NavigationProperty Name="EmpleadoCentroDeSalud" Relationship="Self.FK_EmpleadoCentroDeSalud_CentroDeSalud" FromRole="CentroDeSalud" ToRole="EmpleadoCentroDeSalud" />
           <NavigationProperty Name="Paciente" Relationship="Self.FK_Paciente_CentroDeSalud" FromRole="CentroDeSalud" ToRole="Paciente" />
         </EntityType>
         <EntityType Name="CentroDeSaludConsultorio">
@@ -1827,7 +2004,6 @@
           <Property Name="Activa" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="CentroDeSalud" Relationship="Self.FK_CentroDeSaludEspecialidad_CentroDeSalud" FromRole="CentroDeSaludEspecialidad" ToRole="CentroDeSalud" />
           <NavigationProperty Name="Especialidad" Relationship="Self.FK_CentroDeSaludEspecialidad_Especialidad" FromRole="CentroDeSaludEspecialidad" ToRole="Especialidad" />
-          <NavigationProperty Name="EmpleadoEspecialidadCentroDeSalud" Relationship="Self.FK_EmpleadoEspecialidadCentroDeSalud_CentroDeSaludEspecialidad" FromRole="CentroDeSaludEspecialidad" ToRole="EmpleadoEspecialidadCentroDeSalud" />
         </EntityType>
         <EntityType Name="CuentaContable">
           <Key>
@@ -1877,6 +2053,7 @@
           <Property Name="Activa" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Barrio" Relationship="Self.FK_Barrio_Departamento" FromRole="Departamento" ToRole="Barrio" />
           <NavigationProperty Name="CentroDeSalud" Relationship="Self.FK_CentroDeSalud_Departamento" FromRole="Departamento" ToRole="CentroDeSalud" />
+          <NavigationProperty Name="Provincia" Relationship="Self.FK_Departamento_Provincia" FromRole="Departamento" ToRole="Provincia" />
           <NavigationProperty Name="Localidad" Relationship="Self.FK_Localidad_Localidad" FromRole="Departamento" ToRole="Localidad" />
         </EntityType>
         <EntityType Name="Diagnostico">
@@ -1904,11 +2081,23 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PersonaID" Type="Int32" Nullable="false" />
           <Property Name="AspNetUsersID" Type="Int32" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Empleado_AspNetUsers" FromRole="Empleado" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Agenda" Relationship="Self.FK_Agenda_Empleado" FromRole="Empleado" ToRole="Agenda" />
           <NavigationProperty Name="Persona" Relationship="Self.FK_Empleado_Persona" FromRole="Empleado" ToRole="Persona" />
+          <NavigationProperty Name="EmpleadoCentroDeSalud" Relationship="Self.FK_EmpleadoCentroDeSalud_Empleado" FromRole="Empleado" ToRole="EmpleadoCentroDeSalud" />
           <NavigationProperty Name="EmpleadoContratado" Relationship="Self.FK_EmpleadoContratado_Empleado" FromRole="Empleado" ToRole="EmpleadoContratado" />
-          <NavigationProperty Name="EmpleadoEspecialidadCentroDeSalud" Relationship="Self.FK_EmpleadoEspecialidadCentroDeSalud_Empleado" FromRole="Empleado" ToRole="EmpleadoEspecialidadCentroDeSalud" />
+          <NavigationProperty Name="EmpleadoEspecialidad" Relationship="Self.FK_EmpleadoEspecialidad_Empleado" FromRole="Empleado" ToRole="EmpleadoEspecialidad" />
           <NavigationProperty Name="EmpleadoPlantaPermanente" Relationship="Self.FK_EmpleadoPlantaPermanente_Empleado" FromRole="Empleado" ToRole="EmpleadoPlantaPermanente" />
+        </EntityType>
+        <EntityType Name="EmpleadoCentroDeSalud">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpleadoID" Type="Int32" Nullable="false" />
+          <Property Name="CentroDeSaludID" Type="Int32" Nullable="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CentroDeSalud" Relationship="Self.FK_EmpleadoCentroDeSalud_CentroDeSalud" FromRole="EmpleadoCentroDeSalud" ToRole="CentroDeSalud" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_EmpleadoCentroDeSalud_Empleado" FromRole="EmpleadoCentroDeSalud" ToRole="Empleado" />
         </EntityType>
         <EntityType Name="EmpleadoContratado">
           <Key>
@@ -1929,18 +2118,17 @@
           <NavigationProperty Name="Profesion" Relationship="Self.FK_EmpleadoContratado_Profesion" FromRole="EmpleadoContratado" ToRole="Profesion" />
           <NavigationProperty Name="Reparticion" Relationship="Self.FK_EmpleadoContratado_Reparticion" FromRole="EmpleadoContratado" ToRole="Reparticion" />
         </EntityType>
-        <EntityType Name="EmpleadoEspecialidadCentroDeSalud">
+        <EntityType Name="EmpleadoEspecialidad">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmpleadoID" Type="Int32" Nullable="false" />
-          <Property Name="CentroDeSaludEspecialidadID" Type="Int32" Nullable="false" />
+          <Property Name="EspecialidadID" Type="Int32" Nullable="false" />
           <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Activa" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Agenda" Relationship="Self.FK_Agenda_EmpleadoEspecialidadCentroDeSalud" FromRole="EmpleadoEspecialidadCentroDeSalud" ToRole="Agenda" />
-          <NavigationProperty Name="CentroDeSaludEspecialidad" Relationship="Self.FK_EmpleadoEspecialidadCentroDeSalud_CentroDeSaludEspecialidad" FromRole="EmpleadoEspecialidadCentroDeSalud" ToRole="CentroDeSaludEspecialidad" />
-          <NavigationProperty Name="Empleado" Relationship="Self.FK_EmpleadoEspecialidadCentroDeSalud_Empleado" FromRole="EmpleadoEspecialidadCentroDeSalud" ToRole="Empleado" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_EmpleadoEspecialidad_Empleado" FromRole="EmpleadoEspecialidad" ToRole="Empleado" />
+          <NavigationProperty Name="Especialidad" Relationship="Self.FK_EmpleadoEspecialidad_Especialidad" FromRole="EmpleadoEspecialidad" ToRole="Especialidad" />
         </EntityType>
         <EntityType Name="EmpleadoPlantaPermanente">
           <Key>
@@ -1978,7 +2166,9 @@
           <Property Name="DescripcionPlanilla" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Abreviatura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdMHO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Agenda" Relationship="Self.FK_Agenda_Especialidad" FromRole="Especialidad" ToRole="Agenda" />
           <NavigationProperty Name="CentroDeSaludEspecialidad" Relationship="Self.FK_CentroDeSaludEspecialidad_Especialidad" FromRole="Especialidad" ToRole="CentroDeSaludEspecialidad" />
+          <NavigationProperty Name="EmpleadoEspecialidad" Relationship="Self.FK_EmpleadoEspecialidad_Especialidad" FromRole="Especialidad" ToRole="EmpleadoEspecialidad" />
         </EntityType>
         <EntityType Name="EstadoCivil">
           <Key>
@@ -1988,6 +2178,15 @@
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Activa" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Persona" Relationship="Self.FK_Persona_EstadoCivil" FromRole="EstadoCivil" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="Etnia">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreComunidad" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Pueblo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_Persona_Etnia" FromRole="Etnia" ToRole="Persona" />
         </EntityType>
         <EntityType Name="Evolucion">
           <Key>
@@ -2199,7 +2398,7 @@
           <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
           <Property Name="LenguaID" Type="Byte" />
           <Property Name="TribuID" Type="Byte" />
-          <Property Name="Etnia" Type="Byte" />
+          <Property Name="EtniaID" Type="Byte" />
           <Property Name="LocalidadNacimientoID" Type="Int32" />
           <Property Name="NacionalidadID" Type="Int32" />
           <Property Name="Indocumentado" Type="Boolean" />
@@ -2217,6 +2416,7 @@
           <NavigationProperty Name="Barrio" Relationship="Self.FK_Persona_Barrio" FromRole="Persona" ToRole="Barrio" />
           <NavigationProperty Name="Empleado" Relationship="Self.FK_Empleado_Persona" FromRole="Persona" ToRole="Empleado" />
           <NavigationProperty Name="EstadoCivil" Relationship="Self.FK_Persona_EstadoCivil" FromRole="Persona" ToRole="EstadoCivil" />
+          <NavigationProperty Name="Etnia" Relationship="Self.FK_Persona_Etnia" FromRole="Persona" ToRole="Etnia" />
           <NavigationProperty Name="GrupoSanguineo" Relationship="Self.FK_Persona_GrupoSanguineo" FromRole="Persona" ToRole="GrupoSanguineo" />
           <NavigationProperty Name="Localidad" Relationship="Self.FK_Persona_Localidad" FromRole="Persona" ToRole="Localidad" />
           <NavigationProperty Name="Localidad1" Relationship="Self.FK_Persona_LocalidadNacimiento" FromRole="Persona" ToRole="Localidad" />
@@ -2256,6 +2456,7 @@
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PaisID" Type="Int32" />
           <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Departamento" Relationship="Self.FK_Departamento_Provincia" FromRole="Provincia" ToRole="Departamento" />
           <NavigationProperty Name="Pais" Relationship="Self.FK_Provincia_Pais" FromRole="Provincia" ToRole="Pais" />
         </EntityType>
         <EntityType Name="PuebloIndigena">
@@ -2273,6 +2474,7 @@
           <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CentroDeSalud" Relationship="Self.FK_CentroDeSalud_Reparticion" FromRole="Reparticion" ToRole="CentroDeSalud" />
           <NavigationProperty Name="EmpleadoContratado" Relationship="Self.FK_EmpleadoContratado_Reparticion" FromRole="Reparticion" ToRole="EmpleadoContratado" />
           <NavigationProperty Name="Oficina" Relationship="Self.FK_Oficina_Reparticion" FromRole="Reparticion" ToRole="Oficina" />
           <NavigationProperty Name="Sector" Relationship="Self.FK_Sector_Reparticion" FromRole="Reparticion" ToRole="Sector" />
@@ -2328,6 +2530,14 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <EntityType Name="TipoAgendaDeProfesionales">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+        </EntityType>
         <EntityType Name="TipoDNI">
           <Key>
             <PropertyRef Name="ID" />
@@ -2355,6 +2565,14 @@
           <Property Name="Activa" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="GradosDesignacion" Relationship="Self.FK_GradosDesignacion_TipoGradosDesignacion" FromRole="TipoGradosDesignacion" ToRole="GradosDesignacion" />
         </EntityType>
+        <EntityType Name="TipoLlamadoProximoTurno">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+        </EntityType>
         <EntityType Name="TipoNormaLegal">
           <Key>
             <PropertyRef Name="ID" />
@@ -2363,6 +2581,14 @@
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Activa" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Resolucion" Relationship="Self.FK_Resolucion_TipoNormaLegal" FromRole="TipoNormaLegal" ToRole="Resolucion" />
+        </EntityType>
+        <EntityType Name="TipoParentesco">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Turno">
           <Key>
@@ -2404,6 +2630,14 @@
           <Property Name="Activa" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Turno" Relationship="Self.FK_Turno_TurnoEstadoAdmision" FromRole="TurnoEstadoAdmision" ToRole="Turno" />
         </EntityType>
+        <EntityType Name="Zona">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="zonCodigo" Type="Int32" Nullable="false" />
+          <Property Name="zonNombre" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Administrador_CuentaEscritural">
           <End Role="CuentaEscritural" Type="Self.CuentaEscritural" Multiplicity="0..1" />
           <End Role="Administrador" Type="Self.Administrador" Multiplicity="*" />
@@ -2416,15 +2650,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Agenda_EmpleadoEspecialidadCentroDeSalud">
-          <End Role="EmpleadoEspecialidadCentroDeSalud" Type="Self.EmpleadoEspecialidadCentroDeSalud" Multiplicity="1" />
+        <Association Name="FK_CentroDeSalud_Administrador">
+          <End Role="Administrador" Type="Self.Administrador" Multiplicity="0..1" />
+          <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administrador">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CentroDeSalud">
+              <PropertyRef Name="AdministradorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agenda_CentroDeSalud">
+          <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="1" />
           <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="EmpleadoEspecialidadCentroDeSalud">
+            <Principal Role="CentroDeSalud">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Agenda">
-              <PropertyRef Name="EmpleadoEspecialidadCentroDeSaludID" />
+              <PropertyRef Name="CentroDeSaludID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agenda_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agenda">
+              <PropertyRef Name="EmpleadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agenda_Especialidad">
+          <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
+          <End Role="Agenda" Type="Self.Agenda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialidad">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Agenda">
+              <PropertyRef Name="EspecialidadID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2476,43 +2746,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetRoles">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserClaims">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Empleado_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Empleado">
-              <PropertyRef Name="AspNetUsersID" />
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2552,6 +2796,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CentroDeSalud_Reparticion">
+          <End Role="Reparticion" Type="Self.Reparticion" Multiplicity="0..1" />
+          <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reparticion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CentroDeSalud">
+              <PropertyRef Name="ReparticionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CentroDeSaludConsultorio_CentroDeSalud">
           <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="1" />
           <End Role="CentroDeSaludConsultorio" Type="Self.CentroDeSaludConsultorio" Multiplicity="*" />
@@ -2572,6 +2828,18 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="CentroDeSaludEspecialidad">
+              <PropertyRef Name="CentroDeSaludID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoCentroDeSalud_CentroDeSalud">
+          <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="1" />
+          <End Role="EmpleadoCentroDeSalud" Type="Self.EmpleadoCentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CentroDeSalud">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmpleadoCentroDeSalud">
               <PropertyRef Name="CentroDeSaludID" />
             </Dependent>
           </ReferentialConstraint>
@@ -2597,18 +2865,6 @@
             </Principal>
             <Dependent Role="CentroDeSaludEspecialidad">
               <PropertyRef Name="EspecialidadID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmpleadoEspecialidadCentroDeSalud_CentroDeSaludEspecialidad">
-          <End Role="CentroDeSaludEspecialidad" Type="Self.CentroDeSaludEspecialidad" Multiplicity="1" />
-          <End Role="EmpleadoEspecialidadCentroDeSalud" Type="Self.EmpleadoEspecialidadCentroDeSalud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CentroDeSaludEspecialidad">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="EmpleadoEspecialidadCentroDeSalud">
-              <PropertyRef Name="CentroDeSaludEspecialidadID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2672,6 +2928,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Departamento_Provincia">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Departamento">
+              <PropertyRef Name="ProvinciaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Localidad_Localidad">
           <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
           <End Role="Localidad" Type="Self.Localidad" Multiplicity="*" />
@@ -2708,6 +2976,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_EmpleadoCentroDeSalud_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="EmpleadoCentroDeSalud" Type="Self.EmpleadoCentroDeSalud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmpleadoCentroDeSalud">
+              <PropertyRef Name="EmpleadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_EmpleadoContratado_Empleado">
           <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
           <End Role="EmpleadoContratado" Type="Self.EmpleadoContratado" Multiplicity="*" />
@@ -2720,14 +3000,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EmpleadoEspecialidadCentroDeSalud_Empleado">
+        <Association Name="FK_EmpleadoEspecialidad_Empleado">
           <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
-          <End Role="EmpleadoEspecialidadCentroDeSalud" Type="Self.EmpleadoEspecialidadCentroDeSalud" Multiplicity="*" />
+          <End Role="EmpleadoEspecialidad" Type="Self.EmpleadoEspecialidad" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empleado">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="EmpleadoEspecialidadCentroDeSalud">
+            <Dependent Role="EmpleadoEspecialidad">
               <PropertyRef Name="EmpleadoID" />
             </Dependent>
           </ReferentialConstraint>
@@ -2765,6 +3045,18 @@
             </Principal>
             <Dependent Role="EmpleadoContratado">
               <PropertyRef Name="ReparticionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoEspecialidad_Especialidad">
+          <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
+          <End Role="EmpleadoEspecialidad" Type="Self.EmpleadoEspecialidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialidad">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmpleadoEspecialidad">
+              <PropertyRef Name="EspecialidadID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2825,6 +3117,18 @@
             </Principal>
             <Dependent Role="Persona">
               <PropertyRef Name="EstadoCivilID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persona_Etnia">
+          <End Role="Etnia" Type="Self.Etnia" Multiplicity="0..1" />
+          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etnia">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persona">
+              <PropertyRef Name="EtniaID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3092,10 +3396,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AspNetUserRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Administrador" EntityType="Self.Administrador" />
           <EntitySet Name="Agenda" EntityType="Self.Agenda" />
@@ -3105,6 +3405,7 @@
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
           <EntitySet Name="Barrio" EntityType="Self.Barrio" />
           <EntitySet Name="CentroDeSalud" EntityType="Self.CentroDeSalud" />
@@ -3117,11 +3418,13 @@
           <EntitySet Name="Diagnostico" EntityType="Self.Diagnostico" />
           <EntitySet Name="DiagnosticoAgrupamiento" EntityType="Self.DiagnosticoAgrupamiento" />
           <EntitySet Name="Empleado" EntityType="Self.Empleado" />
+          <EntitySet Name="EmpleadoCentroDeSalud" EntityType="Self.EmpleadoCentroDeSalud" />
           <EntitySet Name="EmpleadoContratado" EntityType="Self.EmpleadoContratado" />
-          <EntitySet Name="EmpleadoEspecialidadCentroDeSalud" EntityType="Self.EmpleadoEspecialidadCentroDeSalud" />
+          <EntitySet Name="EmpleadoEspecialidad" EntityType="Self.EmpleadoEspecialidad" />
           <EntitySet Name="EmpleadoPlantaPermanente" EntityType="Self.EmpleadoPlantaPermanente" />
           <EntitySet Name="Especialidad" EntityType="Self.Especialidad" />
           <EntitySet Name="EstadoCivil" EntityType="Self.EstadoCivil" />
+          <EntitySet Name="Etnia" EntityType="Self.Etnia" />
           <EntitySet Name="Evolucion" EntityType="Self.Evolucion" />
           <EntitySet Name="Fuente" EntityType="Self.Fuente" />
           <EntitySet Name="Grados" EntityType="Self.Grados" />
@@ -3146,19 +3449,35 @@
           <EntitySet Name="Sector" EntityType="Self.Sector" />
           <EntitySet Name="Sexo" EntityType="Self.Sexo" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TipoAgendaDeProfesionales" EntityType="Self.TipoAgendaDeProfesionales" />
           <EntitySet Name="TipoDNI" EntityType="Self.TipoDNI" />
           <EntitySet Name="TipoEstadoEmpleadoPlantaPermanente" EntityType="Self.TipoEstadoEmpleadoPlantaPermanente" />
           <EntitySet Name="TipoGradosDesignacion" EntityType="Self.TipoGradosDesignacion" />
+          <EntitySet Name="TipoLlamadoProximoTurno" EntityType="Self.TipoLlamadoProximoTurno" />
           <EntitySet Name="TipoNormaLegal" EntityType="Self.TipoNormaLegal" />
+          <EntitySet Name="TipoParentesco" EntityType="Self.TipoParentesco" />
           <EntitySet Name="Turno" EntityType="Self.Turno" />
           <EntitySet Name="TurnoEstado" EntityType="Self.TurnoEstado" />
           <EntitySet Name="TurnoEstadoAdmision" EntityType="Self.TurnoEstadoAdmision" />
+          <EntitySet Name="Zona" EntityType="Self.Zona" />
           <AssociationSet Name="FK_Administrador_CuentaEscritural" Association="Self.FK_Administrador_CuentaEscritural">
             <End Role="CuentaEscritural" EntitySet="CuentaEscritural" />
             <End Role="Administrador" EntitySet="Administrador" />
           </AssociationSet>
-          <AssociationSet Name="FK_Agenda_EmpleadoEspecialidadCentroDeSalud" Association="Self.FK_Agenda_EmpleadoEspecialidadCentroDeSalud">
-            <End Role="EmpleadoEspecialidadCentroDeSalud" EntitySet="EmpleadoEspecialidadCentroDeSalud" />
+          <AssociationSet Name="FK_CentroDeSalud_Administrador" Association="Self.FK_CentroDeSalud_Administrador">
+            <End Role="Administrador" EntitySet="Administrador" />
+            <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agenda_CentroDeSalud" Association="Self.FK_Agenda_CentroDeSalud">
+            <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
+            <End Role="Agenda" EntitySet="Agenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agenda_Empleado" Association="Self.FK_Agenda_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Agenda" EntitySet="Agenda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agenda_Especialidad" Association="Self.FK_Agenda_Especialidad">
+            <End Role="Especialidad" EntitySet="Especialidad" />
             <End Role="Agenda" EntitySet="Agenda" />
           </AssociationSet>
           <AssociationSet Name="FK_AgendaHorario_Agenda" Association="Self.FK_AgendaHorario_Agenda">
@@ -3177,17 +3496,9 @@
             <End Role="AgrupamientoGradosDeEscalafon" EntitySet="AgrupamientoGradosDeEscalafon" />
             <End Role="Grados" EntitySet="Grados" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Empleado_AspNetUsers" Association="Self.FK_Empleado_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Empleado" EntitySet="Empleado" />
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_Barrio_Departamento" Association="Self.FK_Barrio_Departamento">
             <End Role="Departamento" EntitySet="Departamento" />
@@ -3201,6 +3512,10 @@
             <End Role="Departamento" EntitySet="Departamento" />
             <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
           </AssociationSet>
+          <AssociationSet Name="FK_CentroDeSalud_Reparticion" Association="Self.FK_CentroDeSalud_Reparticion">
+            <End Role="Reparticion" EntitySet="Reparticion" />
+            <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
+          </AssociationSet>
           <AssociationSet Name="FK_CentroDeSaludConsultorio_CentroDeSalud" Association="Self.FK_CentroDeSaludConsultorio_CentroDeSalud">
             <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
             <End Role="CentroDeSaludConsultorio" EntitySet="CentroDeSaludConsultorio" />
@@ -3209,6 +3524,10 @@
             <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
             <End Role="CentroDeSaludEspecialidad" EntitySet="CentroDeSaludEspecialidad" />
           </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoCentroDeSalud_CentroDeSalud" Association="Self.FK_EmpleadoCentroDeSalud_CentroDeSalud">
+            <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
+            <End Role="EmpleadoCentroDeSalud" EntitySet="EmpleadoCentroDeSalud" />
+          </AssociationSet>
           <AssociationSet Name="FK_Paciente_CentroDeSalud" Association="Self.FK_Paciente_CentroDeSalud">
             <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
             <End Role="Paciente" EntitySet="Paciente" />
@@ -3216,10 +3535,6 @@
           <AssociationSet Name="FK_CentroDeSaludEspecialidad_Especialidad" Association="Self.FK_CentroDeSaludEspecialidad_Especialidad">
             <End Role="Especialidad" EntitySet="Especialidad" />
             <End Role="CentroDeSaludEspecialidad" EntitySet="CentroDeSaludEspecialidad" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmpleadoEspecialidadCentroDeSalud_CentroDeSaludEspecialidad" Association="Self.FK_EmpleadoEspecialidadCentroDeSalud_CentroDeSaludEspecialidad">
-            <End Role="CentroDeSaludEspecialidad" EntitySet="CentroDeSaludEspecialidad" />
-            <End Role="EmpleadoEspecialidadCentroDeSalud" EntitySet="EmpleadoEspecialidadCentroDeSalud" />
           </AssociationSet>
           <AssociationSet Name="FK_CuentaContable_InstitucionContable" Association="Self.FK_CuentaContable_InstitucionContable">
             <End Role="InstitucionContable" EntitySet="InstitucionContable" />
@@ -3241,6 +3556,10 @@
             <End Role="Decreto" EntitySet="Decreto" />
             <End Role="GradosDesignacion" EntitySet="GradosDesignacion" />
           </AssociationSet>
+          <AssociationSet Name="FK_Departamento_Provincia" Association="Self.FK_Departamento_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Departamento" EntitySet="Departamento" />
+          </AssociationSet>
           <AssociationSet Name="FK_Localidad_Localidad" Association="Self.FK_Localidad_Localidad">
             <End Role="Departamento" EntitySet="Departamento" />
             <End Role="Localidad" EntitySet="Localidad" />
@@ -3253,13 +3572,17 @@
             <End Role="Persona" EntitySet="Persona" />
             <End Role="Empleado" EntitySet="Empleado" />
           </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoCentroDeSalud_Empleado" Association="Self.FK_EmpleadoCentroDeSalud_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="EmpleadoCentroDeSalud" EntitySet="EmpleadoCentroDeSalud" />
+          </AssociationSet>
           <AssociationSet Name="FK_EmpleadoContratado_Empleado" Association="Self.FK_EmpleadoContratado_Empleado">
             <End Role="Empleado" EntitySet="Empleado" />
             <End Role="EmpleadoContratado" EntitySet="EmpleadoContratado" />
           </AssociationSet>
-          <AssociationSet Name="FK_EmpleadoEspecialidadCentroDeSalud_Empleado" Association="Self.FK_EmpleadoEspecialidadCentroDeSalud_Empleado">
+          <AssociationSet Name="FK_EmpleadoEspecialidad_Empleado" Association="Self.FK_EmpleadoEspecialidad_Empleado">
             <End Role="Empleado" EntitySet="Empleado" />
-            <End Role="EmpleadoEspecialidadCentroDeSalud" EntitySet="EmpleadoEspecialidadCentroDeSalud" />
+            <End Role="EmpleadoEspecialidad" EntitySet="EmpleadoEspecialidad" />
           </AssociationSet>
           <AssociationSet Name="FK_EmpleadoPlantaPermanente_Empleado" Association="Self.FK_EmpleadoPlantaPermanente_Empleado">
             <End Role="Empleado" EntitySet="Empleado" />
@@ -3272,6 +3595,10 @@
           <AssociationSet Name="FK_EmpleadoContratado_Reparticion" Association="Self.FK_EmpleadoContratado_Reparticion">
             <End Role="Reparticion" EntitySet="Reparticion" />
             <End Role="EmpleadoContratado" EntitySet="EmpleadoContratado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoEspecialidad_Especialidad" Association="Self.FK_EmpleadoEspecialidad_Especialidad">
+            <End Role="Especialidad" EntitySet="Especialidad" />
+            <End Role="EmpleadoEspecialidad" EntitySet="EmpleadoEspecialidad" />
           </AssociationSet>
           <AssociationSet Name="FK_EmpleadoPlantaPermanente_GradosDesignacion" Association="Self.FK_EmpleadoPlantaPermanente_GradosDesignacion">
             <End Role="GradosDesignacion" EntitySet="GradosDesignacion" />
@@ -3291,6 +3618,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Persona_EstadoCivil" Association="Self.FK_Persona_EstadoCivil">
             <End Role="EstadoCivil" EntitySet="EstadoCivil" />
+            <End Role="Persona" EntitySet="Persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persona_Etnia" Association="Self.FK_Persona_Etnia">
+            <End Role="Etnia" EntitySet="Etnia" />
             <End Role="Persona" EntitySet="Persona" />
           </AssociationSet>
           <AssociationSet Name="FK_Fuente_InstitucionContable" Association="Self.FK_Fuente_InstitucionContable">
@@ -3381,14 +3712,152 @@
             <End Role="TurnoEstadoAdmision" EntitySet="TurnoEstadoAdmision" />
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <FunctionImport Name="sp_encryptPassword" ReturnType="Collection(Binary)">
-            <Parameter Name="Pass" Mode="In" Type="String" />
+          <FunctionImport Name="GetAgendaHorariosPorEspecialista">
+            <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAgendaPorEspecialista">
+            <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetCentrosDeSaludPorEmpleado">
+            <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetDepartamentosPorProvincia" ReturnType="Collection(Model.GetDepartamentosPorProvincia_Result)">
+            <Parameter Name="ProvinciaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetDiagnosticosPorAgrupamiento" ReturnType="Collection(Model.GetDiagnosticosPorAgrupamiento_Result)">
+            <Parameter Name="DiagnosticoAgrupamientoID" Mode="In" Type="Byte" />
+          </FunctionImport>
+          <FunctionImport Name="GetEspecialidadesPorCentroDeSalud" ReturnType="Collection(Model.GetEspecialidadesPorCentroDeSalud_Result)">
+            <Parameter Name="CentroDeSaludID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetEspecialistasPorCentroDeSalud">
+            <Parameter Name="CentroDeSaludID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetEvolucionPorPaciente" ReturnType="Collection(Model.GetEvolucionPorPaciente_Result)">
+            <Parameter Name="PacienteID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetEvolucionPorTurno" ReturnType="Collection(Model.GetEvolucionPorTurno_Result)">
+            <Parameter Name="TurnoID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetListaDiagnosticoAgrupamiento" ReturnType="Collection(Model.GetListaDiagnosticoAgrupamiento_Result)" />
+          <FunctionImport Name="GetListaSexo" ReturnType="Collection(Model.GetListaSexo_Result)" />
+          <FunctionImport Name="GetListaTipoAgendaDeProfesionales" ReturnType="Collection(Model.GetListaTipoAgendaDeProfesionales_Result)" />
+          <FunctionImport Name="GetListaTipoDNI" ReturnType="Collection(Model.GetListaTipoDNI_Result)" />
+          <FunctionImport Name="GetListaTipoEstadoCivil" ReturnType="Collection(Model.GetListaTipoEstadoCivil_Result)" />
+          <FunctionImport Name="GetListaTipoEstadoEmpleadoPlantaPermanente" ReturnType="Collection(Model.GetListaTipoEstadoEmpleadoPlantaPermanente_Result)" />
+          <FunctionImport Name="GetListaTipoLlamadoProximoTurno" ReturnType="Collection(Model.GetListaTipoLlamadoProximoTurno_Result)" />
+          <FunctionImport Name="GetListaTipoNormaLegal" ReturnType="Collection(Model.GetListaTipoNormaLegal_Result)" />
+          <FunctionImport Name="GetListaTipoParentesco" ReturnType="Collection(Model.GetListaTipoParentesco_Result)" />
+          <FunctionImport Name="GetListaTurnoEstado" ReturnType="Collection(Model.GetListaTurnoEstado_Result)" />
+          <FunctionImport Name="GetListaTurnoEstadoAdmision" ReturnType="Collection(Model.GetListaTurnoEstadoAdmision_Result)" />
+          <FunctionImport Name="GetLocalidadesPorDepartamento" ReturnType="Collection(Model.GetLocalidadesPorDepartamento_Result)">
+            <Parameter Name="DepartamentoID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetPaises" ReturnType="Collection(Model.GetPaises_Result)" />
+          <FunctionImport Name="GetPracticasPorNomenclador" ReturnType="Collection(Model.GetPracticasPorNomenclador_Result)">
+            <Parameter Name="NomencladorID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetProvinciasPorPais" ReturnType="Collection(Model.GetProvinciasPorPais_Result)">
+            <Parameter Name="PaisID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetTurnosPorPaciente">
+            <Parameter Name="PacienteID" Mode="In" Type="Int32" />
+            <Parameter Name="FechaDesde" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaHasta" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="GetDepartamentosPorProvincia_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetDiagnosticosPorAgrupamiento_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Codigo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="GetEspecialidadesPorCentroDeSalud_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="80" />
+          <Property Type="Int16" Name="IdPadre" Nullable="true" />
+          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DescripcionPlanilla" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Abreviatura" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdMHO" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetEvolucionPorPaciente_Result">
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GetEvolucionPorTurno_Result">
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="true" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="GetListaDiagnosticoAgrupamiento_Result">
+          <Property Type="Byte" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetListaSexo_Result">
+          <Property Type="Byte" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetListaTipoAgendaDeProfesionales_Result">
+          <Property Type="Byte" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetListaTipoDNI_Result">
+          <Property Type="Byte" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetListaTipoEstadoCivil_Result">
+          <Property Type="Byte" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetListaTipoEstadoEmpleadoPlantaPermanente_Result">
+          <Property Type="Int16" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetListaTipoLlamadoProximoTurno_Result">
+          <Property Type="Byte" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetListaTipoNormaLegal_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetListaTipoParentesco_Result">
+          <Property Type="Byte" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetListaTurnoEstado_Result">
+          <Property Type="Byte" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetListaTurnoEstadoAdmision_Result">
+          <Property Type="Byte" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetLocalidadesPorDepartamento_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetPaises_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="GetPracticasPorNomenclador_Result">
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Codigo" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="250" />
+          <Property Type="Decimal" Name="Costo" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Uop" Nullable="false" Precision="15" Scale="2" />
+          <Property Type="Boolean" Name="Activa" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetProvinciasPorPais_Result">
+          <Property Type="Byte" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3409,7 +3878,9 @@
             <EntityTypeMapping TypeName="Model.Agenda">
               <MappingFragment StoreEntitySet="Agenda">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="EmpleadoEspecialidadCentroDeSaludID" ColumnName="EmpleadoEspecialidadCentroDeSaludID" />
+                <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
+                <ScalarProperty Name="CentroDeSaludID" ColumnName="CentroDeSaludID" />
+                <ScalarProperty Name="EspecialidadID" ColumnName="EspecialidadID" />
                 <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
                 <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
                 <ScalarProperty Name="Activa" ColumnName="Activa" />
@@ -3474,6 +3945,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserRoles">
+            <EntityTypeMapping TypeName="Model.AspNetUserRoles">
+              <MappingFragment StoreEntitySet="AspNetUserRoles">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="Model.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
@@ -3516,7 +3995,7 @@
                 <ScalarProperty Name="Longitud" ColumnName="Longitud" />
                 <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
                 <ScalarProperty Name="Publico" ColumnName="Publico" />
-                <ScalarProperty Name="ZonaID" ColumnName="ZonaID" />
+                <ScalarProperty Name="ReparticionID" ColumnName="ReparticionID" />
                 <ScalarProperty Name="CodBioestadistica" ColumnName="CodBioestadistica" />
                 <ScalarProperty Name="CodRemediar" ColumnName="CodRemediar" />
                 <ScalarProperty Name="CantVivienda" ColumnName="CantVivienda" />
@@ -3622,6 +4101,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EmpleadoCentroDeSalud">
+            <EntityTypeMapping TypeName="Model.EmpleadoCentroDeSalud">
+              <MappingFragment StoreEntitySet="EmpleadoCentroDeSalud">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
+                <ScalarProperty Name="CentroDeSaludID" ColumnName="CentroDeSaludID" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="EmpleadoContratado">
             <EntityTypeMapping TypeName="Model.EmpleadoContratado">
               <MappingFragment StoreEntitySet="EmpleadoContratado">
@@ -3639,12 +4128,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EmpleadoEspecialidadCentroDeSalud">
-            <EntityTypeMapping TypeName="Model.EmpleadoEspecialidadCentroDeSalud">
-              <MappingFragment StoreEntitySet="EmpleadoEspecialidadCentroDeSalud">
+          <EntitySetMapping Name="EmpleadoEspecialidad">
+            <EntityTypeMapping TypeName="Model.EmpleadoEspecialidad">
+              <MappingFragment StoreEntitySet="EmpleadoEspecialidad">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
-                <ScalarProperty Name="CentroDeSaludEspecialidadID" ColumnName="CentroDeSaludEspecialidadID" />
+                <ScalarProperty Name="EspecialidadID" ColumnName="EspecialidadID" />
                 <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
                 <ScalarProperty Name="Activa" ColumnName="Activa" />
               </MappingFragment>
@@ -3690,6 +4179,15 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Activa" ColumnName="Activa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Etnia">
+            <EntityTypeMapping TypeName="Model.Etnia">
+              <MappingFragment StoreEntitySet="Etnia">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NombreComunidad" ColumnName="NombreComunidad" />
+                <ScalarProperty Name="Pueblo" ColumnName="Pueblo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3885,7 +4383,7 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="LenguaID" ColumnName="LenguaID" />
                 <ScalarProperty Name="TribuID" ColumnName="TribuID" />
-                <ScalarProperty Name="Etnia" ColumnName="Etnia" />
+                <ScalarProperty Name="EtniaID" ColumnName="EtniaID" />
                 <ScalarProperty Name="LocalidadNacimientoID" ColumnName="LocalidadNacimientoID" />
                 <ScalarProperty Name="NacionalidadID" ColumnName="NacionalidadID" />
                 <ScalarProperty Name="Indocumentado" ColumnName="Indocumentado" />
@@ -4003,6 +4501,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TipoAgendaDeProfesionales">
+            <EntityTypeMapping TypeName="Model.TipoAgendaDeProfesionales">
+              <MappingFragment StoreEntitySet="TipoAgendaDeProfesionales">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TipoDNI">
             <EntityTypeMapping TypeName="Model.TipoDNI">
               <MappingFragment StoreEntitySet="TipoDNI">
@@ -4031,9 +4538,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TipoLlamadoProximoTurno">
+            <EntityTypeMapping TypeName="Model.TipoLlamadoProximoTurno">
+              <MappingFragment StoreEntitySet="TipoLlamadoProximoTurno">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TipoNormaLegal">
             <EntityTypeMapping TypeName="Model.TipoNormaLegal">
               <MappingFragment StoreEntitySet="TipoNormaLegal">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoParentesco">
+            <EntityTypeMapping TypeName="Model.TipoParentesco">
+              <MappingFragment StoreEntitySet="TipoParentesco">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Activa" ColumnName="Activa" />
@@ -4077,15 +4602,192 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="AspNetUsers">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="sp_encryptPassword" FunctionName="Model.Store.sp_encryptPassword" />
+          <EntitySetMapping Name="Zona">
+            <EntityTypeMapping TypeName="Model.Zona">
+              <MappingFragment StoreEntitySet="Zona">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="zonCodigo" ColumnName="zonCodigo" />
+                <ScalarProperty Name="zonNombre" ColumnName="zonNombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAgendaHorariosPorEspecialista" FunctionName="Model.Store.GetAgendaHorariosPorEspecialista" />
+          <FunctionImportMapping FunctionImportName="GetAgendaPorEspecialista" FunctionName="Model.Store.GetAgendaPorEspecialista" />
+          <FunctionImportMapping FunctionImportName="GetCentrosDeSaludPorEmpleado" FunctionName="Model.Store.GetCentrosDeSaludPorEmpleado" />
+          <FunctionImportMapping FunctionImportName="GetDepartamentosPorProvincia" FunctionName="Model.Store.GetDepartamentosPorProvincia">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetDepartamentosPorProvincia_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetDiagnosticosPorAgrupamiento" FunctionName="Model.Store.GetDiagnosticosPorAgrupamiento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetDiagnosticosPorAgrupamiento_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEspecialidadesPorCentroDeSalud" FunctionName="Model.Store.GetEspecialidadesPorCentroDeSalud">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetEspecialidadesPorCentroDeSalud_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdPadre" ColumnName="IdPadre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="DescripcionPlanilla" ColumnName="DescripcionPlanilla" />
+                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+                <ScalarProperty Name="IdMHO" ColumnName="IdMHO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEspecialistasPorCentroDeSalud" FunctionName="Model.Store.GetEspecialistasPorCentroDeSalud" />
+          <FunctionImportMapping FunctionImportName="GetEvolucionPorPaciente" FunctionName="Model.Store.GetEvolucionPorPaciente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetEvolucionPorPaciente_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEvolucionPorTurno" FunctionName="Model.Store.GetEvolucionPorTurno">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetEvolucionPorTurno_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetListaDiagnosticoAgrupamiento" FunctionName="Model.Store.GetListaDiagnosticoAgrupamiento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetListaDiagnosticoAgrupamiento_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetListaSexo" FunctionName="Model.Store.GetListaSexo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetListaSexo_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetListaTipoAgendaDeProfesionales" FunctionName="Model.Store.GetListaTipoAgendaDeProfesionales">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetListaTipoAgendaDeProfesionales_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetListaTipoDNI" FunctionName="Model.Store.GetListaTipoDNI">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetListaTipoDNI_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetListaTipoEstadoCivil" FunctionName="Model.Store.GetListaTipoEstadoCivil">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetListaTipoEstadoCivil_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetListaTipoEstadoEmpleadoPlantaPermanente" FunctionName="Model.Store.GetListaTipoEstadoEmpleadoPlantaPermanente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetListaTipoEstadoEmpleadoPlantaPermanente_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetListaTipoLlamadoProximoTurno" FunctionName="Model.Store.GetListaTipoLlamadoProximoTurno">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetListaTipoLlamadoProximoTurno_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetListaTipoNormaLegal" FunctionName="Model.Store.GetListaTipoNormaLegal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetListaTipoNormaLegal_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetListaTipoParentesco" FunctionName="Model.Store.GetListaTipoParentesco">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetListaTipoParentesco_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetListaTurnoEstado" FunctionName="Model.Store.GetListaTurnoEstado">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetListaTurnoEstado_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetListaTurnoEstadoAdmision" FunctionName="Model.Store.GetListaTurnoEstadoAdmision">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetListaTurnoEstadoAdmision_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetLocalidadesPorDepartamento" FunctionName="Model.Store.GetLocalidadesPorDepartamento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetLocalidadesPorDepartamento_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPaises" FunctionName="Model.Store.GetPaises">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetPaises_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPracticasPorNomenclador" FunctionName="Model.Store.GetPracticasPorNomenclador">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetPracticasPorNomenclador_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Uop" ColumnName="Uop" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetProvinciasPorPais" FunctionName="Model.Store.GetProvinciasPorPais">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetProvinciasPorPais_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTurnosPorPaciente" FunctionName="Model.Store.GetTurnosPorPaciente" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

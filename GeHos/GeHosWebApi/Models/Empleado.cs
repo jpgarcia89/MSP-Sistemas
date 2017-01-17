@@ -17,20 +17,25 @@ namespace GeHosWebApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Empleado()
         {
+            this.Agenda = new HashSet<Agenda>();
+            this.EmpleadoCentroDeSalud = new HashSet<EmpleadoCentroDeSalud>();
             this.EmpleadoContratado = new HashSet<EmpleadoContratado>();
-            this.EmpleadoEspecialidadCentroDeSalud = new HashSet<EmpleadoEspecialidadCentroDeSalud>();
+            this.EmpleadoEspecialidad = new HashSet<EmpleadoEspecialidad>();
         }
     
         public int ID { get; set; }
         public int PersonaID { get; set; }
         public Nullable<int> AspNetUsersID { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Agenda> Agenda { get; set; }
         public virtual Persona Persona { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmpleadoCentroDeSalud> EmpleadoCentroDeSalud { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmpleadoContratado> EmpleadoContratado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmpleadoEspecialidadCentroDeSalud> EmpleadoEspecialidadCentroDeSalud { get; set; }
+        public virtual ICollection<EmpleadoEspecialidad> EmpleadoEspecialidad { get; set; }
         public virtual EmpleadoPlantaPermanente EmpleadoPlantaPermanente { get; set; }
     }
 }

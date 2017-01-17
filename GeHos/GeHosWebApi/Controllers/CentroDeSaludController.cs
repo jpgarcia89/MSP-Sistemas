@@ -131,9 +131,8 @@ namespace GeHosWebApi.Controllers
         {
             int lol = db.Empleado.Where(z => z.AspNetUsersID == id).Select(y => y.ID).FirstOrDefault();
             var x = from a in db.CentroDeSalud
-                    join b in db.CentroDeSaludEspecialidad on a.ID equals b.CentroDeSaludID
-                    join c in db.EmpleadoEspecialidadCentroDeSalud on b.ID equals c.CentroDeSaludEspecialidadID
-                    where c.EmpleadoID == lol
+                    join b in db.EmpleadoCentroDeSalud on a.ID equals b.CentroDeSaludID
+                    where b.EmpleadoID == lol
                     group a by new
                     {
                         a.ID,

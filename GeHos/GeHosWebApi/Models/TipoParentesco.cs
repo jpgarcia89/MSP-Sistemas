@@ -12,14 +12,10 @@ namespace GeHosWebApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CentroDeSaludEspecialidad
+    public partial class TipoParentesco
     {
-        public int ID { get; set; }
-        public int CentroDeSaludID { get; set; }
-        public int EspecialidadID { get; set; }
+        public byte ID { get; set; }
+        public string Nombre { get; set; }
         public bool Activa { get; set; }
-    
-        public virtual CentroDeSalud CentroDeSalud { get; set; }
-        public virtual Especialidad Especialidad { get; set; }
     }
 }
