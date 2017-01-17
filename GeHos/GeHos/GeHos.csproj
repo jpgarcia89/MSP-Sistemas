@@ -1037,6 +1037,7 @@
     <Compile Include="Model\CentroDeSaludClient.cs" />
     <Compile Include="Model\EspecialidadClient.cs" />
     <Compile Include="Model\PersonaClient.cs" />
+    <Compile Include="Model\TipoAgendaDeProfesionalesClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

@@ -182,6 +182,7 @@
     <Compile Include="Controllers\EspecialidadController.cs" />
     <Compile Include="Controllers\PersonaContratoController.cs" />
     <Compile Include="Controllers\PersonaController.cs" />
+    <Compile Include="Controllers\TipoAgendaDeProfesionalesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

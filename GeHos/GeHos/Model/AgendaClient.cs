@@ -8,7 +8,7 @@ using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using GeHosContract.Contrato;
 using GeHos.Helpers;
-using GeHosContract.Contratos.Agenda;
+
 
 namespace GeHos.Model
 {

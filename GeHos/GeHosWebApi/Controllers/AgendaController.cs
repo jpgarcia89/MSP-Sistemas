@@ -10,7 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using GeHosWebApi.Models;
 using GeHosContract.Contrato;
-using GeHosContract.Contratos.Agenda;
+
 
 namespace GeHosWebApi.Controllers
 {
@@ -25,8 +25,8 @@ namespace GeHosWebApi.Controllers
             {
                 Activa = x.Activa,
                 ID = x.ID,
-                CentroDeSaludID = x.EmpleadoEspecialidadCentroDeSalud.CentroDeSaludEspecialidad.CentroDeSaludID,
-                EspecialidadID = x.EmpleadoEspecialidadCentroDeSalud.CentroDeSaludEspecialidad.EspecialidadID,
+                CentroDeSaludID = x.CentroDeSaludID,
+                EspecialidadID = x.EspecialidadID,
                 FechaDesde = x.FechaDesde,
                 FechaHasta = x.FechaHasta
             });
@@ -79,7 +79,7 @@ namespace GeHosWebApi.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+        
         // POST: api/Agenda
         [ResponseType(typeof(Agenda))]
         public IHttpActionResult PostcatAgenda(NewAgendaVM NuevaAgendaVM)
@@ -90,29 +90,45 @@ namespace GeHosWebApi.Controllers
 
             //Nueva Agenda
             Agenda NuevaAgenda = new Agenda();
-
+            //Mapeo Agenda
+            NuevaAgenda.EmpleadoID = NuevaAgendaVM.EmpleadoID;//Consultar con Marcelo
+            NuevaAgenda.CentroDeSaludID = NuevaAgendaVM.CentroDeSaludID;
+            NuevaAgenda.EspecialidadID = NuevaAgendaVM.EspecialidadID;
+            NuevaAgenda.FechaDesde = NuevaAgendaVM.FechaDesde;
+            NuevaAgenda.FechaHasta = NuevaAgendaVM.FechaHasta;
             NuevaAgenda.Activa = true;
-            NuevaAgenda.FechaDesde = NuevaAgendaVM.fechaDesde;
-            NuevaAgenda.FechaHasta = NuevaAgendaVM.fechaHasta;
+
+            ///////////////////Campos proximos a agregar//////////////////////////
+            //NuevaAgenda.EmpleadoCreaID = NuevaAgendaVM.EmpleadoCreaID;
+            //NuevaAgenda.FechaCrea = DateTime.Now;
+            //NuevaAgenda.EmpleadoModificaID = null;
+            //NuevaAgenda.FechaModifica = null;
 
 
-            //Por cada rango horario creo un nuevo congunto de agendas horario
+
+            //Por cada rango horario creo un nuevo conjunto de Agendas Horario
             foreach (var rangoHorario in NuevaAgendaVM.RangosHorarios)
             {
-                AgendaHorario NuevaAgendaHorario = new AgendaHorario();
-                //List<DateTime> allDates = new List<DateTime>();
-
-                int Desde = NuevaAgendaVM.fechaDesde.Day;
-                int Hasta = NuevaAgendaVM.fechaHasta.Day;               
+                int Desde = NuevaAgendaVM.FechaDesde.Day;
+                int Hasta = NuevaAgendaVM.FechaHasta.Day;               
 
                 for (int i = Desde; i <= Hasta; i++)
                 {
-                    var diaValido = new DateTime(NuevaAgendaVM.fechaDesde.Year, NuevaAgendaVM.fechaHasta.Month, i);
+                    var diaValido = new DateTime(NuevaAgendaVM.FechaDesde.Year, NuevaAgendaVM.FechaHasta.Month, i);
 
-                    if (rangoHorario.dias.Any(r => r == (int)diaValido.DayOfWeek))
+                    if (rangoHorario.Dias.Any(r => r == (int)diaValido.DayOfWeek))
                     {
-//                        allDates.Add(diaValido);
-                    }                     
+                        //Nueva Agenda Horario
+                        AgendaHorario NuevaAgendaHorario = new AgendaHorario();
+                        //Mapeo Agenda Horario
+                        NuevaAgendaHorario.AgendaTipoID = rangoHorario.AgendaTipoID;
+                        NuevaAgendaHorario.CantidadDeTurnos = rangoHorario.DuracionDeTurnos;
+                        NuevaAgendaHorario.HoraDesde = rangoHorario.HoraDesde.TimeOfDay;
+                        NuevaAgendaHorario.HoraHasta = rangoHorario.HoraHasta.TimeOfDay;
+                        NuevaAgendaHorario.Dia = diaValido;
+
+                        NuevaAgenda.AgendaHorario.Add(NuevaAgendaHorario);
+                    }
                 }
             }
 

@@ -1,4 +1,4 @@
-﻿@model GeHosContract.Contrato.AgendaVM
+﻿@*@model GeHosContract.Contrato*@
 
 
 @{
@@ -44,16 +44,16 @@
                 @*Profesional*@
                 <div class="form-group">
                     @Html.Label("Profesional", htmlAttributes: new { @class = "control-label " })
-                    @Html.DropDownListFor(model => model.CentroDeSaludID, (SelectList)(ViewBag.ListaCentroSalud), new { @class = "form-control", @id = "CentroDeSaludNombre" })   @*, @style="width: 100%"*@
-                    @Html.ValidationMessageFor(model => model.CentroDeSaludNombre, "", new { @class = "text-danger" })
+                    @Html.DropDownList("CentroDeSaludID", (SelectList)(ViewBag.ListaCentroSalud), new { @class = "form-control", @id = "CentroDeSaludNombre" })   @*, @style="width: 100%"*@
+                    @*@Html.ValidationMessageFor(model => model.CentroDeSaludNombre, "", new { @class = "text-danger" })*@
                 </div>
                 @*Fin - Profesional*@
 
                 @*Especialidad*@
                 <div class="form-group">
-                    @Html.LabelFor(model => model.EspecialidadNombre, htmlAttributes: new { @class = "control-label " })
-                    @Html.DropDownListFor(model => model.EspecialidadID, (SelectList)(ViewBag.Especialidad), new { @class = "select2 form-control" })
-                    @Html.ValidationMessageFor(model => model.EspecialidadNombre, "", new { @class = "text-danger" })
+                    @Html.Label("Especialidad", htmlAttributes: new { @class = "control-label " })
+                    @Html.DropDownList("EspecialidadID", (SelectList)(ViewBag.Especialidad), new { @class = "select2 form-control" })
+                    @*@Html.ValidationMessageFor(model => model.EspecialidadNombre, "", new { @class = "text-danger" })*@
                 </div>
                 @*Fin - Especialidad*@
 
@@ -115,47 +115,47 @@
             @*Box-body*@
             <div class="box-body">
 
-                @*Dias/Tiempo Turnos*@
+                @*Dias/Duracion de Turnos*@
                 <div class="row">
                     @*Dias*@
                     <div class="col-md-7">
                         @Html.Label("Dias", htmlAttributes: new { @class = "control-label" })
                         <div class="col-md-offset-1">
                             <label class="checkbox-inline">
-                                @Html.CheckBox("Lunes", new { @value = 0 , @class="chk_1"}) Lunes
+                                @Html.CheckBox("Lunes", new { @value = 1 , @class="chk_1"}) Lunes
                             </label>
                             <label class="checkbox-inline">
-                                @Html.CheckBox("Martes", new { @value = 1, @class = "chk_1" }) Martes
+                                @Html.CheckBox("Martes", new { @value = 2, @class = "chk_1" }) Martes
                             </label>
                             <label class="checkbox-inline">
-                                @Html.CheckBox("Miercoles", new { @value = 2, @class = "chk_1" }) Miercoles
+                                @Html.CheckBox("Miercoles", new { @value = 3, @class = "chk_1" }) Miercoles
                             </label>
                             <label class="checkbox-inline">
-                                @Html.CheckBox("Jueves", new { @value = 3, @class = "chk_1" }) Jueves
+                                @Html.CheckBox("Jueves", new { @value = 4, @class = "chk_1" }) Jueves
                             </label>
                             <label class="checkbox-inline">
-                                @Html.CheckBox("Viernes", new { @value = 4, @class = "chk_1" }) Viernes
+                                @Html.CheckBox("Viernes", new { @value = 5, @class = "chk_1" }) Viernes
                             </label>
                             <label class="checkbox-inline">
-                                @Html.CheckBox("Sabado", new { @value = 5, @class = "chk_1" }) Sabado
+                                @Html.CheckBox("Sabado", new { @value = 6, @class = "chk_1" }) Sabado
                             </label>
                             <label class="checkbox-inline">
-                                @Html.CheckBox("Domingo", new { @value = 6, @class = "chk_1" }) Domingo
+                                @Html.CheckBox("Domingo", new { @value = 0, @class = "chk_1" }) Domingo
                             </label>
                         </div>
                     </div>
                     @*Fin - Dias*@
 
-                    @* Tiempo Turnos *@
+                    @* Duracion de Turnos *@
                     <div class="col-md-3 col-md-offset-1">
                         <div class="form-group">
-                            <label>Tiempo de Turnos(en minutos)</label>
-                            <input id="cant_tur_1" type="number" class="form-control">
+                            <label>Duracion de Turnos(en minutos)</label>
+                            <input id="dur_tur_1" type="number" class="form-control">
                         </div>
                     </div>
-                    @* Fin - Tiempo Turnos *@
+                    @* Fin - Duracion de Turnos *@
                 </div>
-                @*Fin - Dias/Tiempo Turnos*@
+                @*Fin - Dias/Duracion de Turnos*@
 
                 @*Horarios/Tipo Agenda*@
                 <div class="row">
@@ -192,8 +192,8 @@
                     <div class='col-md-4'>
                         <div class="form-group">
                             @Html.Label("Tipo Agenda", htmlAttributes: new { @class = "control-label" })
-                            @Html.DropDownList("Tipo Agenda",(SelectList)(ViewBag.ListaCentroSalud), new { @class = "form-control", @id="tipoAge_1" })
-                            @Html.ValidationMessageFor(model => model.CentroDeSaludNombre, "", new { @class = "text-danger" })
+                            @Html.DropDownList("Tipo Agenda",(SelectList)(ViewBag.ListaTipoAgendaDeProfesionales), new { @class = "form-control", @id="tipoAge_1" })
+                            @*@Html.ValidationMessageFor(model => model.CentroDeSaludNombre, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
                     @*Fin - Tipo Agenda*@
@@ -308,6 +308,8 @@
             
 
         });
+        
+        
         $("#formAgenda").submit(function (e) {
             submitAgenda(e);
         });
@@ -339,7 +341,7 @@
             });
 
             //Cambio ID del Input Cant Turnos
-            $clon.find("#cant_tur_1").attr("id", "cant_tur_" + boxHorariosCount);
+            $clon.find("#dur_tur_1").attr("id", "dur_tur_" + boxHorariosCount); 
 
             //Cambio ID del Input Hora Desde
             $clon.find("#dpHoraDesde_1").attr("id", "dpHoraDesde_" + boxHorariosCount);
@@ -374,12 +376,15 @@
                 useCurrent: false //Important! See issue #1075
             });
 
-            //$("#dpHoraDesde_1").on("dp.change", function (e) {
-            //    $('#dpHoraHasta_1').data("DateTimePicker");
-            //});
 
-            //$("#dpHoraHasta_1").on("dp.change", function (e) {
-            //    $('#dpHoraDesde_1').data("DateTimePicker");
+            $("#" + desde).on("dp.change", function (e) {
+                $("#" + hasta).data("DateTimePicker").minDate(e.date);
+            });
+
+            $("#" + hasta).on("dp.change", function (e) {
+                $("#" + desde).data("DateTimePicker").maxDate(e.date);
+            });
+
         }
 
         //
@@ -393,9 +398,9 @@
             var data = {
                 ProfesionalID : $("#ProfesionalID").val(),
                 EspecialidadID: $("#EspecialidadID").val(),
-                fechaDesde: $("#dpFechaDesde").data('date'),
-                fechaHasta: $("#dpFechaHasta").data('date'),
-                rangosHorarios :[]
+                FechaDesde: $("#dpFechaDesde").data('date'),
+                FechaHasta: $("#dpFechaHasta").data('date'),
+                RangosHorarios: []
             };
 
             //Rangos Horarios
@@ -404,18 +409,18 @@
 
                     rangoHorario= {
                         id:boxHorariosCount,
-                        dias:[],
-                        //EspecialidadID: $("#EspecialidadID").val(),
-                        horaDesde: $("#dpHoraDesde_" + i).data('date'),
-                        horaHasta: $("#dpHoraHasta_"+i).data('date'),
+                        dias: [],
+                        DuracionDeTurnos: $("#dur_tur_" + i).val(),
+                        AgendaTipoID: $("#tipoAge_" + i).val(),
+                        HoraDesde: $("#dpHoraDesde_" + i).data('date'),
+                        HoraHasta: $("#dpHoraHasta_"+i).data('date'),
                     }
-
-
+                    
                     $("input[class=chk_" + i + "]:checked").each(function() {
                         rangoHorario.dias.push(this.value);
                     });
 
-                    data.rangosHorarios.push(rangoHorario);
+                    data.RangosHorarios.push(rangoHorario);
                 }
             }//End "For"
 
