@@ -25,8 +25,8 @@ namespace GeHosWebApi.Controllers
             {
                 Activa = x.Activa,
                 ID = x.ID,
-                CentroDeSaludID = x.CentroDeSalud.ID,
-                EspecialidadID = x.Especialidad.ID,
+                CentroDeSaludID = x.EmpleadoEspecialidadCentroDeSalud.CentroDeSaludEspecialidad.CentroDeSaludID,
+                EspecialidadID = x.EmpleadoEspecialidadCentroDeSalud.CentroDeSaludEspecialidad.EspecialidadID,
                 FechaDesde = x.FechaDesde,
                 FechaHasta = x.FechaHasta
             });
@@ -99,7 +99,8 @@ namespace GeHosWebApi.Controllers
             //Por cada rango horario creo un nuevo congunto de agendas horario
             foreach (var rangoHorario in NuevaAgendaVM.RangosHorarios)
             {
-                List<DateTime> allDates = new List<DateTime>();
+                AgendaHorario NuevaAgendaHorario = new AgendaHorario();
+                //List<DateTime> allDates = new List<DateTime>();
 
                 int Desde = NuevaAgendaVM.fechaDesde.Day;
                 int Hasta = NuevaAgendaVM.fechaHasta.Day;               
@@ -110,7 +111,7 @@ namespace GeHosWebApi.Controllers
 
                     if (rangoHorario.dias.Any(r => r == (int)diaValido.DayOfWeek))
                     {
-                        allDates.Add(diaValido);
+//                        allDates.Add(diaValido);
                     }                     
                 }
             }
