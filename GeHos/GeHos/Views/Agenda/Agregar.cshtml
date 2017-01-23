@@ -1,4 +1,4 @@
-﻿@model GeHosContract.Contrato.AgendaVM
+﻿@*@model GeHosContract.Contrato*@
 
 
 @{
@@ -21,7 +21,8 @@
 
 
     @*Inicio Form*@
-    <form id="formAgenda" >@*onsubmit="submitAgenda()"*@
+    <form id="formAgenda">
+        @*onsubmit="submitAgenda()"*@
         @*@Html.AntiForgeryToken()*@
 
         @*Box Datos Generales*@
@@ -44,16 +45,16 @@
                 @*Profesional*@
                 <div class="form-group">
                     @Html.Label("Profesional", htmlAttributes: new { @class = "control-label " })
-                    @Html.DropDownListFor(model => model.CentroDeSaludID, (SelectList)(ViewBag.ListaCentroSalud), new { @class = "form-control", @id = "CentroDeSaludNombre" })   @*, @style="width: 100%"*@
-                    @Html.ValidationMessageFor(model => model.CentroDeSaludNombre, "", new { @class = "text-danger" })
+                    @Html.DropDownList("CentroDeSaludID", (SelectList)(ViewBag.ListaCentroSalud), new { @class = "form-control", @id = "CentroDeSaludNombre" })   @*, @style="width: 100%"*@
+                    @*@Html.ValidationMessageFor(model => model.CentroDeSaludNombre, "", new { @class = "text-danger" })*@
                 </div>
                 @*Fin - Profesional*@
 
                 @*Especialidad*@
                 <div class="form-group">
-                    @Html.LabelFor(model => model.EspecialidadNombre, htmlAttributes: new { @class = "control-label " })
-                    @Html.DropDownListFor(model => model.EspecialidadID, (SelectList)(ViewBag.Especialidad), new { @class = "select2 form-control" })
-                    @Html.ValidationMessageFor(model => model.EspecialidadNombre, "", new { @class = "text-danger" })
+                    @Html.Label("Especialidad", htmlAttributes: new { @class = "control-label " })
+                    @Html.DropDownList("EspecialidadID", (SelectList)(ViewBag.Especialidad), new { @class = "select2 form-control" })
+                    @*@Html.ValidationMessageFor(model => model.EspecialidadNombre, "", new { @class = "text-danger" })*@
                 </div>
                 @*Fin - Especialidad*@
 
@@ -64,7 +65,7 @@
                         <div class="form-group">
                             @Html.Label("Fecha Desde", htmlAttributes: new { @class = "control-label" })
                             <div class='input-group date' id='dpFechaDesde'>
-                                <input type='text' class="form-control" />
+                                <input type='text' class="form-control" required />
                                 <span class="input-group-addon">
                                     <span class="fa fa-calendar"></span>
                                 </span>
@@ -78,7 +79,7 @@
                         <div class="form-group">
                             @Html.Label("Fecha Hasta", htmlAttributes: new { @class = "control-label" })
                             <div class='input-group date' id='dpFechaHasta'>
-                                <input type='text' class="form-control" />
+                                <input type='text' class="form-control" required />
                                 <span class="input-group-addon">
                                     <span class="fa fa-calendar"></span>
                                 </span>
@@ -115,47 +116,47 @@
             @*Box-body*@
             <div class="box-body">
 
-                @*Dias/Tiempo Turnos*@
+                @*Dias/Duracion de Turnos*@
                 <div class="row">
                     @*Dias*@
                     <div class="col-md-7">
                         @Html.Label("Dias", htmlAttributes: new { @class = "control-label" })
                         <div class="col-md-offset-1">
                             <label class="checkbox-inline">
-                                @Html.CheckBox("Lunes", new { @value = 0 , @class="chk_1"}) Lunes
+                                @Html.CheckBox("Lunes", new { @value = 1, @class = "chk_1" }) Lunes
                             </label>
                             <label class="checkbox-inline">
-                                @Html.CheckBox("Martes", new { @value = 1, @class = "chk_1" }) Martes
+                                @Html.CheckBox("Martes", new { @value = 2, @class = "chk_1" }) Martes
                             </label>
                             <label class="checkbox-inline">
-                                @Html.CheckBox("Miercoles", new { @value = 2, @class = "chk_1" }) Miercoles
+                                @Html.CheckBox("Miercoles", new { @value = 3, @class = "chk_1" }) Miercoles
                             </label>
                             <label class="checkbox-inline">
-                                @Html.CheckBox("Jueves", new { @value = 3, @class = "chk_1" }) Jueves
+                                @Html.CheckBox("Jueves", new { @value = 4, @class = "chk_1" }) Jueves
                             </label>
                             <label class="checkbox-inline">
-                                @Html.CheckBox("Viernes", new { @value = 4, @class = "chk_1" }) Viernes
+                                @Html.CheckBox("Viernes", new { @value = 5, @class = "chk_1" }) Viernes
                             </label>
                             <label class="checkbox-inline">
-                                @Html.CheckBox("Sabado", new { @value = 5, @class = "chk_1" }) Sabado
+                                @Html.CheckBox("Sabado", new { @value = 6, @class = "chk_1" }) Sabado
                             </label>
                             <label class="checkbox-inline">
-                                @Html.CheckBox("Domingo", new { @value = 6, @class = "chk_1" }) Domingo
+                                @Html.CheckBox("Domingo", new { @value = 0, @class = "chk_1" }) Domingo
                             </label>
                         </div>
                     </div>
                     @*Fin - Dias*@
 
-                    @* Tiempo Turnos *@
+                    @* Duracion de Turnos *@
                     <div class="col-md-3 col-md-offset-1">
                         <div class="form-group">
-                            <label>Tiempo de Turnos(en minutos)</label>
-                            <input id="cant_tur_1" type="number" class="form-control">
+                            <label>Duracion de Turnos(en minutos)</label>
+                            <input id="dur_tur_1" type="number" class="form-control">
                         </div>
                     </div>
-                    @* Fin - Tiempo Turnos *@
+                    @* Fin - Duracion de Turnos *@
                 </div>
-                @*Fin - Dias/Tiempo Turnos*@
+                @*Fin - Dias/Duracion de Turnos*@
 
                 @*Horarios/Tipo Agenda*@
                 <div class="row">
@@ -165,7 +166,7 @@
                         <div class="form-group">
                             @Html.Label("Hora Desde", htmlAttributes: new { @class = "control-label" })
                             <div class='input-group date' id='dpHoraDesde_1'>
-                                <input type='text' class="form-control" />
+                                <input type='text' class="form-control" required />
                                 <span class="input-group-addon">
                                     <span class="fa fa-clock-o"></span>
                                 </span>
@@ -179,7 +180,7 @@
                         <div class="form-group">
                             @Html.Label("Hora Hasta", htmlAttributes: new { @class = "control-label" })
                             <div class='input-group date' id='dpHoraHasta_1'>
-                                <input type='text' class="form-control" />
+                                <input type='text' class="form-control" required />
                                 <span class="input-group-addon">
                                     <span class="fa fa-clock-o"></span>
                                 </span>
@@ -192,8 +193,8 @@
                     <div class='col-md-4'>
                         <div class="form-group">
                             @Html.Label("Tipo Agenda", htmlAttributes: new { @class = "control-label" })
-                            @Html.DropDownList("Tipo Agenda",(SelectList)(ViewBag.ListaCentroSalud), new { @class = "form-control", @id="tipoAge_1" })
-                            @Html.ValidationMessageFor(model => model.CentroDeSaludNombre, "", new { @class = "text-danger" })
+                            @Html.DropDownList("Tipo Agenda", (SelectList)(ViewBag.ListaTipoAgendaDeProfesionales), new { @class = "form-control", @id = "tipoAge_1" })
+                            @*@Html.ValidationMessageFor(model => model.CentroDeSaludNombre, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
                     @*Fin - Tipo Agenda*@
@@ -252,6 +253,10 @@
             line-height: 1.428571429;
             border-radius: 15px;
         }
+
+        #divAddAgenda {
+            margin-bottom: 15px;
+        }
     </style>
 }
 
@@ -296,7 +301,6 @@
             /////////////End - DateTimePicker Functions/////////////
 
 
-
             //Agrega nuevo Box de Rango Horario
             $("#btnAddAgenda").click(function () {
                 //debugger;
@@ -304,13 +308,14 @@
             });
 
 
-
-            
-
+            $("#formAgenda").submit(function (e) {
+                //debugger;
+                submitAgenda(e);
+            });
         });
-        $("#formAgenda").submit(function (e) {
-            submitAgenda(e);
-        });
+
+
+
 
         //Función de clonado HTML para Box De Rango Horario
         function ClonaRangoHorario($original) {
@@ -322,9 +327,7 @@
 
 
             //Agrego boton para cerrar box
-            $clon.find(".box-tools").append('<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="" data-original-title="Cerrar"><i class="fa fa-times"></i></button>');
-
-
+            $clon.find(".box-tools").append('<button type="button" id="btnCerrar_' + boxHorariosCount + '" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="" data-original-title="Cerrar"><i class="fa fa-times"></i></button>');
 
             //Cambio ID del HTML clonado
             $clon.attr("id", "boxHorario_" + boxHorariosCount);
@@ -339,7 +342,7 @@
             });
 
             //Cambio ID del Input Cant Turnos
-            $clon.find("#cant_tur_1").attr("id", "cant_tur_" + boxHorariosCount);
+            $clon.find("#dur_tur_1").attr("id", "dur_tur_" + boxHorariosCount);
 
             //Cambio ID del Input Hora Desde
             $clon.find("#dpHoraDesde_1").attr("id", "dpHoraDesde_" + boxHorariosCount);
@@ -359,6 +362,7 @@
 
 
             InitTimePicker("dpHoraDesde_" + boxHorariosCount, "dpHoraHasta_" + boxHorariosCount);
+            InitBtnClose("btnCerrar_" + boxHorariosCount, boxHorariosCount);
         }
 
         //Función de inicialización de TimePicker
@@ -374,68 +378,160 @@
                 useCurrent: false //Important! See issue #1075
             });
 
-            //$("#dpHoraDesde_1").on("dp.change", function (e) {
-            //    $('#dpHoraHasta_1').data("DateTimePicker");
-            //});
 
-            //$("#dpHoraHasta_1").on("dp.change", function (e) {
-            //    $('#dpHoraDesde_1').data("DateTimePicker");
+            $("#" + desde).on("dp.change", function (e) {
+                $("#" + hasta).data("DateTimePicker").minDate(e.date);
+            });
+
+            $("#" + hasta).on("dp.change", function (e) {
+                $("#" + desde).data("DateTimePicker").maxDate(e.date);
+            });
+
         }
 
-        //
-        
-        function submitAgenda(e)
-        {
-            //validaFormAgenda();
-            debugger
+        //Función de inicialización de Boton "Cerrar"
+        function InitBtnClose(btn, nro_box) {
+            $("#" + btn).click(function (e) {
+                $("#boxHorario_" + nro_box).remove();
+                e.preventDefault();
+            });
+
+            //$("#btnCerrar_2").click(function (e) {
+            //    debugger
+            //    $("#boxHorario_2").remove();
+            //    e.preventDefault();
+            //});
+        }
+
+
+        //SubmitAgenda
+        function submitAgenda(e) {
+
+            //debugger
 
             //Datos Generales
             var data = {
-                ProfesionalID : $("#ProfesionalID").val(),
+                ProfesionalID: $("#ProfesionalID").val(),
                 EspecialidadID: $("#EspecialidadID").val(),
-                fechaDesde: $("#dpFechaDesde").data('date'),
-                fechaHasta: $("#dpFechaHasta").data('date'),
-                rangosHorarios :[]
+                FechaDesde: $("#dpFechaDesde").data('date'),
+                FechaHasta: $("#dpFechaHasta").data('date'),
+                RangosHorarios: []
             };
 
             //Rangos Horarios
             for (var i = 1; i <= boxHorariosCount; i++) {
-                if ($("#boxHorario_" + i).length==1) {
+                if ($("#boxHorario_" + i).length == 1) {
 
-                    rangoHorario= {
-                        id:boxHorariosCount,
-                        dias:[],
-                        //EspecialidadID: $("#EspecialidadID").val(),
-                        horaDesde: $("#dpHoraDesde_" + i).data('date'),
-                        horaHasta: $("#dpHoraHasta_"+i).data('date'),
+                    rangoHorario = {
+                        id: i,
+                        dias: [],
+                        DuracionDeTurnos: $("#dur_tur_" + i).val(),
+                        AgendaTipoID: $("#tipoAge_" + i).val(),
+                        HoraDesde: $("#dpHoraDesde_" + i).data('date'),
+                        HoraHasta: $("#dpHoraHasta_" + i).data('date'),
                     }
 
-
-                    $("input[class=chk_" + i + "]:checked").each(function() {
+                    $("input[class=chk_" + i + "]:checked").each(function () {
                         rangoHorario.dias.push(this.value);
                     });
 
-                    data.rangosHorarios.push(rangoHorario);
+                    data.RangosHorarios.push(rangoHorario);
                 }
             }//End "For"
 
 
-            debugger
+            //debugger
+            ValidaFormAgenda(data);
 
-            var url = '@Url.Action("Agregar", "Agenda")'; // the script where you handle the form input.
-
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: data, // serializes the form's elements.
-                success: function (data) {
-                    debugger
-                    alert("volvio del controller"); // show response from the php script.
-                }
-            });
+            //var url = '@Url.Action("Agregar", "Agenda")'; // the script where you handle the form input.
+            //
+            //$.ajax({
+            //    type: "POST",
+            //    url: url,
+            //    data: data, // serializes the form's elements.
+            //    success: function (data) {
+            //        debugger
+            //        alert("volvio del controller"); // show response from the php script.
+            //    }
+            //});
 
             e.preventDefault(); // avoid to execute the actual submit of the form.
 
+        }
+
+        function ValidaFormAgenda(data) {
+
+            //Valida
+
+            ValidaSolapamiento(data);
+        }
+
+        function ValidaSolapamiento(data) {
+
+            for (var i = 0; i < data.RangosHorarios.length; i++) {
+
+                if ((i + 1) < data.RangosHorarios.length) {
+                    for (var j = i + 1; j < data.RangosHorarios.length; j++) {
+
+                        //Devuelve un array con la interseccion de dias
+                        var days_intersect = intersect_safe(data.RangosHorarios[i].dias.sort(), data.RangosHorarios[j].dias.sort());
+                        //debugger
+
+                        //Si existen dias q se intersectan, verifico solapamiento de Horarios
+                        if (days_intersect.length > 0) {
+                            //rango horario (i)
+                            var hraDesde_1 = parseFloat(data.RangosHorarios[i].HoraDesde.replace(":", "."));
+                            var hraHasta_1 = parseFloat(data.RangosHorarios[i].HoraHasta.replace(":", "."));
+
+                            //rango horario (i+1)
+                            var hraDesde_2 = parseFloat(data.RangosHorarios[j].HoraDesde.replace(":", "."));
+                            var hraHasta_2 = parseFloat(data.RangosHorarios[j].HoraHasta.replace(":", "."));
+
+                            //if(start_times1 <= end_times2 && end_times1 >= start_times2) {}
+                            if (hraDesde_1 < hraHasta_2 && hraHasta_1 > hraDesde_2) {
+                                //hay solapamiento!!
+                                //debugger
+                                console.log("---------------------------------------------------------");
+                                console.log("Hay solapamiento!!");
+                                console.log('Entre "Rango Horario (' + data.RangosHorarios[i].id + ')" y "Rango Horario (' + data.RangosHorarios[j].id + ')"');
+                                console.log("en el/los dias: " + days_intersect);
+                                console.log("---------------------------------------------------------\n");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        /* finds the intersection of
+         * two arrays in a simple fashion.
+         *
+         * PARAMS
+         *  a - first array, must already be sorted
+         *  b - second array, must already be sorted
+         *
+         * NOTES
+         *
+         *  Should have O(n) operations, where n is
+         *    n = MIN(a.length(), b.length())
+         */
+        function intersect_safe(a, b) {
+            var ai = 0, bi = 0;
+            var result = [];
+
+            while (ai < a.length && bi < b.length) {
+                if (a[ai] < b[bi]) { ai++; }
+                else if (a[ai] > b[bi]) { bi++; }
+                else /* they're equal */
+                {
+                    result.push(a[ai]);
+                    ai++;
+                    bi++;
+                }
+            }
+
+            return result;
         }
     </script>
 }

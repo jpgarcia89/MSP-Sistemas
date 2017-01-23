@@ -7,7 +7,7 @@ using Utiles.ContratoBase;
 
 namespace GeHosContract.Contrato
 {
-    public class CTipoAgendaDeProfesionalesVM : ContratoLista<TipoAgendaDeProfesionalesVM>
+    public class CCentroDeSaludVM : ContratoLista<CentroDeSaludVM>
     {
     }
 }

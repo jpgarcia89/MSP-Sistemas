@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using GeHosWebApi;
 using System.ComponentModel.DataAnnotations;
-using GeHosContract.Contratos.Agenda;
+
 
 namespace GeHos.Controllers
 {
@@ -35,11 +35,15 @@ namespace GeHos.Controllers
             CentroDeSaludClient csC = new CentroDeSaludClient();
             EspecialidadClient esC = new EspecialidadClient();
             PersonaClient peC = new PersonaClient();
-            AgendaVM nuevaAgenda = new AgendaVM();
+            TipoAgendaDeProfesionalesClient tAgC = new TipoAgendaDeProfesionalesClient();
+
+            //NewAgendaVM nuevaAgenda = new NewAgendaVM();
             //ViewData["ListaCentroSalud"] = new SelectList(csC.buscarTodos().ToList(), "csId", "csNombre");
+
+            ViewBag.ListaTipoAgendaDeProfesionales = new SelectList(tAgC.buscarTodas().ToList(), "ID", "Nombre");
             ViewBag.ListaCentroSalud = new SelectList(csC.buscarTodos().ToList(), "ID", "Nombre");
             ViewBag.Especialidad = new SelectList(esC.buscarTodasPorCS(csId).ToList(), "ID", "Nombre");
-            return View("Agregar", nuevaAgenda);
+            return View("Agregar");
         }
 
         [HttpPost]
