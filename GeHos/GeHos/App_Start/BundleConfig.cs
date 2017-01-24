@@ -47,7 +47,8 @@ namespace GeHos
                       "~/Scripts/plugins/select2/select2.min.js",                     //Bootstrap
                       "~/Scripts/app.min.js",
                       "~/Scripts/jquery.alerts.js",
-                      "~/Scripts/jquery-ui.min.js"));
+                      "~/Scripts/jquery-ui.min.js",
+                      "~/Scripts/jquery-ui-datepicker-locale-es.js"));
                       //"~/Scripts/AccountScript.js"                         //AdminLTE App
 
             //BundleTable.EnableOptimizations = true;

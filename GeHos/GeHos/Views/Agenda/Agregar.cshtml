@@ -288,22 +288,40 @@
             //    format: "DD/MM/YYYY",
             //    locale: 'es',
             //});
-            $("#dpFechaDesde").datepicker();
+
+            $.datepicker.setDefaults($.datepicker.regional["es"]);
+
+            $("#dpFechaDesde").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                minDate: "-3m",
+                maxDate: "+1y"
+            }).on( "change", function() {
+                $("#dpFechaHasta").datepicker("option", "minDate", this.value);
+            });
 
             //$('#dpFechaHasta').datetimepicker({
             //    format: "DD/MM/YYYY",
             //    locale: 'es',
             //    useCurrent: false //Important! See issue #1075
             //});
-            $("#dpFechaHasta").datepicker();
-
-            $("#dpFechaDesde").on("dp.change", function (e) {
-                $('#dpFechaHasta').data("DateTimePicker").minDate(e.date);
+            $("#dpFechaHasta").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                minDate: "-3m",
+                maxDate: "+1y"
+            }).on("change", function () {
+                $("#dpFechaDesde").datepicker("option", "maxDate", this.value);
+                
             });
 
-            $("#dpFechaHasta").on("dp.change", function (e) {
-                $('#dpFechaDesde').data("DateTimePicker").maxDate(e.date);
-            });
+            //$("#dpFechaDesde").on("dp.change", function (e) {
+            //    $('#dpFechaHasta').data("DateTimePicker").minDate(e.date);
+            //});
+
+            //$("#dpFechaHasta").on("dp.change", function (e) {
+            //    $('#dpFechaDesde').data("DateTimePicker").maxDate(e.date);
+            //});
 
             InitTimePicker("dpHoraDesde_1", "dpHoraHasta_1");
             /////////////End - DateTimePicker Functions/////////////
@@ -447,8 +465,8 @@
             var data = {
                 ProfesionalID: $("#ProfesionalID").val(),
                 EspecialidadID: $("#EspecialidadID").val(),
-                FechaDesde: $("#dpFechaDesde").data('date'),
-                FechaHasta: $("#dpFechaHasta").data('date'),
+                FechaDesde: $("#dpFechaDesde").datepicker().val(),//.data('date'),
+                FechaHasta: $("#dpFechaHasta").datepicker().val(),//.data('date'),
                 RangosHorarios: []
             };
 
@@ -476,7 +494,7 @@
 
             //debugger
             if (ValidaFormAgenda(data)) {
-                var url = '@Url.Action("Agregar", "Agenda")'; // 
+                @*var url = '@Url.Action("Agregar", "Agenda")'; // 
                 
                 $.ajax({
                     type: "POST",
@@ -487,7 +505,7 @@
                         //alert("volvio del controller"); // show response from the php script.
                         window.location.href = data;
                     }
-                });
+                });*@
 
                 // avoid to execute the actual submit of the form.
                
@@ -728,5 +746,16 @@
         }(function (a, b, c) {
             return c.indexOf(a, b + 1) < 0
         });
+
+        function getDate(element) {
+            var date;
+            try {
+                date = $.datepicker.parseDate(dateFormat, element.value);
+            } catch (error) {
+                date = null;
+            }
+
+            return date;
+        }
     </script>
 }
