@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-xs-12">
             <h2 class="page-header">
-                <i class="fa fa-calendar-o"></i> Nueva Agenda.
+                <i class="fa fa-calendar"></i> Nueva Agenda.
                 <small class="pull-right">@DateTime.Now.ToShortDateString()</small>
             </h2>
         </div>
@@ -64,8 +64,8 @@
                     <div class='col-md-6'>
                         <div class="form-group">
                             @Html.Label("Fecha Desde", htmlAttributes: new { @class = "control-label" })
-                            <div class='input-group date' id='dpFechaDesde'>
-                                <input type='text' class="form-control" required />
+                            <div class='input-group date'>
+                                <input type='text' class="form-control" id='dpFechaDesde' required />
                                 <span class="input-group-addon">
                                     <span class="fa fa-calendar"></span>
                                 </span>
@@ -78,8 +78,8 @@
                     <div class='col-md-6'>
                         <div class="form-group">
                             @Html.Label("Fecha Hasta", htmlAttributes: new { @class = "control-label" })
-                            <div class='input-group date' id='dpFechaHasta'>
-                                <input type='text' class="form-control" required />
+                            <div class='input-group date' >
+                                <input type='text' class="form-control" id='dpFechaHasta' required />
                                 <span class="input-group-addon">
                                     <span class="fa fa-calendar"></span>
                                 </span>
@@ -98,7 +98,7 @@
         @*Fin - Box Datos Generales*@
 
         @*Box Rango Horario*@
-        <div class="box box-info rangoHorario" id="boxHorario_1">
+        <div class="box box-success rangoHorario" id="boxHorario_1">
 
             @*Box Header*@
             <div class="box-header with-border">
@@ -202,6 +202,15 @@
                 </div>
                 @*Fin - Horarios/Tipo Agenda*@
 
+                @*Mensaje de Error*@
+                <div class="row" id="boxHorario_error_1">
+                    <div class='col-md-12'>
+                        <div class="form-group has-error">
+                            <span class="help-block ">Help block with warning</span>
+                        </div>
+                    </div>
+                </div>
+                @*Fin - Mensaje de Error*@
             </div>
             @*Fin - Box-body*@
 
@@ -209,13 +218,15 @@
         @*Fin - Box Rango Horario*@
 
 
+       
+            @*Boton Agregar Horario*@
+            <div id="divAddAgenda" >
+                <div class="btn btn-success btn-circle" id="btnAddAgenda"><i class="fa fa-plus"></i></div>
+                <b>Nuevo Rango Horario</b>
+            </div>
+            @*Fin - Boton Agregar Horario*@
 
-        @*Agregar Horario*@
-        <div id="divAddAgenda">
-            <div class="btn btn-success btn-circle" id="btnAddAgenda"><i class="fa fa-plus"></i></div>
-            <b>Nuevo Rango Horario</b>
-        </div>
-        @*Fin - Agregar Horario*@
+           
 
 
         @*Box-footer*@
@@ -227,16 +238,9 @@
 
 
 
-    </form>@*Fin Form*@
-
-
-
-
-
-
-
-
-
+    </form>
+    @*Fin Form*@
+    
 </section>
 
 
@@ -267,6 +271,8 @@
 
     <script>
         var boxHorariosCount = 1;
+
+        //Inicializacion
         $(document).ready(function () {
 
             //Almaceno el estado original del box de Rango Horario
@@ -278,16 +284,18 @@
 
 
             /////////////DateTimePicker Functions/////////////
-            $('#dpFechaDesde').datetimepicker({
-                format: "DD/MM/YYYY",
-                locale: 'es',
-            });
+            //$('#dpFechaDesde').datetimepicker({
+            //    format: "DD/MM/YYYY",
+            //    locale: 'es',
+            //});
+            $("#dpFechaDesde").datepicker();
 
-            $('#dpFechaHasta').datetimepicker({
-                format: "DD/MM/YYYY",
-                locale: 'es',
-                useCurrent: false //Important! See issue #1075
-            });
+            //$('#dpFechaHasta').datetimepicker({
+            //    format: "DD/MM/YYYY",
+            //    locale: 'es',
+            //    useCurrent: false //Important! See issue #1075
+            //});
+            $("#dpFechaHasta").datepicker();
 
             $("#dpFechaDesde").on("dp.change", function (e) {
                 $('#dpFechaHasta').data("DateTimePicker").minDate(e.date);
@@ -302,20 +310,43 @@
 
 
             //Agrega nuevo Box de Rango Horario
-            $("#btnAddAgenda").click(function () {
+            $("#btnAddAgenda").click(function (e) {
                 //debugger;
-                ClonaRangoHorario($original);
+
+                if (!ValidaExistenciaDatos()) {                    
+                    return;
+                }
+
+
+                if (ValidaSolapamiento(null)) {
+                    ClonaRangoHorario($original);
+                }
+                
+
+                return;
             });
 
-
+            //Guarda nueva agenda
             $("#formAgenda").submit(function (e) {
                 //debugger;
                 submitAgenda(e);
             });
+
+            //Oculta div de mensaje de error en box de Rango Horario
+            $("#boxHorario_error_1").hide();
+
+            //btnVerifica
+            //$("#btnVerifica").click(function () {
+            //    ValidaSolapamiento(null);
+            //});
+
+            //$("#btnVerifica").hide();
+
+            //setInterval(function () {
+            //    $("#btnVerifica.btn-default").switchClass("btn-default", "btn-danger", 500);
+            //    $("#btnVerifica.btn-danger").switchClass("btn-danger", "btn-default", 500);
+            //}, 1000);
         });
-
-
-
 
         //Función de clonado HTML para Box De Rango Horario
         function ClonaRangoHorario($original) {
@@ -353,6 +384,9 @@
             //Cambio ID del Input Tipo Agenda
             $clon.find("#tipoAge_1").attr("id", "tipoAge_" + boxHorariosCount);
 
+            //Cambio ID del div q muestra mensajes de error
+            $clon.find("#boxHorario_error_1").attr("id", "boxHorario_error_" + boxHorariosCount);
+            $clon.find("#boxHorario_error_" + boxHorariosCount).hide();
 
             $clon.hide();
             $clon.insertBefore($("#divAddAgenda"));
@@ -441,59 +475,128 @@
 
 
             //debugger
-            ValidaFormAgenda(data);
+            if (ValidaFormAgenda(data)) {
+                var url = '@Url.Action("Agregar", "Agenda")'; // 
+                
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: data, // serializes the form's elements.
+                    success: function (data) {
+                        debugger
+                        //alert("volvio del controller"); // show response from the php script.
+                        window.location.href = data;
+                    }
+                });
 
-            //var url = '@Url.Action("Agregar", "Agenda")'; // the script where you handle the form input.
-            //
-            //$.ajax({
-            //    type: "POST",
-            //    url: url,
-            //    data: data, // serializes the form's elements.
-            //    success: function (data) {
-            //        debugger
-            //        alert("volvio del controller"); // show response from the php script.
-            //    }
-            //});
-
-            e.preventDefault(); // avoid to execute the actual submit of the form.
+                // avoid to execute the actual submit of the form.
+               
+                e.preventDefault();
+            }
+            else {
+                 e.preventDefault();
+                return false;
+            }
+            
+            
+            
 
         }
 
         function ValidaFormAgenda(data) {
 
-            //Valida
-
-            ValidaSolapamiento(data);
+            //ValidaOtrosDatos()
+            if (ValidaExistenciaDatos()&& ValidaSolapamiento(data)) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
 
+
+        /*Función de validación q verifica si existe solapamiento entre los Rangos Horarios
+         *
+         *PARAMETROS
+         *  -data : Objeto q contiene los elementos del formulario
+         *  si este parametro es "null", se recolectaran los datos necesarios
+         *  para la validación.         *
+         *
+         *RETORNO
+         *  TRUE : Si NO hay solapamiento.
+         *  FALSE : Si hay solapamiento.
+         */
         function ValidaSolapamiento(data) {
+
+            var haySolapamiento = false;
+            var arrayDeError = [];
+
+            if (data == null) {
+                //Datos Generales
+                var data = {
+                    RangosHorarios: []
+                };
+
+                //Rangos Horarios
+                for (var i = 1; i <= boxHorariosCount; i++) {
+                    if ($("#boxHorario_" + i).length == 1) {
+
+                        rangoHorario = {
+                            id: i,
+                            dias: [],
+                            DuracionDeTurnos: $("#dur_tur_" + i).val(),
+                            AgendaTipoID: $("#tipoAge_" + i).val(),
+                            HoraDesde: $("#dpHoraDesde_" + i).data('date'),
+                            HoraHasta: $("#dpHoraHasta_" + i).data('date'),
+                        }
+
+                        $("input[class=chk_" + i + "]:checked").each(function () {
+                            rangoHorario.dias.push(this.value);
+                        });
+
+                        data.RangosHorarios.push(rangoHorario);
+                    }
+                }//End "For"
+            }
 
             for (var i = 0; i < data.RangosHorarios.length; i++) {
 
                 if ((i + 1) < data.RangosHorarios.length) {
                     for (var j = i + 1; j < data.RangosHorarios.length; j++) {
 
+                        var id_i = data.RangosHorarios[i].id;
+                        var id_j = data.RangosHorarios[j].id;
+
+
                         //Devuelve un array con la interseccion de dias
                         var days_intersect = intersect_safe(data.RangosHorarios[i].dias.sort(), data.RangosHorarios[j].dias.sort());
                         //debugger
 
-                        //Si existen dias q se intersectan, verifico solapamiento de Horarios
-                        if (days_intersect.length > 0) {
-                            //rango horario (i)
+                         
+                        if (days_intersect.length > 0) //Existen dias q se intersectan
+                        {
+                            //rango horario [i]
                             var hraDesde_1 = parseFloat(data.RangosHorarios[i].HoraDesde.replace(":", "."));
                             var hraHasta_1 = parseFloat(data.RangosHorarios[i].HoraHasta.replace(":", "."));
 
-                            //rango horario (i+1)
+                            //rango horario [j]
                             var hraDesde_2 = parseFloat(data.RangosHorarios[j].HoraDesde.replace(":", "."));
                             var hraHasta_2 = parseFloat(data.RangosHorarios[j].HoraHasta.replace(":", "."));
 
-                            //if(start_times1 <= end_times2 && end_times1 >= start_times2) {}
-                            if (hraDesde_1 < hraHasta_2 && hraHasta_1 > hraDesde_2) {
+                            
+                            if (hraDesde_1 < hraHasta_2 && hraHasta_1 > hraDesde_2) //verifico solapamiento de Horarios
+                            {
                                 //hay solapamiento!!
+                                haySolapamiento = true;
+
+                                //Guardo ID de los box de Rango Horario inconcistentes
+                                arrayDeError.push(id_i);
+                                arrayDeError.push(id_j);
+                                
                                 //debugger
                                 console.log("---------------------------------------------------------");
                                 console.log("Hay solapamiento!!");
-                                console.log('Entre "Rango Horario (' + data.RangosHorarios[i].id + ')" y "Rango Horario (' + data.RangosHorarios[j].id + ')"');
+                                console.log('Entre "Rango Horario (' + id_i + ')" y "Rango Horario (' + id_j + ')"');
                                 console.log("en el/los dias: " + days_intersect);
                                 console.log("---------------------------------------------------------\n");
                             }
@@ -501,6 +604,91 @@
                     }
                 }
             }
+
+
+            //Oculto TODOS los mensajes de error
+            for (var i = 0; i < boxHorariosCount; i++) {
+                if ($("#boxHorario_" + (i + 1)).length == 1) {
+                    //Oculto Mensajes de error en "Rango Horario [j]"
+                    $("#boxHorario_" + (i + 1)).removeClass("box-danger").addClass("box-success");
+                    $("#boxHorario_error_" + (i + 1)).hide();
+                }
+            }
+
+
+            
+            //Muestro solo los mensajes de error q corresponden
+            arrayDeError = arrayDeError.unique();
+            for (var i = 0; i < arrayDeError.length; i++) {
+                //Muestra Mensajes de error en "Rango Horario [i]"                                
+                $("#boxHorario_" + arrayDeError[i]).removeClass("box-success").addClass("box-danger");
+                $("#boxHorario_error_" + arrayDeError[i] + " span").text("Existen solapamientos entre Dias y Horarios, favor de verificar.");
+                $("#boxHorario_error_" + arrayDeError[i]).show();
+            }
+
+
+            if (haySolapamiento) {
+                jAlert("Debe solucionar las inconcistencias en los formularios de Rangos Horario señalados antes de crear uno nuevo.", "¡Atención!");
+                //$("#btnVerifica").show();
+                return false;
+            }
+            else {
+                //$("#btnVerifica").hide();
+                return true;
+            }
+        }
+
+
+        /*Función de validación q verifica la existencia de datos validos en los boxs de Rangos Horarios
+         *
+         *PARAMETROS
+         *  ninguno  
+         *
+         *RETORNO
+         *  TRUE : Si hay datos validos.
+         *  FALSE : Si NO hay datos validos.
+         */
+        function ValidaExistenciaDatos() {
+            //Rangos Horarios
+            for (var i = 1; i <= boxHorariosCount; i++) {
+                if ($("#boxHorario_" + i).length == 1) {
+
+                    //DuracionDeTurnos
+                    if ($("#dur_tur_" + i).val() == "") {
+                        jAlert("Debe completar los datos de todos los formularios de Rango Horario antes de crear uno nuevo.", "¡Atención!");
+                        return false;
+                    }
+
+                    //AgendaTipoID
+                    if ($("#tipoAge_" + i).val() == null) {
+                        jAlert("Debe completar los datos de todos los formularios de Rango Horario antes de crear uno nuevo.", "¡Atención!");
+                        return false;
+                    }
+
+                    //HoraDesde
+                    if (typeof $("#dpHoraDesde_" + i).data('date') == "undefined") {
+                        jAlert("Debe completar los datos de todos los formularios de Rango Horario antes de crear uno nuevo.", "¡Atención!");
+                        return false;
+                    }
+
+                    //HoraHasta
+                    if (typeof $("#dpHoraHasta_" + i).data('date') == "undefined") {
+                        jAlert("Debe completar los datos de todos los formularios de Rango Horario antes de crear uno nuevo.", "¡Atención!");
+                        return false;
+                    }
+
+                    //Dias
+                    var dias = [];
+                    $("input[class=chk_" + i + "]:checked").each(function () {
+                        dias.push(this.value);
+                    });
+                    if (dias.length < 1) {
+                        jAlert("Debe completar los datos de todos los formularios de Rango Horario antes de crear uno nuevo.", "¡Atención!");
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
 
@@ -533,5 +721,12 @@
 
             return result;
         }
+
+
+        Array.prototype.unique = function (a) {
+            return function () { return this.filter(a) }
+        }(function (a, b, c) {
+            return c.indexOf(a, b + 1) < 0
+        });
     </script>
 }

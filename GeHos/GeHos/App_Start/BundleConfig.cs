@@ -35,7 +35,9 @@ namespace GeHos
                       "~/Content/ionicons.min.css",         //Ionicons
                       "~/Content/AdminLTE.min.css",         //Theme style
                       "~/Scripts/plugins/select2/select2.min.css",         //Select2
-                      "~/Content/skin-blue.css"));      //AdminLTE Skins
+                      "~/Content/skin-blue.css",//AdminLTE Skins
+                      "~/Content/jquery.alerts.css",//jQuery Alerts css 
+                      "~/Content/jquery-ui.min.css"));     
 
             //appScripts
             bundles.Add(new ScriptBundle("~/bundles/appScripts").Include(
@@ -43,7 +45,9 @@ namespace GeHos
                       "~/Scripts/Scripts/plugins/jQueryUI/jquery-ui.min.js",    //jQuery UI
                       "~/Scripts/bootstrap.min.js",                     //Bootstrap
                       "~/Scripts/plugins/select2/select2.min.js",                     //Bootstrap
-                      "~/Scripts/app.min.js"));
+                      "~/Scripts/app.min.js",
+                      "~/Scripts/jquery.alerts.js",
+                      "~/Scripts/jquery-ui.min.js"));
                       //"~/Scripts/AccountScript.js"                         //AdminLTE App
 
             //BundleTable.EnableOptimizations = true;

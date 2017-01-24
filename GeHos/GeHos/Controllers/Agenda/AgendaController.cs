@@ -46,15 +46,16 @@ namespace GeHos.Controllers
             return View("Agregar");
         }
 
-        [HttpPost]
-        
+        [HttpPost]        
         public ActionResult Agregar(NewAgendaVM nuevaAgenda)
         {
             //var x = nuevaAgenda;
             //var y = Request.Form["EspecialidadID"];
-            AgendaClient ac = new AgendaClient();
-            ac.AgregarAgenda(nuevaAgenda);
-            return RedirectToAction("Index");
+            //AgendaClient ac = new AgendaClient();
+            //ac.AgregarAgenda(nuevaAgenda);
+            //return RedirectToAction("Index");
+            //return Json(new{ ok= true});
+            return Json(Url.Action("Index", "Agenda"));
         }
 
         [HttpGet]
