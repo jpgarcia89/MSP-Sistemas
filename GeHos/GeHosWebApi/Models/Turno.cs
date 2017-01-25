@@ -15,7 +15,7 @@ namespace GeHosWebApi.Models
     public partial class Turno
     {
         public long ID { get; set; }
-        public Nullable<int> PacienteID { get; set; }
+        public Nullable<long> PacienteID { get; set; }
         public int AgendaHorarioID { get; set; }
         public System.DateTime FechaTurno { get; set; }
         public byte TurnoEstadoID { get; set; }

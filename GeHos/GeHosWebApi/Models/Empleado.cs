@@ -21,6 +21,7 @@ namespace GeHosWebApi.Models
             this.EmpleadoCentroDeSalud = new HashSet<EmpleadoCentroDeSalud>();
             this.EmpleadoContratado = new HashSet<EmpleadoContratado>();
             this.EmpleadoEspecialidad = new HashSet<EmpleadoEspecialidad>();
+            this.EmpleadoPlantaPermanente = new HashSet<EmpleadoPlantaPermanente>();
         }
     
         public int ID { get; set; }
@@ -36,6 +37,7 @@ namespace GeHosWebApi.Models
         public virtual ICollection<EmpleadoContratado> EmpleadoContratado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmpleadoEspecialidad> EmpleadoEspecialidad { get; set; }
-        public virtual EmpleadoPlantaPermanente EmpleadoPlantaPermanente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmpleadoPlantaPermanente> EmpleadoPlantaPermanente { get; set; }
     }
 }

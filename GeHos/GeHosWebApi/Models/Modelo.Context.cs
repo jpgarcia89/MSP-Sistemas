@@ -47,6 +47,9 @@ namespace GeHosWebApi.Models
         public virtual DbSet<Departamento> Departamento { get; set; }
         public virtual DbSet<Diagnostico> Diagnostico { get; set; }
         public virtual DbSet<DiagnosticoAgrupamiento> DiagnosticoAgrupamiento { get; set; }
+        public virtual DbSet<DiagnosticoCapitulo> DiagnosticoCapitulo { get; set; }
+        public virtual DbSet<DiagnosticoPadron> DiagnosticoPadron { get; set; }
+        public virtual DbSet<DiagnosticoSubCapitulo> DiagnosticoSubCapitulo { get; set; }
         public virtual DbSet<Empleado> Empleado { get; set; }
         public virtual DbSet<EmpleadoCentroDeSalud> EmpleadoCentroDeSalud { get; set; }
         public virtual DbSet<EmpleadoContratado> EmpleadoContratado { get; set; }

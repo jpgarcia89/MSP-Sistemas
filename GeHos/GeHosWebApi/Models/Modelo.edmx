@@ -216,6 +216,35 @@
           <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="DiagnosticoCapitulo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoInicial" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CodigoFinal" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="DiagnosticoAgrupamientoID" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DiagnosticoPadron">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="280" Nullable="false" />
+          <Property Name="DiagnosticoSubCapituloID" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DiagnosticoSubCapitulo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoInicial" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CodigoFinal" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="DiagnosticoCapituloID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Empleado">
           <Key>
             <PropertyRef Name="ID" />
@@ -238,8 +267,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EmpleadoID" Type="int" Nullable="false" />
-          <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+          <Property Name="EmpleadoID" Type="int" />
+          <Property Name="FechaAlta" Type="datetime" />
           <Property Name="Observaciones" Type="nvarchar" MaxLength="250" />
           <Property Name="ProfesionID" Type="int" Nullable="false" />
           <Property Name="CargaHorariaSemanal" Type="tinyint" Nullable="false" />
@@ -264,8 +293,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EmpleadoID" Type="int" Nullable="false" />
-          <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+          <Property Name="EmpleadoID" Type="int" />
+          <Property Name="FechaAlta" Type="datetime" />
           <Property Name="SectorID" Type="smallint" Nullable="false" />
           <Property Name="Observaciones" Type="nvarchar" MaxLength="250" />
           <Property Name="Foto" Type="nvarchar" MaxLength="250" />
@@ -347,7 +376,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Fecha" Type="datetime" Nullable="false" />
           <Property Name="Horas" Type="smalldatetime" Nullable="false" />
           <Property Name="ConAdicional" Type="bit" Nullable="false" />
@@ -440,14 +469,14 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PersonaID" Type="int" Nullable="false" />
           <Property Name="ObraSocialID" Type="int" />
           <Property Name="EsDonanteDeOrganos" Type="bit" />
           <Property Name="Hospitalizado" Type="bit" />
           <Property Name="GrupoSanguineoID" Type="tinyint" />
           <Property Name="CentroDeSaludID" Type="int" />
-          <Property Name="NumeroHistoriaClinica" Type="nvarchar" MaxLength="25" />
+          <Property Name="NumeroHistoriaClinica" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Pais">
           <Key>
@@ -655,7 +684,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PacienteID" Type="int" />
+          <Property Name="PacienteID" Type="bigint" />
           <Property Name="AgendaHorarioID" Type="int" Nullable="false" />
           <Property Name="FechaTurno" Type="datetime" Nullable="false" />
           <Property Name="TurnoEstadoID" Type="tinyint" Nullable="false" />
@@ -922,6 +951,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DiagnosticoCapitulo_DiagnosticoCapitulo">
+          <End Role="DiagnosticoAgrupamiento" Type="Self.DiagnosticoAgrupamiento" Multiplicity="1" />
+          <End Role="DiagnosticoCapitulo" Type="Self.DiagnosticoCapitulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiagnosticoAgrupamiento">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DiagnosticoCapitulo">
+              <PropertyRef Name="DiagnosticoAgrupamientoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiagnosticoPadron_DiagnosticoSubCapitulo">
+          <End Role="DiagnosticoSubCapitulo" Type="Self.DiagnosticoSubCapitulo" Multiplicity="1" />
+          <End Role="DiagnosticoPadron" Type="Self.DiagnosticoPadron" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiagnosticoSubCapitulo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DiagnosticoPadron">
+              <PropertyRef Name="DiagnosticoSubCapituloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiagnosticoSubCapitulo_DiagnosticoCapitulo">
+          <End Role="DiagnosticoCapitulo" Type="Self.DiagnosticoCapitulo" Multiplicity="1" />
+          <End Role="DiagnosticoSubCapitulo" Type="Self.DiagnosticoSubCapitulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiagnosticoCapitulo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DiagnosticoSubCapitulo">
+              <PropertyRef Name="DiagnosticoCapituloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Empleado_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
           <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
@@ -959,7 +1024,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EmpleadoContratado_Empleado">
-          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
           <End Role="EmpleadoContratado" Type="Self.EmpleadoContratado" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empleado">
@@ -1019,14 +1084,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EmpleadoPlantaPermanente_Empleado">
-          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
-          <End Role="EmpleadoPlantaPermanente" Type="Self.EmpleadoPlantaPermanente" Multiplicity="0..1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+          <End Role="EmpleadoPlantaPermanente" Type="Self.EmpleadoPlantaPermanente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empleado">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="EmpleadoPlantaPermanente">
-              <PropertyRef Name="ID" />
+              <PropertyRef Name="EmpleadoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1524,6 +1589,9 @@
           <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Diagnostico" EntityType="Self.Diagnostico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiagnosticoAgrupamiento" EntityType="Self.DiagnosticoAgrupamiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiagnosticoCapitulo" EntityType="Self.DiagnosticoCapitulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiagnosticoPadron" EntityType="Self.DiagnosticoPadron" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiagnosticoSubCapitulo" EntityType="Self.DiagnosticoSubCapitulo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpleadoCentroDeSalud" EntityType="Self.EmpleadoCentroDeSalud" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpleadoContratado" EntityType="Self.EmpleadoContratado" Schema="dbo" store:Type="Tables" />
@@ -1642,6 +1710,18 @@
           <AssociationSet Name="FK_Diagnostico_DiagnosticoAgrupamiento" Association="Self.FK_Diagnostico_DiagnosticoAgrupamiento">
             <End Role="DiagnosticoAgrupamiento" EntitySet="DiagnosticoAgrupamiento" />
             <End Role="Diagnostico" EntitySet="Diagnostico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiagnosticoCapitulo_DiagnosticoCapitulo" Association="Self.FK_DiagnosticoCapitulo_DiagnosticoCapitulo">
+            <End Role="DiagnosticoAgrupamiento" EntitySet="DiagnosticoAgrupamiento" />
+            <End Role="DiagnosticoCapitulo" EntitySet="DiagnosticoCapitulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiagnosticoPadron_DiagnosticoSubCapitulo" Association="Self.FK_DiagnosticoPadron_DiagnosticoSubCapitulo">
+            <End Role="DiagnosticoSubCapitulo" EntitySet="DiagnosticoSubCapitulo" />
+            <End Role="DiagnosticoPadron" EntitySet="DiagnosticoPadron" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiagnosticoSubCapitulo_DiagnosticoCapitulo" Association="Self.FK_DiagnosticoSubCapitulo_DiagnosticoCapitulo">
+            <End Role="DiagnosticoCapitulo" EntitySet="DiagnosticoCapitulo" />
+            <End Role="DiagnosticoSubCapitulo" EntitySet="DiagnosticoSubCapitulo" />
           </AssociationSet>
           <AssociationSet Name="FK_Empleado_Persona" Association="Self.FK_Empleado_Persona">
             <End Role="Persona" EntitySet="Persona" />
@@ -2073,6 +2153,41 @@
           <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Diagnostico" Relationship="Self.FK_Diagnostico_DiagnosticoAgrupamiento" FromRole="DiagnosticoAgrupamiento" ToRole="Diagnostico" />
+          <NavigationProperty Name="DiagnosticoCapitulo" Relationship="Self.FK_DiagnosticoCapitulo_DiagnosticoCapitulo" FromRole="DiagnosticoAgrupamiento" ToRole="DiagnosticoCapitulo" />
+        </EntityType>
+        <EntityType Name="DiagnosticoCapitulo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoInicial" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodigoFinal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DiagnosticoAgrupamientoID" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="DiagnosticoAgrupamiento" Relationship="Self.FK_DiagnosticoCapitulo_DiagnosticoCapitulo" FromRole="DiagnosticoCapitulo" ToRole="DiagnosticoAgrupamiento" />
+          <NavigationProperty Name="DiagnosticoSubCapitulo" Relationship="Self.FK_DiagnosticoSubCapitulo_DiagnosticoCapitulo" FromRole="DiagnosticoCapitulo" ToRole="DiagnosticoSubCapitulo" />
+        </EntityType>
+        <EntityType Name="DiagnosticoPadron">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="280" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DiagnosticoSubCapituloID" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="DiagnosticoSubCapitulo" Relationship="Self.FK_DiagnosticoPadron_DiagnosticoSubCapitulo" FromRole="DiagnosticoPadron" ToRole="DiagnosticoSubCapitulo" />
+        </EntityType>
+        <EntityType Name="DiagnosticoSubCapitulo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoInicial" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodigoFinal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DiagnosticoCapituloID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DiagnosticoCapitulo" Relationship="Self.FK_DiagnosticoSubCapitulo_DiagnosticoCapitulo" FromRole="DiagnosticoSubCapitulo" ToRole="DiagnosticoCapitulo" />
+          <NavigationProperty Name="DiagnosticoPadron" Relationship="Self.FK_DiagnosticoPadron_DiagnosticoSubCapitulo" FromRole="DiagnosticoSubCapitulo" ToRole="DiagnosticoPadron" />
         </EntityType>
         <EntityType Name="Empleado">
           <Key>
@@ -2104,8 +2219,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmpleadoID" Type="Int32" Nullable="false" />
-          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmpleadoID" Type="Int32" />
+          <Property Name="FechaAlta" Type="DateTime" Precision="3" />
           <Property Name="Observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="ProfesionID" Type="Int32" Nullable="false" />
           <Property Name="CargaHorariaSemanal" Type="Byte" Nullable="false" />
@@ -2135,8 +2250,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EmpleadoID" Type="Int32" Nullable="false" />
-          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmpleadoID" Type="Int32" />
+          <Property Name="FechaAlta" Type="DateTime" Precision="3" />
           <Property Name="SectorID" Type="Int16" Nullable="false" />
           <Property Name="Observaciones" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Foto" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -2234,7 +2349,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Horas" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ConAdicional" Type="Boolean" Nullable="false" />
@@ -2346,14 +2461,14 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PersonaID" Type="Int32" Nullable="false" />
           <Property Name="ObraSocialID" Type="Int32" />
           <Property Name="EsDonanteDeOrganos" Type="Boolean" />
           <Property Name="Hospitalizado" Type="Boolean" />
           <Property Name="GrupoSanguineoID" Type="Byte" />
           <Property Name="CentroDeSaludID" Type="Int32" />
-          <Property Name="NumeroHistoriaClinica" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="NumeroHistoriaClinica" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CentroDeSalud" Relationship="Self.FK_Paciente_CentroDeSalud" FromRole="Paciente" ToRole="CentroDeSalud" />
           <NavigationProperty Name="GrupoSanguineo" Relationship="Self.FK_Paciente_GrupoSanguineo" FromRole="Paciente" ToRole="GrupoSanguineo" />
           <NavigationProperty Name="ObraSocial" Relationship="Self.FK_Paciente_ObraSocial" FromRole="Paciente" ToRole="ObraSocial" />
@@ -2595,7 +2710,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PacienteID" Type="Int32" />
+          <Property Name="PacienteID" Type="Int64" />
           <Property Name="AgendaHorarioID" Type="Int32" Nullable="false" />
           <Property Name="FechaTurno" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="TurnoEstadoID" Type="Byte" Nullable="false" />
@@ -2964,6 +3079,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DiagnosticoCapitulo_DiagnosticoCapitulo">
+          <End Role="DiagnosticoAgrupamiento" Type="Self.DiagnosticoAgrupamiento" Multiplicity="1" />
+          <End Role="DiagnosticoCapitulo" Type="Self.DiagnosticoCapitulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiagnosticoAgrupamiento">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DiagnosticoCapitulo">
+              <PropertyRef Name="DiagnosticoAgrupamientoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiagnosticoSubCapitulo_DiagnosticoCapitulo">
+          <End Role="DiagnosticoCapitulo" Type="Self.DiagnosticoCapitulo" Multiplicity="1" />
+          <End Role="DiagnosticoSubCapitulo" Type="Self.DiagnosticoSubCapitulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiagnosticoCapitulo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DiagnosticoSubCapitulo">
+              <PropertyRef Name="DiagnosticoCapituloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiagnosticoPadron_DiagnosticoSubCapitulo">
+          <End Role="DiagnosticoSubCapitulo" Type="Self.DiagnosticoSubCapitulo" Multiplicity="1" />
+          <End Role="DiagnosticoPadron" Type="Self.DiagnosticoPadron" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiagnosticoSubCapitulo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DiagnosticoPadron">
+              <PropertyRef Name="DiagnosticoSubCapituloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Empleado_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
           <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
@@ -2989,7 +3140,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EmpleadoContratado_Empleado">
-          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
           <End Role="EmpleadoContratado" Type="Self.EmpleadoContratado" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empleado">
@@ -3013,14 +3164,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EmpleadoPlantaPermanente_Empleado">
-          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
-          <End Role="EmpleadoPlantaPermanente" Type="Self.EmpleadoPlantaPermanente" Multiplicity="0..1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+          <End Role="EmpleadoPlantaPermanente" Type="Self.EmpleadoPlantaPermanente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empleado">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="EmpleadoPlantaPermanente">
-              <PropertyRef Name="ID" />
+              <PropertyRef Name="EmpleadoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3417,6 +3568,9 @@
           <EntitySet Name="Departamento" EntityType="Self.Departamento" />
           <EntitySet Name="Diagnostico" EntityType="Self.Diagnostico" />
           <EntitySet Name="DiagnosticoAgrupamiento" EntityType="Self.DiagnosticoAgrupamiento" />
+          <EntitySet Name="DiagnosticoCapitulo" EntityType="Self.DiagnosticoCapitulo" />
+          <EntitySet Name="DiagnosticoPadron" EntityType="Self.DiagnosticoPadron" />
+          <EntitySet Name="DiagnosticoSubCapitulo" EntityType="Self.DiagnosticoSubCapitulo" />
           <EntitySet Name="Empleado" EntityType="Self.Empleado" />
           <EntitySet Name="EmpleadoCentroDeSalud" EntityType="Self.EmpleadoCentroDeSalud" />
           <EntitySet Name="EmpleadoContratado" EntityType="Self.EmpleadoContratado" />
@@ -3567,6 +3721,18 @@
           <AssociationSet Name="FK_Diagnostico_DiagnosticoAgrupamiento" Association="Self.FK_Diagnostico_DiagnosticoAgrupamiento">
             <End Role="DiagnosticoAgrupamiento" EntitySet="DiagnosticoAgrupamiento" />
             <End Role="Diagnostico" EntitySet="Diagnostico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiagnosticoCapitulo_DiagnosticoCapitulo" Association="Self.FK_DiagnosticoCapitulo_DiagnosticoCapitulo">
+            <End Role="DiagnosticoAgrupamiento" EntitySet="DiagnosticoAgrupamiento" />
+            <End Role="DiagnosticoCapitulo" EntitySet="DiagnosticoCapitulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiagnosticoSubCapitulo_DiagnosticoCapitulo" Association="Self.FK_DiagnosticoSubCapitulo_DiagnosticoCapitulo">
+            <End Role="DiagnosticoCapitulo" EntitySet="DiagnosticoCapitulo" />
+            <End Role="DiagnosticoSubCapitulo" EntitySet="DiagnosticoSubCapitulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiagnosticoPadron_DiagnosticoSubCapitulo" Association="Self.FK_DiagnosticoPadron_DiagnosticoSubCapitulo">
+            <End Role="DiagnosticoSubCapitulo" EntitySet="DiagnosticoSubCapitulo" />
+            <End Role="DiagnosticoPadron" EntitySet="DiagnosticoPadron" />
           </AssociationSet>
           <AssociationSet Name="FK_Empleado_Persona" Association="Self.FK_Empleado_Persona">
             <End Role="Persona" EntitySet="Persona" />
@@ -4089,6 +4255,38 @@
               <MappingFragment StoreEntitySet="DiagnosticoAgrupamiento">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiagnosticoCapitulo">
+            <EntityTypeMapping TypeName="Model.DiagnosticoCapitulo">
+              <MappingFragment StoreEntitySet="DiagnosticoCapitulo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CodigoInicial" ColumnName="CodigoInicial" />
+                <ScalarProperty Name="CodigoFinal" ColumnName="CodigoFinal" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="DiagnosticoAgrupamientoID" ColumnName="DiagnosticoAgrupamientoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiagnosticoPadron">
+            <EntityTypeMapping TypeName="Model.DiagnosticoPadron">
+              <MappingFragment StoreEntitySet="DiagnosticoPadron">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="DiagnosticoSubCapituloID" ColumnName="DiagnosticoSubCapituloID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiagnosticoSubCapitulo">
+            <EntityTypeMapping TypeName="Model.DiagnosticoSubCapitulo">
+              <MappingFragment StoreEntitySet="DiagnosticoSubCapitulo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CodigoInicial" ColumnName="CodigoInicial" />
+                <ScalarProperty Name="CodigoFinal" ColumnName="CodigoFinal" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="DiagnosticoCapituloID" ColumnName="DiagnosticoCapituloID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

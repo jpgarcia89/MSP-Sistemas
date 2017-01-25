@@ -15,8 +15,8 @@ namespace GeHosWebApi.Models
     public partial class EmpleadoContratado
     {
         public int ID { get; set; }
-        public int EmpleadoID { get; set; }
-        public System.DateTime FechaAlta { get; set; }
+        public Nullable<int> EmpleadoID { get; set; }
+        public Nullable<System.DateTime> FechaAlta { get; set; }
         public string Observaciones { get; set; }
         public int ProfesionID { get; set; }
         public byte CargaHorariaSemanal { get; set; }

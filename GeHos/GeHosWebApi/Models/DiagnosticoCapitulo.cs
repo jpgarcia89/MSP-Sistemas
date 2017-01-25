@@ -12,21 +12,22 @@ namespace GeHosWebApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DiagnosticoAgrupamiento
+    public partial class DiagnosticoCapitulo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public DiagnosticoAgrupamiento()
+        public DiagnosticoCapitulo()
         {
-            this.Diagnostico = new HashSet<Diagnostico>();
-            this.DiagnosticoCapitulo = new HashSet<DiagnosticoCapitulo>();
+            this.DiagnosticoSubCapitulo = new HashSet<DiagnosticoSubCapitulo>();
         }
     
-        public byte ID { get; set; }
-        public string Nombre { get; set; }
+        public int ID { get; set; }
+        public string CodigoInicial { get; set; }
+        public string CodigoFinal { get; set; }
+        public string Descripcion { get; set; }
+        public byte DiagnosticoAgrupamientoID { get; set; }
     
+        public virtual DiagnosticoAgrupamiento DiagnosticoAgrupamiento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Diagnostico> Diagnostico { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DiagnosticoCapitulo> DiagnosticoCapitulo { get; set; }
+        public virtual ICollection<DiagnosticoSubCapitulo> DiagnosticoSubCapitulo { get; set; }
     }
 }

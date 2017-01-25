@@ -20,7 +20,7 @@ namespace GeHosWebApi.Models
             this.Turno = new HashSet<Turno>();
         }
     
-        public int ID { get; set; }
+        public long ID { get; set; }
         public int PersonaID { get; set; }
         public Nullable<int> ObraSocialID { get; set; }
         public Nullable<bool> EsDonanteDeOrganos { get; set; }
