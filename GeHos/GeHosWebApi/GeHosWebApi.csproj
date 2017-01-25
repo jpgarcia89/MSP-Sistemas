@@ -294,6 +294,9 @@
     <Compile Include="Models\GetEspecialidadesPorCentroDeSalud_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetEspecialidadesPorEspecialista_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetEvolucionPorPaciente_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>

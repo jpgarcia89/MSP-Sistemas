@@ -278,5 +278,14 @@ namespace GeHosWebApi.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetTurnosPorPaciente", pacienteIDParameter, fechaDesdeParameter, fechaHastaParameter);
         }
+    
+        public virtual ObjectResult<GetEspecialidadesPorEspecialista_Result> GetEspecialidadesPorEspecialista(Nullable<int> empleadoID)
+        {
+            var empleadoIDParameter = empleadoID.HasValue ?
+                new ObjectParameter("EmpleadoID", empleadoID) :
+                new ObjectParameter("EmpleadoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEspecialidadesPorEspecialista_Result>("GetEspecialidadesPorEspecialista", empleadoIDParameter);
+        }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Administrador">
           <Key>
             <PropertyRef Name="ID" />
@@ -1533,6 +1533,9 @@
         <Function Name="GetEspecialidadesPorCentroDeSalud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CentroDeSaludID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetEspecialidadesPorEspecialista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpleadoID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetEspecialistasPorCentroDeSalud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CentroDeSaludID" Type="int" Mode="In" />
         </Function>
@@ -1900,8 +1903,7 @@
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -3879,31 +3881,31 @@
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
           <FunctionImport Name="GetAgendaHorariosPorEspecialista">
-            <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
+          <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetAgendaPorEspecialista">
-            <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
+          <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetCentrosDeSaludPorEmpleado">
-            <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
+          <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetDepartamentosPorProvincia" ReturnType="Collection(Model.GetDepartamentosPorProvincia_Result)">
-            <Parameter Name="ProvinciaID" Mode="In" Type="Int32" />
+          <Parameter Name="ProvinciaID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetDiagnosticosPorAgrupamiento" ReturnType="Collection(Model.GetDiagnosticosPorAgrupamiento_Result)">
-            <Parameter Name="DiagnosticoAgrupamientoID" Mode="In" Type="Byte" />
+          <Parameter Name="DiagnosticoAgrupamientoID" Mode="In" Type="Byte" />
           </FunctionImport>
           <FunctionImport Name="GetEspecialidadesPorCentroDeSalud" ReturnType="Collection(Model.GetEspecialidadesPorCentroDeSalud_Result)">
-            <Parameter Name="CentroDeSaludID" Mode="In" Type="Int32" />
+          <Parameter Name="CentroDeSaludID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetEspecialistasPorCentroDeSalud">
-            <Parameter Name="CentroDeSaludID" Mode="In" Type="Int32" />
+          <Parameter Name="CentroDeSaludID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetEvolucionPorPaciente" ReturnType="Collection(Model.GetEvolucionPorPaciente_Result)">
-            <Parameter Name="PacienteID" Mode="In" Type="Int32" />
+          <Parameter Name="PacienteID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetEvolucionPorTurno" ReturnType="Collection(Model.GetEvolucionPorTurno_Result)">
-            <Parameter Name="TurnoID" Mode="In" Type="Int64" />
+          <Parameter Name="TurnoID" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="GetListaDiagnosticoAgrupamiento" ReturnType="Collection(Model.GetListaDiagnosticoAgrupamiento_Result)" />
           <FunctionImport Name="GetListaSexo" ReturnType="Collection(Model.GetListaSexo_Result)" />
@@ -3917,19 +3919,22 @@
           <FunctionImport Name="GetListaTurnoEstado" ReturnType="Collection(Model.GetListaTurnoEstado_Result)" />
           <FunctionImport Name="GetListaTurnoEstadoAdmision" ReturnType="Collection(Model.GetListaTurnoEstadoAdmision_Result)" />
           <FunctionImport Name="GetLocalidadesPorDepartamento" ReturnType="Collection(Model.GetLocalidadesPorDepartamento_Result)">
-            <Parameter Name="DepartamentoID" Mode="In" Type="Int32" />
+          <Parameter Name="DepartamentoID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetPaises" ReturnType="Collection(Model.GetPaises_Result)" />
           <FunctionImport Name="GetPracticasPorNomenclador" ReturnType="Collection(Model.GetPracticasPorNomenclador_Result)">
-            <Parameter Name="NomencladorID" Mode="In" Type="Int32" />
+          <Parameter Name="NomencladorID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetProvinciasPorPais" ReturnType="Collection(Model.GetProvinciasPorPais_Result)">
-            <Parameter Name="PaisID" Mode="In" Type="Int32" />
+          <Parameter Name="PaisID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetTurnosPorPaciente">
             <Parameter Name="PacienteID" Mode="In" Type="Int32" />
             <Parameter Name="FechaDesde" Mode="In" Type="DateTime" />
             <Parameter Name="FechaHasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetEspecialidadesPorEspecialista" ReturnType="Collection(Model.GetEspecialidadesPorEspecialista_Result)">
+            <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetDepartamentosPorProvincia_Result">
@@ -4023,6 +4028,14 @@
         <ComplexType Name="GetProvinciasPorPais_Result">
           <Property Type="Byte" Name="ID" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetEspecialidadesPorEspecialista_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="80" />
+          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DescripcionPlanilla" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Abreviatura" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdMHO" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4986,6 +4999,18 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetTurnosPorPaciente" FunctionName="Model.Store.GetTurnosPorPaciente" />
+          <FunctionImportMapping FunctionImportName="GetEspecialidadesPorEspecialista" FunctionName="Model.Store.GetEspecialidadesPorEspecialista">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetEspecialidadesPorEspecialista_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="DescripcionPlanilla" ColumnName="DescripcionPlanilla" />
+                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+                <ScalarProperty Name="IdMHO" ColumnName="IdMHO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
