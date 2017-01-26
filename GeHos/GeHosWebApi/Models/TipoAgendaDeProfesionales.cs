@@ -14,8 +14,17 @@ namespace GeHosWebApi.Models
     
     public partial class TipoAgendaDeProfesionales
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TipoAgendaDeProfesionales()
+        {
+            this.AgendaHorario = new HashSet<AgendaHorario>();
+        }
+    
         public byte ID { get; set; }
         public string Nombre { get; set; }
         public bool Activa { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AgendaHorario> AgendaHorario { get; set; }
     }
 }

@@ -10,23 +10,17 @@
 namespace GeHosWebApi.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Turno
+    public partial class GetTurnosPorEspecialista_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Turno()
-        {
-            this.DiagnosticoPorTurno = new HashSet<DiagnosticoPorTurno>();
-            this.PracticaPorTurno = new HashSet<PracticaPorTurno>();
-        }
-    
         public long ID { get; set; }
         public Nullable<long> PacienteID { get; set; }
         public int AgendaHorarioID { get; set; }
         public System.DateTime FechaTurno { get; set; }
         public byte TurnoEstadoID { get; set; }
+        public string EstadoTurno { get; set; }
         public byte TurnoEstadoAdmisionID { get; set; }
+        public string EstadoAdmision { get; set; }
         public Nullable<bool> EsSobreturno { get; set; }
         public Nullable<System.DateTime> FechaAdmision { get; set; }
         public Nullable<System.DateTime> FechaInicioAtencion { get; set; }
@@ -34,14 +28,11 @@ namespace GeHosWebApi.Models
         public Nullable<bool> EsPrioritario { get; set; }
         public Nullable<int> BloqueoMasivoID { get; set; }
         public Nullable<bool> EsProgramado { get; set; }
-    
-        public virtual AgendaHorario AgendaHorario { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DiagnosticoPorTurno> DiagnosticoPorTurno { get; set; }
-        public virtual Paciente Paciente { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PracticaPorTurno> PracticaPorTurno { get; set; }
-        public virtual TurnoEstado TurnoEstado { get; set; }
-        public virtual TurnoEstadoAdmision TurnoEstadoAdmision { get; set; }
+        public Nullable<int> CentroDeSaludID { get; set; }
+        public string CentroDeSalud { get; set; }
+        public Nullable<int> EspecialidadID { get; set; }
+        public string Especialidad { get; set; }
+        public int EmpleadoID { get; set; }
+        public string Especialista { get; set; }
     }
 }

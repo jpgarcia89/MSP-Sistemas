@@ -14,6 +14,12 @@ namespace GeHosWebApi.Models
     
     public partial class Practica
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Practica()
+        {
+            this.PracticaPorTurno = new HashSet<PracticaPorTurno>();
+        }
+    
         public long ID { get; set; }
         public string Codigo { get; set; }
         public string Descripcion { get; set; }
@@ -23,5 +29,7 @@ namespace GeHosWebApi.Models
         public bool Activa { get; set; }
     
         public virtual Nomenclador Nomenclador { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PracticaPorTurno> PracticaPorTurno { get; set; }
     }
 }

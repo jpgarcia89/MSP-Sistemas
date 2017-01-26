@@ -12,9 +12,17 @@ namespace GeHosWebApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AgendaTipo
+    public partial class DiagnosticoPorTurno
     {
-        public byte ID { get; set; }
-        public string Descripcion { get; set; }
+        public long ID { get; set; }
+        public long TurnoID { get; set; }
+        public int DiagnosticoID { get; set; }
+        public System.DateTime FechaAlta { get; set; }
+        public int AspNetUsersID { get; set; }
+        public bool Activa { get; set; }
+    
+        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual Diagnostico Diagnostico { get; set; }
+        public virtual Turno Turno { get; set; }
     }
 }

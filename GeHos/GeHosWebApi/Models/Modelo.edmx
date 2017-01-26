@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Administrador">
           <Key>
             <PropertyRef Name="ID" />
@@ -36,14 +36,14 @@
           <Property Name="HoraDesde" Type="time" Precision="7" Nullable="false" />
           <Property Name="HoraHasta" Type="time" Precision="7" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
-          <Property Name="AgendaTipoID" Type="int" Nullable="false" />
+          <Property Name="AgendaTipoID" Type="tinyint" Nullable="false" />
           <Property Name="CantidadDeTurnos" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="AgendaTipo">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="AgrupamientoGradosDeEscalafon">
@@ -234,6 +234,17 @@
           <Property Name="Codigo" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="280" Nullable="false" />
           <Property Name="DiagnosticoSubCapituloID" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DiagnosticoPorTurno">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TurnoID" Type="bigint" Nullable="false" />
+          <Property Name="DiagnosticoID" Type="int" Nullable="false" />
+          <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+          <Property Name="AspNetUsersID" Type="int" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="DiagnosticoSubCapitulo">
           <Key>
@@ -543,6 +554,18 @@
           <Property Name="Uop" Type="decimal" Precision="15" Scale="2" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="PracticaPorTurno">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TurnoID" Type="bigint" Nullable="false" />
+          <Property Name="PracticaID" Type="bigint" Nullable="false" />
+          <Property Name="Cantidad" Type="smallint" />
+          <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+          <Property Name="AspNetUsersID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Profesion">
           <Key>
             <PropertyRef Name="ID" />
@@ -782,10 +805,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AgendaHorario_AgendaTipo">
-          <End Role="AgendaTipo" Type="Self.AgendaTipo" Multiplicity="1" />
+          <End Role="TipoAgendaDeProfesionales" Type="Self.TipoAgendaDeProfesionales" Multiplicity="1" />
           <End Role="AgendaHorario" Type="Self.AgendaHorario" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AgendaTipo">
+            <Principal Role="TipoAgendaDeProfesionales">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="AgendaHorario">
@@ -972,6 +995,42 @@
             </Principal>
             <Dependent Role="DiagnosticoPadron">
               <PropertyRef Name="DiagnosticoSubCapituloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiagnosticosPorTurno_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="DiagnosticoPorTurno" Type="Self.DiagnosticoPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DiagnosticoPorTurno">
+              <PropertyRef Name="AspNetUsersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiagnosticosPorTurno_Diagnostico">
+          <End Role="Diagnostico" Type="Self.Diagnostico" Multiplicity="1" />
+          <End Role="DiagnosticoPorTurno" Type="Self.DiagnosticoPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnostico">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DiagnosticoPorTurno">
+              <PropertyRef Name="DiagnosticoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiagnosticosPorTurno_Turno">
+          <End Role="Turno" Type="Self.Turno" Multiplicity="1" />
+          <End Role="DiagnosticoPorTurno" Type="Self.DiagnosticoPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turno">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DiagnosticoPorTurno">
+              <PropertyRef Name="TurnoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1419,6 +1478,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PracticaPorTurno_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="PracticaPorTurno" Type="Self.PracticaPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PracticaPorTurno">
+              <PropertyRef Name="AspNetUsersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PracticaPorTurno_Practica">
+          <End Role="Practica" Type="Self.Practica" Multiplicity="1" />
+          <End Role="PracticaPorTurno" Type="Self.PracticaPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Practica">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PracticaPorTurno">
+              <PropertyRef Name="PracticaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PracticaPorTurno_Turno">
+          <End Role="Turno" Type="Self.Turno" Multiplicity="1" />
+          <End Role="PracticaPorTurno" Type="Self.PracticaPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turno">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PracticaPorTurno">
+              <PropertyRef Name="TurnoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Provincia_Pais">
           <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
           <End Role="Provincia" Type="Self.Provincia" Multiplicity="*" />
@@ -1536,8 +1631,19 @@
         <Function Name="GetEspecialidadesPorEspecialista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmpleadoID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetEspecialidadesPorEspecialistaPorCentroDeSalud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpleadoID" Type="int" Mode="In" />
+          <Parameter Name="CentroDeSaludID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetEspecialistasPorCentroDeSalud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CentroDeSaludID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetEspecialistasPorEspecialidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EspecialidadID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetEspecialistasPorEspecialidadPorCentroDeSalud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EspecialidadID" Type="int" Mode="In" />
+          <Parameter Name="CentroDeSalud" Type="int" Mode="In" />
         </Function>
         <Function Name="GetEvolucionPorPaciente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PacienteID" Type="int" Mode="In" />
@@ -1566,10 +1672,18 @@
         <Function Name="GetProvinciasPorPais" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PaisID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetTurnosPorEspecialista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpleadoID" Type="int" Mode="In" />
+          <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
+          <Parameter Name="FechaHasta" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="GetTurnosPorPaciente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PacienteID" Type="int" Mode="In" />
           <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
           <Parameter Name="FechaHasta" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="sp_encryptPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Pass" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
@@ -1594,6 +1708,7 @@
           <EntitySet Name="DiagnosticoAgrupamiento" EntityType="Self.DiagnosticoAgrupamiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiagnosticoCapitulo" EntityType="Self.DiagnosticoCapitulo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiagnosticoPadron" EntityType="Self.DiagnosticoPadron" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiagnosticoPorTurno" EntityType="Self.DiagnosticoPorTurno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiagnosticoSubCapitulo" EntityType="Self.DiagnosticoSubCapitulo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpleadoCentroDeSalud" EntityType="Self.EmpleadoCentroDeSalud" Schema="dbo" store:Type="Tables" />
@@ -1619,6 +1734,7 @@
           <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Practica" EntityType="Self.Practica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PracticaPorTurno" EntityType="Self.PracticaPorTurno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profesion" EntityType="Self.Profesion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PuebloIndigena" EntityType="Self.PuebloIndigena" Schema="dbo" store:Type="Tables" />
@@ -1659,7 +1775,7 @@
             <End Role="AgendaHorario" EntitySet="AgendaHorario" />
           </AssociationSet>
           <AssociationSet Name="FK_AgendaHorario_AgendaTipo" Association="Self.FK_AgendaHorario_AgendaTipo">
-            <End Role="AgendaTipo" EntitySet="AgendaTipo" />
+            <End Role="TipoAgendaDeProfesionales" EntitySet="TipoAgendaDeProfesionales" />
             <End Role="AgendaHorario" EntitySet="AgendaHorario" />
           </AssociationSet>
           <AssociationSet Name="FK_Barrio_Departamento" Association="Self.FK_Barrio_Departamento">
@@ -1721,6 +1837,18 @@
           <AssociationSet Name="FK_DiagnosticoPadron_DiagnosticoSubCapitulo" Association="Self.FK_DiagnosticoPadron_DiagnosticoSubCapitulo">
             <End Role="DiagnosticoSubCapitulo" EntitySet="DiagnosticoSubCapitulo" />
             <End Role="DiagnosticoPadron" EntitySet="DiagnosticoPadron" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiagnosticosPorTurno_AspNetUsers" Association="Self.FK_DiagnosticosPorTurno_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="DiagnosticoPorTurno" EntitySet="DiagnosticoPorTurno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiagnosticosPorTurno_Diagnostico" Association="Self.FK_DiagnosticosPorTurno_Diagnostico">
+            <End Role="Diagnostico" EntitySet="Diagnostico" />
+            <End Role="DiagnosticoPorTurno" EntitySet="DiagnosticoPorTurno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiagnosticosPorTurno_Turno" Association="Self.FK_DiagnosticosPorTurno_Turno">
+            <End Role="Turno" EntitySet="Turno" />
+            <End Role="DiagnosticoPorTurno" EntitySet="DiagnosticoPorTurno" />
           </AssociationSet>
           <AssociationSet Name="FK_DiagnosticoSubCapitulo_DiagnosticoCapitulo" Association="Self.FK_DiagnosticoSubCapitulo_DiagnosticoCapitulo">
             <End Role="DiagnosticoCapitulo" EntitySet="DiagnosticoCapitulo" />
@@ -1870,6 +1998,18 @@
             <End Role="Nomenclador" EntitySet="Nomenclador" />
             <End Role="Practica" EntitySet="Practica" />
           </AssociationSet>
+          <AssociationSet Name="FK_PracticaPorTurno_AspNetUsers" Association="Self.FK_PracticaPorTurno_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="PracticaPorTurno" EntitySet="PracticaPorTurno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PracticaPorTurno_Practica" Association="Self.FK_PracticaPorTurno_Practica">
+            <End Role="Practica" EntitySet="Practica" />
+            <End Role="PracticaPorTurno" EntitySet="PracticaPorTurno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PracticaPorTurno_Turno" Association="Self.FK_PracticaPorTurno_Turno">
+            <End Role="Turno" EntitySet="Turno" />
+            <End Role="PracticaPorTurno" EntitySet="PracticaPorTurno" />
+          </AssociationSet>
           <AssociationSet Name="FK_Provincia_Pais" Association="Self.FK_Provincia_Pais">
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Provincia" EntitySet="Provincia" />
@@ -1903,7 +2043,8 @@
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1944,19 +2085,18 @@
           <Property Name="HoraDesde" Type="Time" Nullable="false" Precision="7" />
           <Property Name="HoraHasta" Type="Time" Nullable="false" Precision="7" />
           <Property Name="Activa" Type="Boolean" Nullable="false" />
-          <Property Name="AgendaTipoID" Type="Int32" Nullable="false" />
+          <Property Name="AgendaTipoID" Type="Byte" Nullable="false" />
           <Property Name="CantidadDeTurnos" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Agenda" Relationship="Self.FK_AgendaHorario_Agenda" FromRole="AgendaHorario" ToRole="Agenda" />
-          <NavigationProperty Name="AgendaTipo" Relationship="Self.FK_AgendaHorario_AgendaTipo" FromRole="AgendaHorario" ToRole="AgendaTipo" />
+          <NavigationProperty Name="TipoAgendaDeProfesionales" Relationship="Self.FK_AgendaHorario_AgendaTipo" FromRole="AgendaHorario" ToRole="TipoAgendaDeProfesionales" />
           <NavigationProperty Name="Turno" Relationship="Self.FK_Turno_AgendaHorario" FromRole="AgendaHorario" ToRole="Turno" />
         </EntityType>
         <EntityType Name="AgendaTipo">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AgendaHorario" Relationship="Self.FK_AgendaHorario_AgendaTipo" FromRole="AgendaTipo" ToRole="AgendaHorario" />
         </EntityType>
         <EntityType Name="AgrupamientoGradosDeEscalafon">
           <Key>
@@ -2019,6 +2159,8 @@
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DiagnosticoPorTurno" Relationship="Self.FK_DiagnosticosPorTurno_AspNetUsers" FromRole="AspNetUsers" ToRole="DiagnosticoPorTurno" />
+          <NavigationProperty Name="PracticaPorTurno" Relationship="Self.FK_PracticaPorTurno_AspNetUsers" FromRole="AspNetUsers" ToRole="PracticaPorTurno" />
         </EntityType>
         <EntityType Name="Barrio">
           <Key>
@@ -2147,6 +2289,7 @@
           <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="DiagnosticoAgrupamientoID" Type="Byte" />
           <NavigationProperty Name="DiagnosticoAgrupamiento" Relationship="Self.FK_Diagnostico_DiagnosticoAgrupamiento" FromRole="Diagnostico" ToRole="DiagnosticoAgrupamiento" />
+          <NavigationProperty Name="DiagnosticoPorTurno" Relationship="Self.FK_DiagnosticosPorTurno_Diagnostico" FromRole="Diagnostico" ToRole="DiagnosticoPorTurno" />
         </EntityType>
         <EntityType Name="DiagnosticoAgrupamiento">
           <Key>
@@ -2178,6 +2321,20 @@
           <Property Name="Descripcion" Type="String" MaxLength="280" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DiagnosticoSubCapituloID" Type="Int16" Nullable="false" />
           <NavigationProperty Name="DiagnosticoSubCapitulo" Relationship="Self.FK_DiagnosticoPadron_DiagnosticoSubCapitulo" FromRole="DiagnosticoPadron" ToRole="DiagnosticoSubCapitulo" />
+        </EntityType>
+        <EntityType Name="DiagnosticoPorTurno">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TurnoID" Type="Int64" Nullable="false" />
+          <Property Name="DiagnosticoID" Type="Int32" Nullable="false" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AspNetUsersID" Type="Int32" Nullable="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_DiagnosticosPorTurno_AspNetUsers" FromRole="DiagnosticoPorTurno" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Diagnostico" Relationship="Self.FK_DiagnosticosPorTurno_Diagnostico" FromRole="DiagnosticoPorTurno" ToRole="Diagnostico" />
+          <NavigationProperty Name="Turno" Relationship="Self.FK_DiagnosticosPorTurno_Turno" FromRole="DiagnosticoPorTurno" ToRole="Turno" />
         </EntityType>
         <EntityType Name="DiagnosticoSubCapitulo">
           <Key>
@@ -2553,6 +2710,22 @@
           <Property Name="Uop" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
           <Property Name="Activa" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Nomenclador" Relationship="Self.FK_Practica_Nomenclador" FromRole="Practica" ToRole="Nomenclador" />
+          <NavigationProperty Name="PracticaPorTurno" Relationship="Self.FK_PracticaPorTurno_Practica" FromRole="Practica" ToRole="PracticaPorTurno" />
+        </EntityType>
+        <EntityType Name="PracticaPorTurno">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TurnoID" Type="Int64" Nullable="false" />
+          <Property Name="PracticaID" Type="Int64" Nullable="false" />
+          <Property Name="Cantidad" Type="Int16" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <Property Name="AspNetUsersID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_PracticaPorTurno_AspNetUsers" FromRole="PracticaPorTurno" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Practica" Relationship="Self.FK_PracticaPorTurno_Practica" FromRole="PracticaPorTurno" ToRole="Practica" />
+          <NavigationProperty Name="Turno" Relationship="Self.FK_PracticaPorTurno_Turno" FromRole="PracticaPorTurno" ToRole="Turno" />
         </EntityType>
         <EntityType Name="Profesion">
           <Key>
@@ -2654,6 +2827,7 @@
           <Property Name="ID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AgendaHorario" Relationship="Self.FK_AgendaHorario_AgendaTipo" FromRole="TipoAgendaDeProfesionales" ToRole="AgendaHorario" />
         </EntityType>
         <EntityType Name="TipoDNI">
           <Key>
@@ -2725,7 +2899,9 @@
           <Property Name="BloqueoMasivoID" Type="Int32" />
           <Property Name="EsProgramado" Type="Boolean" />
           <NavigationProperty Name="AgendaHorario" Relationship="Self.FK_Turno_AgendaHorario" FromRole="Turno" ToRole="AgendaHorario" />
+          <NavigationProperty Name="DiagnosticoPorTurno" Relationship="Self.FK_DiagnosticosPorTurno_Turno" FromRole="Turno" ToRole="DiagnosticoPorTurno" />
           <NavigationProperty Name="Paciente" Relationship="Self.FK_Turno_Paciente" FromRole="Turno" ToRole="Paciente" />
+          <NavigationProperty Name="PracticaPorTurno" Relationship="Self.FK_PracticaPorTurno_Turno" FromRole="Turno" ToRole="PracticaPorTurno" />
           <NavigationProperty Name="TurnoEstado" Relationship="Self.FK_Turno_TurnoEstado" FromRole="Turno" ToRole="TurnoEstado" />
           <NavigationProperty Name="TurnoEstadoAdmision" Relationship="Self.FK_Turno_TurnoEstadoAdmision" FromRole="Turno" ToRole="TurnoEstadoAdmision" />
         </EntityType>
@@ -2828,10 +3004,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AgendaHorario_AgendaTipo">
-          <End Role="AgendaTipo" Type="Self.AgendaTipo" Multiplicity="1" />
+          <End Role="TipoAgendaDeProfesionales" Type="Self.TipoAgendaDeProfesionales" Multiplicity="1" />
           <End Role="AgendaHorario" Type="Self.AgendaHorario" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AgendaTipo">
+            <Principal Role="TipoAgendaDeProfesionales">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="AgendaHorario">
@@ -2874,6 +3050,30 @@
             </Principal>
             <Dependent Role="AspNetUserRoles">
               <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiagnosticosPorTurno_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="DiagnosticoPorTurno" Type="Self.DiagnosticoPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DiagnosticoPorTurno">
+              <PropertyRef Name="AspNetUsersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PracticaPorTurno_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="PracticaPorTurno" Type="Self.PracticaPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PracticaPorTurno">
+              <PropertyRef Name="AspNetUsersID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3081,6 +3281,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DiagnosticosPorTurno_Diagnostico">
+          <End Role="Diagnostico" Type="Self.Diagnostico" Multiplicity="1" />
+          <End Role="DiagnosticoPorTurno" Type="Self.DiagnosticoPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnostico">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DiagnosticoPorTurno">
+              <PropertyRef Name="DiagnosticoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DiagnosticoCapitulo_DiagnosticoCapitulo">
           <End Role="DiagnosticoAgrupamiento" Type="Self.DiagnosticoAgrupamiento" Multiplicity="1" />
           <End Role="DiagnosticoCapitulo" Type="Self.DiagnosticoCapitulo" Multiplicity="*" />
@@ -3114,6 +3326,18 @@
             </Principal>
             <Dependent Role="DiagnosticoPadron">
               <PropertyRef Name="DiagnosticoSubCapituloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiagnosticosPorTurno_Turno">
+          <End Role="Turno" Type="Self.Turno" Multiplicity="1" />
+          <End Role="DiagnosticoPorTurno" Type="Self.DiagnosticoPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turno">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DiagnosticoPorTurno">
+              <PropertyRef Name="TurnoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3501,6 +3725,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PracticaPorTurno_Practica">
+          <End Role="Practica" Type="Self.Practica" Multiplicity="1" />
+          <End Role="PracticaPorTurno" Type="Self.PracticaPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Practica">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PracticaPorTurno">
+              <PropertyRef Name="PracticaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PracticaPorTurno_Turno">
+          <End Role="Turno" Type="Self.Turno" Multiplicity="1" />
+          <End Role="PracticaPorTurno" Type="Self.PracticaPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turno">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PracticaPorTurno">
+              <PropertyRef Name="TurnoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Sector_Reparticion">
           <End Role="Reparticion" Type="Self.Reparticion" Multiplicity="1" />
           <End Role="Sector" Type="Self.Sector" Multiplicity="*" />
@@ -3572,6 +3820,7 @@
           <EntitySet Name="DiagnosticoAgrupamiento" EntityType="Self.DiagnosticoAgrupamiento" />
           <EntitySet Name="DiagnosticoCapitulo" EntityType="Self.DiagnosticoCapitulo" />
           <EntitySet Name="DiagnosticoPadron" EntityType="Self.DiagnosticoPadron" />
+          <EntitySet Name="DiagnosticoPorTurno" EntityType="Self.DiagnosticoPorTurno" />
           <EntitySet Name="DiagnosticoSubCapitulo" EntityType="Self.DiagnosticoSubCapitulo" />
           <EntitySet Name="Empleado" EntityType="Self.Empleado" />
           <EntitySet Name="EmpleadoCentroDeSalud" EntityType="Self.EmpleadoCentroDeSalud" />
@@ -3597,6 +3846,7 @@
           <EntitySet Name="Pais" EntityType="Self.Pais" />
           <EntitySet Name="Persona" EntityType="Self.Persona" />
           <EntitySet Name="Practica" EntityType="Self.Practica" />
+          <EntitySet Name="PracticaPorTurno" EntityType="Self.PracticaPorTurno" />
           <EntitySet Name="Profesion" EntityType="Self.Profesion" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" />
           <EntitySet Name="PuebloIndigena" EntityType="Self.PuebloIndigena" />
@@ -3641,7 +3891,7 @@
             <End Role="AgendaHorario" EntitySet="AgendaHorario" />
           </AssociationSet>
           <AssociationSet Name="FK_AgendaHorario_AgendaTipo" Association="Self.FK_AgendaHorario_AgendaTipo">
-            <End Role="AgendaTipo" EntitySet="AgendaTipo" />
+            <End Role="TipoAgendaDeProfesionales" EntitySet="TipoAgendaDeProfesionales" />
             <End Role="AgendaHorario" EntitySet="AgendaHorario" />
           </AssociationSet>
           <AssociationSet Name="FK_Turno_AgendaHorario" Association="Self.FK_Turno_AgendaHorario">
@@ -3655,6 +3905,14 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiagnosticosPorTurno_AspNetUsers" Association="Self.FK_DiagnosticosPorTurno_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="DiagnosticoPorTurno" EntitySet="DiagnosticoPorTurno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PracticaPorTurno_AspNetUsers" Association="Self.FK_PracticaPorTurno_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="PracticaPorTurno" EntitySet="PracticaPorTurno" />
           </AssociationSet>
           <AssociationSet Name="FK_Barrio_Departamento" Association="Self.FK_Barrio_Departamento">
             <End Role="Departamento" EntitySet="Departamento" />
@@ -3724,6 +3982,10 @@
             <End Role="DiagnosticoAgrupamiento" EntitySet="DiagnosticoAgrupamiento" />
             <End Role="Diagnostico" EntitySet="Diagnostico" />
           </AssociationSet>
+          <AssociationSet Name="FK_DiagnosticosPorTurno_Diagnostico" Association="Self.FK_DiagnosticosPorTurno_Diagnostico">
+            <End Role="Diagnostico" EntitySet="Diagnostico" />
+            <End Role="DiagnosticoPorTurno" EntitySet="DiagnosticoPorTurno" />
+          </AssociationSet>
           <AssociationSet Name="FK_DiagnosticoCapitulo_DiagnosticoCapitulo" Association="Self.FK_DiagnosticoCapitulo_DiagnosticoCapitulo">
             <End Role="DiagnosticoAgrupamiento" EntitySet="DiagnosticoAgrupamiento" />
             <End Role="DiagnosticoCapitulo" EntitySet="DiagnosticoCapitulo" />
@@ -3735,6 +3997,10 @@
           <AssociationSet Name="FK_DiagnosticoPadron_DiagnosticoSubCapitulo" Association="Self.FK_DiagnosticoPadron_DiagnosticoSubCapitulo">
             <End Role="DiagnosticoSubCapitulo" EntitySet="DiagnosticoSubCapitulo" />
             <End Role="DiagnosticoPadron" EntitySet="DiagnosticoPadron" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiagnosticosPorTurno_Turno" Association="Self.FK_DiagnosticosPorTurno_Turno">
+            <End Role="Turno" EntitySet="Turno" />
+            <End Role="DiagnosticoPorTurno" EntitySet="DiagnosticoPorTurno" />
           </AssociationSet>
           <AssociationSet Name="FK_Empleado_Persona" Association="Self.FK_Empleado_Persona">
             <End Role="Persona" EntitySet="Persona" />
@@ -3864,6 +4130,14 @@
             <End Role="TipoDNI" EntitySet="TipoDNI" />
             <End Role="Persona" EntitySet="Persona" />
           </AssociationSet>
+          <AssociationSet Name="FK_PracticaPorTurno_Practica" Association="Self.FK_PracticaPorTurno_Practica">
+            <End Role="Practica" EntitySet="Practica" />
+            <End Role="PracticaPorTurno" EntitySet="PracticaPorTurno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PracticaPorTurno_Turno" Association="Self.FK_PracticaPorTurno_Turno">
+            <End Role="Turno" EntitySet="Turno" />
+            <End Role="PracticaPorTurno" EntitySet="PracticaPorTurno" />
+          </AssociationSet>
           <AssociationSet Name="FK_Sector_Reparticion" Association="Self.FK_Sector_Reparticion">
             <End Role="Reparticion" EntitySet="Reparticion" />
             <End Role="Sector" EntitySet="Sector" />
@@ -3881,31 +4155,45 @@
             <End Role="Turno" EntitySet="Turno" />
           </AssociationSet>
           <FunctionImport Name="GetAgendaHorariosPorEspecialista">
-          <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
+            <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetAgendaPorEspecialista">
-          <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
+            <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetCentrosDeSaludPorEmpleado">
-          <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
+            <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetDepartamentosPorProvincia" ReturnType="Collection(Model.GetDepartamentosPorProvincia_Result)">
-          <Parameter Name="ProvinciaID" Mode="In" Type="Int32" />
+            <Parameter Name="ProvinciaID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetDiagnosticosPorAgrupamiento" ReturnType="Collection(Model.GetDiagnosticosPorAgrupamiento_Result)">
-          <Parameter Name="DiagnosticoAgrupamientoID" Mode="In" Type="Byte" />
+            <Parameter Name="DiagnosticoAgrupamientoID" Mode="In" Type="Byte" />
           </FunctionImport>
           <FunctionImport Name="GetEspecialidadesPorCentroDeSalud" ReturnType="Collection(Model.GetEspecialidadesPorCentroDeSalud_Result)">
-          <Parameter Name="CentroDeSaludID" Mode="In" Type="Int32" />
+            <Parameter Name="CentroDeSaludID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetEspecialistasPorCentroDeSalud">
-          <Parameter Name="CentroDeSaludID" Mode="In" Type="Int32" />
+          <FunctionImport Name="GetEspecialidadesPorEspecialista" ReturnType="Collection(Model.GetEspecialidadesPorEspecialista_Result)">
+            <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetEspecialidadesPorEspecialistaPorCentroDeSalud" ReturnType="Collection(Model.GetEspecialidadesPorEspecialistaPorCentroDeSalud_Result)">
+            <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
+            <Parameter Name="CentroDeSaludID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetEspecialistasPorCentroDeSalud" ReturnType="Collection(Model.GetEspecialistasPorCentroDeSalud_Result)">
+            <Parameter Name="CentroDeSaludID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetEspecialistasPorEspecialidad" ReturnType="Collection(Model.GetEspecialistasPorEspecialidad_Result)">
+            <Parameter Name="EspecialidadID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetEspecialistasPorEspecialidadPorCentroDeSalud" ReturnType="Collection(Model.GetEspecialistasPorEspecialidadPorCentroDeSalud_Result)">
+            <Parameter Name="EspecialidadID" Mode="In" Type="Int32" />
+            <Parameter Name="CentroDeSalud" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetEvolucionPorPaciente" ReturnType="Collection(Model.GetEvolucionPorPaciente_Result)">
-          <Parameter Name="PacienteID" Mode="In" Type="Int32" />
+            <Parameter Name="PacienteID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetEvolucionPorTurno" ReturnType="Collection(Model.GetEvolucionPorTurno_Result)">
-          <Parameter Name="TurnoID" Mode="In" Type="Int64" />
+            <Parameter Name="TurnoID" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="GetListaDiagnosticoAgrupamiento" ReturnType="Collection(Model.GetListaDiagnosticoAgrupamiento_Result)" />
           <FunctionImport Name="GetListaSexo" ReturnType="Collection(Model.GetListaSexo_Result)" />
@@ -3919,22 +4207,27 @@
           <FunctionImport Name="GetListaTurnoEstado" ReturnType="Collection(Model.GetListaTurnoEstado_Result)" />
           <FunctionImport Name="GetListaTurnoEstadoAdmision" ReturnType="Collection(Model.GetListaTurnoEstadoAdmision_Result)" />
           <FunctionImport Name="GetLocalidadesPorDepartamento" ReturnType="Collection(Model.GetLocalidadesPorDepartamento_Result)">
-          <Parameter Name="DepartamentoID" Mode="In" Type="Int32" />
+            <Parameter Name="DepartamentoID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetPaises" ReturnType="Collection(Model.GetPaises_Result)" />
           <FunctionImport Name="GetPracticasPorNomenclador" ReturnType="Collection(Model.GetPracticasPorNomenclador_Result)">
-          <Parameter Name="NomencladorID" Mode="In" Type="Int32" />
+            <Parameter Name="NomencladorID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetProvinciasPorPais" ReturnType="Collection(Model.GetProvinciasPorPais_Result)">
-          <Parameter Name="PaisID" Mode="In" Type="Int32" />
+            <Parameter Name="PaisID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetTurnosPorPaciente">
+          <FunctionImport Name="GetTurnosPorEspecialista" ReturnType="Collection(Model.GetTurnosPorEspecialista_Result)">
+            <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
+            <Parameter Name="FechaDesde" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaHasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetTurnosPorPaciente" ReturnType="Collection(Model.GetTurnosPorPaciente_Result)">
             <Parameter Name="PacienteID" Mode="In" Type="Int32" />
             <Parameter Name="FechaDesde" Mode="In" Type="DateTime" />
             <Parameter Name="FechaHasta" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="GetEspecialidadesPorEspecialista" ReturnType="Collection(Model.GetEspecialidadesPorEspecialista_Result)">
-            <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
+          <FunctionImport Name="sp_encryptPassword" ReturnType="Collection(Binary)">
+            <Parameter Name="Pass" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetDepartamentosPorProvincia_Result">
@@ -3954,6 +4247,42 @@
           <Property Type="String" Name="DescripcionPlanilla" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Abreviatura" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="IdMHO" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetEspecialidadesPorEspecialista_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="80" />
+          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DescripcionPlanilla" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Abreviatura" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdMHO" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetEspecialidadesPorEspecialistaPorCentroDeSalud_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="80" />
+          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DescripcionPlanilla" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Abreviatura" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdMHO" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetEspecialistasPorCentroDeSalud_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Apellido" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TipoDocumento" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="NroDocumento" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetEspecialistasPorEspecialidad_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Apellido" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TipoDocumento" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="NroDocumento" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetEspecialistasPorEspecialidadPorCentroDeSalud_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Apellido" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="NroDocumento" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetEvolucionPorPaciente_Result">
           <Property Type="Int64" Name="ID" Nullable="false" />
@@ -4029,13 +4358,51 @@
           <Property Type="Byte" Name="ID" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="GetEspecialidadesPorEspecialista_Result">
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="80" />
-          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="DescripcionPlanilla" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Abreviatura" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="IdMHO" Nullable="false" />
+        <ComplexType Name="GetTurnosPorEspecialista_Result">
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="Int64" Name="PacienteID" Nullable="true" />
+          <Property Type="Int32" Name="AgendaHorarioID" Nullable="false" />
+          <Property Type="DateTime" Name="FechaTurno" Nullable="false" Precision="23" />
+          <Property Type="Byte" Name="TurnoEstadoID" Nullable="false" />
+          <Property Type="String" Name="EstadoTurno" Nullable="false" MaxLength="50" />
+          <Property Type="Byte" Name="TurnoEstadoAdmisionID" Nullable="false" />
+          <Property Type="String" Name="EstadoAdmision" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="EsSobreturno" Nullable="true" />
+          <Property Type="DateTime" Name="FechaAdmision" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaInicioAtencion" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaFinAtencion" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="EsPrioritario" Nullable="true" />
+          <Property Type="Int32" Name="BloqueoMasivoID" Nullable="true" />
+          <Property Type="Boolean" Name="EsProgramado" Nullable="true" />
+          <Property Type="Int32" Name="CentroDeSaludID" Nullable="true" />
+          <Property Type="String" Name="CentroDeSalud" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="EspecialidadID" Nullable="true" />
+          <Property Type="String" Name="Especialidad" Nullable="true" MaxLength="80" />
+          <Property Type="Int32" Name="EmpleadoID" Nullable="false" />
+          <Property Type="String" Name="Especialista" Nullable="true" MaxLength="201" />
+        </ComplexType>
+        <ComplexType Name="GetTurnosPorPaciente_Result">
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="Int64" Name="PacienteID" Nullable="true" />
+          <Property Type="Int32" Name="AgendaHorarioID" Nullable="false" />
+          <Property Type="DateTime" Name="FechaTurno" Nullable="false" Precision="23" />
+          <Property Type="Byte" Name="TurnoEstadoID" Nullable="false" />
+          <Property Type="String" Name="EstadoTurno" Nullable="false" MaxLength="50" />
+          <Property Type="Byte" Name="TurnoEstadoAdmisionID" Nullable="false" />
+          <Property Type="String" Name="EstadoAdmision" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="EsSobreturno" Nullable="true" />
+          <Property Type="DateTime" Name="FechaAdmision" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaInicioAtencion" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaFinAtencion" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="EsPrioritario" Nullable="true" />
+          <Property Type="Int32" Name="BloqueoMasivoID" Nullable="true" />
+          <Property Type="Boolean" Name="EsProgramado" Nullable="true" />
+          <Property Type="Int32" Name="CentroDeSaludID" Nullable="true" />
+          <Property Type="String" Name="CentroDeSalud" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="EspecialidadID" Nullable="true" />
+          <Property Type="String" Name="Especialidad" Nullable="true" MaxLength="80" />
+          <Property Type="Int32" Name="EmpleadoID" Nullable="false" />
+          <Property Type="String" Name="Especialista" Nullable="true" MaxLength="201" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4289,6 +4656,18 @@
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="DiagnosticoSubCapituloID" ColumnName="DiagnosticoSubCapituloID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiagnosticoPorTurno">
+            <EntityTypeMapping TypeName="Model.DiagnosticoPorTurno">
+              <MappingFragment StoreEntitySet="DiagnosticoPorTurno">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TurnoID" ColumnName="TurnoID" />
+                <ScalarProperty Name="DiagnosticoID" ColumnName="DiagnosticoID" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="AspNetUsersID" ColumnName="AspNetUsersID" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4625,6 +5004,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PracticaPorTurno">
+            <EntityTypeMapping TypeName="Model.PracticaPorTurno">
+              <MappingFragment StoreEntitySet="PracticaPorTurno">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TurnoID" ColumnName="TurnoID" />
+                <ScalarProperty Name="PracticaID" ColumnName="PracticaID" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="AspNetUsersID" ColumnName="AspNetUsersID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Profesion">
             <EntityTypeMapping TypeName="Model.Profesion">
               <MappingFragment StoreEntitySet="Profesion">
@@ -4855,7 +5247,62 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetEspecialistasPorCentroDeSalud" FunctionName="Model.Store.GetEspecialistasPorCentroDeSalud" />
+          <FunctionImportMapping FunctionImportName="GetEspecialidadesPorEspecialista" FunctionName="Model.Store.GetEspecialidadesPorEspecialista">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetEspecialidadesPorEspecialista_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="DescripcionPlanilla" ColumnName="DescripcionPlanilla" />
+                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+                <ScalarProperty Name="IdMHO" ColumnName="IdMHO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEspecialidadesPorEspecialistaPorCentroDeSalud" FunctionName="Model.Store.GetEspecialidadesPorEspecialistaPorCentroDeSalud">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetEspecialidadesPorEspecialistaPorCentroDeSalud_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="DescripcionPlanilla" ColumnName="DescripcionPlanilla" />
+                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+                <ScalarProperty Name="IdMHO" ColumnName="IdMHO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEspecialistasPorCentroDeSalud" FunctionName="Model.Store.GetEspecialistasPorCentroDeSalud">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetEspecialistasPorCentroDeSalud_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="TipoDocumento" ColumnName="TipoDocumento" />
+                <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEspecialistasPorEspecialidad" FunctionName="Model.Store.GetEspecialistasPorEspecialidad">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetEspecialistasPorEspecialidad_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="TipoDocumento" ColumnName="TipoDocumento" />
+                <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEspecialistasPorEspecialidadPorCentroDeSalud" FunctionName="Model.Store.GetEspecialistasPorEspecialidadPorCentroDeSalud">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetEspecialistasPorEspecialidadPorCentroDeSalud_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetEvolucionPorPaciente" FunctionName="Model.Store.GetEvolucionPorPaciente">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Model.GetEvolucionPorPaciente_Result">
@@ -4998,19 +5445,61 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetTurnosPorPaciente" FunctionName="Model.Store.GetTurnosPorPaciente" />
-          <FunctionImportMapping FunctionImportName="GetEspecialidadesPorEspecialista" FunctionName="Model.Store.GetEspecialidadesPorEspecialista">
+          <FunctionImportMapping FunctionImportName="GetTurnosPorEspecialista" FunctionName="Model.Store.GetTurnosPorEspecialista">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Model.GetEspecialidadesPorEspecialista_Result">
+              <ComplexTypeMapping TypeName="Model.GetTurnosPorEspecialista_Result">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="DescripcionPlanilla" ColumnName="DescripcionPlanilla" />
-                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
-                <ScalarProperty Name="IdMHO" ColumnName="IdMHO" />
+                <ScalarProperty Name="PacienteID" ColumnName="PacienteID" />
+                <ScalarProperty Name="AgendaHorarioID" ColumnName="AgendaHorarioID" />
+                <ScalarProperty Name="FechaTurno" ColumnName="FechaTurno" />
+                <ScalarProperty Name="TurnoEstadoID" ColumnName="TurnoEstadoID" />
+                <ScalarProperty Name="EstadoTurno" ColumnName="EstadoTurno" />
+                <ScalarProperty Name="TurnoEstadoAdmisionID" ColumnName="TurnoEstadoAdmisionID" />
+                <ScalarProperty Name="EstadoAdmision" ColumnName="EstadoAdmision" />
+                <ScalarProperty Name="EsSobreturno" ColumnName="EsSobreturno" />
+                <ScalarProperty Name="FechaAdmision" ColumnName="FechaAdmision" />
+                <ScalarProperty Name="FechaInicioAtencion" ColumnName="FechaInicioAtencion" />
+                <ScalarProperty Name="FechaFinAtencion" ColumnName="FechaFinAtencion" />
+                <ScalarProperty Name="EsPrioritario" ColumnName="EsPrioritario" />
+                <ScalarProperty Name="BloqueoMasivoID" ColumnName="BloqueoMasivoID" />
+                <ScalarProperty Name="EsProgramado" ColumnName="EsProgramado" />
+                <ScalarProperty Name="CentroDeSaludID" ColumnName="CentroDeSaludID" />
+                <ScalarProperty Name="CentroDeSalud" ColumnName="CentroDeSalud" />
+                <ScalarProperty Name="EspecialidadID" ColumnName="EspecialidadID" />
+                <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
+                <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
+                <ScalarProperty Name="Especialista" ColumnName="Especialista" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTurnosPorPaciente" FunctionName="Model.Store.GetTurnosPorPaciente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetTurnosPorPaciente_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PacienteID" ColumnName="PacienteID" />
+                <ScalarProperty Name="AgendaHorarioID" ColumnName="AgendaHorarioID" />
+                <ScalarProperty Name="FechaTurno" ColumnName="FechaTurno" />
+                <ScalarProperty Name="TurnoEstadoID" ColumnName="TurnoEstadoID" />
+                <ScalarProperty Name="EstadoTurno" ColumnName="EstadoTurno" />
+                <ScalarProperty Name="TurnoEstadoAdmisionID" ColumnName="TurnoEstadoAdmisionID" />
+                <ScalarProperty Name="EstadoAdmision" ColumnName="EstadoAdmision" />
+                <ScalarProperty Name="EsSobreturno" ColumnName="EsSobreturno" />
+                <ScalarProperty Name="FechaAdmision" ColumnName="FechaAdmision" />
+                <ScalarProperty Name="FechaInicioAtencion" ColumnName="FechaInicioAtencion" />
+                <ScalarProperty Name="FechaFinAtencion" ColumnName="FechaFinAtencion" />
+                <ScalarProperty Name="EsPrioritario" ColumnName="EsPrioritario" />
+                <ScalarProperty Name="BloqueoMasivoID" ColumnName="BloqueoMasivoID" />
+                <ScalarProperty Name="EsProgramado" ColumnName="EsProgramado" />
+                <ScalarProperty Name="CentroDeSaludID" ColumnName="CentroDeSaludID" />
+                <ScalarProperty Name="CentroDeSalud" ColumnName="CentroDeSalud" />
+                <ScalarProperty Name="EspecialidadID" ColumnName="EspecialidadID" />
+                <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
+                <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
+                <ScalarProperty Name="Especialista" ColumnName="Especialista" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_encryptPassword" FunctionName="Model.Store.sp_encryptPassword" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

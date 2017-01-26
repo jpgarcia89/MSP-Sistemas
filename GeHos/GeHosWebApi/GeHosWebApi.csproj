@@ -181,7 +181,6 @@
     <Compile Include="Controllers\CentroDeSaludController.cs" />
     <Compile Include="Controllers\EspecialidadController.cs" />
     <Compile Include="Controllers\PersonaContratoController.cs" />
-    <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\PersonaController.cs" />
     <Compile Include="Controllers\TipoAgendaDeProfesionalesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -253,6 +252,9 @@
     <Compile Include="Models\DiagnosticoPadron.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DiagnosticoPorTurno.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DiagnosticoSubCapitulo.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -307,6 +309,9 @@
     <Compile Include="Models\GetEspecialistasPorEspecialidadPorCentroDeSalud_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetEspecialistasPorEspecialidad_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetEvolucionPorPaciente_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -356,6 +361,12 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetProvinciasPorPais_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetTurnosPorEspecialista_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetTurnosPorPaciente_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Grados.cs">
@@ -413,6 +424,9 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Practica.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PracticaPorTurno.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Profesion.cs">
