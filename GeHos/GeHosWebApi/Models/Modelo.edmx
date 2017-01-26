@@ -235,6 +235,17 @@
           <Property Name="Descripcion" Type="varchar" MaxLength="280" Nullable="false" />
           <Property Name="DiagnosticoSubCapituloID" Type="smallint" Nullable="false" />
         </EntityType>
+        <EntityType Name="DiagnosticoPorTurno">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TurnoID" Type="bigint" Nullable="false" />
+          <Property Name="DiagnosticoID" Type="int" Nullable="false" />
+          <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+          <Property Name="AspNetUsersID" Type="int" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="DiagnosticoSubCapitulo">
           <Key>
             <PropertyRef Name="ID" />
@@ -542,6 +553,18 @@
           <Property Name="NomencladorID" Type="int" />
           <Property Name="Uop" Type="decimal" Precision="15" Scale="2" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PracticaPorTurno">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TurnoID" Type="bigint" Nullable="false" />
+          <Property Name="PracticaID" Type="bigint" Nullable="false" />
+          <Property Name="Cantidad" Type="smallint" />
+          <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+          <Property Name="AspNetUsersID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Profesion">
           <Key>
@@ -972,6 +995,42 @@
             </Principal>
             <Dependent Role="DiagnosticoPadron">
               <PropertyRef Name="DiagnosticoSubCapituloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiagnosticosPorTurno_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="DiagnosticoPorTurno" Type="Self.DiagnosticoPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DiagnosticoPorTurno">
+              <PropertyRef Name="AspNetUsersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiagnosticosPorTurno_Diagnostico">
+          <End Role="Diagnostico" Type="Self.Diagnostico" Multiplicity="1" />
+          <End Role="DiagnosticoPorTurno" Type="Self.DiagnosticoPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnostico">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DiagnosticoPorTurno">
+              <PropertyRef Name="DiagnosticoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiagnosticosPorTurno_Turno">
+          <End Role="Turno" Type="Self.Turno" Multiplicity="1" />
+          <End Role="DiagnosticoPorTurno" Type="Self.DiagnosticoPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turno">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DiagnosticoPorTurno">
+              <PropertyRef Name="TurnoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1419,6 +1478,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PracticaPorTurno_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="PracticaPorTurno" Type="Self.PracticaPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PracticaPorTurno">
+              <PropertyRef Name="AspNetUsersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PracticaPorTurno_Practica">
+          <End Role="Practica" Type="Self.Practica" Multiplicity="1" />
+          <End Role="PracticaPorTurno" Type="Self.PracticaPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Practica">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PracticaPorTurno">
+              <PropertyRef Name="PracticaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PracticaPorTurno_Turno">
+          <End Role="Turno" Type="Self.Turno" Multiplicity="1" />
+          <End Role="PracticaPorTurno" Type="Self.PracticaPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turno">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PracticaPorTurno">
+              <PropertyRef Name="TurnoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Provincia_Pais">
           <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
           <End Role="Provincia" Type="Self.Provincia" Multiplicity="*" />
@@ -1536,6 +1631,10 @@
         <Function Name="GetEspecialidadesPorEspecialista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmpleadoID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetEspecialidadesPorEspecialistaPorCentroDeSalud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpleadoID" Type="int" Mode="In" />
+          <Parameter Name="CentroDeSaludID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetEspecialistasPorCentroDeSalud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CentroDeSaludID" Type="int" Mode="In" />
         </Function>
@@ -1606,6 +1705,7 @@
           <EntitySet Name="DiagnosticoAgrupamiento" EntityType="Self.DiagnosticoAgrupamiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiagnosticoCapitulo" EntityType="Self.DiagnosticoCapitulo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiagnosticoPadron" EntityType="Self.DiagnosticoPadron" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiagnosticoPorTurno" EntityType="Self.DiagnosticoPorTurno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiagnosticoSubCapitulo" EntityType="Self.DiagnosticoSubCapitulo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmpleadoCentroDeSalud" EntityType="Self.EmpleadoCentroDeSalud" Schema="dbo" store:Type="Tables" />
@@ -1631,6 +1731,7 @@
           <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Practica" EntityType="Self.Practica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PracticaPorTurno" EntityType="Self.PracticaPorTurno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profesion" EntityType="Self.Profesion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PuebloIndigena" EntityType="Self.PuebloIndigena" Schema="dbo" store:Type="Tables" />
@@ -1733,6 +1834,18 @@
           <AssociationSet Name="FK_DiagnosticoPadron_DiagnosticoSubCapitulo" Association="Self.FK_DiagnosticoPadron_DiagnosticoSubCapitulo">
             <End Role="DiagnosticoSubCapitulo" EntitySet="DiagnosticoSubCapitulo" />
             <End Role="DiagnosticoPadron" EntitySet="DiagnosticoPadron" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiagnosticosPorTurno_AspNetUsers" Association="Self.FK_DiagnosticosPorTurno_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="DiagnosticoPorTurno" EntitySet="DiagnosticoPorTurno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiagnosticosPorTurno_Diagnostico" Association="Self.FK_DiagnosticosPorTurno_Diagnostico">
+            <End Role="Diagnostico" EntitySet="Diagnostico" />
+            <End Role="DiagnosticoPorTurno" EntitySet="DiagnosticoPorTurno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiagnosticosPorTurno_Turno" Association="Self.FK_DiagnosticosPorTurno_Turno">
+            <End Role="Turno" EntitySet="Turno" />
+            <End Role="DiagnosticoPorTurno" EntitySet="DiagnosticoPorTurno" />
           </AssociationSet>
           <AssociationSet Name="FK_DiagnosticoSubCapitulo_DiagnosticoCapitulo" Association="Self.FK_DiagnosticoSubCapitulo_DiagnosticoCapitulo">
             <End Role="DiagnosticoCapitulo" EntitySet="DiagnosticoCapitulo" />
@@ -1881,6 +1994,18 @@
           <AssociationSet Name="FK_Practica_Nomenclador" Association="Self.FK_Practica_Nomenclador">
             <End Role="Nomenclador" EntitySet="Nomenclador" />
             <End Role="Practica" EntitySet="Practica" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PracticaPorTurno_AspNetUsers" Association="Self.FK_PracticaPorTurno_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="PracticaPorTurno" EntitySet="PracticaPorTurno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PracticaPorTurno_Practica" Association="Self.FK_PracticaPorTurno_Practica">
+            <End Role="Practica" EntitySet="Practica" />
+            <End Role="PracticaPorTurno" EntitySet="PracticaPorTurno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PracticaPorTurno_Turno" Association="Self.FK_PracticaPorTurno_Turno">
+            <End Role="Turno" EntitySet="Turno" />
+            <End Role="PracticaPorTurno" EntitySet="PracticaPorTurno" />
           </AssociationSet>
           <AssociationSet Name="FK_Provincia_Pais" Association="Self.FK_Provincia_Pais">
             <End Role="Pais" EntitySet="Pais" />
@@ -2031,6 +2156,8 @@
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DiagnosticoPorTurno" Relationship="Model.FK_DiagnosticosPorTurno_AspNetUsers" FromRole="AspNetUsers" ToRole="DiagnosticoPorTurno" />
+          <NavigationProperty Name="PracticaPorTurno" Relationship="Model.FK_PracticaPorTurno_AspNetUsers" FromRole="AspNetUsers" ToRole="PracticaPorTurno" />
         </EntityType>
         <EntityType Name="Barrio">
           <Key>
@@ -2159,6 +2286,7 @@
           <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="DiagnosticoAgrupamientoID" Type="Byte" />
           <NavigationProperty Name="DiagnosticoAgrupamiento" Relationship="Self.FK_Diagnostico_DiagnosticoAgrupamiento" FromRole="Diagnostico" ToRole="DiagnosticoAgrupamiento" />
+          <NavigationProperty Name="DiagnosticoPorTurno" Relationship="Model.FK_DiagnosticosPorTurno_Diagnostico" FromRole="Diagnostico" ToRole="DiagnosticoPorTurno" />
         </EntityType>
         <EntityType Name="DiagnosticoAgrupamiento">
           <Key>
@@ -2565,6 +2693,7 @@
           <Property Name="Uop" Type="Decimal" Precision="15" Scale="2" Nullable="false" />
           <Property Name="Activa" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Nomenclador" Relationship="Self.FK_Practica_Nomenclador" FromRole="Practica" ToRole="Nomenclador" />
+          <NavigationProperty Name="PracticaPorTurno" Relationship="Model.FK_PracticaPorTurno_Practica" FromRole="Practica" ToRole="PracticaPorTurno" />
         </EntityType>
         <EntityType Name="Profesion">
           <Key>
@@ -2740,6 +2869,8 @@
           <NavigationProperty Name="Paciente" Relationship="Self.FK_Turno_Paciente" FromRole="Turno" ToRole="Paciente" />
           <NavigationProperty Name="TurnoEstado" Relationship="Self.FK_Turno_TurnoEstado" FromRole="Turno" ToRole="TurnoEstado" />
           <NavigationProperty Name="TurnoEstadoAdmision" Relationship="Self.FK_Turno_TurnoEstadoAdmision" FromRole="Turno" ToRole="TurnoEstadoAdmision" />
+          <NavigationProperty Name="DiagnosticoPorTurno" Relationship="Model.FK_DiagnosticosPorTurno_Turno" FromRole="Turno" ToRole="DiagnosticoPorTurno" />
+          <NavigationProperty Name="PracticaPorTurno" Relationship="Model.FK_PracticaPorTurno_Turno" FromRole="Turno" ToRole="PracticaPorTurno" />
         </EntityType>
         <EntityType Name="TurnoEstado">
           <Key>
@@ -3949,7 +4080,7 @@
           <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetEspecialistasPorEspecialidad" ReturnType="Collection(Model.GetEspecialistasPorEspecialidad_Result)">
-            <Parameter Name="EspecialidadID" Mode="In" Type="Int32" />
+          <Parameter Name="EspecialidadID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetEspecialistasPorEspecialidadPorCentroDeSalud" ReturnType="Collection(Model.GetEspecialistasPorEspecialidadPorCentroDeSalud_Result)">
             <Parameter Name="EspecialidadID" Mode="In" Type="Int32" />
@@ -3959,6 +4090,36 @@
             <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
             <Parameter Name="FechaDesde" Mode="In" Type="DateTime" />
             <Parameter Name="FechaHasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="DiagnosticoPorTurno" EntityType="Model.DiagnosticoPorTurno" />
+          <EntitySet Name="PracticaPorTurno" EntityType="Model.PracticaPorTurno" />
+          <AssociationSet Name="FK_DiagnosticosPorTurno_AspNetUsers" Association="Model.FK_DiagnosticosPorTurno_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="DiagnosticoPorTurno" EntitySet="DiagnosticoPorTurno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PracticaPorTurno_AspNetUsers" Association="Model.FK_PracticaPorTurno_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="PracticaPorTurno" EntitySet="PracticaPorTurno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiagnosticosPorTurno_Diagnostico" Association="Model.FK_DiagnosticosPorTurno_Diagnostico">
+            <End Role="Diagnostico" EntitySet="Diagnostico" />
+            <End Role="DiagnosticoPorTurno" EntitySet="DiagnosticoPorTurno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiagnosticosPorTurno_Turno" Association="Model.FK_DiagnosticosPorTurno_Turno">
+            <End Role="Turno" EntitySet="Turno" />
+            <End Role="DiagnosticoPorTurno" EntitySet="DiagnosticoPorTurno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PracticaPorTurno_Practica" Association="Model.FK_PracticaPorTurno_Practica">
+            <End Role="Practica" EntitySet="Practica" />
+            <End Role="PracticaPorTurno" EntitySet="PracticaPorTurno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PracticaPorTurno_Turno" Association="Model.FK_PracticaPorTurno_Turno">
+            <End Role="Turno" EntitySet="Turno" />
+            <End Role="PracticaPorTurno" EntitySet="PracticaPorTurno" />
+          </AssociationSet>
+          <FunctionImport Name="GetEspecialidadesPorEspecialistaPorCentroDeSalud" ReturnType="Collection(Model.GetEspecialidadesPorEspecialistaPorCentroDeSalud_Result)">
+            <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
+            <Parameter Name="CentroDeSaludID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetDepartamentosPorProvincia_Result">
@@ -4119,6 +4280,115 @@
           <Property Type="String" Name="Especialidad" Nullable="true" MaxLength="80" />
           <Property Type="Int32" Name="EmpleadoID" Nullable="false" />
           <Property Type="String" Name="Especialista" Nullable="true" MaxLength="201" />
+        </ComplexType>
+        <EntityType Name="DiagnosticoPorTurno">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TurnoID" Type="Int64" Nullable="false" />
+          <Property Name="DiagnosticoID" Type="Int32" Nullable="false" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AspNetUsersID" Type="Int32" Nullable="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Model.FK_DiagnosticosPorTurno_AspNetUsers" FromRole="DiagnosticoPorTurno" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Diagnostico" Relationship="Model.FK_DiagnosticosPorTurno_Diagnostico" FromRole="DiagnosticoPorTurno" ToRole="Diagnostico" />
+          <NavigationProperty Name="Turno" Relationship="Model.FK_DiagnosticosPorTurno_Turno" FromRole="DiagnosticoPorTurno" ToRole="Turno" />
+        </EntityType>
+        <EntityType Name="PracticaPorTurno">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TurnoID" Type="Int64" Nullable="false" />
+          <Property Name="PracticaID" Type="Int64" Nullable="false" />
+          <Property Name="Cantidad" Type="Int16" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <Property Name="AspNetUsersID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Model.FK_PracticaPorTurno_AspNetUsers" FromRole="PracticaPorTurno" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Practica" Relationship="Model.FK_PracticaPorTurno_Practica" FromRole="PracticaPorTurno" ToRole="Practica" />
+          <NavigationProperty Name="Turno" Relationship="Model.FK_PracticaPorTurno_Turno" FromRole="PracticaPorTurno" ToRole="Turno" />
+        </EntityType>
+        <Association Name="FK_DiagnosticosPorTurno_AspNetUsers">
+          <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="Model.DiagnosticoPorTurno" Role="DiagnosticoPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DiagnosticoPorTurno">
+              <PropertyRef Name="AspNetUsersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PracticaPorTurno_AspNetUsers">
+          <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="Model.PracticaPorTurno" Role="PracticaPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PracticaPorTurno">
+              <PropertyRef Name="AspNetUsersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiagnosticosPorTurno_Diagnostico">
+          <End Type="Model.Diagnostico" Role="Diagnostico" Multiplicity="1" />
+          <End Type="Model.DiagnosticoPorTurno" Role="DiagnosticoPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnostico">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DiagnosticoPorTurno">
+              <PropertyRef Name="DiagnosticoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiagnosticosPorTurno_Turno">
+          <End Type="Model.Turno" Role="Turno" Multiplicity="1" />
+          <End Type="Model.DiagnosticoPorTurno" Role="DiagnosticoPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turno">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DiagnosticoPorTurno">
+              <PropertyRef Name="TurnoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PracticaPorTurno_Practica">
+          <End Type="Model.Practica" Role="Practica" Multiplicity="1" />
+          <End Type="Model.PracticaPorTurno" Role="PracticaPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Practica">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PracticaPorTurno">
+              <PropertyRef Name="PracticaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PracticaPorTurno_Turno">
+          <End Type="Model.Turno" Role="Turno" Multiplicity="1" />
+          <End Type="Model.PracticaPorTurno" Role="PracticaPorTurno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turno">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PracticaPorTurno">
+              <PropertyRef Name="TurnoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetEspecialidadesPorEspecialistaPorCentroDeSalud_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="80" />
+          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DescripcionPlanilla" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Abreviatura" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdMHO" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -5165,6 +5435,43 @@
                 <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
                 <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
                 <ScalarProperty Name="Especialista" ColumnName="Especialista" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="DiagnosticoPorTurno">
+            <EntityTypeMapping TypeName="Model.DiagnosticoPorTurno">
+              <MappingFragment StoreEntitySet="DiagnosticoPorTurno">
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="AspNetUsersID" ColumnName="AspNetUsersID" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="DiagnosticoID" ColumnName="DiagnosticoID" />
+                <ScalarProperty Name="TurnoID" ColumnName="TurnoID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PracticaPorTurno">
+            <EntityTypeMapping TypeName="Model.PracticaPorTurno">
+              <MappingFragment StoreEntitySet="PracticaPorTurno">
+                <ScalarProperty Name="AspNetUsersID" ColumnName="AspNetUsersID" />
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="PracticaID" ColumnName="PracticaID" />
+                <ScalarProperty Name="TurnoID" ColumnName="TurnoID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetEspecialidadesPorEspecialistaPorCentroDeSalud" FunctionName="Model.Store.GetEspecialidadesPorEspecialistaPorCentroDeSalud">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetEspecialidadesPorEspecialistaPorCentroDeSalud_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="DescripcionPlanilla" ColumnName="DescripcionPlanilla" />
+                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+                <ScalarProperty Name="IdMHO" ColumnName="IdMHO" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

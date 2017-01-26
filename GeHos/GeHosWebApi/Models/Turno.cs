@@ -14,6 +14,13 @@ namespace GeHosWebApi.Models
     
     public partial class Turno
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Turno()
+        {
+            this.DiagnosticoPorTurno = new HashSet<DiagnosticoPorTurno>();
+            this.PracticaPorTurno = new HashSet<PracticaPorTurno>();
+        }
+    
         public long ID { get; set; }
         public Nullable<long> PacienteID { get; set; }
         public int AgendaHorarioID { get; set; }
@@ -32,5 +39,9 @@ namespace GeHosWebApi.Models
         public virtual Paciente Paciente { get; set; }
         public virtual TurnoEstado TurnoEstado { get; set; }
         public virtual TurnoEstadoAdmision TurnoEstadoAdmision { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DiagnosticoPorTurno> DiagnosticoPorTurno { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PracticaPorTurno> PracticaPorTurno { get; set; }
     }
 }

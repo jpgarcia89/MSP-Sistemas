@@ -252,6 +252,9 @@
     <Compile Include="Models\DiagnosticoPadron.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DiagnosticoPorTurno.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DiagnosticoSubCapitulo.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -292,6 +295,9 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetEspecialidadesPorCentroDeSalud_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetEspecialidadesPorEspecialistaPorCentroDeSalud_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetEspecialidadesPorEspecialista_Result.cs">
@@ -415,6 +421,9 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Practica.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PracticaPorTurno.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Profesion.cs">

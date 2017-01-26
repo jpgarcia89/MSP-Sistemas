@@ -93,6 +93,8 @@ namespace GeHosWebApi.Models
         public virtual DbSet<TurnoEstado> TurnoEstado { get; set; }
         public virtual DbSet<TurnoEstadoAdmision> TurnoEstadoAdmision { get; set; }
         public virtual DbSet<Zona> Zona { get; set; }
+        public virtual DbSet<DiagnosticoPorTurno> DiagnosticoPorTurno { get; set; }
+        public virtual DbSet<PracticaPorTurno> PracticaPorTurno { get; set; }
     
         public virtual int GetAgendaHorariosPorEspecialista(Nullable<int> empleadoID)
         {
@@ -325,6 +327,19 @@ namespace GeHosWebApi.Models
                 new ObjectParameter("FechaHasta", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTurnosPorEspecialista_Result>("GetTurnosPorEspecialista", empleadoIDParameter, fechaDesdeParameter, fechaHastaParameter);
+        }
+    
+        public virtual ObjectResult<GetEspecialidadesPorEspecialistaPorCentroDeSalud_Result> GetEspecialidadesPorEspecialistaPorCentroDeSalud(Nullable<int> empleadoID, Nullable<int> centroDeSaludID)
+        {
+            var empleadoIDParameter = empleadoID.HasValue ?
+                new ObjectParameter("EmpleadoID", empleadoID) :
+                new ObjectParameter("EmpleadoID", typeof(int));
+    
+            var centroDeSaludIDParameter = centroDeSaludID.HasValue ?
+                new ObjectParameter("CentroDeSaludID", centroDeSaludID) :
+                new ObjectParameter("CentroDeSaludID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEspecialidadesPorEspecialistaPorCentroDeSalud_Result>("GetEspecialidadesPorEspecialistaPorCentroDeSalud", empleadoIDParameter, centroDeSaludIDParameter);
         }
     }
 }
