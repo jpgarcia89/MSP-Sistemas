@@ -181,6 +181,7 @@
     <Compile Include="Controllers\CentroDeSaludController.cs" />
     <Compile Include="Controllers\EspecialidadController.cs" />
     <Compile Include="Controllers\PersonaContratoController.cs" />
+    <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\PersonaController.cs" />
     <Compile Include="Controllers\TipoAgendaDeProfesionalesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -294,7 +295,16 @@
     <Compile Include="Models\GetEspecialidadesPorCentroDeSalud_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetEspecialidadesPorEspecialistaPorCentroDeSalud_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetEspecialidadesPorEspecialista_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetEspecialistasPorCentroDeSalud_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetEspecialistasPorEspecialidadPorCentroDeSalud_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetEvolucionPorPaciente_Result.cs">

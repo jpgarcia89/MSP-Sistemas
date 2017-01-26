@@ -1057,6 +1057,7 @@
     <Compile Include="Model\AgendaClient.cs" />
     <Compile Include="Model\CentroDeSaludClient.cs" />
     <Compile Include="Model\EspecialidadClient.cs" />
+    <Compile Include="Model\EmpleadoClient.cs" />
     <Compile Include="Model\PersonaClient.cs" />
     <Compile Include="Model\TipoAgendaDeProfesionalesClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

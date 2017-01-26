@@ -10,6 +10,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using GeHosWebApi.Models;
 using GeHosContract.Contrato;
+using System.Web.Http.Results;
+//using System.Web.Mvc;
 
 namespace GeHosWebApi.Controllers
 {
@@ -108,16 +110,16 @@ namespace GeHosWebApi.Controllers
 
 
         // GET: api/Especialidad/GetEspecialidadPorCentroSalud/5
-        public IQueryable<EspecialidadVM> GetEspecialidadPorCentroSalud(int id)
+        public List<EspecialidadVM> GetEspecialidadesPorCentroSalud(int id)
         {
-            var x = from a in db.Especialidad
-                    join b in db.CentroDeSaludEspecialidad on a.ID equals b.CentroDeSaludID
-                    where b.ID == id
-                    select new EspecialidadVM()
+            //var x = from a in db.Especialidad
+            //        join b in db.CentroDeSaludEspecialidad on a.ID equals b.EspecialidadID
+            //        where b.CentroDeSaludID == id
+            var x = db.GetEspecialidadesPorCentroDeSalud(id).Select(r => new EspecialidadVM()
                     {
-                        ID = a.ID,
-                        Nombre = a.Nombre
-                    };
+                        ID = r.ID,
+                        Nombre = r.Nombre
+                    }).OrderBy(r=> r.Nombre).ToList();
 
 
 
@@ -148,6 +150,21 @@ namespace GeHosWebApi.Controllers
         private bool catEspecialidadExists(short id)
         {
             return db.Especialidad.Count(e => e.ID == id) > 0;
+        }
+
+
+
+        [HttpGet]
+        [Route("api/Especialidad/GetEspecialidadesPorEspecialistaPorCentroDeSalud/{empId}/{csId}")]        
+        public JsonResult<List<EspecialidadVM>> GetEspecialidadesPorEspecialistaPorCentroDeSalud(int empId, int csId)//List<EspecialistaVM>
+        {
+            var x = db.GetEspecialidadesPorEspecialistaPorCentroDeSalud(empId, csId).Select(r => new EspecialidadVM()
+            {
+                ID = r.ID,
+                Nombre = r.Nombre
+            }).OrderBy(r => r.Nombre).ToList();
+
+            return Json(x);
         }
     }
 }

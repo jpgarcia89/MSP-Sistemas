@@ -1,6 +1,6 @@
 ﻿@*@model GeHosContract.Contrato*@
-
-
+@using GeHosContract.Contrato;
+@using GeHos.Helpers;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Agregar Agenda";
@@ -45,7 +45,7 @@
                 @*Profesional*@
                 <div class="form-group">
                     @Html.Label("Profesional", htmlAttributes: new { @class = "control-label " })
-                    @Html.DropDownList("CentroDeSaludID", (SelectList)(ViewBag.ListaCentroSalud), new { @class = "form-control", @id = "CentroDeSaludNombre" })   @*, @style="width: 100%"*@
+                    @Html.DropDownList("EspecialistaID", ViewData["ListaEspecialistas"] as SelectList, new { @class = "form-control"})
                     @*@Html.ValidationMessageFor(model => model.CentroDeSaludNombre, "", new { @class = "text-danger" })*@
                 </div>
                 @*Fin - Profesional*@
@@ -53,7 +53,7 @@
                 @*Especialidad*@
                 <div class="form-group">
                     @Html.Label("Especialidad", htmlAttributes: new { @class = "control-label " })
-                    @Html.DropDownList("EspecialidadID", (SelectList)(ViewBag.Especialidad), new { @class = "select2 form-control" })
+                    @Html.DropDownList("EspecialidadID", ViewData["ListaEspecialidad"] as SelectList, new { @class = "select2 form-control", @disabled = "disabled" })
                     @*@Html.ValidationMessageFor(model => model.EspecialidadNombre, "", new { @class = "text-danger" })*@
                 </div>
                 @*Fin - Especialidad*@
@@ -78,7 +78,7 @@
                     <div class='col-md-6'>
                         <div class="form-group">
                             @Html.Label("Fecha Hasta", htmlAttributes: new { @class = "control-label" })
-                            <div class='input-group date' >
+                            <div class='input-group date'>
                                 <input type='text' class="form-control" id='dpFechaHasta' required />
                                 <span class="input-group-addon">
                                     <span class="fa fa-calendar"></span>
@@ -193,7 +193,7 @@
                     <div class='col-md-4'>
                         <div class="form-group">
                             @Html.Label("Tipo Agenda", htmlAttributes: new { @class = "control-label" })
-                            @Html.DropDownList("Tipo Agenda", (SelectList)(ViewBag.ListaTipoAgendaDeProfesionales), new { @class = "form-control", @id = "tipoAge_1" })
+                            @Html.DropDownList("Tipo Agenda", ViewData["ListaTipoAgendaDeProfesionales"] as SelectList, new { @class = "form-control", @id = "tipoAge_1" })
                             @*@Html.ValidationMessageFor(model => model.CentroDeSaludNombre, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
@@ -218,15 +218,15 @@
         @*Fin - Box Rango Horario*@
 
 
-       
-            @*Boton Agregar Horario*@
-            <div id="divAddAgenda" >
-                <div class="btn btn-success btn-circle" id="btnAddAgenda"><i class="fa fa-plus"></i></div>
-                <b>Nuevo Rango Horario</b>
-            </div>
-            @*Fin - Boton Agregar Horario*@
 
-           
+        @*Boton Agregar Horario*@
+        <div id="divAddAgenda">
+            <div class="btn btn-success btn-circle" id="btnAddAgenda"><i class="fa fa-plus"></i></div>
+            <b>Nuevo Rango Horario</b>
+        </div>
+        @*Fin - Boton Agregar Horario*@
+
+
 
 
         @*Box-footer*@
@@ -240,7 +240,7 @@
 
     </form>
     @*Fin Form*@
-    
+
 </section>
 
 
@@ -296,15 +296,9 @@
                 changeYear: true,
                 minDate: "-3m",
                 maxDate: "+1y"
-            }).on( "change", function() {
+            }).on("change", function () {
                 $("#dpFechaHasta").datepicker("option", "minDate", this.value);
             });
-
-            //$('#dpFechaHasta').datetimepicker({
-            //    format: "DD/MM/YYYY",
-            //    locale: 'es',
-            //    useCurrent: false //Important! See issue #1075
-            //});
             $("#dpFechaHasta").datepicker({
                 changeMonth: true,
                 changeYear: true,
@@ -312,16 +306,8 @@
                 maxDate: "+1y"
             }).on("change", function () {
                 $("#dpFechaDesde").datepicker("option", "maxDate", this.value);
-                
+
             });
-
-            //$("#dpFechaDesde").on("dp.change", function (e) {
-            //    $('#dpFechaHasta').data("DateTimePicker").minDate(e.date);
-            //});
-
-            //$("#dpFechaHasta").on("dp.change", function (e) {
-            //    $('#dpFechaDesde').data("DateTimePicker").maxDate(e.date);
-            //});
 
             InitTimePicker("dpHoraDesde_1", "dpHoraHasta_1");
             /////////////End - DateTimePicker Functions/////////////
@@ -331,7 +317,7 @@
             $("#btnAddAgenda").click(function (e) {
                 //debugger;
 
-                if (!ValidaExistenciaDatos()) {                    
+                if (!ValidaExistenciaDatos()) {
                     return;
                 }
 
@@ -339,7 +325,7 @@
                 if (ValidaSolapamiento(null)) {
                     ClonaRangoHorario($original);
                 }
-                
+
 
                 return;
             });
@@ -353,17 +339,43 @@
             //Oculta div de mensaje de error en box de Rango Horario
             $("#boxHorario_error_1").hide();
 
-            //btnVerifica
-            //$("#btnVerifica").click(function () {
-            //    ValidaSolapamiento(null);
-            //});
 
-            //$("#btnVerifica").hide();
+            //Dropdownlist Selectedchange event
+            $("#EspecialistaID").change(function () {
+                var EspID = $("#EspecialistaID").val();
+                var csID = @(((CentroDeSaludVM)Session["CSSeleccionado"]).ID);
+                var _url = '@(GlobalVariables.BASE_URL + "Especialidad/GetEspecialidadesPorEspecialistaPorCentroDeSalud/")' + EspID + '/'+csID;
 
-            //setInterval(function () {
-            //    $("#btnVerifica.btn-default").switchClass("btn-default", "btn-danger", 500);
-            //    $("#btnVerifica.btn-danger").switchClass("btn-danger", "btn-default", 500);
-            //}, 1000);
+                $("#EspecialidadID").empty();
+                if (EspID == 0) {
+                    var comboEspecialidad =$("#EspecialidadID");
+                    comboEspecialidad.append('<option value="0">Seleccionar...</option>');
+                    comboEspecialidad.prop('disabled', true);
+                }
+                else {
+                    $("#EspecialidadID").empty();
+                    $.ajax({
+                        type: 'GET',
+                        url:_url,
+                        dataType: 'json',
+                        crossDomain: true,
+                        //data: { id: EspID },
+                        success: function (data) {
+
+                            var comboEspecialidad =$("#EspecialidadID");
+                            //comboEspecialidad.append('<option value="0">Seleccionar...</option>');
+                            $.each(data, function (ID,Nombre) {
+                                comboEspecialidad.append('<option value="' + this.ID + '">' + this.Nombre + '</option>');
+                            });
+                            comboEspecialidad.prop('disabled', false);
+                        },
+                        error: function (ex) {
+                            alert('Fallo el acceso al servidor');
+                        }
+                    });
+                    return false;
+                }
+            })
         });
 
         //Función de clonado HTML para Box De Rango Horario
@@ -463,7 +475,8 @@
 
             //Datos Generales
             var data = {
-                ProfesionalID: $("#ProfesionalID").val(),
+                CentroDeSaludID : @(((CentroDeSaludVM)Session["CSSeleccionado"]).ID),
+                EmpleadoID: $("#EspecialistaID").val(),
                 EspecialidadID: $("#EspecialidadID").val(),
                 FechaDesde: $("#dpFechaDesde").datepicker().val(),//.data('date'),
                 FechaHasta: $("#dpFechaHasta").datepicker().val(),//.data('date'),
@@ -494,8 +507,8 @@
 
             //debugger
             if (ValidaFormAgenda(data)) {
-                @*var url = '@Url.Action("Agregar", "Agenda")'; // 
-                
+                var url = '@Url.Action("Agregar", "Agenda")'; //
+
                 $.ajax({
                     type: "POST",
                     url: url,
@@ -505,26 +518,26 @@
                         //alert("volvio del controller"); // show response from the php script.
                         window.location.href = data;
                     }
-                });*@
+                });
 
                 // avoid to execute the actual submit of the form.
-               
+
                 e.preventDefault();
             }
             else {
-                 e.preventDefault();
+                e.preventDefault();
                 return false;
             }
-            
-            
-            
+
+
+
 
         }
 
         function ValidaFormAgenda(data) {
 
             //ValidaOtrosDatos()
-            if (ValidaExistenciaDatos()&& ValidaSolapamiento(data)) {
+            if (ValidaExistenciaDatos() && ValidaSolapamiento(data)) {
                 return true;
             }
             else {
@@ -590,7 +603,7 @@
                         var days_intersect = intersect_safe(data.RangosHorarios[i].dias.sort(), data.RangosHorarios[j].dias.sort());
                         //debugger
 
-                         
+
                         if (days_intersect.length > 0) //Existen dias q se intersectan
                         {
                             //rango horario [i]
@@ -601,7 +614,7 @@
                             var hraDesde_2 = parseFloat(data.RangosHorarios[j].HoraDesde.replace(":", "."));
                             var hraHasta_2 = parseFloat(data.RangosHorarios[j].HoraHasta.replace(":", "."));
 
-                            
+
                             if (hraDesde_1 < hraHasta_2 && hraHasta_1 > hraDesde_2) //verifico solapamiento de Horarios
                             {
                                 //hay solapamiento!!
@@ -610,7 +623,7 @@
                                 //Guardo ID de los box de Rango Horario inconcistentes
                                 arrayDeError.push(id_i);
                                 arrayDeError.push(id_j);
-                                
+
                                 //debugger
                                 console.log("---------------------------------------------------------");
                                 console.log("Hay solapamiento!!");
@@ -634,11 +647,11 @@
             }
 
 
-            
+
             //Muestro solo los mensajes de error q corresponden
             arrayDeError = arrayDeError.unique();
             for (var i = 0; i < arrayDeError.length; i++) {
-                //Muestra Mensajes de error en "Rango Horario [i]"                                
+                //Muestra Mensajes de error en "Rango Horario [i]"
                 $("#boxHorario_" + arrayDeError[i]).removeClass("box-success").addClass("box-danger");
                 $("#boxHorario_error_" + arrayDeError[i] + " span").text("Existen solapamientos entre Dias y Horarios, favor de verificar.");
                 $("#boxHorario_error_" + arrayDeError[i]).show();
@@ -660,7 +673,7 @@
         /*Función de validación q verifica la existencia de datos validos en los boxs de Rangos Horarios
          *
          *PARAMETROS
-         *  ninguno  
+         *  ninguno
          *
          *RETORNO
          *  TRUE : Si hay datos validos.

@@ -142,8 +142,8 @@ namespace GeHosWebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            //db.Agenda.Add(NuevaAgenda);
-            //db.SaveChanges();
+            db.Agenda.Add(NuevaAgenda);
+            db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = true }, NuevaAgendaVM);
         }

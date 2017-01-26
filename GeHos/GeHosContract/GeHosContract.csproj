@@ -106,6 +106,7 @@
     <Compile Include="Contratos\Especialidad\CEspecialidadVM.cs" />
     <Compile Include="Contratos\IdentityModels.cs" />
     <Compile Include="Contratos\ManageViewModels.cs" />
+    <Compile Include="Contratos\Persona\Especialista\EspecialistaVM.cs" />
     <Compile Include="Contratos\Persona\PersonaVM.cs" />
     <Compile Include="Contratos\Persona\CPersonaVM.cs" />
     <Compile Include="Contratos\Practicas\PracticaVM.cs" />
@@ -123,6 +124,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Contratos\Persona\Empleado\" />
+    <Folder Include="Contratos\Persona\Paciente\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

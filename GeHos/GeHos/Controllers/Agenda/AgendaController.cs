@@ -32,27 +32,34 @@ namespace GeHos.Controllers
         public ActionResult Agregar()
         {
             int csId = ((CentroDeSaludVM)Session["CSSeleccionado"]).ID;
-            CentroDeSaludClient csC = new CentroDeSaludClient();
             EspecialidadClient esC = new EspecialidadClient();
-            PersonaClient peC = new PersonaClient();
+            EmpleadoClient empC = new EmpleadoClient();
             TipoAgendaDeProfesionalesClient tAgC = new TipoAgendaDeProfesionalesClient();
 
-            //NewAgendaVM nuevaAgenda = new NewAgendaVM();
-            //ViewData["ListaCentroSalud"] = new SelectList(csC.buscarTodos().ToList(), "csId", "csNombre");
+            ViewData["ListaTipoAgendaDeProfesionales"] = new SelectList(tAgC.buscarTodas().ToList(), "ID", "Nombre");// as IEnumerable<EspecialistaVM>  as IEnumerable<EspecialidadVM>                        
 
-            ViewBag.ListaTipoAgendaDeProfesionales = new SelectList(tAgC.buscarTodas().ToList(), "ID", "Nombre");
-            ViewBag.ListaCentroSalud = new SelectList(csC.buscarTodos().ToList(), "ID", "Nombre");
-            ViewBag.Especialidad = new SelectList(esC.buscarTodasPorCS(csId).ToList(), "ID", "Nombre");
+
+            var ListaEspecialistas = empC.GetEspecialistasPorCentroDeSalud(csId);
+            ListaEspecialistas.Insert(0,new EspecialistaVM() {EmpleadoID=0, NombreCompleto= "Seleccionar..." });
+            ViewData["ListaEspecialistas"] = new SelectList(ListaEspecialistas, "EmpleadoID", "NombreCompleto");
+
+
+            List<SelectListItem> ListaEspecialidad = new List<SelectListItem>();
+            ListaEspecialidad.Add(new SelectListItem() { Text = "Seleccionar...", Value = "0" });
+            ViewData["ListaEspecialidad"] = new SelectList(ListaEspecialidad,"Value","Text");//esC.GetEspecialidadPorCentroSalud(csId), "ID", "Nombre"
+
+
+
             return View("Agregar");
         }
 
         [HttpPost]        
         public ActionResult Agregar(NewAgendaVM nuevaAgenda)
         {
-            //var x = nuevaAgenda;
-            //var y = Request.Form["EspecialidadID"];
-            //AgendaClient ac = new AgendaClient();
-            //ac.AgregarAgenda(nuevaAgenda);
+            //nuevaAgenda.EmpleadoCreaID = User.GetId();
+
+            AgendaClient ac = new AgendaClient();
+            ac.AgregarAgenda(nuevaAgenda);
             //return RedirectToAction("Index");
             //return Json(new{ ok= true});
             return Json(Url.Action("Index", "Agenda"));
