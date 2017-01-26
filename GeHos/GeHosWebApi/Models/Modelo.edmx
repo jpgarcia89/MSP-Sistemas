@@ -1539,6 +1539,13 @@
         <Function Name="GetEspecialistasPorCentroDeSalud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CentroDeSaludID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetEspecialistasPorEspecialidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EspecialidadID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetEspecialistasPorEspecialidadPorCentroDeSalud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EspecialidadID" Type="int" Mode="In" />
+          <Parameter Name="CentroDeSalud" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetEvolucionPorPaciente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PacienteID" Type="int" Mode="In" />
         </Function>
@@ -1565,6 +1572,11 @@
         </Function>
         <Function Name="GetProvinciasPorPais" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PaisID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetTurnosPorEspecialista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpleadoID" Type="int" Mode="In" />
+          <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
+          <Parameter Name="FechaHasta" Type="datetime" Mode="In" />
         </Function>
         <Function Name="GetTurnosPorPaciente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PacienteID" Type="int" Mode="In" />
@@ -3928,13 +3940,25 @@
           <FunctionImport Name="GetProvinciasPorPais" ReturnType="Collection(Model.GetProvinciasPorPais_Result)">
           <Parameter Name="PaisID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetTurnosPorPaciente">
+          <FunctionImport Name="GetTurnosPorPaciente" ReturnType="Collection(Model.GetTurnosPorPaciente_Result)">
             <Parameter Name="PacienteID" Mode="In" Type="Int32" />
             <Parameter Name="FechaDesde" Mode="In" Type="DateTime" />
             <Parameter Name="FechaHasta" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="GetEspecialidadesPorEspecialista" ReturnType="Collection(Model.GetEspecialidadesPorEspecialista_Result)">
+          <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetEspecialistasPorEspecialidad" ReturnType="Collection(Model.GetEspecialistasPorEspecialidad_Result)">
+            <Parameter Name="EspecialidadID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetEspecialistasPorEspecialidadPorCentroDeSalud" ReturnType="Collection(Model.GetEspecialistasPorEspecialidadPorCentroDeSalud_Result)">
+            <Parameter Name="EspecialidadID" Mode="In" Type="Int32" />
+            <Parameter Name="CentroDeSalud" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetTurnosPorEspecialista" ReturnType="Collection(Model.GetTurnosPorEspecialista_Result)">
             <Parameter Name="EmpleadoID" Mode="In" Type="Int32" />
+            <Parameter Name="FechaDesde" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaHasta" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetDepartamentosPorProvincia_Result">
@@ -4036,6 +4060,65 @@
           <Property Type="String" Name="DescripcionPlanilla" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Abreviatura" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="IdMHO" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetEspecialistasPorEspecialidad_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Apellido" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TipoDocumento" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="NroDocumento" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetEspecialistasPorEspecialidadPorCentroDeSalud_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Apellido" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="NroDocumento" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetTurnosPorEspecialista_Result">
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="Int64" Name="PacienteID" Nullable="true" />
+          <Property Type="Int32" Name="AgendaHorarioID" Nullable="false" />
+          <Property Type="DateTime" Name="FechaTurno" Nullable="false" Precision="23" />
+          <Property Type="Byte" Name="TurnoEstadoID" Nullable="false" />
+          <Property Type="String" Name="EstadoTurno" Nullable="false" MaxLength="50" />
+          <Property Type="Byte" Name="TurnoEstadoAdmisionID" Nullable="false" />
+          <Property Type="String" Name="EstadoAdmision" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="EsSobreturno" Nullable="true" />
+          <Property Type="DateTime" Name="FechaAdmision" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaInicioAtencion" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaFinAtencion" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="EsPrioritario" Nullable="true" />
+          <Property Type="Int32" Name="BloqueoMasivoID" Nullable="true" />
+          <Property Type="Boolean" Name="EsProgramado" Nullable="true" />
+          <Property Type="Int32" Name="CentroDeSaludID" Nullable="true" />
+          <Property Type="String" Name="CentroDeSalud" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="EspecialidadID" Nullable="true" />
+          <Property Type="String" Name="Especialidad" Nullable="true" MaxLength="80" />
+          <Property Type="Int32" Name="EmpleadoID" Nullable="false" />
+          <Property Type="String" Name="Especialista" Nullable="true" MaxLength="201" />
+        </ComplexType>
+        <ComplexType Name="GetTurnosPorPaciente_Result">
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="Int64" Name="PacienteID" Nullable="true" />
+          <Property Type="Int32" Name="AgendaHorarioID" Nullable="false" />
+          <Property Type="DateTime" Name="FechaTurno" Nullable="false" Precision="23" />
+          <Property Type="Byte" Name="TurnoEstadoID" Nullable="false" />
+          <Property Type="String" Name="EstadoTurno" Nullable="false" MaxLength="50" />
+          <Property Type="Byte" Name="TurnoEstadoAdmisionID" Nullable="false" />
+          <Property Type="String" Name="EstadoAdmision" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="EsSobreturno" Nullable="true" />
+          <Property Type="DateTime" Name="FechaAdmision" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaInicioAtencion" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaFinAtencion" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="EsPrioritario" Nullable="true" />
+          <Property Type="Int32" Name="BloqueoMasivoID" Nullable="true" />
+          <Property Type="Boolean" Name="EsProgramado" Nullable="true" />
+          <Property Type="Int32" Name="CentroDeSaludID" Nullable="true" />
+          <Property Type="String" Name="CentroDeSalud" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="EspecialidadID" Nullable="true" />
+          <Property Type="String" Name="Especialidad" Nullable="true" MaxLength="80" />
+          <Property Type="Int32" Name="EmpleadoID" Nullable="false" />
+          <Property Type="String" Name="Especialista" Nullable="true" MaxLength="201" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4998,7 +5081,33 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetTurnosPorPaciente" FunctionName="Model.Store.GetTurnosPorPaciente" />
+          <FunctionImportMapping FunctionImportName="GetTurnosPorPaciente" FunctionName="Model.Store.GetTurnosPorPaciente" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetTurnosPorPaciente_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PacienteID" ColumnName="PacienteID" />
+                <ScalarProperty Name="AgendaHorarioID" ColumnName="AgendaHorarioID" />
+                <ScalarProperty Name="FechaTurno" ColumnName="FechaTurno" />
+                <ScalarProperty Name="TurnoEstadoID" ColumnName="TurnoEstadoID" />
+                <ScalarProperty Name="EstadoTurno" ColumnName="EstadoTurno" />
+                <ScalarProperty Name="TurnoEstadoAdmisionID" ColumnName="TurnoEstadoAdmisionID" />
+                <ScalarProperty Name="EstadoAdmision" ColumnName="EstadoAdmision" />
+                <ScalarProperty Name="EsSobreturno" ColumnName="EsSobreturno" />
+                <ScalarProperty Name="FechaAdmision" ColumnName="FechaAdmision" />
+                <ScalarProperty Name="FechaInicioAtencion" ColumnName="FechaInicioAtencion" />
+                <ScalarProperty Name="FechaFinAtencion" ColumnName="FechaFinAtencion" />
+                <ScalarProperty Name="EsPrioritario" ColumnName="EsPrioritario" />
+                <ScalarProperty Name="BloqueoMasivoID" ColumnName="BloqueoMasivoID" />
+                <ScalarProperty Name="EsProgramado" ColumnName="EsProgramado" />
+                <ScalarProperty Name="CentroDeSaludID" ColumnName="CentroDeSaludID" />
+                <ScalarProperty Name="CentroDeSalud" ColumnName="CentroDeSalud" />
+                <ScalarProperty Name="EspecialidadID" ColumnName="EspecialidadID" />
+                <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
+                <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
+                <ScalarProperty Name="Especialista" ColumnName="Especialista" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetEspecialidadesPorEspecialista" FunctionName="Model.Store.GetEspecialidadesPorEspecialista">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Model.GetEspecialidadesPorEspecialista_Result">
@@ -5008,6 +5117,54 @@
                 <ScalarProperty Name="DescripcionPlanilla" ColumnName="DescripcionPlanilla" />
                 <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
                 <ScalarProperty Name="IdMHO" ColumnName="IdMHO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEspecialistasPorEspecialidad" FunctionName="Model.Store.GetEspecialistasPorEspecialidad">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetEspecialistasPorEspecialidad_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="TipoDocumento" ColumnName="TipoDocumento" />
+                <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEspecialistasPorEspecialidadPorCentroDeSalud" FunctionName="Model.Store.GetEspecialistasPorEspecialidadPorCentroDeSalud">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetEspecialistasPorEspecialidadPorCentroDeSalud_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTurnosPorEspecialista" FunctionName="Model.Store.GetTurnosPorEspecialista">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Model.GetTurnosPorEspecialista_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PacienteID" ColumnName="PacienteID" />
+                <ScalarProperty Name="AgendaHorarioID" ColumnName="AgendaHorarioID" />
+                <ScalarProperty Name="FechaTurno" ColumnName="FechaTurno" />
+                <ScalarProperty Name="TurnoEstadoID" ColumnName="TurnoEstadoID" />
+                <ScalarProperty Name="EstadoTurno" ColumnName="EstadoTurno" />
+                <ScalarProperty Name="TurnoEstadoAdmisionID" ColumnName="TurnoEstadoAdmisionID" />
+                <ScalarProperty Name="EstadoAdmision" ColumnName="EstadoAdmision" />
+                <ScalarProperty Name="EsSobreturno" ColumnName="EsSobreturno" />
+                <ScalarProperty Name="FechaAdmision" ColumnName="FechaAdmision" />
+                <ScalarProperty Name="FechaInicioAtencion" ColumnName="FechaInicioAtencion" />
+                <ScalarProperty Name="FechaFinAtencion" ColumnName="FechaFinAtencion" />
+                <ScalarProperty Name="EsPrioritario" ColumnName="EsPrioritario" />
+                <ScalarProperty Name="BloqueoMasivoID" ColumnName="BloqueoMasivoID" />
+                <ScalarProperty Name="EsProgramado" ColumnName="EsProgramado" />
+                <ScalarProperty Name="CentroDeSaludID" ColumnName="CentroDeSaludID" />
+                <ScalarProperty Name="CentroDeSalud" ColumnName="CentroDeSalud" />
+                <ScalarProperty Name="EspecialidadID" ColumnName="EspecialidadID" />
+                <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
+                <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
+                <ScalarProperty Name="Especialista" ColumnName="Especialista" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

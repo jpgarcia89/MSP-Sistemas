@@ -297,6 +297,12 @@
     <Compile Include="Models\GetEspecialidadesPorEspecialista_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetEspecialistasPorEspecialidadPorCentroDeSalud_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetEspecialistasPorEspecialidad_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetEvolucionPorPaciente_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -346,6 +352,12 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetProvinciasPorPais_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetTurnosPorEspecialista_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetTurnosPorPaciente_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Grados.cs">
