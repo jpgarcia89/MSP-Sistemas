@@ -26,11 +26,11 @@ namespace GeHosWebApi.Models
         public System.TimeSpan HoraDesde { get; set; }
         public System.TimeSpan HoraHasta { get; set; }
         public bool Activa { get; set; }
-        public int AgendaTipoID { get; set; }
+        public byte AgendaTipoID { get; set; }
         public int CantidadDeTurnos { get; set; }
     
         public virtual Agenda Agenda { get; set; }
-        public virtual AgendaTipo AgendaTipo { get; set; }
+        public virtual TipoAgendaDeProfesionales TipoAgendaDeProfesionales { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Turno> Turno { get; set; }
     }

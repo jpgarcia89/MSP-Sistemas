@@ -303,6 +303,9 @@
     <Compile Include="Models\GetEspecialidadesPorEspecialista_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetEspecialistasPorCentroDeSalud_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetEspecialistasPorEspecialidadPorCentroDeSalud_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>

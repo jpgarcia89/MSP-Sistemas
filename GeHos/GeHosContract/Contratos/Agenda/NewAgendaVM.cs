@@ -38,7 +38,7 @@ namespace GeHosContract.Contrato
 
         public List<int> Dias { get; set; }
 
-        public int AgendaTipoID { get; set; }
+        public byte AgendaTipoID { get; set; }
 
         public int DuracionDeTurnos { get; set; }
 
