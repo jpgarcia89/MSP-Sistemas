@@ -30,7 +30,6 @@ namespace GeHosWebApi.Models
         public virtual DbSet<Administrador> Administrador { get; set; }
         public virtual DbSet<Agenda> Agenda { get; set; }
         public virtual DbSet<AgendaHorario> AgendaHorario { get; set; }
-        public virtual DbSet<AgendaTipo> AgendaTipo { get; set; }
         public virtual DbSet<AgrupamientoGradosDeEscalafon> AgrupamientoGradosDeEscalafon { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
@@ -105,13 +104,13 @@ namespace GeHosWebApi.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetAgendaHorariosPorEspecialista", empleadoIDParameter);
         }
     
-        public virtual int GetAgendaPorEspecialista(Nullable<int> empleadoID)
+        public virtual ObjectResult<GetAgendaPorEspecialista_Result> GetAgendaPorEspecialista(Nullable<int> empleadoID)
         {
             var empleadoIDParameter = empleadoID.HasValue ?
                 new ObjectParameter("EmpleadoID", empleadoID) :
                 new ObjectParameter("EmpleadoID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetAgendaPorEspecialista", empleadoIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAgendaPorEspecialista_Result>("GetAgendaPorEspecialista", empleadoIDParameter);
         }
     
         public virtual int GetCentrosDeSaludPorEmpleado(Nullable<int> empleadoID)
@@ -349,6 +348,19 @@ namespace GeHosWebApi.Models
                 new ObjectParameter("Pass", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<byte[]>("sp_encryptPassword", passParameter);
+        }
+    
+        public virtual ObjectResult<GetAgendaPorEspecialistaPorCentroDeSalud_Result> GetAgendaPorEspecialistaPorCentroDeSalud(Nullable<int> empleadoID, Nullable<int> centroDeSaludID)
+        {
+            var empleadoIDParameter = empleadoID.HasValue ?
+                new ObjectParameter("EmpleadoID", empleadoID) :
+                new ObjectParameter("EmpleadoID", typeof(int));
+    
+            var centroDeSaludIDParameter = centroDeSaludID.HasValue ?
+                new ObjectParameter("CentroDeSaludID", centroDeSaludID) :
+                new ObjectParameter("CentroDeSaludID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAgendaPorEspecialistaPorCentroDeSalud_Result>("GetAgendaPorEspecialistaPorCentroDeSalud", empleadoIDParameter, centroDeSaludIDParameter);
         }
     }
 }

@@ -963,6 +963,17 @@
     <Content Include="Scripts\plugins\pace\pace.js" />
     <Content Include="Scripts\plugins\pace\pace.min.css" />
     <Content Include="Scripts\plugins\pace\pace.min.js" />
+    <Content Include="Scripts\plugins\SebaGrid\Grid.js" />
+    <Content Include="Scripts\plugins\SebaGrid\inc\FileSaver.js" />
+    <Content Include="Scripts\plugins\SebaGrid\inc\Grid.css" />
+    <Content Include="Scripts\plugins\SebaGrid\inc\img\sort_asc.png" />
+    <Content Include="Scripts\plugins\SebaGrid\inc\img\sort_both.png" />
+    <Content Include="Scripts\plugins\SebaGrid\inc\img\sort_desc.png" />
+    <Content Include="Scripts\plugins\SebaGrid\inc\jquery.base64.js" />
+    <Content Include="Scripts\plugins\SebaGrid\inc\tableexport.css" />
+    <Content Include="Scripts\plugins\SebaGrid\inc\tableexport.js" />
+    <Content Include="Scripts\plugins\SebaGrid\inc\velocity.min.js" />
+    <Content Include="Scripts\plugins\SebaGrid\inc\velocity.ui.min.js" />
     <Content Include="Scripts\plugins\select2\i18n\ar.js" />
     <Content Include="Scripts\plugins\select2\i18n\az.js" />
     <Content Include="Scripts\plugins\select2\i18n\bg.js" />
@@ -1010,6 +1021,7 @@
     <Content Include="Scripts\plugins\select2\i18n\vi.js" />
     <Content Include="Scripts\plugins\select2\i18n\zh-CN.js" />
     <Content Include="Scripts\plugins\select2\i18n\zh-TW.js" />
+    <Content Include="Scripts\plugins\select2\select2-bootstrap.css" />
     <Content Include="Scripts\plugins\select2\select2.css" />
     <Content Include="Scripts\plugins\select2\select2.full.js" />
     <Content Include="Scripts\plugins\select2\select2.full.min.js" />
@@ -1026,6 +1038,11 @@
     <Content Include="Scripts\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\plugins\SebaGrid\inc\font\fontello.eot" />
+    <Content Include="Scripts\plugins\SebaGrid\inc\font\fontello.svg" />
+    <Content Include="Scripts\plugins\SebaGrid\inc\font\fontello.ttf" />
+    <Content Include="Scripts\plugins\SebaGrid\inc\font\fontello.woff" />
+    <Content Include="Scripts\plugins\SebaGrid\inc\font\fontello.woff2" />
     <None Include="Scripts\_references.js" />
     <Content Include="Views\Agenda\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />

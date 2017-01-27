@@ -45,8 +45,6 @@ namespace Utiles.ContratoBase
             return res;
         }
 
-
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void RaisePropertyChanged(string propName)

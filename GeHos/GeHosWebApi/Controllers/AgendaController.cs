@@ -10,7 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using GeHosWebApi.Models;
 using GeHosContract.Contrato;
-
+using System.Web.Http.Results;
 
 namespace GeHosWebApi.Controllers
 {
@@ -18,8 +18,8 @@ namespace GeHosWebApi.Controllers
     {
         private Entities db = new Entities();
 
-        // GET: api/Agenda
-        public IQueryable<AgendaVM> GetcatAgenda()
+        // GET: api/Agenda        
+        public IQueryable<AgendaVM> GetAgenda()
         {
             return db.Agenda.Select(x => new AgendaVM()
             {
@@ -79,7 +79,7 @@ namespace GeHosWebApi.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-        
+
         // POST: api/Agenda
         [ResponseType(typeof(Agenda))]
         public IHttpActionResult PostcatAgenda(NewAgendaVM NuevaAgendaVM)
@@ -110,7 +110,7 @@ namespace GeHosWebApi.Controllers
             foreach (var rangoHorario in NuevaAgendaVM.RangosHorarios)
             {
                 int Desde = NuevaAgendaVM.FechaDesde.Day;
-                int Hasta = NuevaAgendaVM.FechaHasta.Day;               
+                int Hasta = NuevaAgendaVM.FechaHasta.Day;
 
                 for (int i = Desde; i <= Hasta; i++)
                 {
@@ -176,6 +176,42 @@ namespace GeHosWebApi.Controllers
         private bool catAgendaExists(int id)
         {
             return db.Agenda.Count(e => e.ID == id) > 0;
+        }
+
+
+
+
+
+
+        // GET: api/Agenda
+        [Route("api/Agenda/GetAgendasPorProfesional/{EspID}/{csID}")]
+        public JsonResult<SebaGridData> GetAgendasPorProfesional(int EspID, int csID)
+        {
+            var y = db.GetAgendaPorEspecialistaPorCentroDeSalud(EspID, csID).Select(x => new AgendaVM()
+            {
+                ID = x.ID,
+                FechaDesde = x.FechaDesde,
+                FechaHasta = x.FechaHasta
+            }).ToList();
+
+
+            info z = new info()
+            {
+                page = 1,
+                rows = 1,
+                page_count = 1,
+                total_rows = 1,
+                start = 0
+            };
+            List<info> _info = new List<info>();
+            _info.Add(z);
+            SebaGridData data = new SebaGridData() {
+                info = _info,
+                values = y
+
+            };
+
+            return Json(data);
         }
     }
 }

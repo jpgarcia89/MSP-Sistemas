@@ -10,11 +10,11 @@
 namespace GeHosWebApi.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class AgendaTipo
+    public partial class GetAgendaPorEspecialistaPorCentroDeSalud_Result
     {
-        public byte ID { get; set; }
-        public string Descripcion { get; set; }
+        public int ID { get; set; }
+        public System.DateTime FechaDesde { get; set; }
+        public System.DateTime FechaHasta { get; set; }
     }
 }

@@ -16,7 +16,7 @@ using Utiles.ContratoBase;
 
 namespace GeHosContract.Contrato
 {
-    public class AgendaVM : ContratoBase
+    public class AgendaVM
     {
         #region Atributos
         int AID;

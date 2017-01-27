@@ -110,6 +110,7 @@
     <Compile Include="Contratos\Persona\PersonaVM.cs" />
     <Compile Include="Contratos\Persona\CPersonaVM.cs" />
     <Compile Include="Contratos\Practicas\PracticaVM.cs" />
+    <Compile Include="Contratos\SebaGrid\SebaGridData.cs" />
     <Compile Include="Contratos\TipoAgendaDeProfesionales\CTipoAgendaDeProfesionalesVM.cs" />
     <Compile Include="Contratos\TipoAgendaDeProfesionales\TipoAgendaDeProfesionalesVM.cs" />
     <Compile Include="Contratos\Turnos\TurnoVM.cs" />

@@ -196,9 +196,6 @@
     <Compile Include="Models\AgendaHorario.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AgendaTipo.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\AgrupamientoGradosDeEscalafon.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -287,6 +284,12 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Fuente.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetAgendaPorEspecialistaPorCentroDeSalud_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetAgendaPorEspecialista_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetDepartamentosPorProvincia_Result.cs">

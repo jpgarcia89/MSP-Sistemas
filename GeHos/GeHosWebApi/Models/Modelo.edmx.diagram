@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="Model.Administrador" Width="1.5" PointX="1.5" PointY="24" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Agenda" Width="1.5" PointX="10.5" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AgendaHorario" Width="1.5" PointX="15.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.AgendaTipo" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AgrupamientoGradosDeEscalafon" Width="1.5" PointX="1.5" PointY="57.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AspNetRoles" Width="1.5" PointX="10.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AspNetUserClaims" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />

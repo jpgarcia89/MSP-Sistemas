@@ -35,6 +35,7 @@ namespace GeHos
                       "~/Content/ionicons.min.css",         //Ionicons
                       "~/Content/AdminLTE.min.css",         //Theme style
                       "~/Scripts/plugins/select2/select2.min.css",         //Select2
+                      "~/Scripts/plugins/select2/select2-bootstrap.css",
                       "~/Content/skin-blue.css",//AdminLTE Skins
                       "~/Content/jquery.alerts.css",//jQuery Alerts css 
                       "~/Content/jquery-ui.min.css"));     
@@ -44,7 +45,7 @@ namespace GeHos
                       "~/Scripts/jquery.validate*",                     //jQuery Validations
                       "~/Scripts/Scripts/plugins/jQueryUI/jquery-ui.min.js",    //jQuery UI
                       "~/Scripts/bootstrap.min.js",                     //Bootstrap
-                      "~/Scripts/plugins/select2/select2.min.js",                     //Bootstrap
+                      "~/Scripts/plugins/select2/select2.full.min.js",                     //Bootstrap
                       "~/Scripts/app.min.js",
                       "~/Scripts/jquery.alerts.js",
                       "~/Scripts/jquery-ui.min.js",
