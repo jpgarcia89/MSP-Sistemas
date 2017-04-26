@@ -1,0 +1,14 @@
+﻿@{
+    List<MSP.Models.MenuVM> menus;
+    if (Session["Menu"] == null)
+    {
+        var menuClien = new MSP.Controllers.MenuController();
+        Session["Menu"] = menuClien.GetMenu();
+    }
+
+    menus = Session["Menu"] as List<MSP.Models.MenuVM>;
+}
+<ul class="sidebar-menu">
+    @MSP.Helpers.HtmlHelperExtensions.RenderMenu(menus);
+</ul>
+

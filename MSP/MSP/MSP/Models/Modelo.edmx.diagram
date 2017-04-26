@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="af64a1c9ae014ff7a3198488342f2b20" Name="Diagram1">
+        <EntityTypeShape EntityType="MSPModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSPModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSPModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSPModel.AspNetUsers" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="MSPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="MSPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="MSPModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MSPModel.Menu" Width="1.5" PointX="0.75" PointY="6.75" />
+        <AssociationConnector Association="MSPModel.FK_Menu_Menu" />
+        <EntityTypeShape EntityType="MSPModel.Certificado" Width="1.5" PointX="5.625" PointY="7.125" />
+        <EntityTypeShape EntityType="MSPModel.CertificadoEstablecimiento" Width="1.5" PointX="7.875" PointY="6.75" />
+        <EntityTypeShape EntityType="MSPModel.TipoCertificado" Width="1.5" PointX="3.375" PointY="10.125" />
+        <EntityTypeShape EntityType="MSPModel.TipoCertificadoEstablecimiento" Width="1.5" PointX="5.625" PointY="13.875" />
+        <AssociationConnector Association="MSPModel.FK_Certificado_AspNetUsers" />
+        <AssociationConnector Association="MSPModel.FK_CertificadoEstablecimiento_AspNetUsers" />
+        <AssociationConnector Association="MSPModel.FK_Certificado_CertificadoEstablecimiento" />
+        <AssociationConnector Association="MSPModel.FK_Certificado_TipoCertificado" />
+        <AssociationConnector Association="MSPModel.FK_CertificadoEstablecimiento_TipoCertificadoEstablecimiento" />
+        <AssociationConnector Association="MSPModel.FK_TipoCertificadoEstablecimiento_TipoCertificado" />
+        <EntityTypeShape EntityType="MSPModel.CertificadoEstablecimentoItem" Width="1.5" PointX="7.875" PointY="14.125" />
+        <AssociationConnector Association="MSPModel.FK_CertificadoEstablecimentoItem_TipoCertificadoEstablecimiento" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

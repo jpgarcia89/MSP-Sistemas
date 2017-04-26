@@ -1,0 +1,109 @@
+﻿@model IEnumerable<MSP.Models.TipoCertificadoEstablecimiento>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Denominacion)</th>
+        <th>@Html.DisplayNameFor(model => model.TipoCertificado.Denominacion)</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Denominacion)</td>
+            <td>@Html.DisplayFor(modelItem => item.TipoCertificado.Denominacion)</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>*@
+
+
+
+
+<section class="content-header">
+    <h1>
+        Certificados
+        <small>Listado</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="#">Sanidad</a></li>
+        <li class="active">Emisión de Certificados</li>
+    </ol>
+</section>
+
+
+<section class="content">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Listado de Certificados</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            @*<a class="btn btn-primary" href="/TipoCertificadoEstablecimientoes/Create"><i class="fa fa-plus"></i> Nuevo</a>*@
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/TipoCertificadoEstablecimientoes/Create','agregar')">
+                <i class="fa fa-plus"></i> Nuevo
+            </button>
+
+            <table id="dtEstablecimientos" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th style="width:100px">Acciones</th>
+                        <th>@Html.DisplayNameFor(model => model.Denominacion)</th>
+                        <th>@Html.DisplayNameFor(model => model.TipoCertificado.Denominacion)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="btn-group-sm">
+                                    <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/TipoCertificadoEstablecimientoes/Edit/@item.ID','editar')"></a>
+                                    <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/TipoCertificadoEstablecimientoes/Details/@item.ID','detalle')"></a>
+                                    <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/TipoCertificadoEstablecimientoes/Delete/@item.ID','eliminar')"></a>
+                                </div>
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Denominacion)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TipoCertificado.Denominacion)</td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+</section>
+
+<script>
+    $(function () {
+
+        $('#dtEstablecimientos').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "language": DataTableEsp()
+        });
+    });
+</script>
