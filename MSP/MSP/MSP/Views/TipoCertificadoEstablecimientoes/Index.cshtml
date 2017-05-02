@@ -5,44 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.Denominacion)</th>
-        <th>@Html.DisplayNameFor(model => model.TipoCertificado.Denominacion)</th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.Denominacion)</td>
-            <td>@Html.DisplayFor(modelItem => item.TipoCertificado.Denominacion)</td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-        </tr>
-    }
-
-</table>*@
-
-
-
 
 <section class="content-header">
     <h1>
-        Certificados
+        Categorias de Establecimientos
         <small>Listado</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
         <li><a href="#">Sanidad</a></li>
-        <li class="active">Emisión de Certificados</li>
+        <li><a href="#">Establecimientos</a></li>
+        <li class="active">Gestion de Categorias</li>
     </ol>
 </section>
 
@@ -54,10 +27,10 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-            @*<a class="btn btn-primary" href="/TipoCertificadoEstablecimientoes/Create"><i class="fa fa-plus"></i> Nuevo</a>*@
+           
 
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/TipoCertificadoEstablecimientoes/Create','agregar')">
+            <button type="button" style="margin-bottom: 15px;" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/TipoCertificadoEstablecimientoes/Create','Agregar','Categoria de Establecimiento')">
                 <i class="fa fa-plus"></i> Nuevo
             </button>
 
@@ -65,8 +38,8 @@
                 <thead>
                     <tr>
                         <th style="width:100px">Acciones</th>
-                        <th>@Html.DisplayNameFor(model => model.Denominacion)</th>
-                        <th>@Html.DisplayNameFor(model => model.TipoCertificado.Denominacion)</th>
+                        <th>Denominacion</th>
+                        <th>Tipo de Ceritificado</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,9 +48,9 @@
                         <tr>
                             <td>
                                 <div class="btn-group-sm">
-                                    <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/TipoCertificadoEstablecimientoes/Edit/@item.ID','editar')"></a>
-                                    <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/TipoCertificadoEstablecimientoes/Details/@item.ID','detalle')"></a>
-                                    <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/TipoCertificadoEstablecimientoes/Delete/@item.ID','eliminar')"></a>
+                                    <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/TipoCertificadoEstablecimientoes/Edit/@item.ID','Editar','Categoria de Establecimiento')"></a>
+                                    <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/TipoCertificadoEstablecimientoes/Details/@item.ID','Detalle','Categoria de Establecimiento')"></a>
+                                    <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/TipoCertificadoEstablecimientoes/Delete/@item.ID','Eliminar','Categoria de Establecimiento')"></a>
                                 </div>
                             </td>
                             <td>@Html.DisplayFor(modelItem => item.Denominacion)</td>
@@ -98,7 +71,7 @@
 
         $('#dtEstablecimientos').DataTable({
             "paging": true,
-            "lengthChange": false,
+            "lengthChange": true,
             "searching": true,
             "ordering": true,
             "info": true,

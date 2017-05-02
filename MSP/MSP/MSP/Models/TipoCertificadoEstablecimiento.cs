@@ -26,7 +26,11 @@ namespace MSP.Models
         public int ID { get; set; }
 
         [Required]
+        [DisplayName("Categoria")]
         public string Denominacion { get; set; }
+
+        [Required]
+        [DisplayName("Tipo Certificado")]
         public int IdTipoCertificado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

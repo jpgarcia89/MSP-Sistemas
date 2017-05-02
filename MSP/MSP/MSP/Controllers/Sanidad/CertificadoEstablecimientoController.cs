@@ -33,7 +33,7 @@ namespace MSP.Controllers.Sanidad
             {
                 return HttpNotFound();
             }
-            return View(certificadoEstablecimiento);
+            return PartialView(certificadoEstablecimiento);
         }
 
         // GET: CertificadoEstablecimiento/Create
@@ -41,7 +41,7 @@ namespace MSP.Controllers.Sanidad
         {
             ViewBag.IdUsuarioAlta = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.IdTipoEstablecimiento = new SelectList(db.TipoCertificadoEstablecimiento, "ID", "Denominacion");
-            return View();
+            return PartialView();
         }
 
         // POST: CertificadoEstablecimiento/Create
@@ -77,7 +77,7 @@ namespace MSP.Controllers.Sanidad
             }
             ViewBag.IdUsuarioAlta = new SelectList(db.AspNetUsers, "Id", "Email", certificadoEstablecimiento.IdUsuarioAlta);
             ViewBag.IdTipoEstablecimiento = new SelectList(db.TipoCertificadoEstablecimiento, "ID", "Denominacion", certificadoEstablecimiento.IdTipoEstablecimiento);
-            return View(certificadoEstablecimiento);
+            return PartialView(certificadoEstablecimiento);
         }
 
         // POST: CertificadoEstablecimiento/Edit/5
@@ -110,7 +110,7 @@ namespace MSP.Controllers.Sanidad
             {
                 return HttpNotFound();
             }
-            return View(certificadoEstablecimiento);
+            return PartialView(certificadoEstablecimiento);
         }
 
         // POST: CertificadoEstablecimiento/Delete/5

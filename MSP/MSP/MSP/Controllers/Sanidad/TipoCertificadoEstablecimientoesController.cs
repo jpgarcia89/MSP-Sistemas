@@ -50,8 +50,11 @@ namespace MSP.Controllers.Sanidad
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Denominacion,IdTipoCertificado")] TipoCertificadoEstablecimiento tipoCertificadoEstablecimiento)
         {
+            tipoCertificadoEstablecimiento.IdTipoCertificado = db.TipoCertificado.Where(r => r.Denominacion.Equals("Sanidad")).FirstOrDefault().ID;
+
             if (ModelState.IsValid)
             {
+                
                 db.TipoCertificadoEstablecimiento.Add(tipoCertificadoEstablecimiento);
                 db.SaveChanges();
                 //return RedirectToAction("Index");
@@ -89,7 +92,8 @@ namespace MSP.Controllers.Sanidad
             {
                 db.Entry(tipoCertificadoEstablecimiento).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return Json(new { ok = "true" });
             }
             ViewBag.IdTipoCertificado = new SelectList(db.TipoCertificado, "ID", "Denominacion", tipoCertificadoEstablecimiento.IdTipoCertificado);
             return View(tipoCertificadoEstablecimiento);
@@ -118,7 +122,8 @@ namespace MSP.Controllers.Sanidad
             TipoCertificadoEstablecimiento tipoCertificadoEstablecimiento = db.TipoCertificadoEstablecimiento.Find(id);
             db.TipoCertificadoEstablecimiento.Remove(tipoCertificadoEstablecimiento);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return Json(new { ok = "true" });
         }
 
         protected override void Dispose(bool disposing)
