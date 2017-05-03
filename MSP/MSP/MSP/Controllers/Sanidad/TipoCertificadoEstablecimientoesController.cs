@@ -96,7 +96,7 @@ namespace MSP.Controllers.Sanidad
                 return Json(new { ok = "true" });
             }
             ViewBag.IdTipoCertificado = new SelectList(db.TipoCertificado, "ID", "Denominacion", tipoCertificadoEstablecimiento.IdTipoCertificado);
-            return View(tipoCertificadoEstablecimiento);
+            return PartialView(tipoCertificadoEstablecimiento);
         }
 
         // GET: TipoCertificadoEstablecimientoes/Delete/5

@@ -90,7 +90,7 @@
           <Property Name="Domicilio" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DomicilioDepto" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Firma" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="FirmaDni" Type="varchar" MaxLength="15" />
+          <Property Name="FirmaDni" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="FirmaDireccion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="FirmaDepto" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -543,7 +543,7 @@
           <NavigationProperty Name="AspNetUsers" Relationship="MSPModel.FK_CertificadoEstablecimiento_AspNetUsers" FromRole="CertificadoEstablecimiento" ToRole="AspNetUsers" />
           <NavigationProperty Name="Certificado" Relationship="MSPModel.FK_Certificado_CertificadoEstablecimiento" FromRole="CertificadoEstablecimiento" ToRole="Certificado" />
           <NavigationProperty Name="TipoCertificadoEstablecimiento" Relationship="MSPModel.FK_CertificadoEstablecimiento_TipoCertificadoEstablecimiento" FromRole="CertificadoEstablecimiento" ToRole="TipoCertificadoEstablecimiento" />
-          <Property Name="FirmaDni" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="FirmaDni" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="TipoCertificado">
           <Key>

@@ -10,8 +10,6 @@
 namespace MSP.Models
 {
     using System;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
     
     public partial class TipoCertificadoEstablecimiento
@@ -24,13 +22,7 @@ namespace MSP.Models
         }
     
         public int ID { get; set; }
-
-        [Required]
-        [DisplayName("Categoria")]
         public string Denominacion { get; set; }
-
-        [Required]
-        [DisplayName("Tipo Certificado")]
         public int IdTipoCertificado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

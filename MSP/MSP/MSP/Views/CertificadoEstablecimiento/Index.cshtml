@@ -50,9 +50,9 @@
                         <tr>
                             <td>
                                 <div class="btn-group-sm">
-                                    <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/CertificadoEstablecimiento/Edit/@item.ID','Editar','Categoria de Establecimiento')"></a>
-                                    <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/CertificadoEstablecimiento/Details/@item.ID','Detalle','Categoria de Establecimiento')"></a>
-                                    <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/CertificadoEstablecimiento/Delete/@item.ID','Eliminar','Categoria de Establecimiento')"></a>
+                                    <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/CertificadoEstablecimiento/Edit/@item.ID','Editar','Establecimiento')"></a>
+                                    <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/CertificadoEstablecimiento/Details/@item.ID','Detalle','Establecimiento')"></a>
+                                    <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/CertificadoEstablecimiento/Delete/@item.ID','Eliminar','Establecimiento')"></a>
                                 </div>
                             </td>
                             <td>@Html.DisplayFor(modelItem => item.Denominacion)</td>
@@ -77,7 +77,7 @@
         
         $('#dtEstablecimientos').DataTable({
             "paging": true,
-            "lengthChange": false,
+            "lengthChange": true,
             "searching": true,
             "ordering": true,
             "info": true,

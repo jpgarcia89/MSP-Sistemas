@@ -11,18 +11,26 @@ namespace MSP.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Certificado
     {
         public int ID { get; set; }
         public int IdEstablecimiento { get; set; }
         public System.DateTime FechaEmision { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true,DataFormatString = "{0:dd/MM/yyyy}")]
         public System.DateTime FechaDesde { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public System.DateTime FechaHasta { get; set; }
+
+        [Required(AllowEmptyStrings = false)]
         public string NroExpediente { get; set; }
         public int IdCertificadoTipo { get; set; }
         public string IdUsuarioEmite { get; set; }
-    
+
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual CertificadoEstablecimiento CertificadoEstablecimiento { get; set; }
         public virtual TipoCertificado TipoCertificado { get; set; }

@@ -27,13 +27,16 @@ namespace MSP.Models
 
         [ScaffoldColumn(true)]
         [DisplayName("Tipo de Establecimiento")]
+        [Required()]
         public int IdTipoEstablecimiento { get; set; }
 
         [ScaffoldColumn(true)]
         [DisplayName("Denominacion")]
+        [Required(AllowEmptyStrings = false)]
         public string Denominacion { get; set; }
 
         [ScaffoldColumn(false)]
+        [Required()]
         public System.DateTime FechaAlta { get; set; }
 
         [ScaffoldColumn(false)]
@@ -53,6 +56,7 @@ namespace MSP.Models
 
         [ScaffoldColumn(true)]
         [DisplayName("Firma")]
+        [Required(AllowEmptyStrings = false)]
         public string Firma { get; set; }
 
         [ScaffoldColumn(true)]

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MSP.Models;
+using Microsoft.AspNet.Identity;
 
 namespace MSP.Controllers.Sanidad
 {
@@ -39,10 +40,10 @@ namespace MSP.Controllers.Sanidad
         // GET: Certificadoes/Create
         public ActionResult Create()
         {
-            ViewBag.IdUsuarioEmite = new SelectList(db.AspNetUsers, "Id", "Email");
-            ViewBag.IdEstablecimiento = new SelectList(db.CertificadoEstablecimiento, "ID", "Denominacion");
-            ViewBag.IdCertificadoTipo = new SelectList(db.TipoCertificado, "ID", "Denominacion");
-            return View();
+            //ViewBag.IdUsuarioEmite = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.IdEstablecimiento = new SelectList(db.CertificadoEstablecimiento.Where(r=>r.TipoCertificadoEstablecimiento.TipoCertificado.Denominacion=="Sanidad"), "ID", "Denominacion");
+            //ViewBag.IdCertificadoTipo = new SelectList(db.TipoCertificado, "ID", "Denominacion");
+            return PartialView();
         }
 
         // POST: Certificadoes/Create
@@ -52,17 +53,23 @@ namespace MSP.Controllers.Sanidad
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,IdEstablecimiento,FechaEmision,FechaDesde,FechaHasta,NroExpediente,IdCertificadoTipo,IdUsuarioEmite")] Certificado certificado)
         {
+            certificado.FechaEmision = DateTime.Now;
+            certificado.IdCertificadoTipo = db.TipoCertificado.FirstOrDefault(r => r.Denominacion == "Sanidad").ID;
+            certificado.IdUsuarioEmite = User.Identity.GetUserId();
+
+
             if (ModelState.IsValid)
             {
                 db.Certificado.Add(certificado);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return Json(new { ok = "true" });
             }
 
-            ViewBag.IdUsuarioEmite = new SelectList(db.AspNetUsers, "Id", "Email", certificado.IdUsuarioEmite);
+            //ViewBag.IdUsuarioEmite = new SelectList(db.AspNetUsers, "Id", "Email", certificado.IdUsuarioEmite);
             ViewBag.IdEstablecimiento = new SelectList(db.CertificadoEstablecimiento, "ID", "Denominacion", certificado.IdEstablecimiento);
-            ViewBag.IdCertificadoTipo = new SelectList(db.TipoCertificado, "ID", "Denominacion", certificado.IdCertificadoTipo);
-            return View(certificado);
+            //ViewBag.IdCertificadoTipo = new SelectList(db.TipoCertificado, "ID", "Denominacion", certificado.IdCertificadoTipo);
+            return PartialView(certificado);
         }
 
         // GET: Certificadoes/Edit/5
@@ -77,10 +84,10 @@ namespace MSP.Controllers.Sanidad
             {
                 return HttpNotFound();
             }
-            ViewBag.IdUsuarioEmite = new SelectList(db.AspNetUsers, "Id", "Email", certificado.IdUsuarioEmite);
+            //ViewBag.IdUsuarioEmite = new SelectList(db.AspNetUsers, "Id", "Email", certificado.IdUsuarioEmite);
             ViewBag.IdEstablecimiento = new SelectList(db.CertificadoEstablecimiento, "ID", "Denominacion", certificado.IdEstablecimiento);
-            ViewBag.IdCertificadoTipo = new SelectList(db.TipoCertificado, "ID", "Denominacion", certificado.IdCertificadoTipo);
-            return View(certificado);
+            //ViewBag.IdCertificadoTipo = new SelectList(db.TipoCertificado, "ID", "Denominacion", certificado.IdCertificadoTipo);
+            return PartialView(certificado);
         }
 
         // POST: Certificadoes/Edit/5
@@ -94,12 +101,13 @@ namespace MSP.Controllers.Sanidad
             {
                 db.Entry(certificado).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return Json(new { ok = "true" });
             }
-            ViewBag.IdUsuarioEmite = new SelectList(db.AspNetUsers, "Id", "Email", certificado.IdUsuarioEmite);
+            //ViewBag.IdUsuarioEmite = new SelectList(db.AspNetUsers, "Id", "Email", certificado.IdUsuarioEmite);
             ViewBag.IdEstablecimiento = new SelectList(db.CertificadoEstablecimiento, "ID", "Denominacion", certificado.IdEstablecimiento);
-            ViewBag.IdCertificadoTipo = new SelectList(db.TipoCertificado, "ID", "Denominacion", certificado.IdCertificadoTipo);
-            return View(certificado);
+            //ViewBag.IdCertificadoTipo = new SelectList(db.TipoCertificado, "ID", "Denominacion", certificado.IdCertificadoTipo);
+            return PartialView(certificado);
         }
 
         // GET: Certificadoes/Delete/5
@@ -114,7 +122,7 @@ namespace MSP.Controllers.Sanidad
             {
                 return HttpNotFound();
             }
-            return View(certificado);
+            return PartialView(certificado);
         }
 
         // POST: Certificadoes/Delete/5
@@ -125,7 +133,8 @@ namespace MSP.Controllers.Sanidad
             Certificado certificado = db.Certificado.Find(id);
             db.Certificado.Remove(certificado);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return Json(new { ok = "true" });
         }
 
         protected override void Dispose(bool disposing)
