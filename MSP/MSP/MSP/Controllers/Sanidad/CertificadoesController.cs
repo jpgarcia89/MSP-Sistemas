@@ -34,7 +34,7 @@ namespace MSP.Controllers.Sanidad
             {
                 return HttpNotFound();
             }
-            return View(certificado);
+            return PartialView(certificado);
         }
 
         // GET: Certificadoes/Create

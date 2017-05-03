@@ -18,12 +18,17 @@ namespace MSP.Models
     {
         public int ID { get; set; }
         public int IdEstablecimiento { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayName("Fecha Emision")]
         public System.DateTime FechaEmision { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true,DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayName("Desde")]
         public System.DateTime FechaDesde { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayName("Hasta")]
         public System.DateTime FechaHasta { get; set; }
 
         [Required(AllowEmptyStrings = false)]
