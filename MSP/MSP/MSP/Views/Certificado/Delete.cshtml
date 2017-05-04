@@ -62,3 +62,34 @@
         
     }
 </div>
+<script>
+    $(function () {
+        //Click "Guardar"
+        $("#btnGuardar").click(function () {
+            //debugger
+            $('#contenidoModal form').submit()
+        });
+
+        //Submit
+        $('form').submit(function () {
+            //debugger
+            if ($(this).valid()) {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        //debugger
+                        if (result.ok) {
+                            window.location.href = window.location.href;
+                            return;
+                        }
+                        $('#contenidoModal').html(result);
+                    }
+                });
+            }
+            return false;
+        });
+    });
+
+</script>
