@@ -54,10 +54,9 @@ namespace MSP
                       "~/Scripts/jquery-ui.min.js",
                       "~/Scripts/jquery-ui-datepicker-locale-es.js",
                       "~/Scripts/plugins/datatables/jquery.dataTables.js",
-                      "~/Scripts/plugins/datatables/dataTables.bootstrap.js"                      
+                      "~/Scripts/plugins/datatables/dataTables.bootstrap.js",
+                      "~/Scripts/Reportes.js"
                       ));
-
-
 
             bundles.Add(new StyleBundle("~/bundles/LoginStyles").Include(
                     "~/Content/AdminLTE.min.css",

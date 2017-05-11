@@ -38,7 +38,12 @@ namespace MSP.Helpers
                         else
                         {
                             string accion = string.IsNullOrEmpty(item.Accion) ? "" : item.Accion;
-                            string url = "/" + item.Controlador + "/" + (accion=="Index"?String.Empty:accion);
+                            string url = "";
+
+#if (DEBUG == false)
+                            url = "/MPS-X";
+#endif
+                            url += "/" + item.Controlador + "/" + (accion=="Index"?String.Empty:accion);
                             string c = string.Format(@"<li><a href=""{1}""><i class=""{2}""></i> {0} </a></li>", item.Nombre, url,item.Icono);
                             output += c;
                         }

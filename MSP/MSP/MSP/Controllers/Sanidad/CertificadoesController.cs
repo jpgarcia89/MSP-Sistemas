@@ -19,6 +19,7 @@ namespace MSP.Controllers.Sanidad
         public ActionResult Index()
         {
             var certificado = db.Certificado.Include(c => c.AspNetUsers).Include(c => c.CertificadoEstablecimiento).Include(c => c.TipoCertificado);
+
             return View(certificado.ToList());
         }
 

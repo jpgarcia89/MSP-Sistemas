@@ -36,7 +36,7 @@
             <table id="dtCertificados" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th style="width:100px">Acciones</th>
+                        <th style="width:120px">Acciones</th>
                         <th>Establecimiento</th>
                         <th>Fecha Emision</th>
                         <th>Desde</th>
@@ -55,6 +55,7 @@
                                     <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Certificado/Edit/@item.ID','Editar','Certificado')"></a>
                                     <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Certificado/Details/@item.ID','Detalle','Certificado')"></a>
                                     <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Certificado/Delete/@item.ID','Eliminar','Certificado')"></a>
+                                    <a class="btn btn-primary fa fa-print"  onclick="reporte(@item.ID)"></a>
                                 </div>
                             </td>
                             <td>@Html.DisplayFor(modelItem => item.CertificadoEstablecimiento.Denominacion)</td>
@@ -75,10 +76,6 @@
 </section>
 
 
-
-
-
-
 <script>
     $(function () {
 
@@ -92,4 +89,12 @@
             "language": DataTableEsp()
         });
     });
+
+
+    function reporte(certId)
+    {
+        debugger
+        var _Parametros = new Array(new Array(certId, 'certId'));
+        InvocarReporte('rptCertificadoSaneamiento', _Parametros);
+    }
 </script>
