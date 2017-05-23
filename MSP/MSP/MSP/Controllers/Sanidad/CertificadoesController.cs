@@ -42,7 +42,7 @@ namespace MSP.Controllers.Sanidad
         public ActionResult Create()
         {
             //ViewBag.IdUsuarioEmite = new SelectList(db.AspNetUsers, "Id", "Email");
-            ViewBag.IdEstablecimiento = new SelectList(db.CertificadoEstablecimiento.Where(r=>r.TipoCertificadoEstablecimiento.TipoCertificado.Denominacion=="Sanidad"), "ID", "Denominacion");
+            ViewBag.IdEstablecimiento = new SelectList(db.CertificadoEstablecimiento.Where(r=>r.TipoCertificadoEstablecimiento.TipoCertificado.Denominacion== "Saneamiento"), "ID", "Denominacion");
             //ViewBag.IdCertificadoTipo = new SelectList(db.TipoCertificado, "ID", "Denominacion");
             return PartialView();
         }
@@ -55,7 +55,7 @@ namespace MSP.Controllers.Sanidad
         public ActionResult Create([Bind(Include = "ID,IdEstablecimiento,FechaEmision,FechaDesde,FechaHasta,NroExpediente,IdCertificadoTipo,IdUsuarioEmite")] Certificado certificado)
         {
             certificado.FechaEmision = DateTime.Now;
-            certificado.IdCertificadoTipo = db.TipoCertificado.FirstOrDefault(r => r.Denominacion == "Sanidad").ID;
+            certificado.IdCertificadoTipo = db.TipoCertificado.FirstOrDefault(r => r.Denominacion == "Saneamiento").ID;
             certificado.IdUsuarioEmite = User.Identity.GetUserId();
 
 

@@ -50,7 +50,7 @@ namespace MSP.Controllers.Sanidad
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Denominacion,IdTipoCertificado")] TipoCertificadoEstablecimiento tipoCertificadoEstablecimiento)
         {
-            tipoCertificadoEstablecimiento.IdTipoCertificado = db.TipoCertificado.Where(r => r.Denominacion.Equals("Sanidad")).FirstOrDefault().ID;
+            tipoCertificadoEstablecimiento.IdTipoCertificado = db.TipoCertificado.Where(r => r.Denominacion.Equals("Saneamiento")).FirstOrDefault().ID;
 
             if (ModelState.IsValid)
             {

@@ -41,7 +41,7 @@ namespace MSP.Controllers.Sanidad
         public ActionResult Create()
         {
             //ViewBag.IdUsuarioAlta = new SelectList(db.AspNetUsers, "Id", "Email");
-            ViewBag.IdTipoEstablecimiento = new SelectList(db.TipoCertificadoEstablecimiento.Where(r => r.TipoCertificado.Denominacion == "Sanidad"), "ID", "Denominacion");
+            ViewBag.IdTipoEstablecimiento = new SelectList(db.TipoCertificadoEstablecimiento.Where(r => r.TipoCertificado.Denominacion == "Saneamiento"), "ID", "Denominacion");
             return PartialView();
         }
 
@@ -65,7 +65,7 @@ namespace MSP.Controllers.Sanidad
             }
 
             //ViewBag.IdUsuarioAlta = new SelectList(db.AspNetUsers, "Id", "Email", certificadoEstablecimiento.IdUsuarioAlta);
-            ViewBag.IdTipoEstablecimiento = new SelectList(db.TipoCertificadoEstablecimiento.Where(r=>r.TipoCertificado.Denominacion=="Sanidad"), "ID", "Denominacion", certificadoEstablecimiento.IdTipoEstablecimiento);
+            ViewBag.IdTipoEstablecimiento = new SelectList(db.TipoCertificadoEstablecimiento.Where(r=>r.TipoCertificado.Denominacion== "Saneamiento"), "ID", "Denominacion", certificadoEstablecimiento.IdTipoEstablecimiento);
             return PartialView(certificadoEstablecimiento);
         }
 
@@ -82,7 +82,7 @@ namespace MSP.Controllers.Sanidad
                 return HttpNotFound();
             }
             //ViewBag.IdUsuarioAlta = new SelectList(db.AspNetUsers, "Id", "Email", certificadoEstablecimiento.IdUsuarioAlta);
-            ViewBag.IdTipoEstablecimiento = new SelectList(db.TipoCertificadoEstablecimiento.Where(r => r.TipoCertificado.Denominacion == "Sanidad"), "ID", "Denominacion", certificadoEstablecimiento.IdTipoEstablecimiento);
+            ViewBag.IdTipoEstablecimiento = new SelectList(db.TipoCertificadoEstablecimiento.Where(r => r.TipoCertificado.Denominacion == "Saneamiento"), "ID", "Denominacion", certificadoEstablecimiento.IdTipoEstablecimiento);
             return PartialView(certificadoEstablecimiento);
         }
 
@@ -101,7 +101,7 @@ namespace MSP.Controllers.Sanidad
                 return Json(new { ok = "true" });
             }
             //ViewBag.IdUsuarioAlta = new SelectList(db.AspNetUsers, "Id", "Email", certificadoEstablecimiento.IdUsuarioAlta);
-            ViewBag.IdTipoEstablecimiento = new SelectList(db.TipoCertificadoEstablecimiento.Where(r => r.TipoCertificado.Denominacion == "Sanidad"), "ID", "Denominacion", certificadoEstablecimiento.IdTipoEstablecimiento);
+            ViewBag.IdTipoEstablecimiento = new SelectList(db.TipoCertificadoEstablecimiento.Where(r => r.TipoCertificado.Denominacion == "Saneamiento"), "ID", "Denominacion", certificadoEstablecimiento.IdTipoEstablecimiento);
             return PartialView(certificadoEstablecimiento);
         }
 
