@@ -1,73 +1,74 @@
-﻿@model MSP_RegProf.Models.TituloProfVM
+﻿@model MSP_RegProf.Models.Matricula
 
 
-
+@if (Model.TieneTitulo || Model.TieneAnalitico)
+{
     <div class="form-horizontal">
 
-        <div class="form-group">
-            <label class="control-label col-md-4" for="Firma">Titulo:</label>
-            <div class="col-md-4 ">
-                <button id="docTitulo" class="btn btn-primary btn-block">Ver</button>
+        @if (Model.TieneTitulo)
+        {
+            <div class="form-group">
+                <label class="control-label col-md-4" for="Firma">Titulo:</label>
+                <div class="col-md-4 ">
+                    <button id="docTitulo" class="btn btn-primary btn-block">Ver</button>
+                </div>
             </div>
-        </div>
+        }
 
-        <div class="form-group">
-            <label class="control-label col-md-4" for="Firma">Analítico:</label>
-            <div class="col-md-4 ">
-                <button id="docAnalitico" class="btn btn-primary btn-block">Ver</button>
+        @if (Model.TieneAnalitico)
+        {
+            <div class="form-group">
+                <label class="control-label col-md-4" for="Firma">Analítico:</label>
+                <div class="col-md-4 ">
+                    <button id="docAnalitico" class="btn btn-primary btn-block">Ver</button>
+                </div>
             </div>
-        </div>
-        @Html.HiddenFor(model => Model.profId)
-        @Html.HiddenFor(model=>Model.titId)        
-    </div>
-
-
-<script>
-    $(function () {
-
-        //Click "Ver Titulo"
-        $("#docTitulo").click(function () {
-            //debugger
-            verDoc("docTitulo");
-        });
-
-        //Click "Ver Analitico"
-        $("#docAnalitico").click(function () {
-            //debugger
-            verDoc("docAnalitico");
-        });
-
-        //Ver Documento
-        function verDoc(_tipoDoc) {
-
-            debugger
-            var _data={
-                tipoDoc: _tipoDoc,
-                profId:$("#profId").val(),
-                titId: $("#titId").val()
-            };
-
-            //var _url = GetPathApp("/DigitDocs/VerDocs/");
-
-            var _src = GetPathApp("/DigitDocs/VerDocs/" + _data.tipoDoc + "/" + _data.profId + "/" + _data.titId + "/");
-            window.open(_src);
-
-            //$.ajax({
-            //    url: _url,
-            //    type: "POST",
-            //    data: _data,
-            //    beforeSend: function (xhr) {
-            //        abrirWaiting();
-            //    },
-            //    success: function (result) {
-            //        //debugger
-            //        $("#contenidoModal").html(result);
-            //        cerrarWaiting();
-            //    },
-            //});
-
         }
         
-    });
+        @Html.HiddenFor(model => Model.ID)
+        @Html.HiddenFor(model => Model.PersonaID)
+    </div>
+}
+else
+{
+    <div class="alert alert-warning alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-warning"></i> Atencion!</h4>
+        No existen Documentos en formato digital asociados a esta Matricula.
+    </div>
+}
 
-</script>
+
+    <script>
+        $(function () {
+
+            //Click "Ver Titulo"
+            $("#docTitulo").click(function () {
+                //debugger
+                verDoc("docTitulo");
+            });
+
+            //Click "Ver Analitico"
+            $("#docAnalitico").click(function () {
+                //debugger
+                verDoc("docAnalitico");
+            });
+
+            //Ver Documento
+            function verDoc(_tipoDoc) {
+
+                debugger
+                var _data = {
+                    tipoDoc: _tipoDoc,
+                    matId: $("#ID").val(),
+                    perId: $("#PersonaID").val()
+                };
+
+                var _src = GetPathApp("/DigitDocs/VerDocs/" + _data.tipoDoc + "/" + _data.perId + "/" + _data.matId + "/");
+                window.open(_src);
+
+            }
+
+        });
+
+    </script>

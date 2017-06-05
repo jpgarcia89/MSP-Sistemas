@@ -13,8 +13,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MSP</RootNamespace>
-    <AssemblyName>MSP</AssemblyName>
+    <RootNamespace>MSP_RegProf</RootNamespace>
+    <AssemblyName>MSP_RegProf</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -228,8 +228,20 @@
     <Compile Include="Models\AspNetUsers.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CarreraMatriculada.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Departamento.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Localidad.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Matricula.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Menu.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -249,9 +261,49 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Models\Organismo.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Pais.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Persona.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PersonaVM.cs" />
+    <Compile Include="Models\Provincia.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RegProf\DigitDocs\DocsVM.cs" />
     <Compile Include="Models\RegProf\DigitDocs\ProfVM.cs" />
     <Compile Include="Models\RegProf\DigitDocs\TituloProfVM.cs" />
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoDNI.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoEstadoCivil.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoEstadoMatricula.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoEstadoProfesion.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoFormacion.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoNivelAcademico.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoSexo.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Titulo.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reportes\EjecutarReportes.aspx.cs">
       <DependentUpon>EjecutarReportes.aspx</DependentUpon>
@@ -276,7 +328,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\old.bootstrap.min.css" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -420,10 +472,18 @@
     <Content Include="Content\skin-blue.min.css" />
     <Content Include="Content\_all-skins.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\ionicons.ttf" />
     <Content Include="Global.asax" />
     <Content Include="Models\Modelo.Context.tt">
       <DependentUpon>Modelo.edmx</DependentUpon>
@@ -454,14 +514,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\fontawesome-webfont.svg" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\ionicons.ttf" />
+    <None Include="Properties\PublishProfiles\MSP-RegProf.pubxml" />
     <None Include="Properties\PublishProfiles\MSP.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -1400,7 +1453,7 @@
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\OLD_Index.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
@@ -1428,12 +1481,18 @@
     <Content Include="Views\DigitDocs\_datosProf.cshtml" />
     <Content Include="Views\DigitDocs\SubirDocs.cshtml" />
     <Content Include="Views\DigitDocs\VerDocs.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Personas\Create.cshtml" />
+    <Content Include="Views\Personas\Delete.cshtml" />
+    <Content Include="Views\Personas\Details.cshtml" />
+    <Content Include="Views\Personas\Edit.cshtml" />
+    <Content Include="Views\Personas\Index.cshtml" />
+    <Content Include="Views\Personas\_ListadoProf.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="UploadedFiles\" />
     <Folder Include="Views\Menu\" />
-    <Folder Include="Views\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

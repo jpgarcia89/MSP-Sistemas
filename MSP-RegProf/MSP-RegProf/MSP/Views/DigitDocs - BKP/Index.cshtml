@@ -98,7 +98,7 @@
 
         $('#formBusqueda').submit(function (e) {
             //$('#btnBusca').click(function (e) {
-            ////debugger
+            //debugger
             var _url = GetPathApp("/DigitDocs/BuscaProf");
 
             Pace.track(function () {
@@ -112,7 +112,7 @@
                         $('#contenTitulos').empty();
                     },
                     success: function (result) {
-                        ////debugger
+                        //debugger
                         if (result.ok == "false") {
 
                             $('#contenTitulos').empty();

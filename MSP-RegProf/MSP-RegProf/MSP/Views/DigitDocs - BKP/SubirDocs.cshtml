@@ -1,4 +1,4 @@
-﻿@model MSP_RegProf.Models.Matricula
+﻿@model MSP_RegProf.Models.TituloProfVM
 
 
 @*@using (Html.BeginForm())*@
@@ -7,19 +7,13 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        @if (!string.IsNullOrEmpty(((string)@ViewBag.Message)))
-        {
-            <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                @ViewBag.Message
-            </div>
-        }
-
+        @ViewBag.Message
         <div class="form-group">
+
             <label class="control-label col-md-3" for="Firma">Titulo:</label>
             <div class="col-md-8 ">
-                @Html.TextBox("docTitulo", "", htmlAttributes: new { @class = "form-control fileUpload", type = "file", accept = ".pdf" })
-                <p class="text-success">@ViewBag.Message1</p>
+                @Html.TextBox("docTitulo", "", htmlAttributes: new { @class = "form-control fileUpload", type = "file" })
+                @ViewBag.Message1
             </div>
         </div>
 
@@ -27,8 +21,8 @@
 
             <label class="control-label col-md-3" for="Firma">Analítico:</label>
             <div class="col-md-8 ">
-                @Html.TextBox("docAnalitico", "", htmlAttributes: new { @class = "form-control fileUpload", type = "file", accept = ".pdf" })
-                <p class="text-success">@ViewBag.Message2</p>
+                @Html.TextBox("docAnalitico", "", htmlAttributes: new { @class = "form-control fileUpload", type = "file" })
+                @ViewBag.Message2
             </div>
         </div>
 
@@ -43,13 +37,13 @@
     $(function () {
         //Click "Guardar"
         $("#btnGuardar").click(function () {
-            ////debugger
+            //debugger
             $('#contenidoModal form').submit()
         });
 
         //Submit
         $('form').submit(function () {
-            //debugger
+            debugger
             // Checking whether FormData is available in browser
             if (window.FormData !== undefined) {
                 // Create FormData object
@@ -61,6 +55,7 @@
                     var file1 = fileUpload1.files;
                     fileData.append("docTitulo", file1[0]);
                 }
+                
 
                 //File 2
                 var fileUpload2 = $("#docAnalitico").get(0);
@@ -68,14 +63,19 @@
                     var file2 = fileUpload2.files;
                     fileData.append("docAnalitico", file2[0]);
                 }
+
+               
+
+
             }
 
 
-            //debugger
+            debugger
             if ($(this).valid()) {
                 $.ajax({
                     url: this.action,
                     type: this.method,
+                    //data: $(this).serialize(),
                     contentType: false, // Not to set any content header
                     processData: false, // Not to process data
                     data: fileData,
@@ -83,7 +83,7 @@
                         abrirWaiting();
                     },
                     success: function (result) {
-                        ////debugger
+                        //debugger
                         $("#contenidoModal").html(result);
                         cerrarWaiting();
                     },

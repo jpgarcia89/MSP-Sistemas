@@ -30,5 +30,22 @@ namespace MSP_RegProf.Models
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
+        public virtual DbSet<CarreraMatriculada> CarreraMatriculada { get; set; }
+        public virtual DbSet<Departamento> Departamento { get; set; }
+        public virtual DbSet<Localidad> Localidad { get; set; }
+        public virtual DbSet<Matricula> Matricula { get; set; }
+        public virtual DbSet<Organismo> Organismo { get; set; }
+        public virtual DbSet<Pais> Pais { get; set; }
+        public virtual DbSet<Persona> Persona { get; set; }
+        public virtual DbSet<Provincia> Provincia { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<TipoDNI> TipoDNI { get; set; }
+        public virtual DbSet<TipoEstadoCivil> TipoEstadoCivil { get; set; }
+        public virtual DbSet<TipoEstadoMatricula> TipoEstadoMatricula { get; set; }
+        public virtual DbSet<TipoEstadoProfesion> TipoEstadoProfesion { get; set; }
+        public virtual DbSet<TipoFormacion> TipoFormacion { get; set; }
+        public virtual DbSet<TipoNivelAcademico> TipoNivelAcademico { get; set; }
+        public virtual DbSet<TipoSexo> TipoSexo { get; set; }
+        public virtual DbSet<Titulo> Titulo { get; set; }
     }
 }

@@ -73,23 +73,23 @@
             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
         </div>
     </div>
-    <div class="form-group">
+    @*<div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <div class="checkbox">
                 @Html.CheckBoxFor(m => m.RememberMe)
                 @Html.LabelFor(m => m.RememberMe)
             </div>
         </div>
-    </div>
+    </div>*@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-8">
             <input type="submit" value="Acceder" class="btn btn-primary btn-block btn-flat" />
         </div>
     </div>
    
-    <p>
+    @*<p>
         @Html.ActionLink("Registrar un nuevo usuario", "Register")
-    </p>
+    </p>*@
 }
 
 

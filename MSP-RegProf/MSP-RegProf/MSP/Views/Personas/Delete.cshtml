@@ -1,0 +1,248 @@
+﻿@model MSP_RegProf.Models.Persona
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Persona</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Apellido)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.NroDocumento)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.NroDocumento)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaNacimiento)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FechaNacimiento)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CodigoPostal)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CodigoPostal)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DomicilioCalle)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DomicilioCalle)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DomicilioNumero)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DomicilioNumero)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DomicilioManzana)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DomicilioManzana)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DomicilioPiso)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DomicilioPiso)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DomicilioDepto)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DomicilioDepto)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CalleReferencia1)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CalleReferencia1)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CalleReferencia2)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CalleReferencia2)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.BarrioID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.BarrioID)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TelefonoFijo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TelefonoFijo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TelefonoCelular)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TelefonoCelular)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CUIL)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CUIL)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Fallecido)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Fallecido)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaActualizacion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FechaActualizacion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaAlta)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FechaAlta)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaFallecido)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FechaFallecido)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Localidad.Nombre)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Localidad.Nombre)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Localidad1.Nombre)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Localidad1.Nombre)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TipoDNI.Nombre)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TipoDNI.Nombre)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TipoEstadoCivil.Nombre)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TipoEstadoCivil.Nombre)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TipoSexo.Nombre)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TipoSexo.Nombre)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Pais.Nombre)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Pais.Nombre)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="af64a1c9ae014ff7a3198488342f2b20" Name="Diagram1">
+      <Diagram DiagramId="af64a1c9ae014ff7a3198488342f2b20" Name="Diagram1" ZoomLevel="62">
         <EntityTypeShape EntityType="MSPModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MSPModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="MSPModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
@@ -14,6 +14,41 @@
         <AssociationConnector Association="MSPModel.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="MSPModel.Menu" Width="1.5" PointX="0.75" PointY="6.75" />
         <AssociationConnector Association="MSPModel.FK_Menu_Menu" />
+        <EntityTypeShape EntityType="MSPModel.CarreraMatriculada" Width="1.5" PointX="10.125" PointY="3.25" />
+        <EntityTypeShape EntityType="MSPModel.Departamento" Width="1.5" PointX="7.875" PointY="10.75" />
+        <EntityTypeShape EntityType="MSPModel.Localidad" Width="1.5" PointX="10.125" PointY="10.625" />
+        <EntityTypeShape EntityType="MSPModel.Matricula" Width="1.5" PointX="14.625" PointY="9.625" />
+        <EntityTypeShape EntityType="MSPModel.Organismo" Width="1.5" PointX="7.875" PointY="13.875" />
+        <EntityTypeShape EntityType="MSPModel.Pais" Width="1.5" PointX="3.375" PointY="12.375" />
+        <EntityTypeShape EntityType="MSPModel.Persona" Width="1.5" PointX="12.375" PointY="8.125" />
+        <EntityTypeShape EntityType="MSPModel.Provincia" Width="1.5" PointX="5.625" PointY="12.125" />
+        <EntityTypeShape EntityType="MSPModel.sysdiagrams" Width="1.5" PointX="3.375" PointY="7.5" />
+        <EntityTypeShape EntityType="MSPModel.TipoDNI" Width="1.5" PointX="10.125" PointY="14" />
+        <EntityTypeShape EntityType="MSPModel.TipoEstadoCivil" Width="1.5" PointX="10.125" PointY="16.5" />
+        <EntityTypeShape EntityType="MSPModel.TipoEstadoMatricula" Width="1.5" PointX="12.375" PointY="17.25" />
+        <EntityTypeShape EntityType="MSPModel.TipoEstadoProfesion" Width="1.5" PointX="7.875" PointY="3.875" />
+        <EntityTypeShape EntityType="MSPModel.TipoFormacion" Width="1.5" PointX="10.125" PointY="0.75" />
+        <EntityTypeShape EntityType="MSPModel.TipoNivelAcademico" Width="1.5" PointX="10.125" PointY="19.125" />
+        <EntityTypeShape EntityType="MSPModel.TipoSexo" Width="1.5" PointX="10.125" PointY="7.5" />
+        <EntityTypeShape EntityType="MSPModel.Titulo" Width="1.5" PointX="12.375" PointY="1.375" />
+        <AssociationConnector Association="MSPModel.FK_CarreraMatriculada_TipoEstadoProfesion" />
+        <AssociationConnector Association="MSPModel.FK_Titulo_CarreraMatriculada" />
+        <AssociationConnector Association="MSPModel.FK_Departamento_Provincia" />
+        <AssociationConnector Association="MSPModel.FK_Localidad_Departamento" />
+        <AssociationConnector Association="MSPModel.FK_Persona_Localidad" />
+        <AssociationConnector Association="MSPModel.FK_Persona_LocalidadNacimiento" />
+        <AssociationConnector Association="MSPModel.FK_Matricula_Organismo" />
+        <AssociationConnector Association="MSPModel.FK_Matricula_Persona" />
+        <AssociationConnector Association="MSPModel.FK_Matricula_TipoEstadoMatricula" />
+        <AssociationConnector Association="MSPModel.FK_Matricula_Titulo" />
+        <AssociationConnector Association="MSPModel.FK_Organismo_Provincia" />
+        <AssociationConnector Association="MSPModel.FK_Provincia_Pais" />
+        <AssociationConnector Association="MSPModel.FK_Persona_TipoDNI" />
+        <AssociationConnector Association="MSPModel.FK_Persona_TipoEstadoCivil" />
+        <AssociationConnector Association="MSPModel.FK_Persona_TipoSexo" />
+        <AssociationConnector Association="MSPModel.FK_Titulo_TipoFormacion" />
+        <AssociationConnector Association="MSPModel.FK_Titulo_TipoNivelAcademico" />
+        <AssociationConnector Association="MSPModel.FK_Persona_Pais" />
 
 
         <!--<EntityTypeShape EntityType="MSPModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />

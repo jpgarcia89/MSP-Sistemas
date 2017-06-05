@@ -30,8 +30,6 @@ namespace MSP_RegProf.Controllers
         {
             //Implementar Busqueda del Profecional
             //var Profesional = ProfVM.GetListaProfDummy().Where(r => r.profDni == profDni).FirstOrDefault();
-
-            profDni = profDni.Trim();
             var Profesional = db.Persona.Include(r => r.Matricula).Where(r => r.NroDocumento == profDni).FirstOrDefault();
 
             if (Profesional == null)
@@ -48,47 +46,70 @@ namespace MSP_RegProf.Controllers
 
 
         // GET: DigitDocs/SubirDocs
-        [Route("DigitDocs/SubirDocs/{perId}/{matId}")]
+        [Route("DigitDocs/SubirDocs/{profId}/{titId}")]
         [HttpGet]
-        public ActionResult SubirDocs(int perId, int matId)
+        public ActionResult SubirDocs(int profId, int titId)
         {
-            //var titulo = ProfVM.GetListaProfDummy().Where(r => r.profId == profId).FirstOrDefault().ListaTitulos.Where(r => r.titId == titId).FirstOrDefault();
-
-            //var titulo = db.Persona.FirstOrDefault(r => r.ID == perId).Matricula.FirstOrDefault(r => r.NroMatricula == matId);
-            var Matricula = db.Matricula.FirstOrDefault(r => r.ID == matId);
-            return PartialView(Matricula);
+            var titulo = ProfVM.GetListaProfDummy().Where(r => r.profId == profId).FirstOrDefault().ListaTitulos.Where(r => r.titId == titId).FirstOrDefault();
+            return PartialView(titulo);
         }
 
         // POST: DigitDocs/Create
-        [Route("DigitDocs/SubirDocs/{perId}/{matId}")]
+        [Route("DigitDocs/SubirDocs/{profId}/{titId}")]
         [HttpPost]
-        public ActionResult SubirDocs(HttpPostedFileBase docTitulo, HttpPostedFileBase docAnalitico, int perId, int matId)//
+        public ActionResult SubirDocs(HttpPostedFileBase docTitulo, HttpPostedFileBase docAnalitico, int profId, int titId)
         {
             try
             {
-                //var profesional = ProfVM.GetListaProfDummy().Where(r => r.profId == perId).FirstOrDefault();
-                var Matricula = db.Matricula.FirstOrDefault(r => r.ID == matId);
+                //if (Request.Files.Count > 0)
+                //{
+                //    HttpFileCollectionBase files = Request.Files;
 
+                //    docTitulo = files[0];
+                //    docAnalitico = files[1];
+
+                //}
+
+                //if (docTitulo.ContentLength > 0)
+                //{
+                //    string _FileName = Path.GetFileName(docTitulo.FileName);
+                //    string _path = Path.Combine(Server.MapPath("~/UploadedFiles"), _FileName);
+                //    docTitulo.SaveAs(_path);
+                //}
+                //ViewBag.Message1 = "Titulo subido satisfactoriamente!!";
+
+
+                //if (docAnalitico.ContentLength > 0)
+                //{
+                //    string _FileName = Path.GetFileName(docAnalitico.FileName);
+                //    string _path = Path.Combine(Server.MapPath("~/UploadedFiles"), _FileName);
+                //    docAnalitico.SaveAs(_path);
+                //}
+                //ViewBag.Message2 = "Titulo subido satisfactoriamente!!";
+                //return PartialView();
+
+                var profesional = ProfVM.GetListaProfDummy().Where(r => r.profId == profId).FirstOrDefault();
+
+                
                 if (Request.Files.Count > 0)
                 {
                     HttpFileCollectionBase files = Request.Files;
-                    //string _IdMatricula = profesional.profId.ToString()+"_"+ profesional.ListaTitulos.Where(r=>r.titId== matId).FirstOrDefault().titMatricula.ToString();
-                    string _IdMatricula = Matricula.PersonaID.ToString() + "_" + Matricula.NroMatricula.ToString();
+                    string _IdMatricula = profesional.profId.ToString()+"_"+ profesional.ListaTitulos.Where(r=>r.titId==titId).FirstOrDefault().titMatricula.ToString();
 
                     //Titulo
-                    if (files["docTitulo"] != null)
+                    if (files["docTitulo"] !=null)
                     {
                         docTitulo = files["docTitulo"];
 
                         if (docTitulo.ContentLength > 0)
                         {
-                            string _FileName = _IdMatricula + "_Titulo" + Path.GetExtension(docTitulo.FileName);
+                            
+                            string _FileName = _IdMatricula+ "_Titulo" + Path.GetExtension(docTitulo.FileName);
                             System.IO.Directory.CreateDirectory(Server.MapPath("~/UploadedFiles/Profesionales/" + _IdMatricula));
-                            string _path = Path.Combine(Server.MapPath("~/UploadedFiles/Profesionales/" + _IdMatricula), _FileName);
+                            string _path = Path.Combine(Server.MapPath("~/UploadedFiles/Profesionales/"+ _IdMatricula), _FileName);
                             docTitulo.SaveAs(_path);
-                            Matricula.TieneTitulo = true;
                         }
-                        ViewBag.Message1 = "Titulo subido correctamente!!";
+                        ViewBag.Message1 = "Titulo subido satisfactoriamente!!";
                     }
 
                     //Analitico
@@ -100,56 +121,48 @@ namespace MSP_RegProf.Controllers
                         {
                             string _FileName = _IdMatricula + "_Analitico" + Path.GetExtension(docAnalitico.FileName);
                             System.IO.Directory.CreateDirectory(Server.MapPath("~/UploadedFiles/Profesionales/" + _IdMatricula));
-                            string _path = Path.Combine(Server.MapPath("~/UploadedFiles/Profesionales/" + _IdMatricula), _FileName);
+                            string _path = Path.Combine(Server.MapPath("~/UploadedFiles/Profesionales/"+ _IdMatricula), _FileName);
                             docAnalitico.SaveAs(_path);
-                            Matricula.TieneAnalitico = true;
                         }
-                        ViewBag.Message2 = "Analitico subido correctamente!!";
+                        ViewBag.Message2 = "Analitico subido satisfactoriamente!!";
                     }
 
-                    db.SaveChanges();
                     return PartialView();
                 }
-                else
-                {
-                    ViewBag.Message = "No se subio ningun archivo.";
-                    return PartialView();
-                }
+
+                ViewBag.Message = "No se subio ningun archivo.";
+                return PartialView();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                ViewBag.Message = "Ocurrio un error! Intente nuevamente.\n Mensaje: "+ ex.Message??ex.InnerException.Message;
+                ViewBag.Message = "Ocurrio un error! Intente nuevamente.";
                 return PartialView();
             }
         }
 
 
         // GET: DigitDocs/SubirDocs
-        [Route("DigitDocs/VerDocs/{perId}/{matId}")]
+        [Route("DigitDocs/VerDocs/{profId}/{titId}")]
         [HttpGet]
-        public ActionResult VerDocs(int perId, int matId)
+        public ActionResult VerDocs(int profId, int titId)
         {
-            //var titulo = ProfVM.GetListaProfDummy().Where(r => r.profId == perId).FirstOrDefault().ListaTitulos.Where(r => r.titId == matId).FirstOrDefault();
-            var Matricula = db.Matricula.FirstOrDefault(r => r.ID == matId);
-            return PartialView(Matricula);
+            var titulo = ProfVM.GetListaProfDummy().Where(r => r.profId == profId).FirstOrDefault().ListaTitulos.Where(r => r.titId == titId).FirstOrDefault();
+            return PartialView(titulo);
         }
 
         // GET: DigitDocs/SubirDocs
-        [Route("DigitDocs/VerDocs/{tipoDoc}/{perId}/{matId}")]
+        [Route("DigitDocs/VerDocs/{tipoDoc}/{profId}/{titId}")]
         [HttpGet]
-        public FileContentResult VerDocs(string tipoDoc, int perId, int matId)
+        public FileContentResult VerDocs(string tipoDoc, int profId, int titId)
         {
-            var Matricula = db.Matricula.FirstOrDefault(r => r.ID == matId);
-            string _IdMatricula = Matricula.PersonaID.ToString() + "_" + Matricula.NroMatricula.ToString();
-
-            //var profesional = ProfVM.GetListaProfDummy().Where(r => r.profId == profId).FirstOrDefault();
-            //string _IdMatricula = profesional.profId.ToString() + "_" + profesional.ListaTitulos.Where(r => r.titId == matId).FirstOrDefault().titMatricula.ToString();
+            var profesional = ProfVM.GetListaProfDummy().Where(r => r.profId == profId).FirstOrDefault();
+            string _IdMatricula = profesional.profId.ToString() + "_" + profesional.ListaTitulos.Where(r => r.titId == titId).FirstOrDefault().titMatricula.ToString();
 
             switch (tipoDoc)
             {
                 case "docTitulo":
                     {
-                        var fullPathToFile = Server.MapPath("~/UploadedFiles/Profesionales/" + _IdMatricula + "/" + _IdMatricula + "_Titulo.pdf");
+                        var fullPathToFile = Server.MapPath("~/UploadedFiles/Profesionales/"+ _IdMatricula + "/"+ _IdMatricula + "_Titulo.pdf");
                         var mimeType = "application/pdf";
                         var fileContents = System.IO.File.ReadAllBytes(fullPathToFile);
 
@@ -173,7 +186,7 @@ namespace MSP_RegProf.Controllers
             }
 
 
-
+            
         }
 
         // GET: DigitDocs/Details/5
