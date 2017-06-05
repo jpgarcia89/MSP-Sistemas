@@ -5639,7 +5639,7 @@ body.modal-open,
 }
 
 .modal-dialog {
-  z-index: 10000;
+  z-index: 1050;
   width: auto;
   padding: 10px;
   margin-right: auto;
