@@ -29,9 +29,7 @@ namespace MSP_RegProf.Models
         public Nullable<byte> EstadoCivilID { get; set; }
 
         public Nullable<byte> SexoID { get; set; }
-
-        //[DataType(DataType.Date)]
-        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        
         public Nullable<System.DateTime> FechaNacimiento { get; set; }
         public Nullable<int> LocalidadID { get; set; }
         public string CodigoPostal { get; set; }
