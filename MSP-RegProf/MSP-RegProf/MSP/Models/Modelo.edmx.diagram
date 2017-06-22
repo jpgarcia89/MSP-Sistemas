@@ -49,6 +49,13 @@
         <AssociationConnector Association="MSPModel.FK_Titulo_TipoFormacion" />
         <AssociationConnector Association="MSPModel.FK_Titulo_TipoNivelAcademico" />
         <AssociationConnector Association="MSPModel.FK_Persona_Pais" />
+        <EntityTypeShape EntityType="MSPModel.Accion" Width="1.5" PointX="11" PointY="21.5" />
+        <EntityTypeShape EntityType="MSPModel.MenuAspNetRoles" Width="1.5" PointX="6" PointY="6.25" />
+        <EntityTypeShape EntityType="MSPModel.MenuAspNetRolesAccion" Width="1.5" PointX="13.25" PointY="5.375" />
+        <AssociationConnector Association="MSPModel.FK_MenuAspNetRolesAccion_Accion" />
+        <AssociationConnector Association="MSPModel.FK_MenuAspNetRoles_AspNetRoles" />
+        <AssociationConnector Association="MSPModel.FK_MenuAspNetRoles_Menu" />
+        <AssociationConnector Association="MSPModel.FK_MenuAspNetRolesAccion_MenuAspNetRoles" />
 
 
         <!--<EntityTypeShape EntityType="MSPModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />

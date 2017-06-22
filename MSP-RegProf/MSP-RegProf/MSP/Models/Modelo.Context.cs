@@ -12,6 +12,8 @@ namespace MSP_RegProf.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class MSPEntities : DbContext
     {
@@ -22,7 +24,10 @@ namespace MSP_RegProf.Models
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<AspNetUserLogins>().HasKey(l => new { l.LoginProvider, l.ProviderKey, l.UserId });
+            //throw new UnintentionalCodeFirstException();
         }
     
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
@@ -47,5 +52,17 @@ namespace MSP_RegProf.Models
         public virtual DbSet<TipoNivelAcademico> TipoNivelAcademico { get; set; }
         public virtual DbSet<TipoSexo> TipoSexo { get; set; }
         public virtual DbSet<Titulo> Titulo { get; set; }
+        public virtual DbSet<Accion> Accion { get; set; }
+        public virtual DbSet<MenuAspNetRoles> MenuAspNetRoles { get; set; }
+        public virtual DbSet<MenuAspNetRolesAccion> MenuAspNetRolesAccion { get; set; }
+    
+        public virtual ObjectResult<GetPermisosPorNombreDeUsuario_Result> GetPermisosPorNombreDeUsuario(string userName)
+        {
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPermisosPorNombreDeUsuario_Result>("GetPermisosPorNombreDeUsuario", userNameParameter);
+        }
     }
 }

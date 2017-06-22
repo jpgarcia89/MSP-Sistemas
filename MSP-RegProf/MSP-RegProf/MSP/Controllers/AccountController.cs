@@ -79,6 +79,7 @@ namespace MSP_RegProf.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    Session["UserName"] = model.UserName;
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -149,6 +150,7 @@ namespace MSP_RegProf.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            MSPEntities Context = new MSPEntities();
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };

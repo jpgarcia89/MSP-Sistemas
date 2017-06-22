@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MSPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
+        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -126,6 +134,22 @@
           <Property Name="Activo" Type="bit" Nullable="false" />
           <Property Name="FechaAlta" Type="datetime" Nullable="false" />
           <Property Name="mnuId" Type="int" />
+        </EntityType>
+        <EntityType Name="MenuAspNetRoles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuId" Type="int" Nullable="false" />
+          <Property Name="AspNetRolesId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuAspNetRolesAccion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccionId" Type="int" Nullable="false" />
+          <Property Name="MenuAspNetRolesId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Organismo">
           <Key>
@@ -414,6 +438,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MenuAspNetRoles_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="MenuAspNetRoles" Type="Self.MenuAspNetRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuAspNetRoles">
+              <PropertyRef Name="AspNetRolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRoles_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="MenuAspNetRoles" Type="Self.MenuAspNetRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRoles">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRolesAccion_Accion">
+          <End Role="Accion" Type="Self.Accion" Multiplicity="1" />
+          <End Role="MenuAspNetRolesAccion" Type="Self.MenuAspNetRolesAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRolesAccion">
+              <PropertyRef Name="AccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRolesAccion_MenuAspNetRoles">
+          <End Role="MenuAspNetRoles" Type="Self.MenuAspNetRoles" Multiplicity="1" />
+          <End Role="MenuAspNetRolesAccion" Type="Self.MenuAspNetRolesAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuAspNetRoles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRolesAccion">
+              <PropertyRef Name="MenuAspNetRolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Organismo_Provincia">
           <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
           <End Role="Organismo" Type="Self.Organismo" Multiplicity="*" />
@@ -546,7 +618,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetPermisosPorNombreDeUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="MSPModelStoreContainer">
+          <EntitySet Name="Accion" EntityType="Self.Accion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
@@ -557,6 +633,8 @@
           <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Matricula" EntityType="Self.Matricula" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuAspNetRoles" EntityType="Self.MenuAspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuAspNetRolesAccion" EntityType="Self.MenuAspNetRolesAccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Organismo" EntityType="Self.Organismo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
@@ -618,6 +696,22 @@
             <End Role="Menu" EntitySet="Menu" />
             <End Role="Menu1" EntitySet="Menu" />
           </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRoles_AspNetRoles" Association="Self.FK_MenuAspNetRoles_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRoles_Menu" Association="Self.FK_MenuAspNetRoles_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRolesAccion_Accion" Association="Self.FK_MenuAspNetRolesAccion_Accion">
+            <End Role="Accion" EntitySet="Accion" />
+            <End Role="MenuAspNetRolesAccion" EntitySet="MenuAspNetRolesAccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRolesAccion_MenuAspNetRoles" Association="Self.FK_MenuAspNetRolesAccion_MenuAspNetRoles">
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+            <End Role="MenuAspNetRolesAccion" EntitySet="MenuAspNetRolesAccion" />
+          </AssociationSet>
           <AssociationSet Name="FK_Organismo_Provincia" Association="Self.FK_Organismo_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Organismo" EntitySet="Organismo" />
@@ -674,6 +768,7 @@
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          <NavigationProperty Name="MenuAspNetRoles" Relationship="MSPModel.FK_MenuAspNetRoles_AspNetRoles" FromRole="AspNetRoles" ToRole="MenuAspNetRoles" />
         </EntityType>
         <EntityType Name="AspNetUserClaims">
           <Key>
@@ -859,6 +954,28 @@
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Persona" EntitySet="Persona" />
           </AssociationSet>
+          <EntitySet Name="Accion" EntityType="MSPModel.Accion" />
+          <EntitySet Name="MenuAspNetRoles" EntityType="MSPModel.MenuAspNetRoles" />
+          <EntitySet Name="MenuAspNetRolesAccion" EntityType="MSPModel.MenuAspNetRolesAccion" />
+          <AssociationSet Name="FK_MenuAspNetRolesAccion_Accion" Association="MSPModel.FK_MenuAspNetRolesAccion_Accion">
+            <End Role="Accion" EntitySet="Accion" />
+            <End Role="MenuAspNetRolesAccion" EntitySet="MenuAspNetRolesAccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRoles_AspNetRoles" Association="MSPModel.FK_MenuAspNetRoles_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRoles_Menu" Association="MSPModel.FK_MenuAspNetRoles_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRolesAccion_MenuAspNetRoles" Association="MSPModel.FK_MenuAspNetRolesAccion_MenuAspNetRoles">
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+            <End Role="MenuAspNetRolesAccion" EntitySet="MenuAspNetRolesAccion" />
+          </AssociationSet>
+          <FunctionImport Name="GetPermisosPorNombreDeUsuario" ReturnType="Collection(MSPModel.GetPermisosPorNombreDeUsuario_Result)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Menu">
           <Key>
@@ -876,6 +993,7 @@
           <Property Name="mnuId" Type="Int32" />
           <NavigationProperty Name="Menu1" Relationship="MSPModel.FK_Menu_Menu" FromRole="Menu" ToRole="Menu1" />
           <NavigationProperty Name="Menu2" Relationship="MSPModel.FK_Menu_Menu" FromRole="Menu1" ToRole="Menu" />
+          <NavigationProperty Name="MenuAspNetRoles" Relationship="MSPModel.FK_MenuAspNetRoles_Menu" FromRole="Menu" ToRole="MenuAspNetRoles" />
         </EntityType>
         <Association Name="FK_Menu_Menu">
           <End Type="MSPModel.Menu" Role="Menu" Multiplicity="0..1" />
@@ -1332,6 +1450,96 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Accion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MenuAspNetRolesAccion" Relationship="MSPModel.FK_MenuAspNetRolesAccion_Accion" FromRole="Accion" ToRole="MenuAspNetRolesAccion" />
+        </EntityType>
+        <EntityType Name="MenuAspNetRoles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuId" Type="Int32" Nullable="false" />
+          <Property Name="AspNetRolesId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetRoles" Relationship="MSPModel.FK_MenuAspNetRoles_AspNetRoles" FromRole="MenuAspNetRoles" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Menu" Relationship="MSPModel.FK_MenuAspNetRoles_Menu" FromRole="MenuAspNetRoles" ToRole="Menu" />
+          <NavigationProperty Name="MenuAspNetRolesAccion" Relationship="MSPModel.FK_MenuAspNetRolesAccion_MenuAspNetRoles" FromRole="MenuAspNetRoles" ToRole="MenuAspNetRolesAccion" />
+        </EntityType>
+        <EntityType Name="MenuAspNetRolesAccion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccionId" Type="Int32" Nullable="false" />
+          <Property Name="MenuAspNetRolesId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accion" Relationship="MSPModel.FK_MenuAspNetRolesAccion_Accion" FromRole="MenuAspNetRolesAccion" ToRole="Accion" />
+          <NavigationProperty Name="MenuAspNetRoles" Relationship="MSPModel.FK_MenuAspNetRolesAccion_MenuAspNetRoles" FromRole="MenuAspNetRolesAccion" ToRole="MenuAspNetRoles" />
+        </EntityType>
+        <Association Name="FK_MenuAspNetRolesAccion_Accion">
+          <End Type="MSPModel.Accion" Role="Accion" Multiplicity="1" />
+          <End Type="MSPModel.MenuAspNetRolesAccion" Role="MenuAspNetRolesAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRolesAccion">
+              <PropertyRef Name="AccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRoles_AspNetRoles">
+          <End Type="MSPModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
+          <End Type="MSPModel.MenuAspNetRoles" Role="MenuAspNetRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuAspNetRoles">
+              <PropertyRef Name="AspNetRolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRoles_Menu">
+          <End Type="MSPModel.Menu" Role="Menu" Multiplicity="1" />
+          <End Type="MSPModel.MenuAspNetRoles" Role="MenuAspNetRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRoles">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRolesAccion_MenuAspNetRoles">
+          <End Type="MSPModel.MenuAspNetRoles" Role="MenuAspNetRoles" Multiplicity="1" />
+          <End Type="MSPModel.MenuAspNetRolesAccion" Role="MenuAspNetRolesAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuAspNetRoles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRolesAccion">
+              <PropertyRef Name="MenuAspNetRolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="PadreID" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Byte" Name="Orden" Nullable="true" />
+          <Property Type="String" Name="Icono" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Accion" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Controlador" Nullable="false" MaxLength="150" />
+          <Property Type="Boolean" Name="Activo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAlta" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="mnuId" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1615,6 +1823,49 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Accion">
+            <EntityTypeMapping TypeName="MSPModel.Accion">
+              <MappingFragment StoreEntitySet="Accion">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuAspNetRoles">
+            <EntityTypeMapping TypeName="MSPModel.MenuAspNetRoles">
+              <MappingFragment StoreEntitySet="MenuAspNetRoles">
+                <ScalarProperty Name="AspNetRolesId" ColumnName="AspNetRolesId" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuAspNetRolesAccion">
+            <EntityTypeMapping TypeName="MSPModel.MenuAspNetRolesAccion">
+              <MappingFragment StoreEntitySet="MenuAspNetRolesAccion">
+                <ScalarProperty Name="MenuAspNetRolesId" ColumnName="MenuAspNetRolesId" />
+                <ScalarProperty Name="AccionId" ColumnName="AccionId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetPermisosPorNombreDeUsuario" FunctionName="MSPModel.Store.GetPermisosPorNombreDeUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MSPModel.GetPermisosPorNombreDeUsuario_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PadreID" ColumnName="PadreID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Icono" ColumnName="Icono" />
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+                <ScalarProperty Name="Controlador" ColumnName="Controlador" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="mnuId" ColumnName="mnuId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

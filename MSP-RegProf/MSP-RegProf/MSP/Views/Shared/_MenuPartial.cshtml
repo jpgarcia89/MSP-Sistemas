@@ -1,9 +1,17 @@
 ﻿@{
     List<MSP_RegProf.Models.MenuVM> menus;
-    if (Session["Menu"] == null)
+    var aux = Session["Menu"] as List<MSP_RegProf.Models.MenuVM>;
+    if (Session["Menu"] == null || aux.Count == 0)
     {
         var menuClien = new MSP_RegProf.Controllers.MenuController();
-        Session["Menu"] = menuClien.GetMenu();
+        if (Session["UserName"] != null)
+        {
+            Session["Menu"] = menuClien.GetMenu(Session["UserName"].ToString());
+        }
+        else
+        {
+            Session["Menu"] = menuClien.GetMenu("");
+        }
     }
 
     menus = Session["Menu"] as List<MSP_RegProf.Models.MenuVM>;

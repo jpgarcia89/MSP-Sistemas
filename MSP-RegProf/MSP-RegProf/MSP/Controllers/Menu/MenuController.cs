@@ -28,6 +28,20 @@ namespace MSP_RegProf.Controllers
             return datos;
         }
 
-        
+        public List<MenuVM> GetMenu(String UserName)
+        {
+            var datos = Context.GetPermisosPorNombreDeUsuario(UserName).Select(r => new MenuVM()
+            {
+                ID = r.ID,
+                mnuId = r.mnuId,
+                PadreID = r.PadreID,
+                Nombre = r.Nombre,
+                Accion = r.Accion,
+                Controlador = r.Controlador,
+                Icono = r.Icono
+            }).ToList();
+
+            return datos;
+        }
     }
 }
