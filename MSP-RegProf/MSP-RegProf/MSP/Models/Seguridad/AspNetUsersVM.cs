@@ -13,6 +13,14 @@ namespace MSP_RegProf.Models.Seguridad
 
     public class AspNetUsersMetadata
     {
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido.")]
+        public string Email { get; set; }
 
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido.")]
+        public string UserName { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido.")]
+        [StringLength(50, MinimumLength = 10)]
+        public string Password { get; set; }
     }
 }
