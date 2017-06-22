@@ -211,6 +211,7 @@
     <Compile Include="Controllers\Menu\MenuController.cs" />
     <Compile Include="Controllers\RegProf\DigitDocs\DigitDocsController.cs" />
     <Compile Include="Controllers\RegProf\Profesionales\PersonasController.cs" />
+    <Compile Include="Controllers\Seguridad\AspNetUsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -290,6 +291,7 @@
     <Compile Include="Models\RegProf\DigitDocs\DocsVM.cs" />
     <Compile Include="Models\RegProf\DigitDocs\ProfVM.cs" />
     <Compile Include="Models\RegProf\DigitDocs\TituloProfVM.cs" />
+    <Compile Include="Models\Seguridad\AspNetUsersVM.cs" />
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -1501,6 +1503,11 @@
     <Content Include="Views\Personas\Edit.cshtml" />
     <Content Include="Views\Personas\Index.cshtml" />
     <Content Include="Views\Personas\_ListadoProf.cshtml" />
+    <Content Include="Views\AspNetUsers\Create.cshtml" />
+    <Content Include="Views\AspNetUsers\Delete.cshtml" />
+    <Content Include="Views\AspNetUsers\Details.cshtml" />
+    <Content Include="Views\AspNetUsers\Edit.cshtml" />
+    <Content Include="Views\AspNetUsers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
