@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MSP_RegProf.Models.Seguridad
 {
-    [MetadataType(typeof(PersonaMetadata))]
+    [MetadataType(typeof(AspNetUsersMetadata))]
     public partial class AspNetUsers
     {
     }
