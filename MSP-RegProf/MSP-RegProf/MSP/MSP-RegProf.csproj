@@ -212,11 +212,13 @@
     <Compile Include="Controllers\RegProf\DigitDocs\DigitDocsController.cs" />
     <Compile Include="Controllers\RegProf\Profesionales\PersonasController.cs" />
     <Compile Include="Controllers\Seguridad\AspNetUsersController.cs" />
+    <Compile Include="Controllers\RegProf\Profesionales\ProfesionalesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\GlobalVariables.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
+    <Compile Include="Helpers\MvcHelpers.cs" />
     <Compile Include="Models\Accion.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -1497,17 +1499,12 @@
     <Content Include="Views\DigitDocs\SubirDocs.cshtml" />
     <Content Include="Views\DigitDocs\VerDocs.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Personas\Create.cshtml" />
-    <Content Include="Views\Personas\Delete.cshtml" />
-    <Content Include="Views\Personas\Details.cshtml" />
-    <Content Include="Views\Personas\Edit.cshtml" />
-    <Content Include="Views\Personas\Index.cshtml" />
-    <Content Include="Views\Personas\_ListadoProf.cshtml" />
-    <Content Include="Views\AspNetUsers\Create.cshtml" />
-    <Content Include="Views\AspNetUsers\Delete.cshtml" />
-    <Content Include="Views\AspNetUsers\Details.cshtml" />
-    <Content Include="Views\AspNetUsers\Edit.cshtml" />
-    <Content Include="Views\AspNetUsers\Index.cshtml" />
+    <Content Include="Views\Profesionales\Create.cshtml" />
+    <Content Include="Views\Profesionales\Delete.cshtml" />
+    <Content Include="Views\Profesionales\Details.cshtml" />
+    <Content Include="Views\Profesionales\Edit.cshtml" />
+    <Content Include="Views\Profesionales\Index.cshtml" />
+    <Content Include="Views\Profesionales\_ListadoProf.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

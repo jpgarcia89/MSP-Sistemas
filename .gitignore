@@ -303,3 +303,4 @@ $RECYCLE.BIN/
 *.lnk
 GeHos/GeHosWebApi/Web.config
 GeHos/GeHosWebApi/Content/bootstrap-datetimepicker.css
+*.pdf

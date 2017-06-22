@@ -83,8 +83,8 @@ namespace MSP_RegProf.Controllers
                         if (docTitulo.ContentLength > 0)
                         {
                             string _FileName = _IdMatricula + "_Titulo" + Path.GetExtension(docTitulo.FileName);
-                            System.IO.Directory.CreateDirectory(Server.MapPath("~/UploadedFiles/Profesionales/" + _IdMatricula));
-                            string _path = Path.Combine(Server.MapPath("~/UploadedFiles/Profesionales/" + _IdMatricula), _FileName);
+                            System.IO.Directory.CreateDirectory(Server.MapPath("~/UploadedFiles/Profesionales/" + Matricula.PersonaID.ToString() + "/"+ _IdMatricula));
+                            string _path = Path.Combine(Server.MapPath("~/UploadedFiles/Profesionales/" + Matricula.PersonaID.ToString() + "/" + _IdMatricula), _FileName);
                             docTitulo.SaveAs(_path);
                             Matricula.TieneTitulo = true;
                         }
@@ -99,8 +99,8 @@ namespace MSP_RegProf.Controllers
                         if (docAnalitico.ContentLength > 0)
                         {
                             string _FileName = _IdMatricula + "_Analitico" + Path.GetExtension(docAnalitico.FileName);
-                            System.IO.Directory.CreateDirectory(Server.MapPath("~/UploadedFiles/Profesionales/" + _IdMatricula));
-                            string _path = Path.Combine(Server.MapPath("~/UploadedFiles/Profesionales/" + _IdMatricula), _FileName);
+                            System.IO.Directory.CreateDirectory(Server.MapPath("~/UploadedFiles/Profesionales/" + Matricula.PersonaID.ToString() + "/" + _IdMatricula));
+                            string _path = Path.Combine(Server.MapPath("~/UploadedFiles/Profesionales/" + Matricula.PersonaID.ToString() + "/" + _IdMatricula), _FileName);
                             docAnalitico.SaveAs(_path);
                             Matricula.TieneAnalitico = true;
                         }
@@ -149,7 +149,7 @@ namespace MSP_RegProf.Controllers
             {
                 case "docTitulo":
                     {
-                        var fullPathToFile = Server.MapPath("~/UploadedFiles/Profesionales/" + _IdMatricula + "/" + _IdMatricula + "_Titulo.pdf");
+                        var fullPathToFile = Server.MapPath("~/UploadedFiles/Profesionales/" + Matricula.PersonaID.ToString() + "/" + _IdMatricula + "/" + _IdMatricula + "_Titulo.pdf");
                         var mimeType = "application/pdf";
                         var fileContents = System.IO.File.ReadAllBytes(fullPathToFile);
 
@@ -159,7 +159,7 @@ namespace MSP_RegProf.Controllers
 
                 case "docAnalitico":
                     {
-                        var fullPathToFile = Server.MapPath("~/UploadedFiles/Profesionales/" + _IdMatricula + "/" + _IdMatricula + "_Analitico.pdf");
+                        var fullPathToFile = Server.MapPath("~/UploadedFiles/Profesionales/" + Matricula.PersonaID.ToString() + "/" + _IdMatricula + "/" + _IdMatricula + "_Analitico.pdf");
                         var mimeType = "application/pdf";
                         var fileContents = System.IO.File.ReadAllBytes(fullPathToFile);
 

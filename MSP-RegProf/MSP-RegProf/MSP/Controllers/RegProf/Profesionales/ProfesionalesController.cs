@@ -7,50 +7,41 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MSP_RegProf.Models;
+using MSP_RegProf.Helpers;
 
 namespace MSP_RegProf.Controllers
 {
-    public class PersonasController : Controller
+    public class ProfesionalesController : Controller
     {
         private MSPEntities db = new MSPEntities();
 
-        // GET: Personas
+        // GET: Profesionales
         public ActionResult Index()
         {
             var persona = db.Persona.Include(p => p.Localidad).Include(p => p.Localidad1).Include(p => p.TipoDNI).Include(p => p.TipoEstadoCivil).Include(p => p.TipoSexo).Include(p => p.Pais);
             return View(persona.ToList());
         }
 
-        // POST: Personas/BuscaProf/{dni}
+        // POST: Profesionales/BuscaProf/{dni}
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult BuscaProf(string profDni)
         {
             //Implementar Busqueda del Profecional
-            //var Profesional = ProfVM.GetListaProfDummy().Where(r => r.profDni == profDni).FirstOrDefault();
+            List<Persona> personas = new List<Persona>();
 
-            profDni = profDni.Trim();
-            List<Persona> persona = new List<Persona>();
-
-
-            persona.AddRange(db.Persona.Where(p => p.Nombre.Contains(profDni)).ToList());
-            persona.AddRange(db.Persona.Where(p => p.Apellido.Contains(profDni)).ToList());
-            persona.AddRange(db.Persona.Where(p => p.NroDocumento.Contains(profDni)).ToList());
-            //var persona = db.Persona.Include(p => p.Localidad).Include(p => p.Localidad1).Include(p => p.TipoDNI).Include(p => p.TipoEstadoCivil).Include(p => p.TipoSexo).Include(p => p.Pais);
-
-            if (persona.Count() == 0)
+            if (!string.IsNullOrEmpty(profDni))
             {
-                return Json(new
-                {
-                    ok = "false",
-                    mensaje = "DNI incorrecto o Profesional no registrado"
-                });
-            }
-
-            return PartialView("_ListadoProf", persona.ToList());
+                profDni = profDni.Trim();
+                personas.AddRange(db.Persona.Where(p => p.Nombre.Contains(profDni)).ToList());
+                personas.AddRange(db.Persona.Where(p => p.Apellido.Contains(profDni)).ToList());
+                personas.AddRange(db.Persona.Where(p => p.NroDocumento.Contains(profDni)).ToList());
+            }            
+            
+            return PartialView("_ListadoProf", personas.ToList());
         }
 
-        // GET: Personas/Details/5
+        // GET: Profesionales/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -87,8 +78,17 @@ namespace MSP_RegProf.Controllers
             if (ModelState.IsValid)
             {
                 db.Persona.Add(persona);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                List<Persona> personas = new List<Persona>();
+                personas.Add(persona);
+                //db.SaveChanges();
+                return Json( new {
+                    ok="true",
+                    //data=BuscaProf(persona.NroDocumento)
+                    data = this.RenderPartialView("_ListadoProf", personas.ToList())
+            });
+                    
+                    
             }
 
             ViewBag.LocalidadID = new SelectList(db.Localidad, "ID", "Nombre", persona.LocalidadID);
@@ -99,6 +99,10 @@ namespace MSP_RegProf.Controllers
             ViewBag.NacionalidadID = new SelectList(db.Pais, "ID", "Nombre", persona.NacionalidadID);
             return View(persona);
         }
+
+
+
+        
 
         // GET: Personas/Edit/5
         public ActionResult Edit(int? id)
