@@ -217,6 +217,9 @@
     <Compile Include="Helpers\GlobalVariables.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
     <Compile Include="Helpers\MvcHelpers.cs" />
+    <Compile Include="Models\Accion.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
@@ -236,6 +239,9 @@
     <Compile Include="Models\Departamento.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetPermisosPorNombreDeUsuario_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Localidad.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
@@ -245,6 +251,12 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Menu.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MenuAspNetRoles.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MenuAspNetRolesAccion.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Menu\MenuVM.cs" />

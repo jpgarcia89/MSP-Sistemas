@@ -9,25 +9,24 @@
 
 namespace MSP_RegProf.Models
 {
-    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Collections.Generic;
-
-    public partial class AspNetRoles
+    
+    public partial class MenuAspNetRoles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AspNetRoles()
+        public MenuAspNetRoles()
         {
-            this.AspNetUsers = new HashSet<AspNetUsers>();
-            this.MenuAspNetRoles = new HashSet<MenuAspNetRoles>();
+            this.MenuAspNetRolesAccion = new HashSet<MenuAspNetRolesAccion>();
         }
     
-        public string Id { get; set; }
-        public string Name { get; set; }
+        public int ID { get; set; }
+        public int MenuId { get; set; }
+        public string AspNetRolesId { get; set; }
     
+        public virtual AspNetRoles AspNetRoles { get; set; }
+        public virtual Menu Menu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MenuAspNetRoles> MenuAspNetRoles { get; set; }
+        public virtual ICollection<MenuAspNetRolesAccion> MenuAspNetRolesAccion { get; set; }
     }
 }

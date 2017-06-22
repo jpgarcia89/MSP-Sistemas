@@ -10,17 +10,9 @@
 namespace MSP_RegProf.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Menu
+    public partial class GetPermisosPorNombreDeUsuario_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Menu()
-        {
-            this.Menu1 = new HashSet<Menu>();
-            this.MenuAspNetRoles = new HashSet<MenuAspNetRoles>();
-        }
-    
         public int ID { get; set; }
         public Nullable<int> PadreID { get; set; }
         public string Nombre { get; set; }
@@ -31,11 +23,5 @@ namespace MSP_RegProf.Models
         public bool Activo { get; set; }
         public System.DateTime FechaAlta { get; set; }
         public Nullable<int> mnuId { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Menu> Menu1 { get; set; }
-        public virtual Menu Menu2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MenuAspNetRoles> MenuAspNetRoles { get; set; }
     }
 }
