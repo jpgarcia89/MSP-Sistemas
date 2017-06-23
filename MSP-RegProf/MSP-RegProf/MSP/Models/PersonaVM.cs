@@ -17,7 +17,7 @@ namespace MSP_RegProf.Models
         /// Valida Datos Personales
         /// </summary>
 
-        [DataType(DataType.Date)]
+        //[DataType(DataType.Date)]
         [Required(ErrorMessage = "El campo {0} es requerido.")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> FechaNacimiento { get; set; }

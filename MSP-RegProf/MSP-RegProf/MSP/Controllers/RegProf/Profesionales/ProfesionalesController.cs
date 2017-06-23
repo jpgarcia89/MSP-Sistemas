@@ -11,6 +11,7 @@ using MSP_RegProf.Helpers;
 
 namespace MSP_RegProf.Controllers
 {
+    [Authorize]
     public class ProfesionalesController : Controller
     {
         private MSPEntities db = new MSPEntities();
@@ -36,8 +37,8 @@ namespace MSP_RegProf.Controllers
                 personas.AddRange(db.Persona.Where(p => p.Nombre.Contains(profDni)).ToList());
                 personas.AddRange(db.Persona.Where(p => p.Apellido.Contains(profDni)).ToList());
                 personas.AddRange(db.Persona.Where(p => p.NroDocumento.Contains(profDni)).ToList());
-            }            
-            
+            }
+
             return PartialView("_ListadoProf", personas.ToList());
         }
 
@@ -77,18 +78,24 @@ namespace MSP_RegProf.Controllers
         {
             if (ModelState.IsValid)
             {
+                persona.FechaAlta = DateTime.Today;
+                persona.FechaActualizacion = DateTime.Today;
+
                 db.Persona.Add(persona);
+                db.SaveChanges();
+
 
                 List<Persona> personas = new List<Persona>();
-                personas.Add(persona);
-                //db.SaveChanges();
-                return Json( new {
-                    ok="true",
-                    //data=BuscaProf(persona.NroDocumento)
+                personas.Add(db.Persona.FirstOrDefault(r => r.ID == persona.ID));
+
+
+                return Json(new
+                {
+                    ok = "true",
                     data = this.RenderPartialView("_ListadoProf", personas.ToList())
-            });
-                    
-                    
+                });
+
+
             }
 
             ViewBag.LocalidadID = new SelectList(db.Localidad, "ID", "Nombre", persona.LocalidadID);
@@ -102,7 +109,7 @@ namespace MSP_RegProf.Controllers
 
 
 
-        
+
 
         // GET: Personas/Edit/5
         public ActionResult Edit(int? id)
@@ -136,7 +143,17 @@ namespace MSP_RegProf.Controllers
             {
                 db.Entry(persona).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                List<Persona> personas = new List<Persona>();
+                personas.Add(db.Persona.FirstOrDefault(r => r.ID == persona.ID));
+
+
+                return Json(new
+                {
+                    ok = "true",
+                    data = this.RenderPartialView("_ListadoProf", personas.ToList())
+                });
+                //return RedirectToAction("Index");
             }
             ViewBag.LocalidadID = new SelectList(db.Localidad, "ID", "Nombre", persona.LocalidadID);
             ViewBag.LocalidadNacimientoID = new SelectList(db.Localidad, "ID", "Nombre", persona.LocalidadNacimientoID);

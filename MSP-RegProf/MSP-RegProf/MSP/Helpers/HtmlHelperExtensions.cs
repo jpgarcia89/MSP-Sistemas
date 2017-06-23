@@ -27,7 +27,7 @@ namespace MSP_RegProf.Helpers
 
                         if (menusAll.Where(r => r.PadreID == item.ID).Any())
                         {
-                            string a = string.Format(@"<li><a href=""#""><i class=""{1}""></i> {0} <span class=""pull-right-container""><i class=""fa fa-angle-left pull-right""></i></span></a><ul class=""treeview-menu"">", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o": item.Icono);
+                            string a = string.Format(@"<li><a href=""#""><i class=""{1}""></i> {0} <span class=""pull-right-container""><i class=""fa fa-angle-left pull-right""></i></span></a><ul class=""treeview-menu"">", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o text-aqua": item.Icono);
                             output += a;
 
                             output = createMenu(menusAll.Where(r => r.PadreID == item.ID).ToList(), menusAll, output);
@@ -44,7 +44,7 @@ namespace MSP_RegProf.Helpers
                             url = "/SRProf";
 #endif
                             url += "/" + item.Controlador + "/" + (accion=="Index"?String.Empty:accion);
-                            string c = string.Format(@"<li><a href=""{1}""><i class=""{2}""></i> {0} </a></li>", item.Nombre, url, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o": item.Icono);
+                            string c = string.Format(@"<li><a href=""{1}""><i class=""{2}""></i> {0} </a></li>", item.Nombre, url, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o text-aqua": item.Icono);
                             output += c;
                         }
                     }
@@ -55,7 +55,7 @@ namespace MSP_RegProf.Helpers
 
                     foreach (var item in menusPadres)
                     {
-                        string x = string.Format(@"<li class=""treeview""><a href = ""#"" ><i class=""{1}""></i><span> {0} </span><span class=""pull-right-container""><i class=""fa fa-angle-left pull-right""></i></span></a>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o": item.Icono);
+                        string x = string.Format(@"<li class=""treeview""><a href = ""#"" ><i class=""{1}""></i><span> {0} </span><span class=""pull-right-container""><i class=""fa fa-angle-left pull-right""></i></span></a>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o text-aqua text-aqua": item.Icono);
                         output += x;
 
                         if (menusAll.Where(r => r.PadreID == item.ID).Any())
