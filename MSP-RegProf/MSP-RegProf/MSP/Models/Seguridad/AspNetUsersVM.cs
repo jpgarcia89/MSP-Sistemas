@@ -17,13 +17,15 @@ namespace MSP_RegProf.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido.")]
         public string Email { get; set; }
 
-        [DisplayName("Nombre de Usuario")]
+        [DisplayName("Usuario")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido.")]
         public string UserName { get; set; }
 
-        [DisplayName("Contraseña")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido.")]
-        [StringLength(50, MinimumLength = 10)]
-        public string PasswordHash { get; set; }
+        //[DisplayName("Contraseña")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "El campo {0} es requerido.")]
+        //[StringLength(20, MinimumLength = 5)]
+        //public string Password { get; set; }
+
+        //public string PasswordHash { get; set; }
     }
 }

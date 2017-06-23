@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MSP_RegProf.Models;
+using System.Text;
+using Microsoft.AspNet.Identity;
 
 namespace MSP_RegProf.Controllers.Seguridad
 {
@@ -82,7 +84,10 @@ namespace MSP_RegProf.Controllers.Seguridad
         {
             if (ModelState.IsValid)
             {
+                var hasher = new PasswordHasher();
                 db.Entry(aspNetUsers).State = EntityState.Modified;
+                aspNetUsers.PasswordHash = hasher.HashPassword(aspNetUsers.PasswordHash);
+                aspNetUsers.SecurityStamp = Guid.NewGuid().ToString();
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
