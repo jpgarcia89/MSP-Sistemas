@@ -43,7 +43,6 @@ namespace MSP_RegProf
                       "~/Scripts/plugins/pace/pace.min.css"
                       ));
 
-
             bundles.Add(new ScriptBundle("~/bundles/appScripts").Include(
                       "~/Scripts/jquery.validate*",                     //jQuery Validations
                       "~/Scripts/Scripts/plugins/jQueryUI/jquery-ui.min.js",    //jQuery UI

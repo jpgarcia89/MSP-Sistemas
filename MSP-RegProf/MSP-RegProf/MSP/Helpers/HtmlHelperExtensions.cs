@@ -55,7 +55,7 @@ namespace MSP_RegProf.Helpers
 
                     foreach (var item in menusPadres)
                     {
-                        string x = string.Format(@"<li class=""treeview""><a href = ""#"" ><i class=""{1}""></i><span> {0} </span><span class=""pull-right-container""><i class=""fa fa-angle-left pull-right""></i></span></a>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o text-aqua text-aqua": item.Icono);
+                        string x = string.Format(@"<li class=""treeview""><a href = ""#"" ><i class=""{1}""></i><span> {0} </span><span class=""pull-right-container""><i class=""fa fa-angle-left pull-right""></i></span></a>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o": item.Icono);
                         output += x;
 
                         if (menusAll.Where(r => r.PadreID == item.ID).Any())

@@ -60,7 +60,7 @@ namespace MSP_RegProf.Controllers
         // GET: Personas/Create
         public ActionResult Create()
         {
-            ViewBag.LocalidadID = new SelectList(db.Localidad, "ID", "Nombre");
+            ViewBag.LocalidadID = new SelectList(db.Departamento.Where(r => r.Provincia.Nombre == "San Juan"), "ID", "Nombre");
             ViewBag.LocalidadNacimientoID = new SelectList(db.Localidad, "ID", "Nombre");
             ViewBag.TipodniID = new SelectList(db.TipoDNI, "ID", "Nombre");
             ViewBag.EstadoCivilID = new SelectList(db.TipoEstadoCivil, "ID", "Nombre");
@@ -86,7 +86,7 @@ namespace MSP_RegProf.Controllers
 
 
                 List<Persona> personas = new List<Persona>();
-                personas.Add(db.Persona.FirstOrDefault(r => r.ID == persona.ID));
+                personas.Add(db.Persona.Include(p => p.TipoSexo).Include(p => p.Pais).FirstOrDefault(r => r.ID == persona.ID));
 
 
                 return Json(new
@@ -141,11 +141,12 @@ namespace MSP_RegProf.Controllers
         {
             if (ModelState.IsValid)
             {
+                persona.FechaActualizacion = DateTime.Today;
                 db.Entry(persona).State = EntityState.Modified;
                 db.SaveChanges();
 
                 List<Persona> personas = new List<Persona>();
-                personas.Add(db.Persona.FirstOrDefault(r => r.ID == persona.ID));
+                personas.Add(db.Persona.Include(p => p.TipoSexo).Include(p => p.Pais).FirstOrDefault(r => r.ID == persona.ID));
 
 
                 return Json(new

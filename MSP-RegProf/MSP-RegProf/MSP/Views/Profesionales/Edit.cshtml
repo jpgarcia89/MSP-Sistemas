@@ -82,7 +82,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <!-- Fila 3 - Estado Civil y Sexo -->
                 <div class="row">
                     <div class="col-md-6">
@@ -317,14 +317,21 @@
                 url: this.action,
                 type: this.method,
                 data: $(this).serialize(),
+                beforeSend: function (xhr) {
+                    abrirWaiting();
+                },
                 success: function (result) {
                     //debugger
+                    cerrarWaiting();
                     if (result.ok) {
                         $('#contenProfesionales').html(result.data);
                         cerrarModal();
                         return;
                     }
                     $('#contenidoModal').html(result);
+                },
+                error: function () {
+                    cerrarWaiting();
                 }
             });
         }
