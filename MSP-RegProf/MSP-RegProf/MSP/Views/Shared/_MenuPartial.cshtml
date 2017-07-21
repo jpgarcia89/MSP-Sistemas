@@ -3,6 +3,8 @@
     var aux = Session["Menu"] as List<MSP_RegProf.Models.MenuVM>;
     if (Session["Menu"] == null || aux.Count == 0)
     {
+        String user = User.Identity.Name;
+
         var menuClien = new MSP_RegProf.Controllers.MenuController();
         if (Session["UserName"] != null)
         {
@@ -10,7 +12,7 @@
         }
         else
         {
-            Session["Menu"] = menuClien.GetMenu("");
+            Session["Menu"] = menuClien.GetMenu(user);
         }
     }
 

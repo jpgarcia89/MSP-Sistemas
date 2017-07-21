@@ -73,6 +73,14 @@ namespace MSP_RegProf.Models
         [Display(Name = "Usuario")]
         public string UserName { get; set; }
 
+        [Required]
+        [Display(Name = "Nombre")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Apellido")]
+        public string LastName { get; set; }
+
         //[Required]
         [EmailAddress]
         [Display(Name = "Email")]

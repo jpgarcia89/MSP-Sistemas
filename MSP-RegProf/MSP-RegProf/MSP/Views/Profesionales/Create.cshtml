@@ -132,44 +132,7 @@
                 </div>
 
             </fieldset>
-
-
-            @*<!-- Grupo - Lugar de Nacimiento -->
-            <fieldset id="fsLugarNacimiento">
-                <legend>Lugar de Nacimiento:</legend>
-
-                <!-- Fila 5 - Ciudad Nac, Localidad Nac y Pais Nac -->
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group row">
-                            <label class="control-label col-md-4" for="Ciudad">Ciudad Nac:</label>
-                            <div class="col-md-6">
-                                @Html.TextBox("CiudadNac", "No existe el campo", htmlAttributes: new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group row">
-                            <label class="control-label col-md-5" for="LocalidadNacimientoID">Localidad Nac:</label>
-                            <div class="col-md-6">
-                                @Html.DropDownList("LocalidadNacimientoID", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.LocalidadNacimientoID, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group row">
-                            <label class="control-label col-md-4" for="Ciudad">Pais Nac:</label>
-                            <div class="col-md-8">
-                                @Html.TextBox("PaisNac", "No existe el campo", htmlAttributes: new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>*@
-
+            
 
             <!-- Grupo - Domicilio -->
             <fieldset id="fsDomicilio">
@@ -334,70 +297,8 @@
 
                 </div>
             </fieldset>
-
-
-         
-
-
-
-
-
-
-
-
-
-
-            <!-- Fila - ........ -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            @*<div class="form-group">
-                <label class="control-label col-md-3" for="Firma">Fallecido:</label>
-                <div class="col-md-8">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.Fallecido)
-                        @Html.ValidationMessageFor(model => model.Fallecido, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>*@
-
-            @*<div class="form-group">
-                <label class="control-label col-md-3" for="Firma">Fecha Actualizacion:</label>
-                <div class="col-md-8">
-                    @Html.EditorFor(model => model.FechaActualizacion, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FechaActualizacion, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-            @*<div class="form-group">
-                <label class="control-label col-md-3" for="Firma">Fecha Alta:</label>
-                <div class="col-md-8">
-                    @Html.EditorFor(model => model.FechaAlta, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FechaAlta, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-            @*<div class="form-group">
-                <label class="control-label col-md-3" for="Firma">Fecha Fallecido:</label>
-                <div class="col-md-8">
-                    @Html.EditorFor(model => model.FechaFallecido, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FechaFallecido, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-
+            
+                        
         </div>
     </div>
 }

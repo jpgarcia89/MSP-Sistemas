@@ -86,10 +86,12 @@
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio 10.0\ReportViewer\Microsoft.ReportViewer.WebForms.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -210,7 +212,9 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\Menu\MenuController.cs" />
     <Compile Include="Controllers\RegProf\DigitDocs\DigitDocsController.cs" />
+    <Compile Include="Controllers\RegProf\Matriculas\MatriculasController.cs" />
     <Compile Include="Controllers\RegProf\Profesionales\ProfesionalesController.cs" />
+    <Compile Include="Controllers\Seguridad\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -220,7 +224,7 @@
     <Compile Include="Models\Accion.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\App Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -242,11 +246,11 @@
     <Compile Include="Models\GetPermisosPorNombreDeUsuario_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\App Models\IdentityModels.cs" />
     <Compile Include="Models\Localidad.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\App Models\ManageViewModels.cs" />
     <Compile Include="Models\Matricula.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -259,7 +263,7 @@
     <Compile Include="Models\MenuAspNetRolesAccion.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Menu\MenuVM.cs" />
+    <Compile Include="Models\App Models\Menu\MenuVM.cs" />
     <Compile Include="Models\Modelo.Context.cs">
       <DependentUpon>Modelo.Context.tt</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -284,13 +288,15 @@
     <Compile Include="Models\Persona.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PersonaVM.cs" />
+    <Compile Include="Models\EF Extended Models\MatriculaVM.cs" />
+    <Compile Include="Models\EF Extended Models\PersonaVM.cs" />
     <Compile Include="Models\Provincia.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RegProf\DigitDocs\DocsVM.cs" />
-    <Compile Include="Models\RegProf\DigitDocs\ProfVM.cs" />
-    <Compile Include="Models\RegProf\DigitDocs\TituloProfVM.cs" />
+    <Compile Include="Models\App Models\RegProf\DigitDocs\DocsVM.cs" />
+    <Compile Include="Models\App Models\RegProf\DigitDocs\ProfVM.cs" />
+    <Compile Include="Models\App Models\RegProf\DigitDocs\TituloProfVM.cs" />
+    <Compile Include="Models\App Models\Seguridad\AspNetUsersVM.cs" />
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -1906,9 +1912,20 @@
     <Content Include="Views\Profesionales\Edit.cshtml" />
     <Content Include="Views\Profesionales\Index.cshtml" />
     <Content Include="Views\Profesionales\_ListadoProf.cshtml" />
+    <Content Include="Views\Matriculas\Create.cshtml" />
+    <Content Include="Views\Matriculas\Delete.cshtml" />
+    <Content Include="Views\Matriculas\Details.cshtml" />
+    <Content Include="Views\Matriculas\Edit.cshtml" />
+    <Content Include="Views\Matriculas\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="NewFolder1\" />
     <Folder Include="UploadedFiles\" />
     <Folder Include="Views\Menu\" />
   </ItemGroup>

@@ -153,7 +153,7 @@ namespace MSP_RegProf.Controllers
             MSPEntities Context = new MSPEntities();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, FirstName=model.FirstName,LastName=model.LastName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -393,6 +393,7 @@ namespace MSP_RegProf.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            Session.RemoveAll();
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Login", "Account");
         }

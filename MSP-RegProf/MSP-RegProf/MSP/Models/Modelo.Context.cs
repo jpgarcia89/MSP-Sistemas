@@ -24,10 +24,7 @@ namespace MSP_RegProf.Models
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<AspNetUserLogins>().HasKey(l => new { l.LoginProvider, l.ProviderKey, l.UserId });
-            //throw new UnintentionalCodeFirstException();
+            throw new UnintentionalCodeFirstException();
         }
     
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }

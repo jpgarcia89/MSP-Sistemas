@@ -1,0 +1,170 @@
+﻿@model MSP_RegProf.Models.Matricula
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Matricula</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Revalido)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Revalido)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaDiploma)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FechaDiploma)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ObservacionDiploma)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ObservacionDiploma)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaInscripcion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FechaInscripcion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.NroMatricula)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.NroMatricula)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Folio)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Folio)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.libro)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.libro)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaActualizacion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FechaActualizacion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Habilitada)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Habilitada)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Retirado)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Retirado)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaRetiro)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FechaRetiro)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ObservacionMatricula)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ObservacionMatricula)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TieneAnalitico)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TieneAnalitico)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TieneTitulo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TieneTitulo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Organismo.Descripcion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Organismo.Descripcion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Persona.Apellido)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Persona.Apellido)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TipoEstadoMatricula.Descripcion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TipoEstadoMatricula.Descripcion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Titulo.Descripcion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Titulo.Descripcion)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
