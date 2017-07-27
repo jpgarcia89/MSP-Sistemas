@@ -106,7 +106,7 @@ namespace MSP_RegProf.Helpers
                         
                         if (menusAll.Where(r => r.PadreID == item.ID).Any())
                         {
-                            string a = string.Format(@"<li data-jstree='{{""icon"":""{1}""}}'> {0} <ul>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono);
+                            string a = string.Format(@"<li id=""{2}"" data-jstree='{{""icon"":""{1}""}}'> {0} <ul>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono, "menu_"+item.ID);
                             output += a;
 
                             output = createTreeMenu(menusAll.Where(r => r.PadreID == item.ID).ToList(), menusAll, output);
@@ -133,13 +133,13 @@ namespace MSP_RegProf.Helpers
                                 //        < li > Digitalizacion de documentos </ li >  
                                 //        < li > Profesionales y Matriculas </ li >    
                                 //    </ ul >
-                                string c = string.Format(@"<li data-jstree='{{""icon"":""{1}""}}'> {0}  <ul>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono);
+                                string c = string.Format(@"<li id=""{2}"" data-jstree='{{""icon"":""{1}""}}'> {0}  <ul>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono, "menu_" + item.ID);
 
                                 foreach (var Accion in item.Accion1)
                                 {
                                     //c+= string.Format(@"<li > {0} </li>", Accion.Nombre);
 
-                                    c += string.Format(@"<li data-jstree='{{""icon"":""{1}""}}'> {0} </li>", Accion.Nombre, string.IsNullOrEmpty(Accion.Icono) ? "fa fa-circle-o" : Accion.Icono);
+                                    c += string.Format(@"<li id=""{2}"" data-jstree='{{""icon"":""{1}""}}'> {0} </li>", Accion.Nombre, string.IsNullOrEmpty(Accion.Icono) ? "fa fa-circle-o" : Accion.Icono, "accion_" + item.ID + "_" + Accion.ID);
                                 }
 
 
@@ -150,7 +150,7 @@ namespace MSP_RegProf.Helpers
                             }
                             else
                             {
-                                string c = string.Format(@"<li data-jstree='{{""icon"":""{1}""}}'> {0} </li>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono);
+                                string c = string.Format(@"<li id=""{2}"" data-jstree='{{""icon"":""{1}""}}'> {0} </li>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono, "menu_" + item.ID);
                                 output += c;
                             }
                         }
@@ -162,7 +162,7 @@ namespace MSP_RegProf.Helpers
 
                     foreach (var item in menusPadres)
                     {
-                        string x = string.Format(@"<li data-jstree='{{""icon"":""{1}""}}'> {0} ", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono);
+                        string x = string.Format(@"<li id=""{2}"" data-jstree='{{""icon"":""{1}""}}'> {0} ", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono, "menu_"+ item.ID);
                         output += x;
 
                         if (menusAll.Where(r => r.PadreID == item.ID).Any())
