@@ -158,6 +158,49 @@ namespace MSP_RegProf.Controllers.Seguridad
             return View(model);
         }
 
+
+        // GET: /Account/ResetPassword/id
+        [AllowAnonymous]
+        public ActionResult ResetPassword(string id)
+        {
+            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
+
+            ResetPasswordViewModel model = new ResetPasswordViewModel { UserName = aspNetUsers.UserName, Code = "1" };
+            return View(model);
+        }
+
+        //
+        // POST: /Account/ResetPassword
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = UserManager.FindByName(model.UserName);
+            if (user == null)
+            {
+                // Don't reveal that the user does not exist
+                return RedirectToAction("ResetPasswordConfirmation", "Account");
+            }
+
+            model.Code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);//model.Code
+            if (result.Succeeded)
+            {
+                return RedirectToAction("ResetPasswordConfirmation", "Account");
+            }
+            AddErrors(result);
+            return View();
+        }
+
+
+
+
+
         // GET: AspNetUsers/Delete/5
         public ActionResult Delete(string id)
         {
@@ -181,7 +224,8 @@ namespace MSP_RegProf.Controllers.Seguridad
             AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
             db.AspNetUsers.Remove(aspNetUsers);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return Json(new { ok = "true" });
         }
 
         protected override void Dispose(bool disposing)

@@ -13,6 +13,16 @@
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MSP-RegProf-Desarrollo.dbo.AspNetMenuAccion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AspNetMenuAccion">
+          <Key>
+            <PropertyRef Name="IdMenu" />
+            <PropertyRef Name="IdAccion" />
+          </Key>
+          <Property Name="IdMenu" Type="int" Nullable="false" />
+          <Property Name="IdAccion" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -288,6 +298,30 @@
           <Property Name="TipoNivelAcademicoID" Type="tinyint" Nullable="false" />
           <Property Name="CarreraMatriculadaID" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_AspNetMenuAccion_Accion">
+          <End Role="Accion" Type="Self.Accion" Multiplicity="1" />
+          <End Role="AspNetMenuAccion" Type="Self.AspNetMenuAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AspNetMenuAccion">
+              <PropertyRef Name="IdAccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetMenuAccion_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="AspNetMenuAccion" Type="Self.AspNetMenuAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AspNetMenuAccion">
+              <PropertyRef Name="IdMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CarreraMatriculada_TipoEstadoProfesion">
           <End Role="TipoEstadoProfesion" Type="Self.TipoEstadoProfesion" Multiplicity="1" />
           <End Role="CarreraMatriculada" Type="Self.CarreraMatriculada" Multiplicity="*" />
@@ -650,6 +684,20 @@
           <EntitySet Name="TipoNivelAcademico" EntityType="Self.TipoNivelAcademico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoSexo" EntityType="Self.TipoSexo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Titulo" EntityType="Self.Titulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetMenuAccion" EntityType="Self.AspNetMenuAccion" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AspNetMenuAccion].[IdMenu] AS [IdMenu], 
+    [AspNetMenuAccion].[IdAccion] AS [IdAccion]
+    FROM [dbo].[AspNetMenuAccion] AS [AspNetMenuAccion]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_AspNetMenuAccion_Accion" Association="Self.FK_AspNetMenuAccion_Accion">
+            <End Role="Accion" EntitySet="Accion" />
+            <End Role="AspNetMenuAccion" EntitySet="AspNetMenuAccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetMenuAccion_Menu" Association="Self.FK_AspNetMenuAccion_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="AspNetMenuAccion" EntitySet="AspNetMenuAccion" />
+          </AssociationSet>
           <AssociationSet Name="FK_CarreraMatriculada_TipoEstadoProfesion" Association="Self.FK_CarreraMatriculada_TipoEstadoProfesion">
             <End Role="TipoEstadoProfesion" EntitySet="TipoEstadoProfesion" />
             <End Role="CarreraMatriculada" EntitySet="CarreraMatriculada" />
@@ -980,6 +1028,10 @@
           <FunctionImport Name="GetPermisosPorNombreDeUsuario" ReturnType="Collection(MSPModel.GetPermisosPorNombreDeUsuario_Result)">
           <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
+          <AssociationSet Name="AspNetMenuAccion" Association="MSPModel.AspNetMenuAccion">
+            <End Role="Accion" EntitySet="Accion" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Menu">
           <Key>
@@ -998,6 +1050,7 @@
           <NavigationProperty Name="Menu1" Relationship="MSPModel.FK_Menu_Menu" FromRole="Menu" ToRole="Menu1" />
           <NavigationProperty Name="Menu2" Relationship="MSPModel.FK_Menu_Menu" FromRole="Menu1" ToRole="Menu" />
           <NavigationProperty Name="MenuAspNetRoles" Relationship="MSPModel.FK_MenuAspNetRoles_Menu" FromRole="Menu" ToRole="MenuAspNetRoles" />
+          <NavigationProperty Name="Accion1" Relationship="MSPModel.AspNetMenuAccion" FromRole="Menu" ToRole="Accion" />
         </EntityType>
         <Association Name="FK_Menu_Menu">
           <End Type="MSPModel.Menu" Role="Menu" Multiplicity="0..1" />
@@ -1462,6 +1515,7 @@
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MenuAspNetRolesAccion" Relationship="MSPModel.FK_MenuAspNetRolesAccion_Accion" FromRole="Accion" ToRole="MenuAspNetRolesAccion" />
+          <NavigationProperty Name="Menu" Relationship="MSPModel.AspNetMenuAccion" FromRole="Accion" ToRole="Menu" />
         </EntityType>
         <EntityType Name="MenuAspNetRoles">
           <Key>
@@ -1544,6 +1598,10 @@
           <Property Type="DateTime" Name="FechaAlta" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="mnuId" Nullable="true" />
         </ComplexType>
+        <Association Name="AspNetMenuAccion">
+          <End Type="MSPModel.Accion" Role="Accion" Multiplicity="*" />
+          <End Type="MSPModel.Menu" Role="Menu" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1872,6 +1930,14 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <AssociationSetMapping Name="AspNetMenuAccion" TypeName="MSPModel.AspNetMenuAccion" StoreEntitySet="AspNetMenuAccion">
+            <EndProperty Name="Menu">
+              <ScalarProperty Name="ID" ColumnName="IdMenu" />
+            </EndProperty>
+            <EndProperty Name="Accion">
+              <ScalarProperty Name="ID" ColumnName="IdAccion" />
+            </EndProperty>
+          </AssociationSetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

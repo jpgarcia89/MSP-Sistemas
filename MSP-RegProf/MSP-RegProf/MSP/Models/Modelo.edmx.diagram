@@ -56,6 +56,7 @@
         <AssociationConnector Association="MSPModel.FK_MenuAspNetRoles_AspNetRoles" />
         <AssociationConnector Association="MSPModel.FK_MenuAspNetRoles_Menu" />
         <AssociationConnector Association="MSPModel.FK_MenuAspNetRolesAccion_MenuAspNetRoles" />
+        <AssociationConnector Association="MSPModel.AspNetMenuAccion" />
 
 
         <!--<EntityTypeShape EntityType="MSPModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />

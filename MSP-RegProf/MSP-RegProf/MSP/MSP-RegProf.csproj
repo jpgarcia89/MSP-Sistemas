@@ -214,6 +214,7 @@
     <Compile Include="Controllers\RegProf\DigitDocs\DigitDocsController.cs" />
     <Compile Include="Controllers\RegProf\Matriculas\MatriculasController.cs" />
     <Compile Include="Controllers\RegProf\Profesionales\ProfesionalesController.cs" />
+    <Compile Include="Controllers\Seguridad\RolesController.cs" />
     <Compile Include="Controllers\Seguridad\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1754,6 +1755,18 @@
     <Content Include="Scripts\plugins\jQueryUI\jquery-ui.js" />
     <Content Include="Scripts\plugins\jQueryUI\jquery-ui.min.js" />
     <Content Include="Scripts\plugins\jQuery\jquery-2.2.3.min.js" />
+    <Content Include="Scripts\plugins\jsTree\jstree.js" />
+    <Content Include="Scripts\plugins\jsTree\jstree.min.js" />
+    <Content Include="Scripts\plugins\jsTree\themes\default-dark\32px.png" />
+    <Content Include="Scripts\plugins\jsTree\themes\default-dark\40px.png" />
+    <Content Include="Scripts\plugins\jsTree\themes\default-dark\style.css" />
+    <Content Include="Scripts\plugins\jsTree\themes\default-dark\style.min.css" />
+    <Content Include="Scripts\plugins\jsTree\themes\default-dark\throbber.gif" />
+    <Content Include="Scripts\plugins\jsTree\themes\default\32px.png" />
+    <Content Include="Scripts\plugins\jsTree\themes\default\40px.png" />
+    <Content Include="Scripts\plugins\jsTree\themes\default\style.css" />
+    <Content Include="Scripts\plugins\jsTree\themes\default\style.min.css" />
+    <Content Include="Scripts\plugins\jsTree\themes\default\throbber.gif" />
     <Content Include="Scripts\plugins\jvectormap\jquery-jvectormap-1.2.2.css" />
     <Content Include="Scripts\plugins\jvectormap\jquery-jvectormap-1.2.2.min.js" />
     <Content Include="Scripts\plugins\jvectormap\jquery-jvectormap-usa-en.js" />
@@ -1922,6 +1935,13 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\ResetPassword.cshtml" />
+    <Content Include="Views\Roles\Create.cshtml" />
+    <Content Include="Views\Roles\Delete.cshtml" />
+    <Content Include="Views\Roles\Details.cshtml" />
+    <Content Include="Views\Roles\Edit.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Views\Roles\Permisos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

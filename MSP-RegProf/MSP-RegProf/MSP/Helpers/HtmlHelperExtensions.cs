@@ -9,6 +9,8 @@ namespace MSP_RegProf.Helpers
 {
     public static class HtmlHelperExtensions
     {
+        //Renderizado de Menu(Panel Izquerdo)
+        #region Renderizado de Menu(Panel Izquerdo)
         public static MvcHtmlString RenderMenu(List<MenuVM> menus)//this HtmlHelper helper, 
         {            
             var menusPadres = menus == null ? null : menus.Where(r => r.PadreID == null).ToList();
@@ -80,9 +82,85 @@ namespace MSP_RegProf.Helpers
                 return @"<li><a href=""#""><i class=""fa fa-circle-o text-red""></i> <span>No hay menus disponibles</span></a></li>";
             }
         }
+        #endregion
 
 
+        //Renderizado de Permisos de Menu y acciones(JSTree)
+        #region Renderizado de Permisos de Menu y acciones(JSTree)
+        public static MvcHtmlString RenderTreeMenu(List<Menu> menus)//this HtmlHelper helper, 
+        {
+            var menusPadres = menus == null ? null : menus.Where(r => r.PadreID == null).ToList();
+            return MvcHtmlString.Create(createTreeMenu(menusPadres, menus));
+        }
 
+        private static string createTreeMenu(List<Menu> menusPadres, List<Menu> menusAll, string output = null)
+        {
+            if (menusPadres != null && menusAll != null)
+            {
+
+                //
+                if (menusPadres.Any(r => r.PadreID != null))//Son opciones de menu q tienen un padre
+                {
+                    foreach (var item in menusPadres)
+                    {
+                        //item.men
+                        if (menusAll.Where(r => r.PadreID == item.ID).Any())
+                        {
+                            string a = string.Format(@"<li>{0} <ul>", item.Nombre);
+                            output += a;
+
+                            output = createTreeMenu(menusAll.Where(r => r.PadreID == item.ID).ToList(), menusAll, output);
+
+                            string b = @"</ul></li>";
+                            output += b;
+                        }
+                        else
+                        {
+                            string accion = string.IsNullOrEmpty(item.Accion) ? "" : item.Accion;
+                            string url = "";
+
+                        #if (DEBUG == false)
+                            url = "/SRProf";
+                        #endif
+
+                            url += "/" + item.Controlador + "/" + (accion == "Index" ? String.Empty : accion);
+                            string c = string.Format(@"<li> {0} </li>", item.Nombre, url, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o text-aqua" : item.Icono);
+                            output += c;
+                        }
+                    }
+                    //return output;
+                }
+                else
+                {
+
+                    foreach (var item in menusPadres)
+                    {
+                        string x = string.Format(@"<li>  {0} ", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono);
+                        output += x;
+
+                        if (menusAll.Where(r => r.PadreID == item.ID).Any())
+                        {
+                            string y = @"<ul >";
+                            output += y;
+
+                            output = createTreeMenu(menusAll.Where(r => r.PadreID == item.ID).ToList(), menusAll, output);
+
+                            string z = @"</ul>";
+                            output += z;
+                        }
+                        output += "</li>";
+
+                    }
+
+                }
+                return output;
+            }
+            else
+            {
+                return @"<li><a href=""#""><i class=""fa fa-circle-o text-red""></i> <span>No hay menus disponibles</span></a></li>";
+            }
+        }
+        #endregion
 
     }
 }

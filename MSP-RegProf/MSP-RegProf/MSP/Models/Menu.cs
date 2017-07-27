@@ -19,6 +19,7 @@ namespace MSP_RegProf.Models
         {
             this.Menu1 = new HashSet<Menu>();
             this.MenuAspNetRoles = new HashSet<MenuAspNetRoles>();
+            this.Accion1 = new HashSet<Accion>();
         }
     
         public int ID { get; set; }
@@ -37,5 +38,7 @@ namespace MSP_RegProf.Models
         public virtual Menu Menu2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MenuAspNetRoles> MenuAspNetRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Accion> Accion1 { get; set; }
     }
 }
