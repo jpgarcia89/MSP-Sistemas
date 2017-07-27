@@ -30,9 +30,12 @@
         <ul>
             @MSP_RegProf.Helpers.HtmlHelperExtensions.RenderTreeMenu(Model)
         </ul>
+
+
+        
 </div>
 
-    
+    @*@(string.Format(@"<li data-jstree='{{""icon"":""fa fa-plus""}}'> {0} </li>", "agregar"))*@
     <!-- 4 include the jQuery library -->
     <!-- 5 include the minified jstree source -->
     <script src="~/Scripts/plugins/jsTree/jstree.min.js"></script>

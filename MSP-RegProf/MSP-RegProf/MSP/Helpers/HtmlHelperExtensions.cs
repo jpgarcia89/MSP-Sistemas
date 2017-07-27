@@ -103,10 +103,10 @@ namespace MSP_RegProf.Helpers
                 {
                     foreach (var item in menusPadres)
                     {
-                        //item.men
+                        
                         if (menusAll.Where(r => r.PadreID == item.ID).Any())
                         {
-                            string a = string.Format(@"<li>{0} <ul>", item.Nombre);
+                            string a = string.Format(@"<li data-jstree='{{""icon"":""{1}""}}'> {0} <ul>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono);
                             output += a;
 
                             output = createTreeMenu(menusAll.Where(r => r.PadreID == item.ID).ToList(), menusAll, output);
@@ -116,16 +116,43 @@ namespace MSP_RegProf.Helpers
                         }
                         else
                         {
-                            string accion = string.IsNullOrEmpty(item.Accion) ? "" : item.Accion;
-                            string url = "";
+                            //string accion = string.IsNullOrEmpty(item.Accion) ? "" : item.Accion;
+                            //string url = "";
 
                         #if (DEBUG == false)
                             url = "/SRProf";
                         #endif
 
-                            url += "/" + item.Controlador + "/" + (accion == "Index" ? String.Empty : accion);
-                            string c = string.Format(@"<li> {0} </li>", item.Nombre, url, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o text-aqua" : item.Icono);
-                            output += c;
+                            //url += "/" + item.Controlador + "/" + (accion == "Index" ? String.Empty : accion);
+                            //string c = string.Format(@"<li> {0} </li>", item.Nombre);
+                            //output += c;
+
+                            if (item.Accion1!=null) //La Propiedad "Accion1" Navega la relacion "Menu => Accion"
+                            {
+                                //    < ul >
+                                //        < li > Digitalizacion de documentos </ li >  
+                                //        < li > Profesionales y Matriculas </ li >    
+                                //    </ ul >
+                                string c = string.Format(@"<li data-jstree='{{""icon"":""{1}""}}'> {0}  <ul>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono);
+
+                                foreach (var Accion in item.Accion1)
+                                {
+                                    //c+= string.Format(@"<li > {0} </li>", Accion.Nombre);
+
+                                    c += string.Format(@"<li data-jstree='{{""icon"":""{1}""}}'> {0} </li>", Accion.Nombre, string.IsNullOrEmpty(Accion.Icono) ? "fa fa-circle-o" : Accion.Icono);
+                                }
+
+
+                                c += "</ul></li>";
+                                output += c;
+
+
+                            }
+                            else
+                            {
+                                string c = string.Format(@"<li data-jstree='{{""icon"":""{1}""}}'> {0} </li>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono);
+                                output += c;
+                            }
                         }
                     }
                     //return output;
@@ -135,7 +162,7 @@ namespace MSP_RegProf.Helpers
 
                     foreach (var item in menusPadres)
                     {
-                        string x = string.Format(@"<li>  {0} ", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono);
+                        string x = string.Format(@"<li data-jstree='{{""icon"":""{1}""}}'> {0} ", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono);
                         output += x;
 
                         if (menusAll.Where(r => r.PadreID == item.ID).Any())

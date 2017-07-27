@@ -12,6 +12,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
+          <Property Name="Icono" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'MSP-RegProf-Desarrollo.dbo.AspNetMenuAccion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1516,6 +1517,7 @@ warning 6002: The table/view 'MSP-RegProf-Desarrollo.dbo.AspNetMenuAccion' does 
           <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MenuAspNetRolesAccion" Relationship="MSPModel.FK_MenuAspNetRolesAccion_Accion" FromRole="Accion" ToRole="MenuAspNetRolesAccion" />
           <NavigationProperty Name="Menu" Relationship="MSPModel.AspNetMenuAccion" FromRole="Accion" ToRole="Menu" />
+          <Property Name="Icono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="MenuAspNetRoles">
           <Key>
@@ -1890,6 +1892,7 @@ warning 6002: The table/view 'MSP-RegProf-Desarrollo.dbo.AspNetMenuAccion' does 
           <EntitySetMapping Name="Accion">
             <EntityTypeMapping TypeName="MSPModel.Accion">
               <MappingFragment StoreEntitySet="Accion">
+                <ScalarProperty Name="Icono" ColumnName="Icono" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
