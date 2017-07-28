@@ -226,6 +226,7 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\App Models\AccountViewModels.cs" />
+    <Compile Include="Models\App Models\Seguridad\PermisosVM.cs" />
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>

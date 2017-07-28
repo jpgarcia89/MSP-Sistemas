@@ -104,6 +104,7 @@ namespace MSP_RegProf.Helpers
                     foreach (var item in menusPadres)
                     {
                         
+
                         if (menusAll.Where(r => r.PadreID == item.ID).Any())
                         {
                             string a = string.Format(@"<li id=""{2}"" data-jstree='{{""icon"":""{1}""}}'> {0} <ul>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono, "menu_"+item.ID);
