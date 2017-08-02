@@ -17,6 +17,7 @@ using System.Transactions;
 
 namespace MSP_RegProf.Controllers.Seguridad
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private MSPEntities db = new MSPEntities();

@@ -17,7 +17,7 @@ namespace MSP.Controllers
         {
             var datos = Context.Menu.Where(r=>r.Activo).Select(r=> new MenuVM() {
                 ID = r.ID,
-                mnuId=r.mnuId,
+                //mnuId=r.mnuId,
                 PadreID = r.PadreID,
                 Nombre=r.Nombre,
                 Accion=r.Accion,

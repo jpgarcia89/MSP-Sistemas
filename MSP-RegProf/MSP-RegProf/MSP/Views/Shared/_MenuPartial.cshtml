@@ -9,10 +9,12 @@
         if (Session["UserName"] != null)
         {
             Session["Menu"] = menuClien.GetMenu(Session["UserName"].ToString());
+            Session["Permisos"] = menuClien.GetPermisos(Session["UserName"].ToString());
         }
         else
         {
             Session["Menu"] = menuClien.GetMenu(user);
+            Session["Permisos"] = menuClien.GetPermisos(user);
         }
     }
 

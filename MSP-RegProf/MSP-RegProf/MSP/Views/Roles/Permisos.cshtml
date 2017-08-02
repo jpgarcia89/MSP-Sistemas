@@ -50,12 +50,11 @@
                 console.log(data.selected);
             });
 
-
-            
+            GetPermisosRol("@Model.idRol");            
         });
 
         //Click "Guardar"
-        $("#btnGuardar").unbind();
+        $("#btnGuardar").unbind("click");
         $("#btnGuardar").click(function () {
             //debugger
 
@@ -83,7 +82,7 @@
                         abrirWaiting();
                     },
                     success: function (result) {
-                        debugger
+                        //debugger
                         cerrarWaiting();
 
                         //if (result.ok == "true") {
@@ -102,6 +101,31 @@
             }
             return false;
         });
+
+
+        //GetPermisosRol
+        function GetPermisosRol(idRol) {
+            //debugger
+            var _url = GetPathApp("/Roles/GetPermisosRol/" + idRol);
+
+            $.ajax({
+                url: _url,
+                type: "GET",
+                //data: { "idRol": idRol },
+                beforeSend: function (xhr) {
+                    abrirWaiting();
+                },
+                success: function (result) {
+                    //debugger
+                    cerrarWaiting();
+                    $('#jstree').jstree().select_node(result)
+                    //alert(result);
+                },
+                error: function () {
+                cerrarWaiting();
+            }
+            });
+        }
     </script>
 </body>
 </html>

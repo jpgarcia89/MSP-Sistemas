@@ -10,7 +10,7 @@ using System.Data.Entity;
 
 namespace MSP_RegProf.Controllers
 {
-
+    [Authorize]
     public class DigitDocsController : Controller
     {
         private MSPEntities db = new MSPEntities();

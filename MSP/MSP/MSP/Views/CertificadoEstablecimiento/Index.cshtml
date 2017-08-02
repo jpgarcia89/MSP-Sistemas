@@ -28,7 +28,7 @@
         <!-- /.box-header -->
         <div class="box-body">
             @*<a class="btn btn-primary" href="/CertificadoEstablecimiento/Create"><i class="fa fa-plus"></i> Nuevo</a>*@
-            <button type="button" style="margin-bottom: 15px;" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/CertificadoEstablecimiento/Create', 'Agregar', 'Categoria de Establecimiento')">
+            <button type="button" style="margin-bottom: 15px;" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="abrirModal('@Url.Content("~/CertificadoEstablecimiento/Create")', 'Agregar', 'Categoria de Establecimiento')">
                 <i class="fa fa-plus"></i> Nuevo
             </button>
 
@@ -50,9 +50,9 @@
                         <tr>
                             <td>
                                 <div class="btn-group-sm">
-                                    <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/CertificadoEstablecimiento/Edit/@item.ID','Editar','Establecimiento')"></a>
-                                    <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/CertificadoEstablecimiento/Details/@item.ID','Detalle','Establecimiento')"></a>
-                                    <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/CertificadoEstablecimiento/Delete/@item.ID','Eliminar','Establecimiento')"></a>
+                                    <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('@Url.Content("~/CertificadoEstablecimiento/Edit/"+item.ID)','Editar','Establecimiento')"></a>
+                                    <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('@Url.Content("~/CertificadoEstablecimiento/Details/"+item.ID)','Detalle','Establecimiento')"></a>
+                                    <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('@Url.Content("~/CertificadoEstablecimiento/Delete/"+item.ID)','Eliminar','Establecimiento')"></a>
                                 </div>
                             </td>
                             <td>@Html.DisplayFor(modelItem => item.Denominacion)</td>

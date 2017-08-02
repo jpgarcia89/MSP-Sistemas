@@ -15,7 +15,11 @@
         
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
-
+        @Html.HiddenFor(model => model.IdUsuarioEmite)
+        @Html.HiddenFor(model => model.IdCertificadoTipo)
+        @Html.HiddenFor(model => model.FechaEmision)
+        
+        
         <div class="form-group">
             @*@Html.LabelFor(model => model.IdEstablecimiento, "IdEstablecimiento", htmlAttributes: new { @class = "control-label col-md-2" })*@
             <label class="control-label col-md-3" for="Firma">Establecimiento:</label>
@@ -79,6 +83,7 @@
 
 
         //Click "Guardar"
+        $("#btnGuardar").unbind("click");
         $("#btnGuardar").click(function () {
             //debugger
             $('#contenidoModal form').submit()

@@ -10,6 +10,7 @@ using MSP_RegProf.Models;
 
 namespace MSP_RegProf.Controllers.RegProf.Matriculas
 {
+    [Authorize]
     public class MatriculasController : Controller
     {
         private MSPEntities db = new MSPEntities();

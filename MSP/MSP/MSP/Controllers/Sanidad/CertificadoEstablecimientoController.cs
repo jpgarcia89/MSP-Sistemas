@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace MSP.Controllers.Sanidad
 {
+    [Authorize]
     public class CertificadoEstablecimientoController : Controller
     {
         private MSPEntities db = new MSPEntities();

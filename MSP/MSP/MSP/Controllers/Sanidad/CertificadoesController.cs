@@ -9,8 +9,10 @@ using System.Web.Mvc;
 using MSP.Models;
 using Microsoft.AspNet.Identity;
 
+
 namespace MSP.Controllers.Sanidad
 {
+    [Authorize]
     public class CertificadoController : Controller
     {
         private MSPEntities db = new MSPEntities();

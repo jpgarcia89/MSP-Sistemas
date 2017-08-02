@@ -29,7 +29,7 @@
         <div class="box-body">
 
             <!-- Button trigger modal -->
-            <button type="button" style="margin-bottom: 15px;" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Certificado/Create', 'Agregar', 'Certificado')">
+            <button type="button" style="margin-bottom: 15px;" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="abrirModal('@Url.Content("~/Certificado/Create")', 'Agregar', 'Certificado')">
                 <i class="fa fa-plus"></i> Nuevo
             </button>
 
@@ -52,9 +52,9 @@
                         <tr>
                             <td>
                                 <div class="btn-group-sm">
-                                    <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Certificado/Edit/@item.ID','Editar','Certificado')"></a>
-                                    <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Certificado/Details/@item.ID','Detalle','Certificado')"></a>
-                                    <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Certificado/Delete/@item.ID','Eliminar','Certificado')"></a>
+                                    <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('@Url.Content("~/Certificado/Edit/"+item.ID)','Editar','Certificado')"></a>
+                                    <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('@Url.Content("~/Certificado/Details/"+item.ID)','Detalle','Certificado')"></a>
+                                    <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('@Url.Content("~/Certificado/Delete/"+item.ID)','Eliminar','Certificado')"></a>
                                     <a class="btn btn-primary fa fa-print"  onclick="reporte(@item.ID)"></a>
                                 </div>
                             </td>

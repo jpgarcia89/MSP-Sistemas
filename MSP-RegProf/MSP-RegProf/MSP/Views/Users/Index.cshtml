@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<MSP_RegProf.Models.AspNetUsers>
+@using MSP_RegProf.Models
 
 @{
     ViewBag.Title = "Usuarios";
+
+    var Permisos = Session["Permisos"] as List<MenuAccionVM>;
 }
 
 <section class="content-header">
@@ -25,9 +28,12 @@
         <div class="box-header">
             <h3 class="box-title">Listado de Usuarios</h3>
 
-            <button type="button" style="margin-right:25px;" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Users/Create', 'Agregar', 'Usuario')">
-                <i class="fa fa-plus"></i> Nuevo
-            </button>
+            @if (Permisos.Any(r => r.menu.Nombre == "Usuarios" && r.accion.Any(x => x.Nombre == "Agregar")))
+            {
+                <button type="button" style="margin-right:25px;" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Users/Create', 'Agregar', 'Usuario')">
+                    <i class="fa fa-plus"></i> Nuevo
+                </button>
+            }
         </div>
         <div class="box-body">
             <table id="dtUsuarios" class="table table-bordered table-striped">
@@ -46,16 +52,26 @@
                         <tr>
                             <td>
                                 <div class="btn-group-sm">
-                                    <span data-placement="top" title="Editar" data-toggle="tooltip">
-                                        <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Users/Edit/@item.Id','Editar','Usuarios')"></a>
-                                    </span>
+
+                                    @if (Permisos.Any(r => r.menu.Nombre == "Usuarios" && r.accion.Any(x => x.Nombre == "Editar")))
+                                    {
+                                        <span data-placement="top" title="Editar" data-toggle="tooltip">
+                                            <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Users/Edit/@item.Id','Editar','Usuarios')"></a>
+                                        </span>
+                                    }
+
+
 
                                     <span data-placement="top" title="Detalles" data-toggle="tooltip">
                                         <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Users/Details/@item.Id','Detalle','Usuarios')"></a>
                                     </span>
-                                    <span data-placement="top" title="Eliminar" data-toggle="tooltip">
-                                        <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Users/Delete/@item.Id','Eliminar','Usuarios')"></a>
-                                    </span>
+
+                                    @if (Permisos.Any(r => r.menu.Nombre == "Usuarios" && r.accion.Any(x => x.Nombre == "Eliminar")))
+                                    {
+                                        <span data-placement="top" title="Eliminar" data-toggle="tooltip">
+                                            <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Users/Delete/@item.Id','Eliminar','Usuarios')"></a>
+                                        </span>
+                                    }
                                     <span data-placement="top" title="Restablecer Contraseña" data-toggle="tooltip">
                                         <a class="btn btn-success fa fa-refresh" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Users/ResetPassword/@item.Id','Eliminar','Usuarios')"></a>
                                     </span>

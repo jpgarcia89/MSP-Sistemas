@@ -10,6 +10,7 @@ using MSP.Models;
 
 namespace MSP.Controllers.Sanidad
 {
+    [Authorize]
     public class TipoCertificadoEstablecimientoesController : Controller
     {
         private MSPEntities db = new MSPEntities();
