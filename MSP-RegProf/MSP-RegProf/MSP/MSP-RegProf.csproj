@@ -246,6 +246,7 @@
     <Compile Include="Models\Departamento.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EF Extended Models\AspNetRolesVM.cs" />
     <Compile Include="Models\GetPermisosPorNombreDeUsuario_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -1944,6 +1945,7 @@
     <Content Include="Views\Roles\Edit.cshtml" />
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\Permisos.cshtml" />
+    <Content Include="Views\Users\SetRoles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

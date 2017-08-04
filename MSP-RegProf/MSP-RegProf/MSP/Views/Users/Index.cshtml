@@ -39,7 +39,7 @@
             <table id="dtUsuarios" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th style="width:140px">Acciones</th>
+                        <th style="width:190px">Acciones</th>
                         <th>Nombre de Usuario</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
@@ -60,20 +60,20 @@
                                         </span>
                                     }
 
-
-
                                     <span data-placement="top" title="Detalles" data-toggle="tooltip">
                                         <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Users/Details/@item.Id','Detalle','Usuarios')"></a>
                                     </span>
 
-                                    @if (Permisos.Any(r => r.menu.Nombre == "Usuarios" && r.accion.Any(x => x.Nombre == "Eliminar")))
-                                    {
-                                        <span data-placement="top" title="Eliminar" data-toggle="tooltip">
-                                            <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Users/Delete/@item.Id','Eliminar','Usuarios')"></a>
-                                        </span>
-                                    }
+                                    <span data-placement="top" title="Eliminar" data-toggle="tooltip">
+                                        <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Users/Delete/@item.Id','Eliminar','Usuarios')"></a>
+                                    </span>
+
                                     <span data-placement="top" title="Restablecer Contraseña" data-toggle="tooltip">
-                                        <a class="btn btn-success fa fa-refresh" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Users/ResetPassword/@item.Id','Eliminar','Usuarios')"></a>
+                                        <a class="btn btn-success fa fa-unlock-alt" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Users/ResetPassword/@item.Id','Eliminar','Usuarios')"></a>
+                                    </span>
+
+                                    <span data-placement="top" title="Asignar roles" data-toggle="tooltip">
+                                        <a class="btn btn-success fa fa-users" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Users/SetRoles/@item.Id','Asignar','Roles')"></a>
                                     </span>
                                 </div>
                             </td>

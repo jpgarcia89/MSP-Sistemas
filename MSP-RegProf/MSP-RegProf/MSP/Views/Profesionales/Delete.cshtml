@@ -15,6 +15,12 @@
     }
 </style>
 
+<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <h4><i class="icon fa fa-ban"></i> Atencion!</h4>
+    ¿Esta seguro que desea eliminar este elemento?
+</div>
+
 
 <div class="form-horizontal">
     <div class="container">
@@ -281,6 +287,7 @@
 
 
         //Click "Guardar"
+        $("#btnGuardar").unbind("click");
         $("#btnGuardar").click(function () {
             debugger
             $('#contenidoModal form').submit()
