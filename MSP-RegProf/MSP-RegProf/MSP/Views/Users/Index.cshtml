@@ -39,17 +39,21 @@
             <table id="dtUsuarios" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th style="width:190px">Acciones</th>
                         <th>Nombre de Usuario</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Email</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr>
+                            <td>@Html.DisplayFor(modelItem => item.UserName)</td>
+                            <td>@item.FirstName</td>
+                            <td>@item.LastName</td>
+                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
                             <td>
                                 <div class="btn-group-sm">
 
@@ -77,10 +81,6 @@
                                     </span>
                                 </div>
                             </td>
-                            <td>@Html.DisplayFor(modelItem => item.UserName)</td>
-                            <td>@item.FirstName</td>
-                            <td>@item.LastName</td>
-                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
                         </tr>
                     }
                 </tbody>
@@ -93,7 +93,8 @@
     $(function () {
         if (!$.fn.dataTable.isDataTable('#dtUsuarios')) {
             $('#dtUsuarios').DataTable({
-                "language": DataTableEsp()
+                "language": DataTableEsp(),
+                responsive: true
             });
         }
     });

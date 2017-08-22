@@ -47,9 +47,6 @@
                 <table id="dtCertificados" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th class="text-center" style="width:120px;">
-                                Acciones
-                            </th>
                             <th class="text-center">
                                 Denominacion
                             </th>
@@ -62,20 +59,15 @@
                             <th class="text-center">
                                 Folio
                             </th>
+                            <th class="text-center">
+                                Acciones
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var Matricula in Model.Matricula)
                 {
                             <tr>
-                                <td>
-                                    <div class="btn-group-sm text-center">
-                                        <a class="btn btn-default fa fa-upload" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DigitDocs/SubirDocs/@Model.ID/@Matricula.ID','Cargar','Documentos')"></a>
-                                        <a class="btn btn-primary fa fa-eye" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DigitDocs/VerDocs/@Model.ID/@Matricula.ID','Detalle','Documentos')"></a>
-                                        @*<a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DigitDocs/Delete/@item.titId','Eliminar','Certificado')"></a>
-                                            <a class="btn btn-primary fa fa-print" onclick="reporte(@item.titId)"></a>*@
-                                    </div>
-                                </td>
                                 <td class="text-center">
                                     @Html.DisplayFor(modelItem => Matricula.Titulo.Descripcion)
                                 </td>
@@ -87,6 +79,14 @@
                                 </td>
                                 <td class="text-center">
                                     @Html.DisplayFor(modelItem => Matricula.Folio)
+                                </td>
+                                <td>
+                                    <div class="btn-group-sm text-center">
+                                        <a class="btn btn-default fa fa-upload" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DigitDocs/SubirDocs/@Model.ID/@Matricula.ID','Cargar','Documentos')"></a>
+                                        <a class="btn btn-primary fa fa-eye" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DigitDocs/VerDocs/@Model.ID/@Matricula.ID','Detalle','Documentos')"></a>
+                                        @*<a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DigitDocs/Delete/@item.titId','Eliminar','Certificado')"></a>
+                                            <a class="btn btn-primary fa fa-print" onclick="reporte(@item.titId)"></a>*@
+                                    </div>
                                 </td>
                             </tr>
                         }
