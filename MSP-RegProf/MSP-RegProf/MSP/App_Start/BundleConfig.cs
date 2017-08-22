@@ -40,6 +40,7 @@ namespace MSP_RegProf
                       "~/Content/jquery-ui.min.css",
                       "~/Scripts/plugins/datatables/dataTables.bootstrap.css",
                       "~/Scripts/plugins/datatables/jquery.dataTables.css",
+                      "~/Scripts/plugins/datatables/dataTables.responsive.css",                      
                       "~/Scripts/plugins/pace/pace.min.css"
                       ));
 
@@ -53,6 +54,7 @@ namespace MSP_RegProf
                       "~/Scripts/jquery-ui.min.js",
                       "~/Scripts/jquery-ui-datepicker-locale-es.js",
                       "~/Scripts/plugins/datatables/jquery.dataTables.js",
+                      "~/Scripts/plugins/datatables/dataTables.responsive.min.js",
                       "~/Scripts/plugins/datatables/dataTables.bootstrap.js",
                       "~/Scripts/Reportes.js",
                       "~/Scripts/plugins/pace/pace.min.js"
