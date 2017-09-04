@@ -29,24 +29,33 @@ namespace WebAPI.Controllers.AppControllers
             double m = 0;
             double s = 0;
 
-
-            if (!string.IsNullOrEmpty(degrees))
+            try
             {
-                degrees = degrees.Trim();
+                if (!string.IsNullOrEmpty(degrees))
+                {
+                    degrees = degrees.Trim();
 
-                d = Double.Parse(degrees.Split('°')[0]);
-                string aux = degrees.Split('°')[1];
+                    d = Double.Parse(degrees.Split('°')[0]);
+                    string aux = degrees.Split('°')[1];
 
-               
-                m = Double.Parse(aux.Split('\'')[0]);
-                aux = aux.Split('\'')[1];
 
-                s = Double.Parse(aux.Split('\"')[0].Replace('.',','));
-                aux = aux.Split('\"')[1];
+                    m = Double.Parse(aux.Split('\'')[0]);
+                    aux = aux.Split('\'')[1];
+
+                    s = Double.Parse(aux.Split('\"')[0].Replace('.', ','));
+                    aux = aux.Split('\"')[1];
+                }
+
+                return Convert.ToDecimal(-1 * (d + (m / 60) + (s / 3600)) * (d < 0 ?
+                    -1 : 1));
+            }
+            catch (Exception e)
+            {
+
+                throw e;
             }
 
-            return Convert.ToDecimal(-1 * (d + (m / 60) + (s / 3600)) * (d < 0 ?
-                -1 : 1));
+            
         }
 
         // GET: api/CentroDeSalud
@@ -54,20 +63,29 @@ namespace WebAPI.Controllers.AppControllers
         {
             var data = db.CentroDeSalud.ToList();
 
+            try
+            {
+                var cs = data.Select(r => new {
+                    ID = r.ID,
+                    Nombre = r.Nombre.Trim(),
+                    Latitud = DmsToDD(r.Latitud),//-31.405809929952255,
+                    Longitud = DmsToDD(r.Longitud),//-68.49254608154297,
+                    Telefono = r.Telefono.Trim(),//"*sin dato*",
+                    Direccion = r.Direccion.Trim(),//"La Laja 3850. Las Lomitas.",
+                    DepartamentoID = r.Localidad.DepartamentoID,//442,
+                    LocalidadID = r.LocalidadID,
+                    URLImagenDelCentroDeSalud = r.URLImagenDelCentroDeSalud.Trim()//"http://cdn.memegenerator.es/imagenes/memes/full/4/25/4252823.jpg"
+                }).ToList();
 
-            var cs = data.Select(r => new {
-                ID = r.ID,
-                Nombre = r.Nombre.Trim(),
-                Latitud = DmsToDD(r.Latitud),//-31.405809929952255,
-                Longitud = DmsToDD(r.Longitud),//-68.49254608154297,
-                Telefono = r.Telefono.Trim(),//"*sin dato*",
-                Direccion = r.Direccion.Trim(),//"La Laja 3850. Las Lomitas.",
-                DepartamentoID = r.Localidad.DepartamentoID,//442,
-                LocalidadID = r.LocalidadID,
-                URLImagenDelCentroDeSalud = r.URLImagenDelCentroDeSalud.Trim()//"http://cdn.memegenerator.es/imagenes/memes/full/4/25/4252823.jpg"
-            }).ToList();
+                return Json(cs);
+            }
+            catch (Exception e)
+            {
 
-            return   Json(cs);
+                throw e;
+            }
+
+            
         }
 
         // GET: api/CentroDeSalud/5
@@ -193,27 +211,30 @@ namespace WebAPI.Controllers.AppControllers
             return Json(LineasColectivos);
         }
 
+
         // GET: api/CentroDeSalud/5/EspecialidadesYHorarios
-        //[ResponseType(typeof(CentroDeSalud))]
-        [Route("Noticias")]
-        public async Task<string> GetNoticia()
+        [Route("Departamento/{id}")]
+        [ResponseType(typeof(CentroDeSalud))]
+        public IHttpActionResult GetCentroDeSaludPorDepartamento(short id)
         {
-            var client = new HttpClient();
-            //var content = new StringContent(JsonConvert.SerializeObject(new Product { query = encryptingIT, empImg = false }));
-            //content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var response = await client.GetAsync("http://sanjuan.gov.ar/gen/gobierno/app/noticias/salud/c/index.json");//, content
+            var data = db.CentroDeSalud.Where(r=>r.Localidad.DepartamentoID == id).ToList();
+                        
+            var cs = data.Select(r => new {
+                ID = r.ID,
+                Nombre = r.Nombre.Trim(),
+                Latitud = DmsToDD(r.Latitud),//-31.405809929952255,
+                Longitud = DmsToDD(r.Longitud),//-68.49254608154297,
+                Telefono = r.Telefono.Trim(),//"*sin dato*",
+                Direccion = r.Direccion.Trim(),//"La Laja 3850. Las Lomitas.",
+                DepartamentoID = r.Localidad.DepartamentoID,//442,
+                LocalidadID = r.LocalidadID,
+                URLImagenDelCentroDeSalud = r.URLImagenDelCentroDeSalud.Trim()//"http://cdn.memegenerator.es/imagenes/memes/full/4/25/4252823.jpg"
+            }).ToList();
 
-            var value = await response.Content.ReadAsStringAsync();
-
-            value = "[" + value + "]";
-
-            
-            var list = JsonConvert.DeserializeObject<List<object>>(value);
-
-
-
-            return value;
+            return Json(cs);
         }
+
+
 
 
         //// PUT: api/CentroDeSalud/5

@@ -24,7 +24,7 @@ namespace WebAPI.Controllers.AppControllers
                 ID = r.ID,
                 Nombre = r.Nombre,
                 Zona = r.Zona
-            });
+            }).OrderBy(r=>r.Zona);
 
 
             return Json(data);

@@ -34,7 +34,7 @@ namespace MSP_RegProf
                       "~/Content/ionicons.min.css",         //Ionicons
                       "~/Content/AdminLTE.min.css",         //Theme style
                       "~/Scripts/plugins/select2/select2.min.css",         //Select2
-                      "~/Scripts/plugins/select2/select2-bootstrap.css",
+                      //"~/Scripts/plugins/select2/select2-bootstrap.css",
                       "~/Content/skin-blue.css",//AdminLTE Skins
                       "~/Content/jquery.alerts.css",//jQuery Alerts css 
                       "~/Content/jquery-ui.min.css",

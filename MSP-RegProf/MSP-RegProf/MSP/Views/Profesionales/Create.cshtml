@@ -58,7 +58,7 @@
                         <div class="form-group row">
                             <label class="control-label col-md-4" for="TipodniID">Tipo DNI:</label>
                             <div class="col-md-7">
-                                @Html.DropDownList("TipodniID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("TipodniID", null, htmlAttributes: new { @class = "form-control select2Control" })
                                 @Html.ValidationMessageFor(model => model.TipodniID, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                         <div class="form-group row">
                             <label class="control-label col-md-3" for="EstadoCivilID">Estado Civil:</label>
                             <div class="col-md-8">
-                                @Html.DropDownList("EstadoCivilID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("EstadoCivilID", null, htmlAttributes: new { @class = "form-control select2Control" })
                                 @Html.ValidationMessageFor(model => model.EstadoCivilID, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -101,7 +101,7 @@
                         <div class="form-group row">
                             <label class="control-label col-md-3" for="SexoID">Sexo:</label>
                             <div class="col-md-8">
-                                @Html.DropDownList("SexoID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("SexoID", null, htmlAttributes: new { @class = "form-control select2Control" })
                                 @Html.ValidationMessageFor(model => model.SexoID, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -114,7 +114,7 @@
                         <div class="form-group row">
                             <label class="control-label col-md-3" for="NacionalidadID">Nacionalidad:</label>
                             <div class="col-md-8">
-                                @Html.DropDownList("NacionalidadID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("NacionalidadID", null, htmlAttributes: new { @class = "form-control select2Control" })
                                 @Html.ValidationMessageFor(model => model.NacionalidadID, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -211,11 +211,11 @@
                         <div class="form-group row">
                             <label class="control-label col-md-3" for="LocalidadID">Localidad:</label>
                             <div class="col-md-8">
-                                @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control select2Control" })
                                 @Html.ValidationMessageFor(model => model.LocalidadID, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </div>
+                    </div> 
 
                     <div class="col-md-6">
                         <div class="form-group row">
@@ -304,6 +304,13 @@
 }
 
 <script>
+
+    $(document).ready(function () {        
+        $(".select2Control").select2();
+            
+    });
+
+
     //Click "Guardar"
     $("#btnGuardar").unbind("click");
     $("#btnGuardar").click(function () {

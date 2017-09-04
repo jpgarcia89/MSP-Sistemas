@@ -1841,8 +1841,8 @@
     <Content Include="Scripts\plugins\select2\i18n\vi.js" />
     <Content Include="Scripts\plugins\select2\i18n\zh-CN.js" />
     <Content Include="Scripts\plugins\select2\i18n\zh-TW.js" />
-    <Content Include="Scripts\plugins\select2\select2-bootstrap.css" />
     <Content Include="Scripts\plugins\select2\select2.css" />
+    <Content Include="Scripts\plugins\select2\OLD.select2.css" />
     <Content Include="Scripts\plugins\select2\select2.full.js" />
     <Content Include="Scripts\plugins\select2\select2.full.min.js" />
     <Content Include="Scripts\plugins\select2\select2.js" />
