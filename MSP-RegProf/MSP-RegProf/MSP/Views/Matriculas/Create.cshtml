@@ -16,7 +16,7 @@
 </style>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Matriculas",FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -36,7 +36,7 @@
                     <div class="form-group row">
                         <label class="control-label col-md-3 col-md-offset-1" for="Titulo">Titulo:</label>
                         <div class="col-md-8">
-                            @Html.DropDownList("TituloID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownList("TituloID", null, htmlAttributes: new { @class = "form-control select2Control", @style = "width:100%" })
                             @Html.ValidationMessageFor(model => model.TituloID, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                     <div class="form-group row">
                         <label class="control-label col-md-4" for="Organismo">Organismo:</label>
                         <div class="col-md-8">
-                            @Html.DropDownList("OrganismoID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownList("OrganismoID", null, htmlAttributes: new { @class = "form-control select2Control" })
                             @Html.ValidationMessageFor(model => model.OrganismoID, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                     <div class="form-group row">
                         <label class="control-label col-md-4" for="NroDocumento">Fecha Diploma:</label>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.FechaDiploma, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.FechaDiploma, new { htmlAttributes = new { @class = "form-control datepicker" } })
                             @Html.ValidationMessageFor(model => model.FechaDiploma, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -147,7 +147,7 @@
                     <div class="form-group row">
                         <label class="control-label col-md-4" for="TipoEstadoMatriculaID">Estado Matricula:</label>
                         <div class="col-md-8">
-                            @Html.DropDownList("TipoEstadoMatriculaID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownList("TipoEstadoMatriculaID", null, htmlAttributes: new { @class = "form-control select2Control" })
                             @Html.ValidationMessageFor(model => model.TipoEstadoMatriculaID, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -188,8 +188,8 @@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.FechaRetiro, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.FechaRetiro, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.FechaRetiro, new { htmlAttributes = new { @class = "form-control datepicker" } })
                     @Html.ValidationMessageFor(model => model.FechaRetiro, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -203,6 +203,27 @@
 }
 
 <script>
+    $(document).ready(function () {
+        $(".select2Control").select2({
+            width: 'element',
+        });
+
+        $(".select2-selection, .select2-selection--single").removeClass('select2-selection--single').addClass('form-control');
+
+
+
+        $('.datepicker').datepicker({
+            format: "dd/mm/yyyy",
+            language: "es",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "1930:+0"
+        });
+
+
+    });
+
+
     //Click "Guardar"
     $("#btnGuardar").unbind("click");
     $("#btnGuardar").click(function () {
@@ -225,7 +246,7 @@
                     //debugger
                     cerrarWaiting();
                     if (result.ok) {
-                        $('#contenProfesionales').html(result.data);
+                        window.location.href = window.location.href;
                         cerrarModal();
                         return;
                     }

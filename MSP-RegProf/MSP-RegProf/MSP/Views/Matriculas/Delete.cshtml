@@ -3,178 +3,238 @@
 @{
     Layout = null;
 }
+
+<style>
+    legend {
+        border-bottom: 1px solid #3c8dbc;
+    }
+</style>
+
+
+
 <div class="alert alert-danger alert-dismissible">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
     <h4><i class="icon fa fa-ban"></i> Atencion!</h4>
     ¿Esta seguro que desea eliminar este elemento?
 </div>
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Delete</title>
-</head>
-<body>
-    <h3>Are you sure you want to delete this?</h3>
-    <div>
-        <h4>Matricula</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Revalido)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Revalido)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.FechaDiploma)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.FechaDiploma)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.ObservacionDiploma)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.ObservacionDiploma)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.FechaInscripcion)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.FechaInscripcion)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.NroMatricula)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.NroMatricula)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Folio)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Folio)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.libro)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.libro)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.FechaActualizacion)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.FechaActualizacion)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Habilitada)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Habilitada)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Retirado)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Retirado)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.FechaRetiro)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.FechaRetiro)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.ObservacionMatricula)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.ObservacionMatricula)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.TieneAnalitico)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TieneAnalitico)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.TieneTitulo)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TieneTitulo)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Organismo.Descripcion)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Organismo.Descripcion)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Persona.Apellido)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Persona.Apellido)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.TipoEstadoMatricula.Descripcion)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TipoEstadoMatricula.Descripcion)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Titulo.Descripcion)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Titulo.Descripcion)
-            </dd>
-    
-        </dl>
-    
-        @using (Html.BeginForm()) {
-            @Html.AntiForgeryToken()
-    
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "Index")
+<div>
+
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <!-- Grupo - Datos Titulos -->
+        <fieldset id="fsDatosTitulos">
+            <legend>Datos Titulos:</legend>
+
+
+            <!-- Fila 1 - Titulo y Organismo -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label col-md-3 col-md-offset-1" for="Titulo">Titulo:</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Titulo.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label col-md-4" for="Organismo">Organismo:</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Organismo.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!-- Fila 2 - Revalido y Fecha Diploma -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label col-md-3 col-md-offset-1" for="Revalido">Revalido:</label>
+                        <div class="checkbox col-md-offset-1 col-md-4">
+                            @Html.CheckBox("Revalido", Model.Revalido ?? false)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label class="control-label col-md-4" for="NroDocumento">Fecha Diploma:</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.FechaDiploma, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Fila 3 - Observacion Diploma -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group row">
+                        <label class="control-label col-md-3" for="ObservacionDiploma">Observacion Diploma:</label>
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(model => model.ObservacionDiploma, new { @rows = "3", @style = "width: 100%;" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+
+
+        <!-- Grupo - Datos Matricula -->
+        <fieldset id="fsDatosMatricula">
+            <legend>Datos Matricula:</legend>
+
+            <!-- Fila 1 - Nro Matricula, Folio y Libro -->
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group row">
+                        <label class="control-label col-md-6" for="NroMatricula">Nro Matricula:</label>
+                        <div class="col-md-5">
+                            @Html.EditorFor(model => model.NroMatricula, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group row">
+                        <label class="control-label col-md-4" for="Folio">Folio:</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Folio, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group row">
+                        <label class="control-label col-md-4" for="libro">Libro:</label>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.libro, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fila 2 - Nro Matricula, Folio y Libro -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group row">
+                        <label class="control-label col-md-6 col-md-offset-1" for="Habilitada">Habilitada:</label>
+                        <div class="col-md-3 col-md-offset-1 checkbox">
+                            @Html.EditorFor(model => model.Habilitada)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="form-group row">
+                        <label class="control-label col-md-4" for="TipoEstadoMatriculaID">Estado Matricula:</label>
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.TipoEstadoMatricula.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Fila 3 - Observacion Matricula -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group row">
+                        <label class="control-label col-md-3" for="ObservacionDiploma">Observacion Matricula:</label>
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(model => model.ObservacionMatricula, new { @rows = "3", @style = "width: 100%;" })
+                            @Html.ValidationMessageFor(model => model.ObservacionMatricula, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+
+
+        <!-- Grupo - Datos Retiro -->
+        <fieldset id="fsDatosRetiro">
+            <legend>Datos Retiro:</legend>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Retirado, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Retirado)
+                        @Html.ValidationMessageFor(model => model.Retirado, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FechaRetiro, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.FechaRetiro, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                    @Html.ValidationMessageFor(model => model.FechaRetiro, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </fieldset>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
         }
     </div>
-</body>
-</html>
+
+
+
+
+</div>
+
+<script>
+    $("input,textarea").prop('disabled', true);
+
+
+    //Click "Guardar"
+    $("#btnGuardar").unbind("click");
+    $("#btnGuardar").click(function () {
+        //debugger
+        $('#contenidoModal form').submit()
+    });
+
+    //Submit
+    $('form').submit(function () {
+        debugger
+        if ($(this).valid()) {
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                beforeSend: function (xhr) {
+                    abrirWaiting();
+                },
+                success: function (result) {
+                    //debugger
+                    cerrarWaiting();
+                    if (result.ok) {
+                        window.location.href = window.location.href;
+                        cerrarModal();
+                        return;
+                    }
+                    $('#contenidoModal').html(result);
+                },
+                error: function () {
+                    cerrarWaiting();
+                }
+            });
+        }
+        return false;
+    });
+</script>
+

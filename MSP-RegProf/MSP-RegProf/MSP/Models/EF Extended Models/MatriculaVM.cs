@@ -23,27 +23,60 @@ namespace MSP_RegProf.Models
             set { Revalido = value; }
         }
 
+        [Required(ErrorMessage = "El campo {0} es requerido.")]
+        public int PersonaID { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es requerido.")]
+        public int OrganismoID { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es requerido.")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public Nullable<System.DateTime> FechaDiploma { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es requerido.")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public Nullable<System.DateTime> FechaInscripcion { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es requerido.")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public Nullable<System.DateTime> FechaActualizacion { get; set; }
 
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public Nullable<System.DateTime> FechaRetiro { get; set; }
+
+
+        [Required(ErrorMessage = "El campo {0} es requerido.")]
+        public int NroMatricula { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es requerido.")]
+        public string Folio { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es requerido.")]
+        public string libro { get; set; }
+
+        
+        
+        
+        
+        
         /// <summary>
         /// Sin Validar
         /// </summary>
         public int ID { get; set; }
-        public int PersonaID { get; set; }
-        public int TituloID { get; set; }
-        public int OrganismoID { get; set; }
         
-        public Nullable<System.DateTime> FechaDiploma { get; set; }
+        public int TituloID { get; set; }
+        
+        
+        
         public string ObservacionDiploma { get; set; }
-        public Nullable<System.DateTime> FechaInscripcion { get; set; }
-        public int NroMatricula { get; set; }
-        public string Folio { get; set; }
-        public string libro { get; set; }
-        public Nullable<System.DateTime> FechaActualizacion { get; set; }
+        
+        
         public bool Habilitada { get; set; }
         public byte TipoEstadoMatriculaID { get; set; }
         public bool Retirado { get; set; }
-        public Nullable<System.DateTime> FechaRetiro { get; set; }
+
+        
         public string ObservacionMatricula { get; set; }
         public bool TieneAnalitico { get; set; }
         public bool TieneTitulo { get; set; }

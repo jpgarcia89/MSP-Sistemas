@@ -64,7 +64,7 @@
                         <thead>
                             <tr>
                                 <th class="text-center" style="width:120px;">
-                                    Acciones
+                                    Documentos
                                 </th>
                                 <th class="text-center">
                                     Denominacion
@@ -78,18 +78,32 @@
                                 <th class="text-center">
                                     Folio
                                 </th>
+                                <th class="text-center" style="width:200px;">
+                                    Acciones
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var Matricula in Matriculas)
-                {
+                            {
                                 <tr>
                                     <td>
                                         <div class="btn-group-sm text-center">
-                                            <a class="btn btn-default fa fa-upload" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DigitDocs/SubirDocs/@Profesional.ID/@Matricula.ID','Cargar','Documentos')"></a>
-                                            <a class="btn btn-primary fa fa-eye" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DigitDocs/VerDocs/@Profesional.ID/@Matricula.ID','Detalle','Documentos')"></a>
-                                            @*<a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DigitDocs/Delete/@item.titId','Eliminar','Certificado')"></a>
+                                            <!-- btn-uploadFile -->
+                                            <span data-placement="top" title="Subir Docs" data-toggle="tooltip">
+                                                <a class="btn btn-default fa fa-upload" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DigitDocs/SubirDocs/@Profesional.ID/@Matricula.ID','Cargar','Documentos')"></a>
+                                            </span>
+
+                                            <!-- btn-ViewFile -->
+                                            <span data-placement="top" title="Ver Docs" data-toggle="tooltip">
+                                                <a class="btn btn-primary fa fa-eye" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DigitDocs/VerDocs/@Profesional.ID/@Matricula.ID','Detalle','Documentos')"></a>
+                                            </span>
+                                            
+                                                @*<a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/DigitDocs/Delete/@item.titId','Eliminar','Certificado')"></a>
                                                 <a class="btn btn-primary fa fa-print" onclick="reporte(@item.titId)"></a>*@
+
+                                            
+
                                         </div>
                                     </td>
                                     <td class="text-center">
@@ -103,6 +117,22 @@
                                     </td>
                                     <td class="text-center">
                                         @Html.DisplayFor(modelItem => Matricula.Folio)
+                                    </td>
+                                    <td class="text-center">
+                                        <!-- btn-Edit -->
+                                        <span data-placement="top" title="Editar" data-toggle="tooltip">
+                                            <a class="btn btn-info fa fa-pencil-square-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Matriculas/Edit/@Matricula.ID','Editar','Profesionales')"></a>
+                                        </span>
+
+                                        <!-- btn-Details -->
+                                        <span data-placement="top" title="Detalles" data-toggle="tooltip">
+                                            <a class="btn btn-default fa fa-file-text-o" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Matriculas/Details/@Matricula.ID','Detalle','Profesionales')"></a>
+                                        </span>
+
+                                        <!-- btn-Delete -->
+                                        <span data-placement="top" title="Eliminar" data-toggle="tooltip">
+                                            <a class="btn btn-danger fa fa-trash" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Matriculas/Delete/@Matricula.ID','Eliminar','Profesionales')"></a>
+                                        </span>
                                     </td>
                                 </tr>
                             }

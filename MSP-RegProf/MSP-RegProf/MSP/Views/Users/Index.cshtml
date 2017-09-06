@@ -7,6 +7,14 @@
     var Permisos = Session["Permisos"] as List<MenuAccionVM>;
 }
 
+<style>
+    .btn-roles {
+    color: white;
+    background-color: #0027d6;
+    border-color: #05008d;
+}
+</style>
+
 <section class="content-header">
     <h1>
         Usuarios
@@ -77,7 +85,7 @@
                                     </span>
 
                                     <span data-placement="top" title="Asignar roles" data-toggle="tooltip">
-                                        <a class="btn btn-success fa fa-users" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Users/SetRoles/@item.Id','Asignar','Roles')"></a>
+                                        <a class="btn btn-roles fa fa-users" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/Users/SetRoles/@item.Id','Asignar','Roles')"></a>
                                     </span>
                                 </div>
                             </td>

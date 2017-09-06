@@ -49,6 +49,7 @@ namespace MSP_RegProf.Controllers.RegProf.Matriculas
 
         // GET: Matriculas/Create/5
         [Route("Matriculas/Create/{profId}")]
+        [HttpGet]
         public ActionResult Create(int profId)
         {
             ViewBag.OrganismoID = new SelectList(db.Organismo, "ID", "Descripcion");
@@ -65,13 +66,29 @@ namespace MSP_RegProf.Controllers.RegProf.Matriculas
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,PersonaID,TituloID,OrganismoID,Revalido,FechaDiploma,ObservacionDiploma,FechaInscripcion,NroMatricula,Folio,libro,FechaActualizacion,Habilitada,TipoEstadoMatriculaID,Retirado,FechaRetiro,ObservacionMatricula,TieneAnalitico,TieneTitulo")] Matricula matricula)
+        [Route("Matriculas/Create")]//int profId,
+        public ActionResult Create( Matricula matricula)//[Bind(Include = "ID,PersonaID,TituloID,OrganismoID,Revalido,FechaDiploma,ObservacionDiploma,FechaInscripcion,NroMatricula,Folio,libro,FechaActualizacion,Habilitada,TipoEstadoMatriculaID,Retirado,FechaRetiro,ObservacionMatricula,TieneAnalitico,TieneTitulo")]
         {
+
+            matricula.FechaInscripcion = DateTime.Today;
+            matricula.FechaActualizacion = DateTime.Today;
+            //UpdateModel(matricula);
+            ModelState["FechaInscripcion"].Errors.Clear();
+            ModelState["FechaActualizacion"].Errors.Clear();
+
             if (ModelState.IsValid)
             {
                 db.Matricula.Add(matricula);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                return Json(new
+                {
+                    ok = 1,
+                    mensaje = ""
+                });
+
+
+                //return RedirectToAction("Index",new { profId=matricula.PersonaID });
             }
 
             ViewBag.OrganismoID = new SelectList(db.Organismo, "ID", "Descripcion", matricula.OrganismoID);
@@ -107,11 +124,19 @@ namespace MSP_RegProf.Controllers.RegProf.Matriculas
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,PersonaID,TituloID,OrganismoID,Revalido,FechaDiploma,ObservacionDiploma,FechaInscripcion,NroMatricula,Folio,libro,FechaActualizacion,Habilitada,TipoEstadoMatriculaID,Retirado,FechaRetiro,ObservacionMatricula,TieneAnalitico,TieneTitulo")] Matricula matricula)
         {
+
+            matricula.FechaActualizacion = DateTime.Today;
+
             if (ModelState.IsValid)
             {
                 db.Entry(matricula).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                return Json(new
+                {
+                    ok = 1,
+                    mensaje = ""
+                });
             }
             ViewBag.OrganismoID = new SelectList(db.Organismo, "ID", "Descripcion", matricula.OrganismoID);
             ViewBag.PersonaID = new SelectList(db.Persona, "ID", "Apellido", matricula.PersonaID);
@@ -137,13 +162,17 @@ namespace MSP_RegProf.Controllers.RegProf.Matriculas
 
         // POST: Matriculas/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Matricula matricula = db.Matricula.Find(id);
             db.Matricula.Remove(matricula);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new
+            {
+                ok = 1,
+                mensaje = ""
+            });
         }
 
         protected override void Dispose(bool disposing)

@@ -155,7 +155,7 @@ namespace MSP_RegProf.Controllers
 
                         return new FileContentResult(fileContents, mimeType);
                     }
-                    break;
+                    //break;
 
                 case "docAnalitico":
                     {
@@ -165,11 +165,11 @@ namespace MSP_RegProf.Controllers
 
                         return new FileContentResult(fileContents, mimeType);
                     }
-                    break;
+                    //break
 
                 default:
                     return null;
-                    break;
+                    //break;
             }
 
 

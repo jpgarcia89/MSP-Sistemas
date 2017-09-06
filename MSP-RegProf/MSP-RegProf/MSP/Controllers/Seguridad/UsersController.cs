@@ -336,10 +336,7 @@ namespace MSP_RegProf.Controllers.Seguridad
                 //throw ex;
             }
 
-
-
-
-            return View();
+            
         }
     }
 }
