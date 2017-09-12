@@ -12,14 +12,10 @@ namespace WebAPI.Models.Entity_Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Localidad
+    public partial class RegistroActualizacionTablas
     {
         public int ID { get; set; }
-        public string Nombre { get; set; }
-        public short DepartamentoID { get; set; }
-        public bool Activa { get; set; }
-        public string id_access { get; set; }
-    
-        public virtual Departamento Departamento { get; set; }
+        public string NombreTabla { get; set; }
+        public System.DateTime FechaUltimaActualizacion { get; set; }
     }
 }

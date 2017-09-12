@@ -12,19 +12,25 @@ namespace WebAPI.Models.Entity_Model
     using System;
     using System.Collections.Generic;
     
-    public partial class TipoSexo
+    public partial class Provincia
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TipoSexo()
+        public Provincia()
         {
-            this.Persona = new HashSet<Persona>();
+            this.Departamento = new HashSet<Departamento>();
+            this.Organismo = new HashSet<Organismo>();
         }
     
         public byte ID { get; set; }
         public string Nombre { get; set; }
+        public Nullable<int> PaisID { get; set; }
         public bool Activa { get; set; }
+        public Nullable<int> id_access { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Persona> Persona { get; set; }
+        public virtual ICollection<Departamento> Departamento { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Organismo> Organismo { get; set; }
+        public virtual Pais Pais { get; set; }
     }
 }

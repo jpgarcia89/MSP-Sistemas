@@ -33,7 +33,7 @@ namespace WebAPI.Models.Entity_Model
         public bool Activo { get; set; }
         public System.DateTime FechaUltimaActualizacion { get; set; }
     
-        public virtual Localidad Localidad { get; set; }
+        public virtual LocalidadBackUp LocalidadBackUp { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EspecialidadPorCentroDeSalud> EspecialidadPorCentroDeSalud { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

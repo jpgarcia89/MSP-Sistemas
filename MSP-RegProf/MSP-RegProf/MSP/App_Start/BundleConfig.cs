@@ -71,7 +71,7 @@ namespace MSP_RegProf
                 "~/Content/plugins/iCheck/icheck.min.js",
                 "~/Scripts/bootstrap.min.js"));
 
-            BundleTable.EnableOptimizations = false;
+            //BundleTable.EnableOptimizations = false;
         }
     }
 }

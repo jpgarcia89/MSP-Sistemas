@@ -12,19 +12,27 @@ namespace WebAPI.Models.Entity_Model
     using System;
     using System.Collections.Generic;
     
-    public partial class TipoSexo
+    public partial class Menu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TipoSexo()
+        public Menu()
         {
-            this.Persona = new HashSet<Persona>();
+            this.Menu1 = new HashSet<Menu>();
         }
     
-        public byte ID { get; set; }
+        public int ID { get; set; }
+        public Nullable<int> PadreID { get; set; }
         public string Nombre { get; set; }
-        public bool Activa { get; set; }
+        public Nullable<byte> Orden { get; set; }
+        public string Icono { get; set; }
+        public string Accion { get; set; }
+        public string Controlador { get; set; }
+        public bool Activo { get; set; }
+        public System.DateTime FechaAlta { get; set; }
+        public Nullable<int> mnuId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Persona> Persona { get; set; }
+        public virtual ICollection<Menu> Menu1 { get; set; }
+        public virtual Menu Menu2 { get; set; }
     }
 }

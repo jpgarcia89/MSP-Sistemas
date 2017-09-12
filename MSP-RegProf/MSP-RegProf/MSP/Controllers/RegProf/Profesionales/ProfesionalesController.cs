@@ -19,8 +19,9 @@ namespace MSP_RegProf.Controllers
         // GET: Profesionales
         public ActionResult Index()
         {
-            var persona = db.Persona.Include(p => p.Localidad).Include(p => p.Localidad1).Include(p => p.TipoDNI).Include(p => p.TipoEstadoCivil).Include(p => p.TipoSexo).Include(p => p.Pais);
-            return View(persona.ToList());
+            //var persona = db.Persona.Include(p => p.Localidad).Include(p => p.Localidad1).Include(p => p.TipoDNI).Include(p => p.TipoEstadoCivil).Include(p => p.TipoSexo).Include(p => p.Pais);
+            //return View(persona.ToList());
+            return View();
         }
 
         // POST: Profesionales/BuscaProf/{dni}

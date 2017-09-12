@@ -68,6 +68,7 @@ namespace MSP_RegProf.Controllers
             {
                 //var profesional = ProfVM.GetListaProfDummy().Where(r => r.profId == perId).FirstOrDefault();
                 var Matricula = db.Matricula.FirstOrDefault(r => r.ID == matId);
+                Matricula.FechaActualizacion = DateTime.Now;
 
                 if (Request.Files.Count > 0)
                 {
@@ -118,6 +119,8 @@ namespace MSP_RegProf.Controllers
             }
             catch (Exception ex)
             {
+                ViewBag.Message1 = null;
+                ViewBag.Message2 = null;
                 ViewBag.Message = "Ocurrio un error! Intente nuevamente.\n Mensaje: "+ ex.Message??ex.InnerException.Message;
                 return PartialView();
             }

@@ -15,13 +15,13 @@ namespace WebAPI.Models.Entity_Model
     public partial class SolicitudProtur
     {
         public int ID { get; set; }
-        public int DNI { get; set; }
+        public Nullable<int> DNI { get; set; }
         public string Apellido { get; set; }
         public string Nombre { get; set; }
         public Nullable<byte> Sexo { get; set; }
         public Nullable<System.DateTime> FechaNacimiento { get; set; }
         public short DepId { get; set; }
-        public short LocId { get; set; }
+        public Nullable<short> LocId { get; set; }
         public string Telefono1 { get; set; }
         public string Telefono2 { get; set; }
         public string Email { get; set; }

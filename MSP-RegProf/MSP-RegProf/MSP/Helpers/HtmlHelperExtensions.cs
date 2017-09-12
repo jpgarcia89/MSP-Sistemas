@@ -40,11 +40,13 @@ namespace MSP_RegProf.Helpers
                         else
                         {
                             string accion = string.IsNullOrEmpty(item.Accion) ? "" : item.Accion;
-                            string url = "";
+                            string url;// = "";
+                            url = System.Configuration.ConfigurationManager.AppSettings["SystemPath"];
 
-                    //#if (DEBUG == false)
-                    //        url = "/SRProfTest";
-                    //#endif
+//#if (DEBUG == true)
+//         url = "";                       
+//#endif
+
                             url += "/" + item.Controlador + "/" + (accion=="Index"?String.Empty:accion);
                             string c = string.Format(@"<li><a href=""{1}""><i class=""{2}""></i> {0} </a></li>", item.Nombre, url, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o text-aqua": item.Icono);
                             output += c;

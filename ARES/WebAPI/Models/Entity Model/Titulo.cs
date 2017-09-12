@@ -12,19 +12,24 @@ namespace WebAPI.Models.Entity_Model
     using System;
     using System.Collections.Generic;
     
-    public partial class TipoSexo
+    public partial class Titulo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TipoSexo()
+        public Titulo()
         {
-            this.Persona = new HashSet<Persona>();
+            this.Matricula = new HashSet<Matricula>();
         }
     
-        public byte ID { get; set; }
-        public string Nombre { get; set; }
-        public bool Activa { get; set; }
+        public int ID { get; set; }
+        public string Descripcion { get; set; }
+        public byte TipoFormacionID { get; set; }
+        public byte TipoNivelAcademicoID { get; set; }
+        public int CarreraMatriculadaID { get; set; }
     
+        public virtual CarreraMatriculada CarreraMatriculada { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Persona> Persona { get; set; }
+        public virtual ICollection<Matricula> Matricula { get; set; }
+        public virtual TipoFormacion TipoFormacion { get; set; }
+        public virtual TipoNivelAcademico TipoNivelAcademico { get; set; }
     }
 }

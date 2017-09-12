@@ -32,6 +32,16 @@ namespace WebAPI.Controllers.AppControllers
                 value = "[" + value + "]";
 
                 value =  Regex.Replace(value, "(?i)<a[^>]*>", "");//Esta instruccion quita los tags "<a>" del html en la noticia 
+                //value = Regex.Replace(value, "(<.+?)\\s + style\\s *=\\s * ([\"']).*?\\2(.*?>)","");
+
+                value = Regex.Replace(value, "(<style.+?</style>)|(<script.+?</script>)", "", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+                value = Regex.Replace(value, "(<img.+?>)", "", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+                value = Regex.Replace(value, "(<o:.+?</o:.+?>)", "", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+                value = Regex.Replace(value, "<!--.+?-->", "", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+                value = Regex.Replace(value, "class=.+?>", ">", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+                value = Regex.Replace(value, "class=.+?\\s", " ", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+                value = Regex.Replace(value, "style=.+?>", ">", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+                value = Regex.Replace(value, "style=.+?\\s", " ", RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
                 var list = JsonConvert.DeserializeObject<List<object>>(value);
 

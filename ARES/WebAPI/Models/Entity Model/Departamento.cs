@@ -14,8 +14,21 @@ namespace WebAPI.Models.Entity_Model
     
     public partial class Departamento
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Departamento()
+        {
+            this.Localidad = new HashSet<Localidad>();
+        }
+    
         public short ID { get; set; }
         public string Nombre { get; set; }
+        public byte ProvinciaID { get; set; }
+        public bool Activa { get; set; }
+        public Nullable<int> id_access { get; set; }
         public Nullable<byte> Zona { get; set; }
+    
+        public virtual Provincia Provincia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Localidad> Localidad { get; set; }
     }
 }

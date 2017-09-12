@@ -12,14 +12,12 @@ namespace WebAPI.Models.Entity_Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Localidad
+    public partial class AspNetUserLogins
     {
-        public int ID { get; set; }
-        public string Nombre { get; set; }
-        public short DepartamentoID { get; set; }
-        public bool Activa { get; set; }
-        public string id_access { get; set; }
+        public string LoginProvider { get; set; }
+        public string ProviderKey { get; set; }
+        public string UserId { get; set; }
     
-        public virtual Departamento Departamento { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

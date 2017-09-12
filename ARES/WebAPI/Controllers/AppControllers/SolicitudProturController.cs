@@ -85,7 +85,7 @@ namespace WebAPI.Controllers.AppControllers
             db.SolicitudProtur.Add(solicitudProtur);
             //db.SaveChanges();
 
-            return Json(new {ok=1 });
+            return Json(new {ok=1, NuevoID=solicitudProtur.ID });
 
             //return CreatedAtRoute("DefaultApi", new { id = solicitudProtur.ID }, solicitudProtur);
             //return CreatedAtRoute("DefaultApi", new { id = 1 }, solicitudProtur);
