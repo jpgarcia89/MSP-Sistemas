@@ -17,8 +17,8 @@ namespace MSP_RegProf.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Pais()
         {
-            this.Provincia = new HashSet<Provincia>();
             this.Persona = new HashSet<Persona>();
+            this.Provincia = new HashSet<Provincia>();
         }
     
         public int ID { get; set; }
@@ -27,8 +27,8 @@ namespace MSP_RegProf.Models
         public Nullable<int> id_access { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Provincia> Provincia { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Persona> Persona { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Provincia> Provincia { get; set; }
     }
 }

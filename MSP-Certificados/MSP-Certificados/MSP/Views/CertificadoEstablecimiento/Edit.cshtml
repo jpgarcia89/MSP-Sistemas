@@ -1,0 +1,170 @@
+﻿@model MSP_Certificados.Models.CertificadoEstablecimiento
+
+@{
+    ViewBag.Title = "Edit";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>Edit</h2>*@
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @*<h4>CertificadoEstablecimiento</h4>
+        <hr />*@
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">Datos del Establecimiento</div>
+            <div class="panel-body">
+                @Html.HiddenFor(model => model.ID)
+                @Html.HiddenFor(model => model.FechaAlta)
+                @Html.HiddenFor(model => model.IdUsuarioAlta)
+                @Html.HiddenFor(model => model.Activo)
+                  
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.Denominacion, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <label class="control-label col-md-2" for="Firma">Denominacion:</label>
+                    <div class="col-md-8 col-md-offset-1">
+                        @Html.EditorFor(model => model.Denominacion, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Denominacion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.IdTipoEstablecimiento, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <label class="control-label col-md-2" for="Firma">Categoria:</label>
+                    <div class="col-md-8 col-md-offset-1">
+                        @Html.DropDownList("IdTipoEstablecimiento", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdTipoEstablecimiento, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                                @*<div class="form-group">
+        @Html.LabelFor(model => model.FechaAlta, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.FechaAlta, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.FechaAlta, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(model => model.IdUsuarioAlta, "IdUsuarioAlta", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("IdUsuarioAlta", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.IdUsuarioAlta, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Activo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Activo)
+                @Html.ValidationMessageFor(model => model.Activo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>*@
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.Domicilio, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <label class="control-label col-md-2" for="Firma">Domicilio:</label>
+                    <div class="col-md-8 col-md-offset-1">
+                        @Html.EditorFor(model => model.Domicilio, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Domicilio, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.DomicilioDepto, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <label class="control-label col-md-2" for="Firma">Depto:</label>
+                    <div class="col-md-8 col-md-offset-1">
+                        @Html.EditorFor(model => model.DomicilioDepto, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DomicilioDepto, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div><!-- End of "panel-body" -->
+        </div> <!-- End of "panel" -->
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">Datos del Firmante</div>
+            <div class="panel-body">
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.Firma, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <label class="control-label col-md-2" for="Firma">Firma:</label>
+                    <div class="col-md-8 col-md-offset-1">
+                        @Html.EditorFor(model => model.Firma, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Firma, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.FirmaDni, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <label class="control-label col-md-2" for="Firma">DNI:</label>
+                    <div class="col-md-8 col-md-offset-1">
+                        @Html.EditorFor(model => model.FirmaDni, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FirmaDni, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.FirmaDireccion, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <label class="control-label col-md-2" for="Firma">Domicilio:</label>
+                    <div class="col-md-8 col-md-offset-1">
+                        @Html.EditorFor(model => model.FirmaDireccion, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FirmaDireccion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.FirmaDepto, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <label class="control-label col-md-2" for="Firma">Depto:</label>
+                    <div class="col-md-8 col-md-offset-1">
+                        @Html.EditorFor(model => model.FirmaDepto, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FirmaDepto, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div><!-- End of "panel-body" -->
+        </div> <!-- End of "panel" -->
+    </div>
+}
+
+            @*<div>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>*@
+            <script>
+                $(function () {
+                    $("#btnGuardar").unbind("click");
+                    $("#btnGuardar").click(function () {
+                        debugger
+                        $('#contenidoModal form').submit()
+                    });
+
+                    $('form').submit(function () {
+                        debugger
+                        if ($(this).valid()) {
+                            $.ajax({
+                                url: this.action,
+                                type: this.method,
+                                data: $(this).serialize(),
+                                success: function (result) {
+                                    //debugger
+                                    if (result.ok) {
+                                        window.location.href = window.location.href;
+                                        return;
+                                    }
+                                    $('#contenidoModal').html(result);
+                                }
+                            });
+                        }
+                        return false;
+                    });
+                });
+
+            </script>

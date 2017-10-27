@@ -67,9 +67,7 @@ namespace MSP_RegProf.Controllers
 
             return datos.OrderBy(r => r.Orden).ToList();
         }
-
-
-
+        
 
         public List<MenuAccionVM> GetPermisos(String UserName)
         {

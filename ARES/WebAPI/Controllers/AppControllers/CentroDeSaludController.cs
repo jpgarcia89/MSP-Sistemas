@@ -68,8 +68,8 @@ namespace WebAPI.Controllers.AppControllers
                 var cs = data.Select(r => new {
                     ID = r.ID,
                     Nombre = r.Nombre.Trim(),
-                    Latitud = DmsToDD(r.Latitud),//-31.405809929952255,
-                    Longitud = DmsToDD(r.Longitud),//-68.49254608154297,
+                    Latitud = r.Latitud,//DmsToDD(r.Latitud),//-31.405809929952255,
+                    Longitud = r.Longitud,//DmsToDD(r.Longitud),//-68.49254608154297,
                     Telefono = r.Telefono.Trim(),//"*sin dato*",
                     Direccion = r.Direccion.Trim(),//"La Laja 3850. Las Lomitas.",
                     DepartamentoID = r.Localidad.DepartamentoID,//442,
@@ -101,13 +101,13 @@ namespace WebAPI.Controllers.AppControllers
             var data = new {
                 ID = centroDeSalud.ID,
                 Nombre = centroDeSalud.Nombre.Trim(),
-                Latitud = DmsToDD(centroDeSalud.Latitud),//-31.405809929952255,
-                Longitud = DmsToDD(centroDeSalud.Longitud),//-68.49254608154297,
+                Latitud = centroDeSalud.Latitud,//DmsToDD(centroDeSalud.Latitud),//-31.405809929952255,
+                Longitud = centroDeSalud.Longitud,//DmsToDD(centroDeSalud.Longitud),//-68.49254608154297,
                 Telefono = centroDeSalud.Telefono.Trim(),//"*sin dato*",
                 Direccion = centroDeSalud.Direccion.Trim(),//"La Laja 3850. Las Lomitas.",
                 DepartamentoID = centroDeSalud.Localidad.DepartamentoID,//442,
                 LocalidadID = centroDeSalud.LocalidadID,
-                URLImagenDelCentroDeSalud = centroDeSalud.URLImagenDelCentroDeSalud.Trim()//"http://cdn.memegenerator.es/imagenes/memes/full/4/25/4252823.jpg"
+                URLImagenDelCentroDeSalud = centroDeSalud.URLImagenDelCentroDeSalud.Trim()//"http//cdn.memegenerator.es/imagenes/memes/full/4/25/4252823.jpg"
             };
 
             return Json(data);

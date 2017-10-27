@@ -1,0 +1,1155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MSPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
+          <Property Name="Icono" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MSP-Certificados.dbo.AspNetMenuAccion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AspNetMenuAccion">
+          <Key>
+            <PropertyRef Name="IdMenu" />
+            <PropertyRef Name="IdAccion" />
+          </Key>
+          <Property Name="IdMenu" Type="int" Nullable="false" />
+          <Property Name="IdAccion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Certificado">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEstablecimiento" Type="int" Nullable="false" />
+          <Property Name="FechaEmision" Type="date" Nullable="false" />
+          <Property Name="FechaDesde" Type="date" Nullable="false" />
+          <Property Name="FechaHasta" Type="date" Nullable="false" />
+          <Property Name="NroExpediente" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IdCertificadoTipo" Type="int" Nullable="false" />
+          <Property Name="IdUsuarioEmite" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CertificadoEstablecimentoItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="IdTipoEstablecimiento" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CertificadoEstablecimiento">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTipoEstablecimiento" Type="int" Nullable="false" />
+          <Property Name="Denominacion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaAlta" Type="date" Nullable="false" />
+          <Property Name="IdUsuarioAlta" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="Domicilio" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DomicilioDepto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Firma" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirmaDni" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="FirmaDireccion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirmaDepto" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PadreID" Type="int" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Orden" Type="tinyint" />
+          <Property Name="Icono" Type="nvarchar" MaxLength="50" />
+          <Property Name="Accion" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Controlador" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+          <Property Name="mnuId" Type="int" />
+        </EntityType>
+        <EntityType Name="MenuAspNetRoles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuId" Type="int" Nullable="false" />
+          <Property Name="AspNetRolesId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuAspNetRolesAccion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccionId" Type="int" Nullable="false" />
+          <Property Name="MenuAspNetRolesId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoCertificado">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denominacion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoCertificadoEstablecimiento">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denominacion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdTipoCertificado" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AspNetMenuAccion_Accion">
+          <End Role="Accion" Type="Self.Accion" Multiplicity="1" />
+          <End Role="AspNetMenuAccion" Type="Self.AspNetMenuAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AspNetMenuAccion">
+              <PropertyRef Name="IdAccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetMenuAccion_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="AspNetMenuAccion" Type="Self.AspNetMenuAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AspNetMenuAccion">
+              <PropertyRef Name="IdMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Certificado_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Certificado" Type="Self.Certificado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Certificado">
+              <PropertyRef Name="IdUsuarioEmite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Certificado_CertificadoEstablecimiento">
+          <End Role="CertificadoEstablecimiento" Type="Self.CertificadoEstablecimiento" Multiplicity="1" />
+          <End Role="Certificado" Type="Self.Certificado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CertificadoEstablecimiento">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Certificado">
+              <PropertyRef Name="IdEstablecimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Certificado_TipoCertificado">
+          <End Role="TipoCertificado" Type="Self.TipoCertificado" Multiplicity="1" />
+          <End Role="Certificado" Type="Self.Certificado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCertificado">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Certificado">
+              <PropertyRef Name="IdCertificadoTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CertificadoEstablecimentoItem_TipoCertificadoEstablecimiento">
+          <End Role="TipoCertificadoEstablecimiento" Type="Self.TipoCertificadoEstablecimiento" Multiplicity="1" />
+          <End Role="CertificadoEstablecimentoItem" Type="Self.CertificadoEstablecimentoItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCertificadoEstablecimiento">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CertificadoEstablecimentoItem">
+              <PropertyRef Name="IdTipoEstablecimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CertificadoEstablecimiento_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="CertificadoEstablecimiento" Type="Self.CertificadoEstablecimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CertificadoEstablecimiento">
+              <PropertyRef Name="IdUsuarioAlta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CertificadoEstablecimiento_TipoCertificadoEstablecimiento">
+          <End Role="TipoCertificadoEstablecimiento" Type="Self.TipoCertificadoEstablecimiento" Multiplicity="1" />
+          <End Role="CertificadoEstablecimiento" Type="Self.CertificadoEstablecimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCertificadoEstablecimiento">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CertificadoEstablecimiento">
+              <PropertyRef Name="IdTipoEstablecimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Menu1">
+              <PropertyRef Name="PadreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRoles_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="MenuAspNetRoles" Type="Self.MenuAspNetRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuAspNetRoles">
+              <PropertyRef Name="AspNetRolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRoles_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="MenuAspNetRoles" Type="Self.MenuAspNetRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRoles">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRolesAccion_Accion">
+          <End Role="Accion" Type="Self.Accion" Multiplicity="1" />
+          <End Role="MenuAspNetRolesAccion" Type="Self.MenuAspNetRolesAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRolesAccion">
+              <PropertyRef Name="AccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRolesAccion_MenuAspNetRoles">
+          <End Role="MenuAspNetRoles" Type="Self.MenuAspNetRoles" Multiplicity="1" />
+          <End Role="MenuAspNetRolesAccion" Type="Self.MenuAspNetRolesAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuAspNetRoles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRolesAccion">
+              <PropertyRef Name="MenuAspNetRolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TipoCertificadoEstablecimiento_TipoCertificado">
+          <End Role="TipoCertificado" Type="Self.TipoCertificado" Multiplicity="1" />
+          <End Role="TipoCertificadoEstablecimiento" Type="Self.TipoCertificadoEstablecimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCertificado">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TipoCertificadoEstablecimiento">
+              <PropertyRef Name="IdTipoCertificado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetPermisosPorNombreDeUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="MSPModelStoreContainer">
+          <EntitySet Name="Accion" EntityType="Self.Accion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Certificado" EntityType="Self.Certificado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CertificadoEstablecimentoItem" EntityType="Self.CertificadoEstablecimentoItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CertificadoEstablecimiento" EntityType="Self.CertificadoEstablecimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuAspNetRoles" EntityType="Self.MenuAspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuAspNetRolesAccion" EntityType="Self.MenuAspNetRolesAccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoCertificado" EntityType="Self.TipoCertificado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoCertificadoEstablecimiento" EntityType="Self.TipoCertificadoEstablecimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetMenuAccion" EntityType="Self.AspNetMenuAccion" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AspNetMenuAccion].[IdMenu] AS [IdMenu], 
+    [AspNetMenuAccion].[IdAccion] AS [IdAccion]
+    FROM [dbo].[AspNetMenuAccion] AS [AspNetMenuAccion]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_AspNetMenuAccion_Accion" Association="Self.FK_AspNetMenuAccion_Accion">
+            <End Role="Accion" EntitySet="Accion" />
+            <End Role="AspNetMenuAccion" EntitySet="AspNetMenuAccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetMenuAccion_Menu" Association="Self.FK_AspNetMenuAccion_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="AspNetMenuAccion" EntitySet="AspNetMenuAccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Certificado_AspNetUsers" Association="Self.FK_Certificado_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Certificado" EntitySet="Certificado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Certificado_CertificadoEstablecimiento" Association="Self.FK_Certificado_CertificadoEstablecimiento">
+            <End Role="CertificadoEstablecimiento" EntitySet="CertificadoEstablecimiento" />
+            <End Role="Certificado" EntitySet="Certificado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Certificado_TipoCertificado" Association="Self.FK_Certificado_TipoCertificado">
+            <End Role="TipoCertificado" EntitySet="TipoCertificado" />
+            <End Role="Certificado" EntitySet="Certificado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CertificadoEstablecimentoItem_TipoCertificadoEstablecimiento" Association="Self.FK_CertificadoEstablecimentoItem_TipoCertificadoEstablecimiento">
+            <End Role="TipoCertificadoEstablecimiento" EntitySet="TipoCertificadoEstablecimiento" />
+            <End Role="CertificadoEstablecimentoItem" EntitySet="CertificadoEstablecimentoItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CertificadoEstablecimiento_AspNetUsers" Association="Self.FK_CertificadoEstablecimiento_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="CertificadoEstablecimiento" EntitySet="CertificadoEstablecimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CertificadoEstablecimiento_TipoCertificadoEstablecimiento" Association="Self.FK_CertificadoEstablecimiento_TipoCertificadoEstablecimiento">
+            <End Role="TipoCertificadoEstablecimiento" EntitySet="TipoCertificadoEstablecimiento" />
+            <End Role="CertificadoEstablecimiento" EntitySet="CertificadoEstablecimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Menu1" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRoles_AspNetRoles" Association="Self.FK_MenuAspNetRoles_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRoles_Menu" Association="Self.FK_MenuAspNetRoles_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRolesAccion_Accion" Association="Self.FK_MenuAspNetRolesAccion_Accion">
+            <End Role="Accion" EntitySet="Accion" />
+            <End Role="MenuAspNetRolesAccion" EntitySet="MenuAspNetRolesAccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRolesAccion_MenuAspNetRoles" Association="Self.FK_MenuAspNetRolesAccion_MenuAspNetRoles">
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+            <End Role="MenuAspNetRolesAccion" EntitySet="MenuAspNetRolesAccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TipoCertificadoEstablecimiento_TipoCertificado" Association="Self.FK_TipoCertificadoEstablecimiento_TipoCertificado">
+            <End Role="TipoCertificado" EntitySet="TipoCertificado" />
+            <End Role="TipoCertificadoEstablecimiento" EntitySet="TipoCertificadoEstablecimiento" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MSPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MSPEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="MSPModel.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="MSPModel.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="MSPModel.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="MSPModel.AspNetUsers" />
+          <EntitySet Name="Certificado" EntityType="MSPModel.Certificado" />
+          <EntitySet Name="CertificadoEstablecimentoItem" EntityType="MSPModel.CertificadoEstablecimentoItem" />
+          <EntitySet Name="CertificadoEstablecimiento" EntityType="MSPModel.CertificadoEstablecimiento" />
+          <EntitySet Name="Menu" EntityType="MSPModel.Menu" />
+          <EntitySet Name="TipoCertificado" EntityType="MSPModel.TipoCertificado" />
+          <EntitySet Name="TipoCertificadoEstablecimiento" EntityType="MSPModel.TipoCertificadoEstablecimiento" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="MSPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="MSPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Certificado_AspNetUsers" Association="MSPModel.FK_Certificado_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Certificado" EntitySet="Certificado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CertificadoEstablecimiento_AspNetUsers" Association="MSPModel.FK_CertificadoEstablecimiento_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="CertificadoEstablecimiento" EntitySet="CertificadoEstablecimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Certificado_CertificadoEstablecimiento" Association="MSPModel.FK_Certificado_CertificadoEstablecimiento">
+            <End Role="CertificadoEstablecimiento" EntitySet="CertificadoEstablecimiento" />
+            <End Role="Certificado" EntitySet="Certificado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Certificado_TipoCertificado" Association="MSPModel.FK_Certificado_TipoCertificado">
+            <End Role="TipoCertificado" EntitySet="TipoCertificado" />
+            <End Role="Certificado" EntitySet="Certificado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CertificadoEstablecimentoItem_TipoCertificadoEstablecimiento" Association="MSPModel.FK_CertificadoEstablecimentoItem_TipoCertificadoEstablecimiento">
+            <End Role="TipoCertificadoEstablecimiento" EntitySet="TipoCertificadoEstablecimiento" />
+            <End Role="CertificadoEstablecimentoItem" EntitySet="CertificadoEstablecimentoItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CertificadoEstablecimiento_TipoCertificadoEstablecimiento" Association="MSPModel.FK_CertificadoEstablecimiento_TipoCertificadoEstablecimiento">
+            <End Role="TipoCertificadoEstablecimiento" EntitySet="TipoCertificadoEstablecimiento" />
+            <End Role="CertificadoEstablecimiento" EntitySet="CertificadoEstablecimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Menu" Association="MSPModel.FK_Menu_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Menu1" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TipoCertificadoEstablecimiento_TipoCertificado" Association="MSPModel.FK_TipoCertificadoEstablecimiento_TipoCertificado">
+            <End Role="TipoCertificado" EntitySet="TipoCertificado" />
+            <End Role="TipoCertificadoEstablecimiento" EntitySet="TipoCertificadoEstablecimiento" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="MSPModel.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Accion" EntityType="MSPModel.Accion" />
+          <EntitySet Name="MenuAspNetRoles" EntityType="MSPModel.MenuAspNetRoles" />
+          <EntitySet Name="MenuAspNetRolesAccion" EntityType="MSPModel.MenuAspNetRolesAccion" />
+          <AssociationSet Name="FK_MenuAspNetRolesAccion_Accion" Association="MSPModel.FK_MenuAspNetRolesAccion_Accion">
+            <End Role="Accion" EntitySet="Accion" />
+            <End Role="MenuAspNetRolesAccion" EntitySet="MenuAspNetRolesAccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRoles_AspNetRoles" Association="MSPModel.FK_MenuAspNetRoles_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRoles_Menu" Association="MSPModel.FK_MenuAspNetRoles_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuAspNetRolesAccion_MenuAspNetRoles" Association="MSPModel.FK_MenuAspNetRolesAccion_MenuAspNetRoles">
+            <End Role="MenuAspNetRoles" EntitySet="MenuAspNetRoles" />
+            <End Role="MenuAspNetRolesAccion" EntitySet="MenuAspNetRolesAccion" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetMenuAccion" Association="MSPModel.AspNetMenuAccion">
+            <End Role="Accion" EntitySet="Accion" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <FunctionImport Name="GetPermisosPorNombreDeUsuario" ReturnType="Collection(MSPModel.GetPermisosPorNombreDeUsuario_Result1)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetPermisosPorNombreDeUsuario_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="PadreID" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Byte" Name="Orden" Nullable="true" />
+          <Property Type="String" Name="Icono" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Accion" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Controlador" Nullable="false" MaxLength="150" />
+          <Property Type="Boolean" Name="Activo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAlta" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="mnuId" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="MSPModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          <NavigationProperty Name="MenuAspNetRoles" Relationship="MSPModel.FK_MenuAspNetRoles_AspNetRoles" FromRole="AspNetRoles" ToRole="MenuAspNetRoles" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="MSPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="MSPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="MSPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="MSPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Certificado" Relationship="MSPModel.FK_Certificado_AspNetUsers" FromRole="AspNetUsers" ToRole="Certificado" />
+          <NavigationProperty Name="CertificadoEstablecimiento" Relationship="MSPModel.FK_CertificadoEstablecimiento_AspNetUsers" FromRole="AspNetUsers" ToRole="CertificadoEstablecimiento" />
+          <NavigationProperty Name="AspNetRoles" Relationship="MSPModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Certificado">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEstablecimiento" Type="Int32" Nullable="false" />
+          <Property Name="FechaEmision" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaDesde" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaHasta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NroExpediente" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCertificadoTipo" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuarioEmite" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="MSPModel.FK_Certificado_AspNetUsers" FromRole="Certificado" ToRole="AspNetUsers" />
+          <NavigationProperty Name="CertificadoEstablecimiento" Relationship="MSPModel.FK_Certificado_CertificadoEstablecimiento" FromRole="Certificado" ToRole="CertificadoEstablecimiento" />
+          <NavigationProperty Name="TipoCertificado" Relationship="MSPModel.FK_Certificado_TipoCertificado" FromRole="Certificado" ToRole="TipoCertificado" />
+        </EntityType>
+        <EntityType Name="CertificadoEstablecimentoItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoEstablecimiento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TipoCertificadoEstablecimiento" Relationship="MSPModel.FK_CertificadoEstablecimentoItem_TipoCertificadoEstablecimiento" FromRole="CertificadoEstablecimentoItem" ToRole="TipoCertificadoEstablecimiento" />
+        </EntityType>
+        <EntityType Name="CertificadoEstablecimiento">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTipoEstablecimiento" Type="Int32" Nullable="false" />
+          <Property Name="Denominacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdUsuarioAlta" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="Domicilio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DomicilioDepto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Firma" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirmaDni" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="FirmaDireccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirmaDepto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="MSPModel.FK_CertificadoEstablecimiento_AspNetUsers" FromRole="CertificadoEstablecimiento" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Certificado" Relationship="MSPModel.FK_Certificado_CertificadoEstablecimiento" FromRole="CertificadoEstablecimiento" ToRole="Certificado" />
+          <NavigationProperty Name="TipoCertificadoEstablecimiento" Relationship="MSPModel.FK_CertificadoEstablecimiento_TipoCertificadoEstablecimiento" FromRole="CertificadoEstablecimiento" ToRole="TipoCertificadoEstablecimiento" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PadreID" Type="Int32" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orden" Type="Byte" />
+          <Property Name="Icono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Accion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Controlador" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="mnuId" Type="Int32" />
+          <NavigationProperty Name="Menu1" Relationship="MSPModel.FK_Menu_Menu" FromRole="Menu" ToRole="Menu1" />
+          <NavigationProperty Name="Menu2" Relationship="MSPModel.FK_Menu_Menu" FromRole="Menu1" ToRole="Menu" />
+          <NavigationProperty Name="MenuAspNetRoles" Relationship="MSPModel.FK_MenuAspNetRoles_Menu" FromRole="Menu" ToRole="MenuAspNetRoles" />
+          <NavigationProperty Name="Accion1" Relationship="MSPModel.AspNetMenuAccion" FromRole="Menu" ToRole="Accion" />
+        </EntityType>
+        <EntityType Name="TipoCertificado">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Denominacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Certificado" Relationship="MSPModel.FK_Certificado_TipoCertificado" FromRole="TipoCertificado" ToRole="Certificado" />
+          <NavigationProperty Name="TipoCertificadoEstablecimiento" Relationship="MSPModel.FK_TipoCertificadoEstablecimiento_TipoCertificado" FromRole="TipoCertificado" ToRole="TipoCertificadoEstablecimiento" />
+        </EntityType>
+        <EntityType Name="TipoCertificadoEstablecimiento">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Denominacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoCertificado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CertificadoEstablecimentoItem" Relationship="MSPModel.FK_CertificadoEstablecimentoItem_TipoCertificadoEstablecimiento" FromRole="TipoCertificadoEstablecimiento" ToRole="CertificadoEstablecimentoItem" />
+          <NavigationProperty Name="CertificadoEstablecimiento" Relationship="MSPModel.FK_CertificadoEstablecimiento_TipoCertificadoEstablecimiento" FromRole="TipoCertificadoEstablecimiento" ToRole="CertificadoEstablecimiento" />
+          <NavigationProperty Name="TipoCertificado" Relationship="MSPModel.FK_TipoCertificadoEstablecimiento_TipoCertificado" FromRole="TipoCertificadoEstablecimiento" ToRole="TipoCertificado" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="MSPModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MSPModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="MSPModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MSPModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Certificado_AspNetUsers">
+          <End Type="MSPModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="MSPModel.Certificado" Role="Certificado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Certificado">
+              <PropertyRef Name="IdUsuarioEmite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CertificadoEstablecimiento_AspNetUsers">
+          <End Type="MSPModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="MSPModel.CertificadoEstablecimiento" Role="CertificadoEstablecimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CertificadoEstablecimiento">
+              <PropertyRef Name="IdUsuarioAlta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Certificado_CertificadoEstablecimiento">
+          <End Type="MSPModel.CertificadoEstablecimiento" Role="CertificadoEstablecimiento" Multiplicity="1" />
+          <End Type="MSPModel.Certificado" Role="Certificado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CertificadoEstablecimiento">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Certificado">
+              <PropertyRef Name="IdEstablecimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Certificado_TipoCertificado">
+          <End Type="MSPModel.TipoCertificado" Role="TipoCertificado" Multiplicity="1" />
+          <End Type="MSPModel.Certificado" Role="Certificado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCertificado">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Certificado">
+              <PropertyRef Name="IdCertificadoTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CertificadoEstablecimentoItem_TipoCertificadoEstablecimiento">
+          <End Type="MSPModel.TipoCertificadoEstablecimiento" Role="TipoCertificadoEstablecimiento" Multiplicity="1" />
+          <End Type="MSPModel.CertificadoEstablecimentoItem" Role="CertificadoEstablecimentoItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCertificadoEstablecimiento">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CertificadoEstablecimentoItem">
+              <PropertyRef Name="IdTipoEstablecimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CertificadoEstablecimiento_TipoCertificadoEstablecimiento">
+          <End Type="MSPModel.TipoCertificadoEstablecimiento" Role="TipoCertificadoEstablecimiento" Multiplicity="1" />
+          <End Type="MSPModel.CertificadoEstablecimiento" Role="CertificadoEstablecimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCertificadoEstablecimiento">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CertificadoEstablecimiento">
+              <PropertyRef Name="IdTipoEstablecimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Menu">
+          <End Type="MSPModel.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="MSPModel.Menu" Role="Menu1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Menu1">
+              <PropertyRef Name="PadreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TipoCertificadoEstablecimiento_TipoCertificado">
+          <End Type="MSPModel.TipoCertificado" Role="TipoCertificado" Multiplicity="1" />
+          <End Type="MSPModel.TipoCertificadoEstablecimiento" Role="TipoCertificadoEstablecimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCertificado">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TipoCertificadoEstablecimiento">
+              <PropertyRef Name="IdTipoCertificado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="MSPModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="MSPModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Accion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Icono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MenuAspNetRolesAccion" Relationship="MSPModel.FK_MenuAspNetRolesAccion_Accion" FromRole="Accion" ToRole="MenuAspNetRolesAccion" />
+          <NavigationProperty Name="Menu" Relationship="MSPModel.AspNetMenuAccion" FromRole="Accion" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="MenuAspNetRoles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuId" Type="Int32" Nullable="false" />
+          <Property Name="AspNetRolesId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetRoles" Relationship="MSPModel.FK_MenuAspNetRoles_AspNetRoles" FromRole="MenuAspNetRoles" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Menu" Relationship="MSPModel.FK_MenuAspNetRoles_Menu" FromRole="MenuAspNetRoles" ToRole="Menu" />
+          <NavigationProperty Name="MenuAspNetRolesAccion" Relationship="MSPModel.FK_MenuAspNetRolesAccion_MenuAspNetRoles" FromRole="MenuAspNetRoles" ToRole="MenuAspNetRolesAccion" />
+        </EntityType>
+        <EntityType Name="MenuAspNetRolesAccion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccionId" Type="Int32" Nullable="false" />
+          <Property Name="MenuAspNetRolesId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accion" Relationship="MSPModel.FK_MenuAspNetRolesAccion_Accion" FromRole="MenuAspNetRolesAccion" ToRole="Accion" />
+          <NavigationProperty Name="MenuAspNetRoles" Relationship="MSPModel.FK_MenuAspNetRolesAccion_MenuAspNetRoles" FromRole="MenuAspNetRolesAccion" ToRole="MenuAspNetRoles" />
+        </EntityType>
+        <Association Name="FK_MenuAspNetRolesAccion_Accion">
+          <End Type="MSPModel.Accion" Role="Accion" Multiplicity="1" />
+          <End Type="MSPModel.MenuAspNetRolesAccion" Role="MenuAspNetRolesAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRolesAccion">
+              <PropertyRef Name="AccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRoles_AspNetRoles">
+          <End Type="MSPModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
+          <End Type="MSPModel.MenuAspNetRoles" Role="MenuAspNetRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MenuAspNetRoles">
+              <PropertyRef Name="AspNetRolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRoles_Menu">
+          <End Type="MSPModel.Menu" Role="Menu" Multiplicity="1" />
+          <End Type="MSPModel.MenuAspNetRoles" Role="MenuAspNetRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRoles">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuAspNetRolesAccion_MenuAspNetRoles">
+          <End Type="MSPModel.MenuAspNetRoles" Role="MenuAspNetRoles" Multiplicity="1" />
+          <End Type="MSPModel.MenuAspNetRolesAccion" Role="MenuAspNetRolesAccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuAspNetRoles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MenuAspNetRolesAccion">
+              <PropertyRef Name="MenuAspNetRolesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetMenuAccion">
+          <End Type="MSPModel.Accion" Role="Accion" Multiplicity="*" />
+          <End Type="MSPModel.Menu" Role="Menu" Multiplicity="*" />
+        </Association>
+        <ComplexType Name="GetPermisosPorNombreDeUsuario_Result1">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="PadreID" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Byte" Name="Orden" Nullable="true" />
+          <Property Type="String" Name="Icono" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Accion" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Controlador" Nullable="false" MaxLength="150" />
+          <Property Type="Boolean" Name="Activo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAlta" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="mnuId" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MSPModelStoreContainer" CdmEntityContainer="MSPEntities">
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="MSPModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="MSPModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="MSPModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="MSPModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Certificado">
+            <EntityTypeMapping TypeName="MSPModel.Certificado">
+              <MappingFragment StoreEntitySet="Certificado">
+                <ScalarProperty Name="IdUsuarioEmite" ColumnName="IdUsuarioEmite" />
+                <ScalarProperty Name="IdCertificadoTipo" ColumnName="IdCertificadoTipo" />
+                <ScalarProperty Name="NroExpediente" ColumnName="NroExpediente" />
+                <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
+                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+                <ScalarProperty Name="FechaEmision" ColumnName="FechaEmision" />
+                <ScalarProperty Name="IdEstablecimiento" ColumnName="IdEstablecimiento" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CertificadoEstablecimentoItem">
+            <EntityTypeMapping TypeName="MSPModel.CertificadoEstablecimentoItem">
+              <MappingFragment StoreEntitySet="CertificadoEstablecimentoItem">
+                <ScalarProperty Name="IdTipoEstablecimiento" ColumnName="IdTipoEstablecimiento" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CertificadoEstablecimiento">
+            <EntityTypeMapping TypeName="MSPModel.CertificadoEstablecimiento">
+              <MappingFragment StoreEntitySet="CertificadoEstablecimiento">
+                <ScalarProperty Name="FirmaDepto" ColumnName="FirmaDepto" />
+                <ScalarProperty Name="FirmaDireccion" ColumnName="FirmaDireccion" />
+                <ScalarProperty Name="FirmaDni" ColumnName="FirmaDni" />
+                <ScalarProperty Name="Firma" ColumnName="Firma" />
+                <ScalarProperty Name="DomicilioDepto" ColumnName="DomicilioDepto" />
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="IdUsuarioAlta" ColumnName="IdUsuarioAlta" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+                <ScalarProperty Name="IdTipoEstablecimiento" ColumnName="IdTipoEstablecimiento" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="MSPModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="mnuId" ColumnName="mnuId" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Controlador" ColumnName="Controlador" />
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+                <ScalarProperty Name="Icono" ColumnName="Icono" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="PadreID" ColumnName="PadreID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoCertificado">
+            <EntityTypeMapping TypeName="MSPModel.TipoCertificado">
+              <MappingFragment StoreEntitySet="TipoCertificado">
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoCertificadoEstablecimiento">
+            <EntityTypeMapping TypeName="MSPModel.TipoCertificadoEstablecimiento">
+              <MappingFragment StoreEntitySet="TipoCertificadoEstablecimiento">
+                <ScalarProperty Name="IdTipoCertificado" ColumnName="IdTipoCertificado" />
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="MSPModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Accion">
+            <EntityTypeMapping TypeName="MSPModel.Accion">
+              <MappingFragment StoreEntitySet="Accion">
+                <ScalarProperty Name="Icono" ColumnName="Icono" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuAspNetRoles">
+            <EntityTypeMapping TypeName="MSPModel.MenuAspNetRoles">
+              <MappingFragment StoreEntitySet="MenuAspNetRoles">
+                <ScalarProperty Name="AspNetRolesId" ColumnName="AspNetRolesId" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuAspNetRolesAccion">
+            <EntityTypeMapping TypeName="MSPModel.MenuAspNetRolesAccion">
+              <MappingFragment StoreEntitySet="MenuAspNetRolesAccion">
+                <ScalarProperty Name="MenuAspNetRolesId" ColumnName="MenuAspNetRolesId" />
+                <ScalarProperty Name="AccionId" ColumnName="AccionId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetMenuAccion" TypeName="MSPModel.AspNetMenuAccion" StoreEntitySet="AspNetMenuAccion">
+            <EndProperty Name="Menu">
+              <ScalarProperty Name="ID" ColumnName="IdMenu" />
+            </EndProperty>
+            <EndProperty Name="Accion">
+              <ScalarProperty Name="ID" ColumnName="IdAccion" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="GetPermisosPorNombreDeUsuario" FunctionName="MSPModel.Store.GetPermisosPorNombreDeUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MSPModel.GetPermisosPorNombreDeUsuario_Result1">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PadreID" ColumnName="PadreID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Icono" ColumnName="Icono" />
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+                <ScalarProperty Name="Controlador" ColumnName="Controlador" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="mnuId" ColumnName="mnuId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

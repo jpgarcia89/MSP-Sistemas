@@ -237,6 +237,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AppControllers\CentroDeSaludController.cs" />
     <Compile Include="Controllers\AppControllers\DepartamentoController.cs" />
+    <Compile Include="Controllers\AppControllers\MilDiasController.cs" />
     <Compile Include="Controllers\AppControllers\LocalidadController.cs" />
     <Compile Include="Controllers\AppControllers\PortalController.cs" />
     <Compile Include="Controllers\AppControllers\SolicitudProturController.cs" />
@@ -275,9 +276,6 @@
     <Compile Include="Models\Entity Model\Departamento.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Entity Model\DepartamentoBackUp.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Entity Model\Especialidad.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -297,9 +295,6 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity Model\Localidad.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Entity Model\LocalidadBackUp.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity Model\Matricula.cs">
@@ -330,6 +325,15 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity Model\Persona.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity Model\ProturEncuestador.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity Model\ProturEquivalenciasCaps.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entity Model\ProturRegistros.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entity Model\Provincia.cs">

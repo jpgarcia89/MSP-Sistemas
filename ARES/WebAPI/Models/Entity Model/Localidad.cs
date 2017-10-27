@@ -14,12 +14,20 @@ namespace WebAPI.Models.Entity_Model
     
     public partial class Localidad
     {
-        public int ID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Localidad()
+        {
+            this.CentroDeSalud = new HashSet<CentroDeSalud>();
+        }
+    
+        public short ID { get; set; }
         public string Nombre { get; set; }
         public short DepartamentoID { get; set; }
         public bool Activa { get; set; }
         public string id_access { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CentroDeSalud> CentroDeSalud { get; set; }
         public virtual Departamento Departamento { get; set; }
     }
 }

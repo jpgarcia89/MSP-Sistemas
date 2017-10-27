@@ -6,7 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
-warning 6002: The table/view 'MSP-Ares.dbo.AsignacionTipo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'MSP-Ares-Desarrollo.dbo.AsignacionTipo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AsignacionTipo">
           <Key>
             <PropertyRef Name="ID" />
@@ -64,6 +64,8 @@ warning 6002: The table/view 'MSP-Ares.dbo.AsignacionTipo' does not have a prima
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="CarreraMatriculada">
           <Key>
@@ -102,14 +104,6 @@ warning 6002: The table/view 'MSP-Ares.dbo.AsignacionTipo' does not have a prima
           <Property Name="ProvinciaID" Type="tinyint" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
           <Property Name="id_access" Type="int" />
-          <Property Name="Zona" Type="tinyint" />
-        </EntityType>
-        <EntityType Name="DepartamentoBackUp">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Zona" Type="tinyint" />
         </EntityType>
         <EntityType Name="Especialidad">
@@ -168,19 +162,11 @@ warning 6002: The table/view 'MSP-Ares.dbo.AsignacionTipo' does not have a prima
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="DepartamentoID" Type="smallint" Nullable="false" />
           <Property Name="Activa" Type="bit" Nullable="false" />
           <Property Name="id_access" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="LocalidadBackUp">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="DepartamentoID" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="Matricula">
           <Key>
@@ -272,6 +258,50 @@ warning 6002: The table/view 'MSP-Ares.dbo.AsignacionTipo' does not have a prima
           <Property Name="FechaAlta" Type="datetime" Nullable="false" />
           <Property Name="FechaFallecido" Type="datetime" />
         </EntityType>
+        <EntityType Name="ProturEncuestador">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ProturEquivalenciasCaps">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="255" />
+          <Property Name="id_caps" Type="int" />
+        </EntityType>
+        <EntityType Name="ProturRegistros">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TS" Type="bigint" Nullable="false" />
+          <Property Name="CS" Type="int" Nullable="false" />
+          <Property Name="PT" Type="int" Nullable="false" />
+          <Property Name="DC" Type="date" Nullable="false" />
+          <Property Name="PN" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SP" Type="int" Nullable="false" />
+          <Property Name="NP" Type="date" Nullable="false" />
+          <Property Name="DP" Type="varchar" MaxLength="20" />
+          <Property Name="PO" Type="int" Nullable="false" />
+          <Property Name="OS" Type="int" Nullable="false" />
+          <Property Name="TP" Type="varchar" MaxLength="50" />
+          <Property Name="PD" Type="int" Nullable="false" />
+          <Property Name="DO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ET" Type="int" Nullable="false" />
+          <Property Name="TT" Type="int" Nullable="false" />
+          <Property Name="MT" Type="int" Nullable="false" />
+          <Property Name="CT" Type="int" />
+          <Property Name="EI" Type="int" />
+          <Property Name="PE" Type="int" />
+          <Property Name="PC" Type="int" />
+          <Property Name="FP" Type="date" />
+          <Property Name="PM" Type="int" />
+          <Property Name="TA" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Provincia">
           <Key>
             <PropertyRef Name="ID" />
@@ -291,7 +321,7 @@ warning 6002: The table/view 'MSP-Ares.dbo.AsignacionTipo' does not have a prima
           <Property Name="FechaUltimaActualizacion" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'MSP-Ares.dbo.SolicitudProtur' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'MSP-Ares-Desarrollo.dbo.SolicitudProtur' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SolicitudProtur">
           <Key>
             <PropertyRef Name="ID" />
@@ -393,10 +423,10 @@ warning 6002: The table/view 'MSP-Ares.dbo.SolicitudProtur' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CentroDeSalud_Localidad">
-          <End Role="LocalidadBackUp" Type="Self.LocalidadBackUp" Multiplicity="1" />
+          <End Role="Localidad" Type="Self.Localidad" Multiplicity="1" />
           <End Role="CentroDeSalud" Type="Self.CentroDeSalud" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="LocalidadBackUp">
+            <Principal Role="Localidad">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="CentroDeSalud">
@@ -745,7 +775,6 @@ warning 6002: The table/view 'MSP-Ares.dbo.SolicitudProtur' does not have a prim
           <EntitySet Name="CarreraMatriculada" EntityType="Self.CarreraMatriculada" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CentroDeSalud" EntityType="Self.CentroDeSalud" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DepartamentoBackUp" EntityType="Self.DepartamentoBackUp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Especialidad" EntityType="Self.Especialidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EspecialidadPorCentroDeSalud" EntityType="Self.EspecialidadPorCentroDeSalud" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Horarios" EntityType="Self.Horarios" Schema="dbo" store:Type="Tables" />
@@ -753,12 +782,14 @@ warning 6002: The table/view 'MSP-Ares.dbo.SolicitudProtur' does not have a prim
           <EntitySet Name="LineaColectivo" EntityType="Self.LineaColectivo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LineaColectivoPorCentroDeSalud" EntityType="Self.LineaColectivoPorCentroDeSalud" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LocalidadBackUp" EntityType="Self.LocalidadBackUp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Matricula" EntityType="Self.Matricula" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Organismo" EntityType="Self.Organismo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProturEncuestador" EntityType="Self.ProturEncuestador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProturEquivalenciasCaps" EntityType="Self.ProturEquivalenciasCaps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProturRegistros" EntityType="Self.ProturRegistros" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegistroActualizacionTablas" EntityType="Self.RegistroActualizacionTablas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoDNI" EntityType="Self.TipoDNI" Schema="dbo" store:Type="Tables" />
@@ -799,7 +830,7 @@ warning 6002: The table/view 'MSP-Ares.dbo.SolicitudProtur' does not have a prim
             <End Role="CarreraMatriculada" EntitySet="CarreraMatriculada" />
           </AssociationSet>
           <AssociationSet Name="FK_CentroDeSalud_Localidad" Association="Self.FK_CentroDeSalud_Localidad">
-            <End Role="LocalidadBackUp" EntitySet="LocalidadBackUp" />
+            <End Role="Localidad" EntitySet="Localidad" />
             <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -923,7 +954,6 @@ warning 6002: The table/view 'MSP-Ares.dbo.SolicitudProtur' does not have a prim
           <EntitySet Name="CarreraMatriculada" EntityType="Model.CarreraMatriculada" />
           <EntitySet Name="CentroDeSalud" EntityType="Model.CentroDeSalud" />
           <EntitySet Name="Departamento" EntityType="Model.Departamento" />
-          <EntitySet Name="DepartamentoBackUp" EntityType="Model.DepartamentoBackUp" />
           <EntitySet Name="Especialidad" EntityType="Model.Especialidad" />
           <EntitySet Name="EspecialidadPorCentroDeSalud" EntityType="Model.EspecialidadPorCentroDeSalud" />
           <EntitySet Name="Horarios" EntityType="Model.Horarios" />
@@ -931,7 +961,6 @@ warning 6002: The table/view 'MSP-Ares.dbo.SolicitudProtur' does not have a prim
           <EntitySet Name="LineaColectivo" EntityType="Model.LineaColectivo" />
           <EntitySet Name="LineaColectivoPorCentroDeSalud" EntityType="Model.LineaColectivoPorCentroDeSalud" />
           <EntitySet Name="Localidad" EntityType="Model.Localidad" />
-          <EntitySet Name="LocalidadBackUp" EntityType="Model.LocalidadBackUp" />
           <EntitySet Name="Matricula" EntityType="Model.Matricula" />
           <EntitySet Name="Menu" EntityType="Model.Menu" />
           <EntitySet Name="Organismo" EntityType="Model.Organismo" />
@@ -966,7 +995,7 @@ warning 6002: The table/view 'MSP-Ares.dbo.SolicitudProtur' does not have a prim
             <End Role="Titulo" EntitySet="Titulo" />
           </AssociationSet>
           <AssociationSet Name="FK_CentroDeSalud_Localidad" Association="Model.FK_CentroDeSalud_Localidad">
-            <End Role="LocalidadBackUp" EntitySet="LocalidadBackUp" />
+            <End Role="Localidad" EntitySet="Localidad" />
             <End Role="CentroDeSalud" EntitySet="CentroDeSalud" />
           </AssociationSet>
           <AssociationSet Name="FK_EspecialidadPorCentroDeSalud_CentroDeSalud" Association="Model.FK_EspecialidadPorCentroDeSalud_CentroDeSalud">
@@ -1061,6 +1090,9 @@ warning 6002: The table/view 'MSP-Ares.dbo.SolicitudProtur' does not have a prim
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="ProturEncuestador" EntityType="Model.ProturEncuestador" />
+          <EntitySet Name="ProturEquivalenciasCaps" EntityType="Model.ProturEquivalenciasCaps" />
+          <EntitySet Name="ProturRegistros" EntityType="Model.ProturRegistros" />
         </EntityContainer>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -1110,6 +1142,8 @@ warning 6002: The table/view 'MSP-Ares.dbo.SolicitudProtur' does not have a prim
           <NavigationProperty Name="AspNetUserClaims" Relationship="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="Model.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CarreraMatriculada">
           <Key>
@@ -1140,7 +1174,7 @@ warning 6002: The table/view 'MSP-Ares.dbo.SolicitudProtur' does not have a prim
           <Property Name="LocalidadID" Type="Int16" Nullable="false" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <Property Name="FechaUltimaActualizacion" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="LocalidadBackUp" Relationship="Model.FK_CentroDeSalud_Localidad" FromRole="CentroDeSalud" ToRole="LocalidadBackUp" />
+          <NavigationProperty Name="Localidad" Relationship="Model.FK_CentroDeSalud_Localidad" FromRole="CentroDeSalud" ToRole="Localidad" />
           <NavigationProperty Name="EspecialidadPorCentroDeSalud" Relationship="Model.FK_EspecialidadPorCentroDeSalud_CentroDeSalud" FromRole="CentroDeSalud" ToRole="EspecialidadPorCentroDeSalud" />
           <NavigationProperty Name="LineaColectivoPorCentroDeSalud" Relationship="Model.FK_LineaColectivoPorCentroDeSalud_CentroDeSalud" FromRole="CentroDeSalud" ToRole="LineaColectivoPorCentroDeSalud" />
         </EntityType>
@@ -1156,14 +1190,6 @@ warning 6002: The table/view 'MSP-Ares.dbo.SolicitudProtur' does not have a prim
           <Property Name="Zona" Type="Byte" />
           <NavigationProperty Name="Provincia" Relationship="Model.FK_Departamento_Provincia" FromRole="Departamento" ToRole="Provincia" />
           <NavigationProperty Name="Localidad" Relationship="Model.FK_Localidad_Departamento" FromRole="Departamento" ToRole="Localidad" />
-        </EntityType>
-        <EntityType Name="DepartamentoBackUp">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Zona" Type="Byte" />
         </EntityType>
         <EntityType Name="Especialidad">
           <Key>
@@ -1233,21 +1259,13 @@ warning 6002: The table/view 'MSP-Ares.dbo.SolicitudProtur' does not have a prim
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="DepartamentoID" Type="Int16" Nullable="false" />
           <Property Name="Activa" Type="Boolean" Nullable="false" />
           <Property Name="id_access" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CentroDeSalud" Relationship="Model.FK_CentroDeSalud_Localidad" FromRole="Localidad" ToRole="CentroDeSalud" />
           <NavigationProperty Name="Departamento" Relationship="Model.FK_Localidad_Departamento" FromRole="Localidad" ToRole="Departamento" />
-        </EntityType>
-        <EntityType Name="LocalidadBackUp">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="DepartamentoID" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="CentroDeSalud" Relationship="Model.FK_CentroDeSalud_Localidad" FromRole="LocalidadBackUp" ToRole="CentroDeSalud" />
         </EntityType>
         <EntityType Name="Matricula">
           <Key>
@@ -1534,10 +1552,10 @@ warning 6002: The table/view 'MSP-Ares.dbo.SolicitudProtur' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CentroDeSalud_Localidad">
-          <End Type="Model.LocalidadBackUp" Role="LocalidadBackUp" Multiplicity="1" />
+          <End Type="Model.Localidad" Role="Localidad" Multiplicity="1" />
           <End Type="Model.CentroDeSalud" Role="CentroDeSalud" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="LocalidadBackUp">
+            <Principal Role="Localidad">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="CentroDeSalud">
@@ -1813,6 +1831,50 @@ warning 6002: The table/view 'MSP-Ares.dbo.SolicitudProtur' does not have a prim
           <End Type="Model.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
+        <EntityType Name="ProturEncuestador">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ProturEquivalenciasCaps">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="id_caps" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ProturRegistros">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TS" Type="Int64" Nullable="false" />
+          <Property Name="CS" Type="Int32" Nullable="false" />
+          <Property Name="PT" Type="Int32" Nullable="false" />
+          <Property Name="DC" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SP" Type="Int32" Nullable="false" />
+          <Property Name="NP" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PO" Type="Int32" Nullable="false" />
+          <Property Name="OS" Type="Int32" Nullable="false" />
+          <Property Name="TP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PD" Type="Int32" Nullable="false" />
+          <Property Name="DO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ET" Type="Int32" Nullable="false" />
+          <Property Name="TT" Type="Int32" Nullable="false" />
+          <Property Name="MT" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="Int32" />
+          <Property Name="EI" Type="Int32" />
+          <Property Name="PE" Type="Int32" />
+          <Property Name="PC" Type="Int32" />
+          <Property Name="FP" Type="DateTime" Precision="0" />
+          <Property Name="PM" Type="Int32" />
+          <Property Name="TA" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1849,6 +1911,8 @@ warning 6002: The table/view 'MSP-Ares.dbo.SolicitudProtur' does not have a prim
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="Model.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
@@ -1901,15 +1965,6 @@ warning 6002: The table/view 'MSP-Ares.dbo.SolicitudProtur' does not have a prim
                 <ScalarProperty Name="id_access" ColumnName="id_access" />
                 <ScalarProperty Name="Activa" ColumnName="Activa" />
                 <ScalarProperty Name="ProvinciaID" ColumnName="ProvinciaID" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DepartamentoBackUp">
-            <EntityTypeMapping TypeName="Model.DepartamentoBackUp">
-              <MappingFragment StoreEntitySet="DepartamentoBackUp">
-                <ScalarProperty Name="Zona" ColumnName="Zona" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -1978,15 +2033,6 @@ warning 6002: The table/view 'MSP-Ares.dbo.SolicitudProtur' does not have a prim
               <MappingFragment StoreEntitySet="Localidad">
                 <ScalarProperty Name="id_access" ColumnName="id_access" />
                 <ScalarProperty Name="Activa" ColumnName="Activa" />
-                <ScalarProperty Name="DepartamentoID" ColumnName="DepartamentoID" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LocalidadBackUp">
-            <EntityTypeMapping TypeName="Model.LocalidadBackUp">
-              <MappingFragment StoreEntitySet="LocalidadBackUp">
                 <ScalarProperty Name="DepartamentoID" ColumnName="DepartamentoID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -2217,6 +2263,53 @@ warning 6002: The table/view 'MSP-Ares.dbo.SolicitudProtur' does not have a prim
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="ProturEncuestador">
+            <EntityTypeMapping TypeName="Model.ProturEncuestador">
+              <MappingFragment StoreEntitySet="ProturEncuestador">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProturEquivalenciasCaps">
+            <EntityTypeMapping TypeName="Model.ProturEquivalenciasCaps">
+              <MappingFragment StoreEntitySet="ProturEquivalenciasCaps">
+                <ScalarProperty Name="id_caps" ColumnName="id_caps" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProturRegistros">
+            <EntityTypeMapping TypeName="Model.ProturRegistros">
+              <MappingFragment StoreEntitySet="ProturRegistros">
+                <ScalarProperty Name="TA" ColumnName="TA" />
+                <ScalarProperty Name="PM" ColumnName="PM" />
+                <ScalarProperty Name="FP" ColumnName="FP" />
+                <ScalarProperty Name="PC" ColumnName="PC" />
+                <ScalarProperty Name="PE" ColumnName="PE" />
+                <ScalarProperty Name="EI" ColumnName="EI" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="MT" ColumnName="MT" />
+                <ScalarProperty Name="TT" ColumnName="TT" />
+                <ScalarProperty Name="ET" ColumnName="ET" />
+                <ScalarProperty Name="DO" ColumnName="DO" />
+                <ScalarProperty Name="PD" ColumnName="PD" />
+                <ScalarProperty Name="TP" ColumnName="TP" />
+                <ScalarProperty Name="OS" ColumnName="OS" />
+                <ScalarProperty Name="PO" ColumnName="PO" />
+                <ScalarProperty Name="DP" ColumnName="DP" />
+                <ScalarProperty Name="NP" ColumnName="NP" />
+                <ScalarProperty Name="SP" ColumnName="SP" />
+                <ScalarProperty Name="PN" ColumnName="PN" />
+                <ScalarProperty Name="DC" ColumnName="DC" />
+                <ScalarProperty Name="PT" ColumnName="PT" />
+                <ScalarProperty Name="CS" ColumnName="CS" />
+                <ScalarProperty Name="TS" ColumnName="TS" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

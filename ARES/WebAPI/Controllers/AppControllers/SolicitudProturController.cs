@@ -85,30 +85,54 @@ namespace WebAPI.Controllers.AppControllers
             db.SolicitudProtur.Add(solicitudProtur);
             //db.SaveChanges();
 
-            return Json(new {ok=1, NuevoID=solicitudProtur.ID });
-
-            //return CreatedAtRoute("DefaultApi", new { id = solicitudProtur.ID }, solicitudProtur);
-            //return CreatedAtRoute("DefaultApi", new { id = 1 }, solicitudProtur);
+            return Json(new { ok = 1, NuevoID = solicitudProtur.ID });
         }
 
 
         [Route("Registro")]
-        [ResponseType(typeof(RegistroProtur))]
-        public IHttpActionResult PostRegistroProtur(List<RegistroProtur> RegistroProtur)
+        //[ResponseType(typeof(RegistroProtur))]
+        public IHttpActionResult PostRegistroProtur(List<ProturRegistros> RegistroProtur)//RegistroProtur
         {
+
+            var x = new DateTime(1504622796888);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            
+            try
+            {
 
 
-            //db.SaveChanges();
 
-            //return CreatedAtRoute("DefaultApi", new { id = solicitudProtur.ID }, solicitudProtur);
-            //return CreatedAtRoute("DefaultApi", new { id = 1 }, registro);
-            return Json(new { ok = 1 });
+                var cantRegistros = RegistroProtur.Count;
+                var cantInsertados = 0;
+
+                foreach (var reg in RegistroProtur)
+                {
+                    if (!db.ProturRegistros.Where(r => r.CS == reg.CS && r.TS == reg.TS).Any())
+                    {
+                        db.ProturRegistros.Add(reg);
+                        cantInsertados++;
+                    }
+                }
+
+                db.SaveChanges();
+
+                return Json(new
+                {
+                    ok = 1,
+                    cantRegistros = cantRegistros,
+                    cantInsertados = cantInsertados
+                });
+
+            }
+
+            catch (Exception e)
+            {
+
+                throw e;
+            }
         }
 
         // DELETE: api/SolicitudProtur/5

@@ -210,6 +210,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CentroDeSaludController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\Menu\MenuController.cs" />
@@ -230,6 +231,9 @@
     <Compile Include="Models\App Models\AccountViewModels.cs" />
     <Compile Include="Models\App Models\Menu\MenuAccionVM.cs" />
     <Compile Include="Models\App Models\Seguridad\PermisosVM.cs" />
+    <Compile Include="Models\AsignacionTipo.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -245,18 +249,46 @@
     <Compile Include="Models\CarreraMatriculada.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CentroDeSalud.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Departamento.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF Extended Models\AspNetRolesVM.cs" />
+    <Compile Include="Models\App Models\IdentityModels.cs" />
+    <Compile Include="Models\App Models\ManageViewModels.cs" />
+    <Compile Include="Models\App Models\Menu\MenuVM.cs" />
+    <Compile Include="Models\EF Extended Models\MatriculaVM.cs" />
+    <Compile Include="Models\EF Extended Models\PersonaVM.cs" />
+    <Compile Include="Models\App Models\RegProf\DigitDocs\DocsVM.cs" />
+    <Compile Include="Models\App Models\RegProf\DigitDocs\ProfVM.cs" />
+    <Compile Include="Models\App Models\RegProf\DigitDocs\TituloProfVM.cs" />
+    <Compile Include="Models\App Models\Seguridad\AspNetUsersVM.cs" />
+    <Compile Include="Models\Especialidad.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EspecialidadPorCentroDeSalud.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetPermisosPorNombreDeUsuario_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\App Models\IdentityModels.cs" />
+    <Compile Include="Models\Horarios.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HorariosPorEspecialidadPorCentroDeSalud.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LineaColectivo.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LineaColectivoPorCentroDeSalud.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Localidad.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\App Models\ManageViewModels.cs" />
     <Compile Include="Models\Matricula.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -269,21 +301,20 @@
     <Compile Include="Models\MenuAspNetRolesAccion.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\App Models\Menu\MenuVM.cs" />
     <Compile Include="Models\Modelo.Context.cs">
-      <DependentUpon>Modelo.Context.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Modelo.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Modelo.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Modelo.Designer.cs">
-      <DependentUpon>Modelo.edmx</DependentUpon>
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Modelo.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Organismo.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
@@ -294,16 +325,40 @@
     <Compile Include="Models\Persona.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EF Extended Models\MatriculaVM.cs" />
-    <Compile Include="Models\EF Extended Models\PersonaVM.cs" />
+    <Compile Include="Models\ProturEncuestador.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProturEquivalenciasCaps.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProturEquivalenciasDepartamentos.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProturMedios.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProturMotivos.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProturObrasSociales.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProturPueblosOriginarios.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProturRegistros.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProturTipoDeTurno.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Provincia.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\App Models\RegProf\DigitDocs\DocsVM.cs" />
-    <Compile Include="Models\App Models\RegProf\DigitDocs\ProfVM.cs" />
-    <Compile Include="Models\App Models\RegProf\DigitDocs\TituloProfVM.cs" />
-    <Compile Include="Models\App Models\Seguridad\AspNetUsersVM.cs" />
-    <Compile Include="Models\sysdiagrams.cs">
+    <Compile Include="Models\RegistroActualizacionTablas.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SolicitudProtur.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoDNI.cs">
@@ -354,6 +409,16 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Models\Modelo.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Modelo.edmx</DependentUpon>
+      <LastGenOutput>Modelo.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Modelo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Modelo.edmx</DependentUpon>
+      <LastGenOutput>Modelo.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\plugins\datatables\dataTables.responsive.css" />
     <Content Include="Content\old.bootstrap.min.css" />
     <Content Include="Content\bootstrap.min.css.map" />
@@ -512,19 +577,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\ionicons.ttf" />
     <Content Include="Global.asax" />
-    <Content Include="Models\Modelo.Context.tt">
-      <DependentUpon>Modelo.edmx</DependentUpon>
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Modelo.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Modelo.edmx.diagram">
-      <DependentUpon>Modelo.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\Modelo.tt">
-      <DependentUpon>Modelo.edmx</DependentUpon>
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Modelo.cs</LastGenOutput>
-    </Content>
     <Content Include="Reportes\EjecutarReportes.aspx" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -541,6 +593,13 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <EntityDeploy Include="Models\Modelo.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Modelo.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Modelo.edmx.diagram">
+      <DependentUpon>Modelo.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\MSP-RegProf.pubxml" />
     <None Include="Properties\PublishProfiles\MSP.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
@@ -1531,6 +1590,11 @@
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\Permisos.cshtml" />
     <Content Include="Views\Users\SetRoles.cshtml" />
+    <Content Include="Views\CentroDeSalud\Create.cshtml" />
+    <Content Include="Views\CentroDeSalud\Delete.cshtml" />
+    <Content Include="Views\CentroDeSalud\Details.cshtml" />
+    <Content Include="Views\CentroDeSalud\Edit.cshtml" />
+    <Content Include="Views\CentroDeSalud\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1573,12 +1637,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="Models\Modelo.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Modelo.Designer.cs</LastGenOutput>
-    </EntityDeploy>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

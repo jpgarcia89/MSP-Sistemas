@@ -1,0 +1,95 @@
+﻿@model MSP_Certificados.Models.Certificado
+
+@{
+    ViewBag.Title = "Delete";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <h4><i class="icon fa fa-ban"></i> Atencion!</h4>
+    ¿Esta seguro que desea eliminar este elemento?
+</div>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Establecimiento
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CertificadoEstablecimiento.Denominacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaEmision)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaEmision)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaDesde)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaDesde)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaHasta)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaHasta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NroExpediente)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NroExpediente)
+        </dd>
+
+        <dt>
+            Tipo Certificado
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TipoCertificado.Denominacion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+    }
+
+</div>
+<script>
+    $(function () {
+        //Click "Guardar"
+        $("#btnGuardar").unbind("click");
+        $("#btnGuardar").click(function () {
+            //debugger
+            $('#contenidoModal form').submit()
+        });
+
+        //Submit
+        $('form').submit(function () {
+            //debugger
+            if ($(this).valid()) {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        //debugger
+                        if (result.ok) {
+                            window.location.href = window.location.href;
+                            return;
+                        }
+                        $('#contenidoModal').html(result);
+                    }
+                });
+            }
+            return false;
+        });
+    });
+
+</script>

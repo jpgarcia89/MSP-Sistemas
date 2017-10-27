@@ -32,7 +32,6 @@ namespace WebAPI.Models.Entity_Model
         public virtual DbSet<CarreraMatriculada> CarreraMatriculada { get; set; }
         public virtual DbSet<CentroDeSalud> CentroDeSalud { get; set; }
         public virtual DbSet<Departamento> Departamento { get; set; }
-        public virtual DbSet<DepartamentoBackUp> DepartamentoBackUp { get; set; }
         public virtual DbSet<Especialidad> Especialidad { get; set; }
         public virtual DbSet<EspecialidadPorCentroDeSalud> EspecialidadPorCentroDeSalud { get; set; }
         public virtual DbSet<Horarios> Horarios { get; set; }
@@ -40,7 +39,6 @@ namespace WebAPI.Models.Entity_Model
         public virtual DbSet<LineaColectivo> LineaColectivo { get; set; }
         public virtual DbSet<LineaColectivoPorCentroDeSalud> LineaColectivoPorCentroDeSalud { get; set; }
         public virtual DbSet<Localidad> Localidad { get; set; }
-        public virtual DbSet<LocalidadBackUp> LocalidadBackUp { get; set; }
         public virtual DbSet<Matricula> Matricula { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<Organismo> Organismo { get; set; }
@@ -58,5 +56,8 @@ namespace WebAPI.Models.Entity_Model
         public virtual DbSet<Titulo> Titulo { get; set; }
         public virtual DbSet<AsignacionTipo> AsignacionTipo { get; set; }
         public virtual DbSet<SolicitudProtur> SolicitudProtur { get; set; }
+        public virtual DbSet<ProturEncuestador> ProturEncuestador { get; set; }
+        public virtual DbSet<ProturEquivalenciasCaps> ProturEquivalenciasCaps { get; set; }
+        public virtual DbSet<ProturRegistros> ProturRegistros { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace MSP_RegProf.Helpers
         //Renderizado de Menu(Panel Izquerdo)
         #region Renderizado de Menu(Panel Izquerdo)
         public static MvcHtmlString RenderMenu(List<MenuVM> menus)//this HtmlHelper helper, 
-        {            
+        {
             var menusPadres = menus == null ? null : menus.Where(r => r.PadreID == null).ToList();
             return MvcHtmlString.Create(createMenu(menusPadres, menus));
         }
@@ -29,7 +29,7 @@ namespace MSP_RegProf.Helpers
 
                         if (menusAll.Where(r => r.PadreID == item.ID).Any())
                         {
-                            string a = string.Format(@"<li><a href=""#""><i class=""{1}""></i> {0} <span class=""pull-right-container""><i class=""fa fa-angle-left pull-right""></i></span></a><ul class=""treeview-menu"">", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o text-aqua": item.Icono);
+                            string a = string.Format(@"<li><a href=""#""><i class=""{1}""></i> {0} <span class=""pull-right-container""><i class=""fa fa-angle-left pull-right""></i></span></a><ul class=""treeview-menu"">", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o text-aqua" : item.Icono);
                             output += a;
 
                             output = createMenu(menusAll.Where(r => r.PadreID == item.ID).ToList(), menusAll, output);
@@ -43,12 +43,12 @@ namespace MSP_RegProf.Helpers
                             string url;// = "";
                             url = System.Configuration.ConfigurationManager.AppSettings["SystemPath"];
 
-//#if (DEBUG == true)
-//         url = "";                       
-//#endif
+                            //#if (DEBUG == true)
+                            //         url = "";                       
+                            //#endif
 
-                            url += "/" + item.Controlador + "/" + (accion=="Index"?String.Empty:accion);
-                            string c = string.Format(@"<li><a href=""{1}""><i class=""{2}""></i> {0} </a></li>", item.Nombre, url, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o text-aqua": item.Icono);
+                            url += "/" + item.Controlador + "/" + (accion == "Index" ? String.Empty : accion);
+                            string c = string.Format(@"<li><a href=""{1}""><i class=""{2}""></i> {0} </a></li>", item.Nombre, url, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o text-aqua" : item.Icono);
                             output += c;
                         }
                     }
@@ -59,21 +59,34 @@ namespace MSP_RegProf.Helpers
 
                     foreach (var item in menusPadres)
                     {
-                        string x = string.Format(@"<li class=""treeview""><a href = ""#"" ><i class=""{1}""></i><span> {0} </span><span class=""pull-right-container""><i class=""fa fa-angle-left pull-right""></i></span></a>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o": item.Icono);
-                        output += x;
-
-                        if (menusAll.Where(r => r.PadreID == item.ID).Any())
+                        if (!menusAll.Where(r => r.PadreID == item.ID).Any())//El Menu es padre pero no tiene descendientes
                         {
-                            string y = @"<ul class=""treeview-menu"">";
-                            output += y;
+                            string accion = string.IsNullOrEmpty(item.Accion) ? "" : item.Accion;
+                            string url;
+                            url = System.Configuration.ConfigurationManager.AppSettings["SystemPath"];
 
-                            output = createMenu(menusAll.Where(r => r.PadreID == item.ID).ToList(), menusAll, output);
-
-                            string z = @"</ul>";
-                            output += z;
+                            url += "/" + item.Controlador + "/" + (accion == "Index" ? String.Empty : accion);
+                            string c = string.Format(@"<li><a href=""{1}""><i class=""{2}""></i> {0} </a></li>", item.Nombre, url, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o text-aqua" : item.Icono);
+                            output += c;
                         }
-                        output += "</li>";
+                        else // El Menu es padre y tiene descendientes
+                        {
 
+                            string x = string.Format(@"<li class=""treeview""><a href = ""#"" ><i class=""{1}""></i><span> {0} </span><span class=""pull-right-container""><i class=""fa fa-angle-left pull-right""></i></span></a>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono);
+                            output += x;
+
+                            if (menusAll.Where(r => r.PadreID == item.ID).Any())
+                            {
+                                string y = @"<ul class=""treeview-menu"">";
+                                output += y;
+
+                                output = createMenu(menusAll.Where(r => r.PadreID == item.ID).ToList(), menusAll, output);
+
+                                string z = @"</ul>";
+                                output += z;
+                            }
+                            output += "</li>";
+                        }
                     }
 
                 }
@@ -105,11 +118,11 @@ namespace MSP_RegProf.Helpers
                 {
                     foreach (var item in menusPadres)
                     {
-                        
+
 
                         if (menusAll.Where(r => r.PadreID == item.ID).Any())
                         {
-                            string a = string.Format(@"<li id=""{2}"" data-jstree='{{""icon"":""{1}""}}'> {0} <ul>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono, "menu_"+item.ID);
+                            string a = string.Format(@"<li id=""{2}"" data-jstree='{{""icon"":""{1}""}}'> {0} <ul>", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono, "menu_" + item.ID);
                             output += a;
 
                             output = createTreeMenu(menusAll.Where(r => r.PadreID == item.ID).ToList(), menusAll, output);
@@ -122,15 +135,15 @@ namespace MSP_RegProf.Helpers
                             //string accion = string.IsNullOrEmpty(item.Accion) ? "" : item.Accion;
                             //string url = "";
 
-                        //#if (DEBUG == false)
-                        //    url = "/SRProfTest";
-                        //#endif
+                            //#if (DEBUG == false)
+                            //    url = "/SRProfTest";
+                            //#endif
 
                             //url += "/" + item.Controlador + "/" + (accion == "Index" ? String.Empty : accion);
                             //string c = string.Format(@"<li> {0} </li>", item.Nombre);
                             //output += c;
 
-                            if (item.Accion1!=null) //La Propiedad "Accion1" Navega la relacion "Menu => Accion"
+                            if (item.Accion1 != null) //La Propiedad "Accion1" Navega la relacion "Menu => Accion"
                             {
                                 //    < ul >
                                 //        < li > Digitalizacion de documentos </ li >  
@@ -165,7 +178,7 @@ namespace MSP_RegProf.Helpers
 
                     foreach (var item in menusPadres)
                     {
-                        string x = string.Format(@"<li id=""{2}"" data-jstree='{{""icon"":""{1}""}}'> {0} ", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono, "menu_"+ item.ID);
+                        string x = string.Format(@"<li id=""{2}"" data-jstree='{{""icon"":""{1}""}}'> {0} ", item.Nombre, string.IsNullOrEmpty(item.Icono) ? "fa fa-circle-o" : item.Icono, "menu_" + item.ID);
                         output += x;
 
                         if (menusAll.Where(r => r.PadreID == item.ID).Any())

@@ -28,7 +28,7 @@ namespace MSP_RegProf.Models
         public Nullable<byte> EstadoCivilID { get; set; }
         public Nullable<byte> SexoID { get; set; }
         public Nullable<System.DateTime> FechaNacimiento { get; set; }
-        public Nullable<int> LocalidadID { get; set; }
+        public Nullable<short> LocalidadID { get; set; }
         public string CodigoPostal { get; set; }
         public string DomicilioCalle { get; set; }
         public string DomicilioNumero { get; set; }
@@ -49,13 +49,11 @@ namespace MSP_RegProf.Models
         public System.DateTime FechaAlta { get; set; }
         public Nullable<System.DateTime> FechaFallecido { get; set; }
     
-        public virtual Localidad Localidad { get; set; }
-        public virtual Localidad Localidad1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Matricula> Matricula { get; set; }
+        public virtual Pais Pais { get; set; }
         public virtual TipoDNI TipoDNI { get; set; }
         public virtual TipoEstadoCivil TipoEstadoCivil { get; set; }
         public virtual TipoSexo TipoSexo { get; set; }
-        public virtual Pais Pais { get; set; }
     }
 }

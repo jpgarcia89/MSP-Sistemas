@@ -20,11 +20,12 @@ namespace MSP_RegProf.Models
             this.Localidad = new HashSet<Localidad>();
         }
     
-        public int ID { get; set; }
+        public short ID { get; set; }
         public string Nombre { get; set; }
         public byte ProvinciaID { get; set; }
         public bool Activa { get; set; }
         public Nullable<int> id_access { get; set; }
+        public Nullable<byte> Zona { get; set; }
     
         public virtual Provincia Provincia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

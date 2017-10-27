@@ -79,8 +79,8 @@ namespace MSP_RegProf.Models
         public System.DateTime FechaAlta { get; set; }
         public Nullable<System.DateTime> FechaFallecido { get; set; }
 
-        public virtual Localidad Localidad { get; set; }
-        public virtual Localidad Localidad1 { get; set; }
+        //public virtual Localidad Localidad { get; set; }
+        //public virtual Localidad Localidad1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Matricula> Matricula { get; set; }
         public virtual TipoDNI TipoDNI { get; set; }

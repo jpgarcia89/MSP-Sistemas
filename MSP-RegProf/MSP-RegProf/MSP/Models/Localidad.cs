@@ -17,20 +17,17 @@ namespace MSP_RegProf.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Localidad()
         {
-            this.Persona = new HashSet<Persona>();
-            this.Persona1 = new HashSet<Persona>();
+            this.CentroDeSalud = new HashSet<CentroDeSalud>();
         }
     
-        public int ID { get; set; }
+        public short ID { get; set; }
         public string Nombre { get; set; }
-        public int DepartamentoID { get; set; }
+        public short DepartamentoID { get; set; }
         public bool Activa { get; set; }
         public string id_access { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CentroDeSalud> CentroDeSalud { get; set; }
         public virtual Departamento Departamento { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Persona> Persona { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Persona> Persona1 { get; set; }
     }
 }
