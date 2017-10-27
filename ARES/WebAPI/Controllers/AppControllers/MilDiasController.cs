@@ -18,9 +18,9 @@ namespace WebAPI.Controllers.AppControllers
         {
             try
             {
-                if (string.IsNullOrEmpty(data.mensaje))
+                if (string.IsNullOrEmpty(data.Mensaje))
                 {
-                    data.mensaje = "yeya fuhrer?";
+                    data.Mensaje = "yeya fuhrer?";
                 }
 
                 return Json(true);
@@ -38,7 +38,13 @@ namespace WebAPI.Controllers.AppControllers
 
     public class SMS
     {
-        public string mensaje { get; set; }
+        public string Mensaje { get; set; }
+
+        public Int32 Telefono { get; set; }
+
+        public string DNI { get; set; }
+
+        public string Carrier { get; set; }
     }
 
 }
