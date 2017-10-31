@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -22,13 +23,14 @@ namespace WebAPI.Controllers.AppControllers
                 {
                     data.Mensaje = "yeya fuhrer?";
                 }
-
+                //Console.WriteLine(data.DNI + " " + data.Mensaje);
+                Debug.WriteLine(data.DNI + " " + data.Mensaje);
                 return Json(true);
 
             }
             catch (Exception)
             {
-
+                
                 return Json(false);
             }           
             
