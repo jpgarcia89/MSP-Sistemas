@@ -24,7 +24,7 @@ namespace WebAPI.Controllers.AppControllers
                     data.Mensaje = "yeya fuhrer?";
                 }
                 //Console.WriteLine(data.DNI + " " + data.Mensaje);
-                Debug.WriteLine(data.DNI + " " + data.Mensaje);
+                Debug.WriteLine("|||||||| DNI:"+data.DNI + "  -- Carrier: " + data.Carrier + "  -- MSJ: " + data.Mensaje);
                 return Json(true);
 
             }
