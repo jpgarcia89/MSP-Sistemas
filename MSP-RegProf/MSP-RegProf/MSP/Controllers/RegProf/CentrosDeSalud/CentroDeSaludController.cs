@@ -10,6 +10,7 @@ using MSP_RegProf.Models;
 
 namespace MSP_RegProf.Controllers
 {
+    [Authorize]
     public class CentroDeSaludController : Controller
     {
         private MSPEntities db = new MSPEntities();
@@ -74,6 +75,7 @@ namespace MSP_RegProf.Controllers
                 return HttpNotFound();
             }
             ViewBag.LocalidadID = new SelectList(db.Localidad, "ID", "Nombre", centroDeSalud.LocalidadID);
+            ViewBag.DepartamentoID = new SelectList(db.Departamento, "ID", "Nombre", centroDeSalud.Localidad.DepartamentoID);
             return View(centroDeSalud);
         }
 
@@ -128,5 +130,25 @@ namespace MSP_RegProf.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
+
+
+        public ActionResult _EspecialidadesPartial()
+        {
+            return PartialView();
+        }
+
+
+
+
+
+
+
+
+
+
+
     }
 }

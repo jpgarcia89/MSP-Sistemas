@@ -10,26 +10,24 @@ using System.Web.Http.Description;
 
 namespace WebAPI.Controllers.AppControllers
 {
-    [RoutePrefix("api/MilDias")]
+    [RoutePrefix("MilDias")]
     public class MilDiasController : ApiController
     {
+
 
         [Route("Prueba")]
         [ResponseType(typeof(Boolean))]
         public IHttpActionResult PostPrueba(SMS data)
         {
-#if DEBUG
+            #if DEBUG
             TelemetryConfiguration.Active.DisableTelemetry = true;
-#endif
+            #endif
 
             try
             {
-                if (string.IsNullOrEmpty(data.Mensaje))
-                {
-                    data.Mensaje = "yeya fuhrer?";
-                }
+                
                 //Console.WriteLine(data.DNI + " " + data.Mensaje);
-                Debug.WriteLine("DATOS:{ DNI:" + data.DNI + "  -- Carrier: " + data.Carrier + "  -- MSJ: " + data.Mensaje + "}");
+                Debug.WriteLine("DATOS:{ InstanceID: " + data.ID_Instancia + "  -- MES: " + data.Mes + "  -- MSJ: " + data.Mensaje + "}");
 
                 return Json(true);
 

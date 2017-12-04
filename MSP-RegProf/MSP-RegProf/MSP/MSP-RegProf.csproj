@@ -210,7 +210,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CentroDeSaludController.cs" />
+    <Compile Include="Controllers\RegProf\CentrosDeSalud\CentroDeSaludController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\Menu\MenuController.cs" />
@@ -265,6 +265,7 @@
     <Compile Include="Models\App Models\RegProf\DigitDocs\ProfVM.cs" />
     <Compile Include="Models\App Models\RegProf\DigitDocs\TituloProfVM.cs" />
     <Compile Include="Models\App Models\Seguridad\AspNetUsersVM.cs" />
+    <Compile Include="Models\EnumDias.cs" />
     <Compile Include="Models\Especialidad.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -1595,6 +1596,9 @@
     <Content Include="Views\CentroDeSalud\Details.cshtml" />
     <Content Include="Views\CentroDeSalud\Edit.cshtml" />
     <Content Include="Views\CentroDeSalud\Index.cshtml" />
+    <Content Include="Views\CentroDeSalud\EditEspecialidades.cshtml" />
+    <Content Include="Views\CentroDeSalud\EditLineasDeColectivos.cshtml" />
+    <Content Include="Views\CentroDeSalud\_EspecialidadesPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

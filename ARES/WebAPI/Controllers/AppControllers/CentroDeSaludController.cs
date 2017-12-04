@@ -115,10 +115,101 @@ namespace WebAPI.Controllers.AppControllers
             //return Ok(centroDeSalud);
         }
 
-        // GET: api/CentroDeSalud/5/EspecialidadesYHorarios
+
+        // GET: api/CentroDeSalud/EspecialidadesYHorarios ---GetHorarios
+        [Route("EspecialidadesYHorarios")]
+        [ResponseType(typeof(EspecialidadHorariosVM))]
+        public IHttpActionResult GetHorarios()
+        {
+            List<CentroDeSalud> CentrosDeSalud = db.CentroDeSalud.ToList();
+            if (CentrosDeSalud == null)
+            {
+                return NotFound();
+            }
+
+
+            List<CentroDeSaludEspecialidadHorariosVM> CentrosDeSaludVM = new List<CentroDeSaludEspecialidadHorariosVM>();
+            //Itera en la coleccion de Centros de Salud
+            foreach (var cs in CentrosDeSalud)
+            {
+                //Info del Centro de Salud
+                var itemCS = new CentroDeSaludEspecialidadHorariosVM()
+                {
+                    ID = cs.ID,
+                    Nombre = cs.Nombre,
+                    EspecialidadHorarios = new List<EspecialidadHorariosVM>()
+                };
+
+                //Itera en la coleccion de Especialidades asociadas al CS
+                foreach (var esp in cs.EspecialidadPorCentroDeSalud.Where(r => r.Activo).ToList())
+                {
+                    //Info Especialidad
+                    var itemEsp = new EspecialidadHorariosVM()
+                    {
+                        ID = esp.Especialidad.ID,
+                        Nombre = esp.Especialidad.Nombre,
+                        Horarios = new List<HorariosVM>()
+                    };
+
+                    //Itera en la coleccion de Dias y Horarios asociados a la Especialidad
+                    foreach (var hr in esp.HorariosPorEspecialidadPorCentroDeSalud.Where(r => r.Activo))
+                    {
+                        string dia = "";
+
+                        switch (hr.Dia)
+                        {
+                            case 1:
+                                dia = "Lunes";
+                                break;
+                            case 2:
+                                dia = "Martes";
+                                break;
+                            case 3:
+                                dia = "Miércoles";
+                                break;
+                            case 4:
+                                dia = "Jueves";
+                                break;
+                            case 5:
+                                dia = "Viernes";
+                                break;
+                            case 6:
+                                dia = "Sábado";
+                                break;
+                            case 7:
+                                dia = "Domingo";
+                                break;
+
+                        }
+
+                        //Info Dia y Horario
+                        var itemHr = new HorariosVM()
+                        {
+                            Dia = dia,
+                            HorarioEntrada = hr.Horarios.Hora,
+                            HorarioSalida = hr.Horarios1.Hora
+
+                        };
+
+                        itemEsp.Horarios.Add(itemHr);
+                    }
+
+                    itemCS.EspecialidadHorarios.Add(itemEsp);
+                }
+
+                CentrosDeSaludVM.Add(itemCS);
+
+            }
+
+
+
+            return Json(CentrosDeSaludVM);
+        }
+
+        // GET: api/CentroDeSalud/5/EspecialidadesYHorarios ---GetHorarios
         [Route("{id}/EspecialidadesYHorarios")]
         [ResponseType(typeof(CentroDeSalud))]
-        public IHttpActionResult GetHorarios(short id)
+        public IHttpActionResult GetHorariosPorCentroDeSalud(short id)
         {
             CentroDeSalud centroDeSalud = db.CentroDeSalud.Find(id);
             if (centroDeSalud == null)
@@ -184,10 +275,10 @@ namespace WebAPI.Controllers.AppControllers
             return Json(especialidades);
         }
 
-        // GET: api/CentroDeSalud/5/EspecialidadesYHorarios
+        // GET: api/CentroDeSalud/5/EspecialidadesYHorarios ---GetLineasColectivos
         [Route("{id}/LineasDeColectivos")]
         [ResponseType(typeof(CentroDeSalud))]
-        public IHttpActionResult GetLineasColectivos(short id)
+        public IHttpActionResult GetLineasColectivosPorCentroDeSalud(short id)
         {
             CentroDeSalud centroDeSalud = db.CentroDeSalud.Find(id);
             if (centroDeSalud == null)

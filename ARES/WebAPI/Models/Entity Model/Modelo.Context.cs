@@ -54,10 +54,9 @@ namespace WebAPI.Models.Entity_Model
         public virtual DbSet<TipoNivelAcademico> TipoNivelAcademico { get; set; }
         public virtual DbSet<TipoSexo> TipoSexo { get; set; }
         public virtual DbSet<Titulo> Titulo { get; set; }
-        public virtual DbSet<AsignacionTipo> AsignacionTipo { get; set; }
-        public virtual DbSet<SolicitudProtur> SolicitudProtur { get; set; }
         public virtual DbSet<ProturEncuestador> ProturEncuestador { get; set; }
         public virtual DbSet<ProturEquivalenciasCaps> ProturEquivalenciasCaps { get; set; }
         public virtual DbSet<ProturRegistros> ProturRegistros { get; set; }
+        public virtual DbSet<SolicitudProtur> SolicitudProtur { get; set; }
     }
 }

@@ -17,73 +17,28 @@ namespace WebAPI.Controllers.AppControllers
     public class SolicitudProturController : ApiController
     {
         private Entidades db = new Entidades();
-
-        // GET: api/SolicitudProtur
-        //public IQueryable<SolicitudProtur> GetSolicitudProtur()
-        //{
-        //    return db.SolicitudProtur;
-        //}
-
-        // GET: api/SolicitudProtur/5
-        //[ResponseType(typeof(SolicitudProtur))]
-        //public IHttpActionResult GetSolicitudProtur(int id)
-        //{
-        //    SolicitudProtur solicitudProtur = db.SolicitudProtur.Find(id);
-        //    if (solicitudProtur == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(solicitudProtur);
-        //}
-
-        // PUT: api/SolicitudProtur/5
-        //[ResponseType(typeof(void))]
-        //public IHttpActionResult PutSolicitudProtur(int id, SolicitudProtur solicitudProtur)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    if (id != solicitudProtur.ID)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    db.Entry(solicitudProtur).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!SolicitudProturExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
+        
 
         // POST: api/SolicitudProtur
         [Route("Solicitud")]
         [ResponseType(typeof(SolicitudProtur))]
         public IHttpActionResult PostSolicitudProtur(SolicitudProtur solicitudProtur)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            solicitudProtur.Fecha = DateTime.Now;
 
             db.SolicitudProtur.Add(solicitudProtur);
-            //db.SaveChanges();
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                var x = e.InnerException.Message;
+                return Json(new { ok = 0});
+
+                //InnerException = {"An error occurred while updating the entries. See the inner exception for details."}
+            }
 
             return Json(new { ok = 1, NuevoID = solicitudProtur.ID });
         }

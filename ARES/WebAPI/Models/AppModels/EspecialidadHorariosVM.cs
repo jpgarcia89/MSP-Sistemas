@@ -5,6 +5,17 @@ using System.Web;
 
 namespace WebAPI.Models
 {
+
+    public class CentroDeSaludEspecialidadHorariosVM
+    {
+        public int ID { get; set; }
+
+        public string Nombre { get; set; }
+
+        public List<EspecialidadHorariosVM> EspecialidadHorarios { get; set; }
+
+    }
+
     public class EspecialidadHorariosVM
     {
         public int ID { get; set; }

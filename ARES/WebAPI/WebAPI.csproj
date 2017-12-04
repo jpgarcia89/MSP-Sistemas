@@ -241,7 +241,13 @@
     <Compile Include="Controllers\AppControllers\LocalidadController.cs" />
     <Compile Include="Controllers\AppControllers\PortalController.cs" />
     <Compile Include="Controllers\AppControllers\SolicitudProturController.cs" />
+    <Compile Include="Controllers\AppControllers\EspecialidadController.cs" />
+    <Compile Include="Controllers\AppControllers\EspecialidadPorCentroDeSaludController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\AppControllers\HorariosController.cs" />
+    <Compile Include="Controllers\AppControllers\HorariosPorEspecialidadPorCentroDeSaludController.cs" />
+    <Compile Include="Controllers\AppControllers\LineaColectivoController.cs" />
+    <Compile Include="Controllers\AppControllers\LineaColectivoPorCentroDeSaludController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -252,9 +258,6 @@
     <Compile Include="Models\AppModels\LineaColectivoVM.cs" />
     <Compile Include="Models\AppModels\EspecialidadHorariosVM.cs" />
     <Compile Include="Models\AppModels\Info.cs" />
-    <Compile Include="Models\Entity Model\AsignacionTipo.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Entity Model\AspNetRoles.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
