@@ -1,4 +1,6 @@
-﻿@model MSP_RegProf.Models.EspecialidadPorCentroDeSalud
+﻿@model List<MSP_RegProf.Models.EspecialidadPorCentroDeSalud>
+@using MSP_RegProf.Models
+
 
 <!-- Box - Especialidades y Horarios -->
 <div class="box box-primary">
@@ -21,9 +23,9 @@
                     <!-- Lista de Especialidades-->
                     <div class="row">
 
-                        @if (Model != null && Model.EspecialidadPorCentroDeSalud != null)
+                        @if (Model != null )
                         {
-                            foreach (var Especialidad in Model.EspecialidadPorCentroDeSalud.OrderBy(r => r.Especialidad.Nombre).ToList())
+                            foreach (var Especialidad in Model.OrderBy(r => r.Especialidad.Nombre).ToList())
                             {
                                         <!-- Acordion -->
                                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">

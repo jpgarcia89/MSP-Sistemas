@@ -280,7 +280,7 @@
     </div>
 
 
-    @Html.RenderPartial("_EspecialidadesPartial")
+    @Html.Partial("_EspecialidadesPartial", Model.EspecialidadPorCentroDeSalud.ToList())
 
     <!-- Box - Especialidades y Horarios -->
     <div class="box box-primary">
