@@ -1596,7 +1596,7 @@
     <Content Include="Views\CentroDeSalud\Details.cshtml" />
     <Content Include="Views\CentroDeSalud\Edit.cshtml" />
     <Content Include="Views\CentroDeSalud\Index.cshtml" />
-    <Content Include="Views\CentroDeSalud\EditEspecialidades.cshtml" />
+    <Content Include="Views\CentroDeSalud\CreateEspecialidad.cshtml" />
     <Content Include="Views\CentroDeSalud\EditLineasDeColectivos.cshtml" />
     <Content Include="Views\CentroDeSalud\_EspecialidadesPartial.cshtml" />
   </ItemGroup>

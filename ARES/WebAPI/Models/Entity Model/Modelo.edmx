@@ -5,8 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'MSP-Ares-Desarrollo.dbo.AsignacionTipo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -275,15 +273,15 @@ warning 6002: The table/view 'MSP-Ares-Desarrollo.dbo.AsignacionTipo' does not h
           <Property Name="CS" Type="int" Nullable="false" />
           <Property Name="PT" Type="int" Nullable="false" />
           <Property Name="DC" Type="date" Nullable="false" />
-          <Property Name="PN" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PN" Type="varchar" MaxLength="255" />
           <Property Name="SP" Type="int" Nullable="false" />
           <Property Name="NP" Type="date" Nullable="false" />
-          <Property Name="DP" Type="varchar" MaxLength="20" />
+          <Property Name="DP" Type="varchar" MaxLength="255" />
           <Property Name="PO" Type="int" Nullable="false" />
           <Property Name="OS" Type="int" Nullable="false" />
-          <Property Name="TP" Type="varchar" MaxLength="50" />
+          <Property Name="TP" Type="varchar" MaxLength="255" />
           <Property Name="PD" Type="int" Nullable="false" />
-          <Property Name="DO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DO" Type="varchar" MaxLength="255" />
           <Property Name="ET" Type="int" Nullable="false" />
           <Property Name="TT" Type="int" Nullable="false" />
           <Property Name="MT" Type="int" Nullable="false" />
@@ -1780,15 +1778,15 @@ warning 6002: The table/view 'MSP-Ares-Desarrollo.dbo.AsignacionTipo' does not h
           <Property Name="CS" Type="Int32" Nullable="false" />
           <Property Name="PT" Type="Int32" Nullable="false" />
           <Property Name="DC" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="PN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PN" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="SP" Type="Int32" Nullable="false" />
           <Property Name="NP" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DP" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="PO" Type="Int32" Nullable="false" />
           <Property Name="OS" Type="Int32" Nullable="false" />
-          <Property Name="TP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TP" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="PD" Type="Int32" Nullable="false" />
-          <Property Name="DO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="ET" Type="Int32" Nullable="false" />
           <Property Name="TT" Type="Int32" Nullable="false" />
           <Property Name="MT" Type="Int32" Nullable="false" />

@@ -135,8 +135,10 @@ namespace MSP_RegProf.Controllers
 
 
 
-        public ActionResult _EspecialidadesPartial()
+        public ActionResult CreateEspecialidad()
         {
+            ViewBag.EspecialidadID = new SelectList(db.Especialidad, "ID", "Nombre");
+
             return PartialView();
         }
 
