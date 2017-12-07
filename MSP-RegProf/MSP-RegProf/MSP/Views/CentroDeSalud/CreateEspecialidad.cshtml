@@ -1,5 +1,5 @@
 ﻿@model MSP_RegProf.Models.EspecialidadPorCentroDeSalud
-
+@using MSP_RegProf.Models
 
 
 <style>
@@ -42,255 +42,58 @@
                 </div>
             </div>
 
-            <!-- Grupo 2 -Dias y Horarios -->
+            
+
+            <!-- Grupo 3 -Dias y Horarios (Mejor programado)-->
             <div class="row">
                 <fieldset id="fsDiasYHorarios">
                     <legend>Dias y Horarios:</legend>
 
-                    <!-- Check Lunes -->
-                    <div class="container">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="1">
-                                Lunes
-                            </label>
-                        </div>
-                        <div id="rowHorario_1_1" class="row">
-                            <!-- id="rowHorario_[Id_Dia]_[Nro_Fila]" -->
-                            <div class="col-md-5">
-                                <div class="form-group row">
-                                    <label class="control-label col-md-4 col-md-offset-2" for="HoraDesde">Desde: </label>
-                                    <div class="col-md-4 col-md-offset-1">
-                                        <input type="text" class="form-control " id="HoraDesde_1_1" placeholder="08:00">
+                    @for (int i = 1; i <= 7; i++)
+                    {
+                        <!-- Check @((Dias)i) -->
+                        <div class="container">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="@i">
+                                    @((Dias)i)
+                                </label>
+                            </div>
+                            <div id="rowHorario_@(i)_1" class="row">
+                                <!-- id="rowHorario_[Id_Dia]_[Nro_Fila]" -->
+                                <div class="col-md-5">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-4 col-md-offset-2" for="HoraDesde">Desde: </label>
+                                        <div class="col-md-4 col-md-offset-1">
+                                            <input type="text" class="form-control " id="HoraDesde_@(i)_1" placeholder="08:00">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col-md-5">
-                                <div class="form-group row">
-                                    <label class="control-label col-md-4" for="HoraHasta">Hasta: </label>
-                                    <div class="col-md-4 col-md-offset-1">
-                                        <input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraHasta_1_1" placeholder="13:00">
+                                <div class="col-md-5">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-4" for="HoraHasta">Hasta: </label>
+                                        <div class="col-md-4 col-md-offset-1">
+                                            <input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraHasta_@(i)_1" placeholder="13:00">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col-md-2">
-                                <button id="btnAdd_1_1" type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-plus"></i></button>
-                                <button id="btnDelete_1_1" type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-minus"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Check Martes -->
-                    <div class="container">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="2">
-                                Martes
-                            </label>
-                        </div>
-                        <div id="rowHorario_2_1" class="row">
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label class="control-label col-md-4 col-md-offset-2" for="HoraDesde">Desde: </label>
-                                    <div class="col-md-4 col-md-offset-1">
-                                        <input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraDesde_2_1" placeholder="08:00">
-                                    </div>
+                                <div id="divBtns_@(i)_1" class="col-md-2">
+                                    <button id="btnAdd_@(i)_1" type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-plus"></i></button>
+                                    @*<button id="btnDelete_1_1" type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-minus"></i></button>*@
                                 </div>
                             </div>
-
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label class="control-label col-md-4" for="HoraHasta">Hasta: </label>
-                                    <div class="col-md-4 col-md-offset-1">
-                                        <input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraHasta_2_1" placeholder="13:00">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="btn_2_1" class="col-md-2">
-                                <button type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-plus"></i></button>
-                                <button type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-minus"></i></button>
-                            </div>
                         </div>
-                    </div>
+                    }
 
-                    <!-- Check Miercoles -->
-                    <div class="container">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="3">
-                                Miercoles
-                            </label>
-                        </div>
-                        <div id="rowHorario_3_1" class="row">
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label class="control-label col-md-4 col-md-offset-2" for="HoraDesde">Desde: </label>
-                                    <div class="col-md-4 col-md-offset-1">
-                                        <input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraDesde_3_1" placeholder="08:00">
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label class="control-label col-md-4" for="HoraHasta">Hasta: </label>
-                                    <div class="col-md-4 col-md-offset-1">
-                                        <input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraHasta_3_1" placeholder="13:00">
-                                    </div>
-                                </div>
-                            </div>
+                    
 
-                            <div id="btn_3_1" class="col-md-2">
-                                <button type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-plus"></i></button>
-                                <button type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-minus"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Check Jueves -->
-                    <div class="container">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="4">
-                                Jueves
-                            </label>
-                        </div>
-                        <div id="rowHorario_4_1" class="row">
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label class="control-label col-md-4 col-md-offset-2" for="HoraDesde">Desde: </label>
-                                    <div class="col-md-4 col-md-offset-1">
-                                        <input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraDesde_4_1" placeholder="08:00">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label class="control-label col-md-4" for="HoraHasta">Hasta: </label>
-                                    <div class="col-md-4 col-md-offset-1">
-                                        <input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraHasta_4_1" placeholder="13:00">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="btn_4_1" class="col-md-2">
-                                <button type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-plus"></i></button>
-                                <button type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-minus"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Check Viernes -->
-                    <div class="container">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="5">
-                                Viernes
-                            </label>
-                        </div>
-                        <div id="rowHorario_5_1" class="row">
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label class="control-label col-md-4 col-md-offset-2" for="HoraDesde">Desde: </label>
-                                    <div class="col-md-4 col-md-offset-1">
-                                        <input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraDesde_5_1" placeholder="08:00">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label class="control-label col-md-4" for="HoraHasta">Hasta: </label>
-                                    <div class="col-md-4 col-md-offset-1">
-                                        <input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraHasta_5_1" placeholder="13:00">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="btn_5_1" class="col-md-2">
-                                <button type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-plus"></i></button>
-                                <button type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-minus"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Check Sabado -->
-                    <div class="container">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="6">
-                                Sabado
-                            </label>
-                        </div>
-                        <div id="rowHorario_6_1" class="row">
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label class="control-label col-md-4 col-md-offset-2" for="HoraDesde">Desde: </label>
-                                    <div class="col-md-4 col-md-offset-1">
-                                        <input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraDesde_6_1" placeholder="08:00">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label class="control-label col-md-4" for="HoraHasta">Hasta: </label>
-                                    <div class="col-md-4 col-md-offset-1">
-                                        <input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraHasta_6_1" placeholder="13:00">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="btn_6_1" class="col-md-2">
-                                <button type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-plus"></i></button>
-                                <button type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-minus"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Check Domingo -->
-                    <div class="container">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="7">
-                                Domingo
-                            </label>
-                        </div>
-                        <div id="rowHorario_7_1" class="row">
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label class="control-label col-md-4 col-md-offset-2" for="HoraDesde">Desde: </label>
-                                    <div class="col-md-4 col-md-offset-1">
-                                        <input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraDesde_7_1" placeholder="08:00">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label class="control-label col-md-4" for="HoraHasta">Hasta: </label>
-                                    <div class="col-md-4 col-md-offset-1">
-                                        <input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraHasta_7_1" placeholder="13:00">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="btn_7_1" class="col-md-2">
-                                <button type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-plus"></i></button>
-                                <button type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-minus"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
+                  
 
                 </fieldset>
             </div>
-
-
 
         </div><!-- Fin Container -->
 
@@ -317,63 +120,109 @@
 
 
     $(function () {
-
+        //Hide all "rowHorario" divs
         $("div[id^='rowHorario']").hide();
 
-        $("input[type='checkbox']").change(function () {
-            if ($(this).is(':checked')) {
-                //debugger
-                var chkId = $(this).val();
-                $("div[id^='rowHorario_" + chkId + "']").show('slow');
-            }
-            else {
-                //debugger
-                var chkId = $(this).val();
-                $("div[id^='rowHorario_" + chkId + "']").hide('slow');
-            }
-        });
+        //Bind "change" event to checkboxs
+        $("input[type='checkbox']").on("change", ShowOrHideRowOnClick);
 
-        $("button[id^='btnAdd_']").click(function () {
-
-            debugger
-            var split = $(this).attr('id').split('_');
-
-            var diaId = parseInt(split[1]);
-            var rowId = parseInt(split[2]);
-
-            var newNroId ='_'+ diaId + '_' + (rowId + 1);
-            var newRowId = 'rowHorario' + newNroId;
-
-            var newRowHtml = '<div id="' + newRowId + '" class="row">'
-                                + '<div class="col-md-5">'
-                                    + '<div class="form-group">'
-                                        + '<label class="control-label col-md-4 col-md-offset-2" for="HoraDesde">Desde: </label>'
-                                        + '<div class="col-md-4 col-md-offset-1">'
-                                            + '<input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraDesde_1_1" placeholder="08:00">'
-                                        + '</div>'
-                                    + '</div>'
-                                + '</div>'
-
-                                + '<div class="col-md-5">'
-                                    + '<div class="form-group">'
-                                        + '<label class="control-label col-md-4" for="HoraHasta">Hasta: </label>'
-                                        + '<div class="col-md-4 col-md-offset-1">'
-                                            + '<input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraHasta_1_1" placeholder="13:00">'
-                                        + '</div>'
-                                    + '</div>'
-                                + '</div>'
-
-                                + '<div class="col-md-2">'
-                                    + '<button id="btnAdd_1_1" type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-plus"></i></button>'
-                                    + '<button id="btnDelete_1_1" type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-minus"></i></button>'
-                                + '</div>'
-                            + '</div>';
-
-            //newRowHtml.insertAfter($(this).parent().parent()).fadeIn('slow');
-            $(this).parent().parent().after(newRowHtml);
-            $('#' + newRowId).hide();
-            $('#' + newRowId).show('slow');
-        });
+        //Bind "click" event to all Add and Delete buttons
+        $("button[id^='btnAdd_']").click(AddRow);
+        $("button[id^='btnDelete_']").click(DeleteRow);
 
     });
+
+
+
+
+    function ShowOrHideRowOnClick() {
+        if ($(this).is(':checked')) {
+            //debugger
+            var chkId = $(this).val();
+            $("div[id^='rowHorario_" + chkId + "']").show('slow');
+        }
+        else {
+            //debugger
+            var chkId = $(this).val();
+            $("div[id^='rowHorario_" + chkId + "']").hide('slow');
+        }
+    }
+
+    function AddRow() {
+
+        debugger
+        var split = $(this).attr('id').split('_');
+
+        var currentDiaId = parseInt(split[1]);
+        var currentRowId = parseInt(split[2]);
+
+        var currentNroId = '_' + currentDiaId + '_' + currentRowId;
+        var newNroId = '_' + currentDiaId + '_' + (currentRowId + 1);
+
+        //var newRowId = 'rowHorario' + newNroId;
+        //var newBtnAddId = 'btnAdd' + newNroId;
+        //var newBtnDeleteId = 'btnDelete' + newNroId;
+
+
+        var newRowHtml = '<div id="rowHorario' + newNroId + '" class="row">'
+                            + '<div class="col-md-5">'
+                                + '<div class="form-group">'
+                                    + '<label class="control-label col-md-4 col-md-offset-2" for="HoraDesde">Desde: </label>'
+                                    + '<div class="col-md-4 col-md-offset-1">'
+                                        + '<input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraDesde_1_1" placeholder="08:00">'
+                                    + '</div>'
+                                + '</div>'
+                            + '</div>'
+
+                            + '<div class="col-md-5">'
+                                + '<div class="form-group">'
+                                    + '<label class="control-label col-md-4" for="HoraHasta">Hasta: </label>'
+                                    + '<div class="col-md-4 col-md-offset-1">'
+                                        + '<input type="text" class="form-control col-md-4 col-md-offset-1" id="HoraHasta_1_1" placeholder="13:00">'
+                                    + '</div>'
+                                + '</div>'
+                            + '</div>'
+
+                            + '<div id="divBtns' + newNroId + '" class="col-md-2">'
+                                + '<button id="btnAdd' + newNroId + '" type="button" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-plus"></i></button>'
+                                + '<button id="btnDelete' + newNroId + '" type="button" class="btn btn-danger btn-circle"><i class="glyphicon glyphicon-minus"></i></button>'
+                            + '</div>'
+                        + '</div>';
+
+
+        //AddNewRow(HTML)
+        $(this).parent().parent().after(newRowHtml);
+
+        //Hide Buttons
+        $('#divBtns' + currentNroId).hide('slow');
+
+
+        //Bind Events
+        $('#btnAdd' + newNroId).on('click', AddRow);
+        $('#btnDelete' + newNroId).on('click', DeleteRow);
+
+        //Entrance animation
+        $('#rowHorario' + newNroId).hide();
+        $('#rowHorario' + newNroId).show('slow');
+    }
+
+    function DeleteRow() {
+        debugger
+        var split = $(this).attr('id').split('_');
+
+        var currentDiaId = parseInt(split[1]);
+        var currentRowId = parseInt(split[2]);
+
+        var prevNroId = '_' + currentDiaId + '_' + (currentRowId-1);
+        var currentNroId = '_' + currentDiaId + '_' + currentRowId;
+        //var newNroId = '_' + currentDiaId + '_' + (currentRowId + 1);
+        
+        $('#rowHorario' + currentNroId).hide('slow', function () {
+            $('#rowHorario' + currentNroId).remove();
+        });
+        
+        $('#divBtns' + prevNroId).show('slow');
+
+    }
+
 </script>
