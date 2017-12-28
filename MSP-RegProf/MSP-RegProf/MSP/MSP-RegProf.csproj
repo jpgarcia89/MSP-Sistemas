@@ -1599,6 +1599,7 @@
     <Content Include="Views\CentroDeSalud\CreateEspecialidad.cshtml" />
     <Content Include="Views\CentroDeSalud\EditLineasDeColectivos.cshtml" />
     <Content Include="Views\CentroDeSalud\_EspecialidadesPartial.cshtml" />
+    <Content Include="Views\CentroDeSalud\EditEspecialidad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

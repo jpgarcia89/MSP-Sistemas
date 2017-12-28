@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MSP_RegProf.Models;
+using System.Transactions;
 
 namespace MSP_RegProf.Controllers
 {
@@ -134,12 +135,93 @@ namespace MSP_RegProf.Controllers
 
 
 
-
-        public ActionResult CreateEspecialidad()
+        // GET: CentroDeSalud/CreateEspecialidad/5
+        [Route("CentroDeSalud/CreateEspecialidad/{csId}")]
+        [HttpGet]
+        public ActionResult CreateEspecialidad(short csId)
         {
+
+
             ViewBag.EspecialidadID = new SelectList(db.Especialidad, "ID", "Nombre");
+            ViewBag.HorariosID = new SelectList(db.Horarios, "ID", "Hora");
+
+            //EspecialidadPorCentroDeSalud
+            //HorariosPorEspecialidadPorCentroDeSalud
+            ViewBag.csId = csId;
 
             return PartialView();
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("CentroDeSalud/CreateEspecialidad")]
+        public ActionResult CreateEspecialidad(EspecialidadPorCentroDeSalud data)
+        {
+
+            //using (TransactionScope tran = new TransactionScope())
+            //{
+
+            //}
+            try
+            {
+                var existeEspecialidad = db.CentroDeSalud.Find(data.CentroDeSaludID).EspecialidadPorCentroDeSalud.Any(r => r.EspecialidadID == data.EspecialidadID);
+
+                if (existeEspecialidad)
+                {
+                    return Json(new {
+                        ok = false,
+                        msj = "La especialidad seleccionada ya esta asociada al Centro de Salud",
+                    });
+                }
+                
+
+                db.EspecialidadPorCentroDeSalud.Add(data);
+                //db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception e )
+            {
+
+                ViewBag.EspecialidadID = new SelectList(db.Especialidad, "ID", "Nombre");
+                ViewBag.HorariosID = new SelectList(db.Horarios, "ID", "Hora");
+
+                //EspecialidadPorCentroDeSalud
+                //HorariosPorEspecialidadPorCentroDeSalud
+
+                return PartialView();
+            }
+
+
+
+            //if (ModelState.IsValid)
+            //{
+            //    db.EspecialidadPorCentroDeSalud.Add(data);
+            //    //db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+
+            
+        }
+
+
+
+        // GET: CentroDeSalud/EditEspecialidad/5
+        [Route("CentroDeSalud/EditEspecialidad/{EspecialidadPorCentroDeSaludID}")]
+        [HttpGet]
+        public ActionResult EditEspecialidad(int EspecialidadPorCentroDeSaludID)
+        {
+            var model = db.EspecialidadPorCentroDeSalud.Where(r => r.ID == EspecialidadPorCentroDeSaludID).FirstOrDefault();
+
+            ViewBag.EspecialidadID = new SelectList(db.Especialidad, "ID", "Nombre");
+            ViewBag.HorariosID = new SelectList(db.Horarios, "ID", "Hora");
+
+            //EspecialidadPorCentroDeSalud
+            //HorariosPorEspecialidadPorCentroDeSalud
+            ViewBag.csId = model.CentroDeSaludID;
+
+            return PartialView(model);
         }
 
 
@@ -150,6 +232,20 @@ namespace MSP_RegProf.Controllers
 
 
 
+
+
+
+
+
+
+        //Return Partial View
+        [Route("CentroDeSalud/EspecialidadesPartial/{csId}")]
+        public ActionResult EspecialidadesPartial(short csId)
+        {
+            var model = db.EspecialidadPorCentroDeSalud.Where(r => r.CentroDeSaludID == csId).ToList();
+            return PartialView("_EspecialidadesPartial", model);
+
+        }
 
 
     }

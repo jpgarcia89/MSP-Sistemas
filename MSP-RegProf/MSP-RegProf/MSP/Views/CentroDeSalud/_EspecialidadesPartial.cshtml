@@ -7,7 +7,7 @@
     <div class="box-header">
         <h3 class="box-title">Especialidades y Horarios:</h3>
 
-        <button type="button" style="margin-right:25px;" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/CentroDeSalud/CreateEspecialidad', 'Agregar', 'Especialidad')">
+        <button type="button" style="margin-right:25px;" class="btn btn-primary btn-md pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/CentroDeSalud/CreateEspecialidad/@ViewBag.csId', 'Agregar', 'Especialidad')">
             <i class="fa fa-plus"></i> Agregar
         </button>
     </div>
@@ -31,13 +31,16 @@
                                                 <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_@Especialidad.ID" aria-expanded="false" aria-controls="collapseThree">
                                                     @Especialidad.Especialidad.Nombre
                                                 </a>
-
-                                                <a class="btn pull-right">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
+                                                                                                
                                                 <a class="btn pull-right">
                                                     <i class="fa fa-trash-o"></i>
                                                 </a>
+
+                                                <a class="btn pull-right" data-toggle="modal" data-target="#myModal" onclick="abrirModal('/CentroDeSalud/EditEspecialidad/@Especialidad.ID', 'Detalle', 'Centro de Salud')">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+
+
                                             </div>
                                         </div>
                                         <div id="collapse_@Especialidad.ID" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
@@ -54,10 +57,11 @@
 
                                                                     <h3 class="box-title">@((Dias)HorariosPorDia.FirstOrDefault().Dia)</h3>
 
-                                                                    <div class="pull-right">
-                                                                        <a class="btn"><i class="fa fa-edit"></i></a>
+                                                                    @*<div class="pull-right">
                                                                         <a class="btn"><i class="fa fa-trash-o"></i></a>
-                                                                    </div>
+                                                                        <a class="btn"><i class="fa fa-edit"></i></a>
+                                                                        
+                                                                    </div>*@
                                                                 </div>
                                                                 <!-- /.box-header -->
                                                                 <div class="box-body">
