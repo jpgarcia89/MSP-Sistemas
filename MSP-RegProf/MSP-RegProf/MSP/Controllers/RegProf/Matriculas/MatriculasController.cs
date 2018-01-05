@@ -198,32 +198,30 @@ namespace MSP_RegProf.Controllers.RegProf.Matriculas
         public ActionResult ExportarSISAConfirmed(int id)
         {
             Matricula matricula = db.Matricula.Find(id);
+            string NombreArchivo = id + ".txt";
+            string Carpeta = "ExportaSISA";
 
-            string sFileName = id + ".txt";
+            DirectoryInfo directory = new DirectoryInfo(Server.MapPath("~/"+Carpeta));
 
-            //YOu could omit these lines here as you may
-            //not want to save the textfile to the server
-            //I have just left them here to demonstrate that you could create the text file 
-            DirectoryInfo directory = new DirectoryInfo(Server.MapPath("~/ExportaSISA"));
+            var ArchivoUbicacion = directory + "/" + NombreArchivo;
 
-            if (System.IO.File.Exists(directory + "/" + sFileName))
+            //Si existe lo elimino para crearlo nuevamente en blanco.
+            if (System.IO.File.Exists(ArchivoUbicacion))
             {
-                System.IO.File.Delete(directory + "/" + sFileName);
+                System.IO.File.Delete(ArchivoUbicacion);
             }
 
-            using (var tw = new StreamWriter(directory + "/" + sFileName, true))
+            using (var tw = new StreamWriter(ArchivoUbicacion, true))
             {
-                
                 tw.WriteLine("The next line!");
                 tw.Close();
             }
 
-            string host = System.Web.HttpContext.Current.Request.Url.Authority;
-            // localhost
+            string host = "http://" + System.Web.HttpContext.Current.Request.Url.Authority;
 
             return Json(new
             {
-                url= "http://" +host + "/ExportaSISA/" + sFileName, 
+                url= host + "/"+Carpeta+"/" + NombreArchivo, 
                 ok = 1,
                 mensaje = ""
             });
