@@ -1600,10 +1600,10 @@
     <Content Include="Views\CentroDeSalud\EditLineasDeColectivos.cshtml" />
     <Content Include="Views\CentroDeSalud\_EspecialidadesPartial.cshtml" />
     <Content Include="Views\CentroDeSalud\EditEspecialidad.cshtml" />
+    <Content Include="Views\Matriculas\ExportarSISA.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="NewFolder1\" />
     <Folder Include="UploadedFiles\" />
     <Folder Include="Views\Menu\" />
   </ItemGroup>

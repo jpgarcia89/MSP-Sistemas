@@ -5,8 +5,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
-using System.Web.Mvc;
+ using System.Web.Mvc;
 using MSP_RegProf.Models;
+using System.Text;
+using System.IO;
 
 namespace MSP_RegProf.Controllers.RegProf.Matriculas
 {
@@ -175,6 +177,59 @@ namespace MSP_RegProf.Controllers.RegProf.Matriculas
             });
         }
 
+
+        // GET: Matriculas/Delete/5
+        public ActionResult ExportarSISA(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Matricula matricula = db.Matricula.Find(id);
+            if (matricula == null)
+            {
+                return HttpNotFound();
+            }
+            return View(matricula);
+        }
+
+        [HttpPost, ActionName("ExportarSISA")]
+        //[ValidateAntiForgeryToken]
+        public ActionResult ExportarSISAConfirmed(int id)
+        {
+            Matricula matricula = db.Matricula.Find(id);
+
+            string sFileName = id + ".txt";
+
+            //YOu could omit these lines here as you may
+            //not want to save the textfile to the server
+            //I have just left them here to demonstrate that you could create the text file 
+            DirectoryInfo directory = new DirectoryInfo(Server.MapPath("~/ExportaSISA"));
+
+            if (System.IO.File.Exists(directory + "/" + sFileName))
+            {
+                System.IO.File.Delete(directory + "/" + sFileName);
+            }
+
+            using (var tw = new StreamWriter(directory + "/" + sFileName, true))
+            {
+                
+                tw.WriteLine("The next line!");
+                tw.Close();
+            }
+
+            string host = System.Web.HttpContext.Current.Request.Url.Authority;
+            // localhost
+
+            return Json(new
+            {
+                url= "http://" +host + "/ExportaSISA/" + sFileName, 
+                ok = 1,
+                mensaje = ""
+            });
+            
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -182,6 +237,17 @@ namespace MSP_RegProf.Controllers.RegProf.Matriculas
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        protected void csv()
+        {
+            TextWriter sw = new StreamWriter(@"C:\\temp.txt");
+
+            sw.WriteLine("hola");
+            sw.Close();     //Don't Forget Close the TextWriter Object(sw)
+          
+
+            //MessageBox.Show("Data Successfully Exported");
         }
     }
 }
